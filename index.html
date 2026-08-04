@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Khanak Shah</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<style> 
+<style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px} 
+html{scroll-behavior:smooth;font-size:16px}
 :root{
   --rose-m:#d4a0a0;--sage-m:#9dc4b3;--sage-d:#3d7a62;
   --lav-m:#b5a8e8;--lav-d:#6355c7;
@@ -73,19 +73,13 @@ section{padding:6rem 0 3rem;position:relative;z-index:1;}
 .s-label-line{flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent);position:relative;}
 .s-label-line::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-radius:50%;background:var(--text-dim);box-shadow:0 0 6px var(--accent);}
 
-/* SKILLS */
-.skill-groups{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;}
-.skill-group-title{font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-dim);margin-bottom:1.1rem;}
-.skill-bar-row{margin-bottom:1.2rem;}
-.skill-bar-top{display:flex;justify-content:space-between;margin-bottom:0.4rem;}
-.skill-bar-name{font-size:0.88rem;color:var(--text);font-weight:400;}
-.skill-bar-pct{font-size:0.75rem;color:var(--text-muted);}
-.skill-bar-track{height:3px;background:var(--surface2);border-radius:99px;overflow:visible;position:relative;}
-.skill-bar-fill{height:100%;border-radius:99px;width:0%;transition:width 1.4s cubic-bezier(0.22,1,0.36,1);position:relative;}
-.skill-bar-fill::after{content:"";position:absolute;right:-1px;top:-3px;width:7px;height:7px;border-radius:50%;background:inherit;filter:brightness(1.8);box-shadow:0 0 8px 2px currentColor;}
-.skill-tags-row{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.8rem;}
-.s-tag{font-size:0.7rem;padding:0.22rem 0.65rem;border-radius:99px;background:rgba(181,168,232,0.07);color:var(--text-muted);border:1px solid var(--border);transition:border-color 0.2s,color 0.2s;}
-.s-tag:hover{border-color:var(--lav-m);color:var(--text);}
+/* SKILLS — Solar System */
+#solar-canvas{display:block;width:100%;border-radius:20px;cursor:crosshair;touch-action:none;}
+.solar-legend{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.2rem;justify-content:center;}
+.solar-legend-item{display:flex;align-items:center;gap:0.4rem;font-size:0.7rem;color:var(--text-muted);padding:0.22rem 0.7rem;border-radius:99px;border:1px solid var(--border);background:var(--surface);transition:border-color 0.2s,color 0.2s;cursor:pointer;}
+.solar-legend-item:hover{color:var(--text);border-color:rgba(181,168,232,0.35);}
+.solar-legend-dot{width:7px;height:7px;border-radius:50%;}
+.solar-hint{text-align:center;font-size:0.68rem;color:var(--text-dim);letter-spacing:0.08em;margin-top:0.8rem;}
 
 /* EXPERIENCE */
 .exp-track{position:relative;padding-left:2.2rem;}
@@ -175,11 +169,81 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--lav-d);border-radius:99px;}
+
+/* ── SCROLL PROGRESS ── */
+#scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(to right,var(--lav-m),var(--sage-m),var(--rose-m));z-index:999;width:0%;transition:width 0.1s linear;box-shadow:0 0 8px var(--lav-m);}
+
+/* ── WARP FLASH ── */
+#warp-flash{position:fixed;inset:0;z-index:500;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 50% 50%,rgba(181,168,232,0.18) 0%,transparent 70%);}
+
+/* ── HERO PARALLAX LAYERS ── */
+.hero-name{transform-style:preserve-3d;}
+.line1{will-change:transform;transition:transform 0.05s ease-out;}
+.line2{will-change:transform;transition:transform 0.05s ease-out;}
+.hero-kicker{will-change:transform;transition:transform 0.08s ease-out;}
+
+/* ── EXPERIENCE CARDS — expandable ── */
+.exp-card{cursor:pointer;}
+.exp-bullets{max-height:0;overflow:hidden;transition:max-height 0.55s cubic-bezier(0.22,1,0.36,1),opacity 0.4s ease;opacity:0;margin-top:0;}
+.exp-card.open .exp-bullets{max-height:300px;opacity:1;margin-top:0.7rem;}
+.exp-expand-hint{font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.6rem;display:flex;align-items:center;gap:0.4rem;transition:color 0.2s;}
+.exp-expand-hint::after{content:"▾";transition:transform 0.35s ease;}
+.exp-card.open .exp-expand-hint::after{transform:rotate(180deg);}
+.exp-card.open .exp-expand-hint{color:var(--lav-m);}
+
+/* ── HORIZONTAL PROJECT SCROLL (Mission Log) ── */
+#projects{overflow:hidden;}
+.mission-log-wrap{position:relative;}
+.mission-log-label{font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);margin-bottom:1rem;display:flex;align-items:center;gap:0.6rem;}
+.mission-log-label::before{content:"";width:20px;height:1px;background:var(--text-dim);}
+.proj-rail{display:flex;gap:1.4rem;overflow-x:auto;padding-bottom:1.2rem;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;cursor:grab;}
+.proj-rail:active{cursor:grabbing;}
+.proj-rail::-webkit-scrollbar{height:3px;}
+.proj-rail::-webkit-scrollbar-track{background:var(--surface2);border-radius:99px;}
+.proj-rail::-webkit-scrollbar-thumb{background:var(--lav-d);border-radius:99px;}
+.proj-card{min-width:300px;max-width:340px;flex-shrink:0;scroll-snap-align:start;}
+/* drag hint arrows */
+.proj-arrows{display:flex;gap:0.6rem;margin-top:1rem;justify-content:flex-end;}
+.proj-arrow{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:0.9rem;cursor:pointer;transition:border-color 0.2s,color 0.2s,background 0.2s;}
+.proj-arrow:hover{border-color:var(--lav-m);color:var(--text);background:rgba(181,168,232,0.08);}
+
+/* ── SKILL NODE CANVAS ── */
+#skill-node-canvas{display:block;width:100%;border-radius:16px;margin-top:1.5rem;cursor:crosshair;}
+
+/* ── SECTION DOT NAV ── */
+#dot-nav{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:10px;}
+.dot-nav-item{width:7px;height:7px;border-radius:50%;background:var(--text-dim);transition:background 0.3s,box-shadow 0.3s,transform 0.3s;cursor:pointer;}
+.dot-nav-item.active{background:var(--lav-m);box-shadow:0 0 8px var(--lav-m);transform:scale(1.4);}
+
+/* ── STAT COUNTER ANIMATION ── */
+.hero-stat-num{transition:text-shadow 0.3s;}
+.hero-stat-num.pop{text-shadow:0 0 30px var(--accent),0 0 60px var(--lav-d);}
+
+/* ── AWARD ROWS — staggered on scroll ── */
+.award-row{transition:border-color 0.3s,transform 0.4s cubic-bezier(0.34,1.56,0.64,1),opacity 0.5s;opacity:0;transform:translateX(-24px);}
+.award-row.visible{opacity:1;transform:translateX(0);}
+
+/* ── EASTER EGG: KONAMI ── */
+#konami-msg{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity 0.5s;}
+#konami-msg span{font-family:"Cormorant Garamond",serif;font-size:clamp(1.5rem,4vw,3rem);color:var(--accent);text-align:center;line-height:1.5;text-shadow:0 0 40px var(--lav-m);padding:2rem 3rem;background:rgba(7,5,15,0.9);border:1px solid var(--border);border-radius:20px;}
 </style>
 </head>
 <body>
+<div id="scroll-progress"></div>
+<div id="warp-flash"></div>
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
+<div id="dot-nav">
+  <div class="dot-nav-item active" data-sec="hero" title="Home"></div>
+  <div class="dot-nav-item" data-sec="skills" title="Skills"></div>
+  <div class="dot-nav-item" data-sec="experience" title="Experience"></div>
+  <div class="dot-nav-item" data-sec="projects" title="Projects"></div>
+  <div class="dot-nav-item" data-sec="awards" title="Awards"></div>
+  <div class="dot-nav-item" data-sec="patents" title="Patents"></div>
+  <div class="dot-nav-item" data-sec="extra" title="Extracurriculars"></div>
+  <div class="dot-nav-item" data-sec="contact" title="Contact"></div>
+</div>
+<div id="konami-msg"><span>✦ You found the constellation code ✦<br/><small style="font-size:0.5em;opacity:0.7;">Khanak Shah · Explorer of the digital cosmos</small></span></div>
 <canvas id="nebula-canvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.55;"></canvas>
 <canvas id="star-canvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
 <canvas id="shoot-canvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
@@ -234,83 +298,18 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
   </div>
 </section>
 
-<div class="skill-groups reveal">
-
-    <!-- LEFT COLUMN -->
-    <div>
-
-        <div class="skill-group-title">Core Languages</div>
-        <div class="skill-tags-row">
-            <span class="s-tag">Python</span>
-            <span class="s-tag">Java</span>
-            <span class="s-tag">C</span>
-            <span class="s-tag">C++</span>
-            <span class="s-tag">JavaScript</span>
-            <span class="s-tag">SQL</span>
-            <span class="s-tag">HTML</span>
-            <span class="s-tag">CSS</span>
-            <span class="s-tag">Dart</span>
-            <span class="s-tag">Groovy</span>
-        </div>
-
-        <div class="skill-group-title" style="margin-top:2rem;">Frameworks</div>
-        <div class="skill-tags-row">
-            <span class="s-tag">React.js</span>
-            <span class="s-tag">Bootstrap</span>
-            <span class="s-tag">FastAPI</span>
-            <span class="s-tag">Flask</span>
-            <span class="s-tag">Flutter</span>
-            <span class="s-tag">TensorFlow</span>
-            <span class="s-tag">PyTorch</span>
-            <span class="s-tag">Streamlit</span>
-        </div>
-
+<section id="skills">
+  <div class="container">
+    <div class="s-label reveal">
+      <span class="s-label-pill" style="background:rgba(181,168,232,0.12);color:var(--lav-m);border:1px solid rgba(181,168,232,0.2);">Technical</span>
+      <h2>Skills</h2><div class="s-label-line"></div>
     </div>
-
-    <!-- RIGHT COLUMN -->
-    <div>
-
-        <div class="skill-group-title">ML &amp; Data Science</div>
-        <div class="skill-tags-row">
-            <span class="s-tag">Neural Networks</span>
-            <span class="s-tag">Deep Learning</span>
-            <span class="s-tag">NLP</span>
-            <span class="s-tag">GenAI</span>
-            <span class="s-tag">Scikit-learn</span>
-            <span class="s-tag">NumPy</span>
-            <span class="s-tag">Pandas</span>
-            <span class="s-tag">Matplotlib</span>
-            <span class="s-tag">Seaborn</span>
-            <span class="s-tag">OpenCV</span>
-            <span class="s-tag">R</span>
-            <span class="s-tag">MATLAB</span>
-        </div>
-
-        <div class="skill-group-title" style="margin-top:2rem;">DevOps, Cloud &amp; Toolkits</div>
-        <div class="skill-tags-row">
-            <span class="s-tag">AWS</span>
-            <span class="s-tag">Git</span>
-            <span class="s-tag">GitHub</span>
-            <span class="s-tag">Bitbucket</span>
-            <span class="s-tag">Vercel</span>
-            <span class="s-tag">Figma</span>
-            <span class="s-tag">Canva</span>
-            <span class="s-tag">Docker</span>
-            <span class="s-tag">Kubernetes</span>
-            <span class="s-tag">Jenkins</span>
-            <span class="s-tag">Postman</span>
-        </div>
-
-        <div class="skill-group-title" style="margin-top:2rem;">Observability &amp; Monitoring</div>
-        <div class="skill-tags-row">
-            <span class="s-tag">Dynatrace</span>
-            <span class="s-tag">Splunk</span>
-            <span class="s-tag">Catchpoint</span>
-        </div>
-
-    </div>
-
-</div>
+    <canvas id="solar-canvas"></canvas>
+    <div class="solar-legend" id="solar-legend"></div>
+    <div class="solar-hint">Click a planet to explore its skills &nbsp;✦&nbsp; Hover to pause orbit</div>
+    <canvas id="skill-node-canvas" height="0" style="display:none;"></canvas>
+  </div>
+</section>
 
 <section id="experience">
   <div class="container">
@@ -324,9 +323,13 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
         <div class="exp-card">
           <div class="exp-head">
             <div><div class="exp-role">Associate SDE Intern <span style="color:var(--text-dim);font-weight:300;">&middot; DevOps Team</span></div><div class="exp-org">Gartner</div></div>
-            <span class="exp-date">May 25 &ndash; Jul 31, 2025</span>
+            <span class="exp-date">May 2026 &ndash; Jul 2026</span>
           </div>
-          <ul class="exp-bullets"><li>Worked on AWS Lambda functions upgradation and config validity checks, improving cloud infrastructure reliability for production workloads.</li></ul>
+          <div class="exp-expand-hint">Tap to reveal details</div>
+          <ul class="exp-bullets">
+            <li>Automated the AWS Lambda runtime upgrade pipeline using AWS Transform, reducing manual effort, migration time, and operational costs by 70&ndash;80%; identified 171 inactive AWS Lambda functions, contributing to the cleanup of 123 to improve cloud scalability and reduce infrastructure costs.</li>
+            <li>Built an App Configuration Validator to detect invalid endpoints during the PR stage, reducing troubleshooting time by 75&ndash;85%, from 2+ hours to just 10&ndash;15 minutes and preventing deployment failures; automated the deployment of an AI-powered Conference Assistant using AWS services and supported API Gateway version migration and release.</li>
+          </ul>
         </div>
       </div>
       <div class="exp-item reveal">
@@ -336,6 +339,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
             <div><div class="exp-role">Open Source Contributor</div><div class="exp-org">GirlScript Summer of Code (GSSoC &rsquo;25)</div></div>
             <span class="exp-date">Jul &ndash; Sep 2025</span>
           </div>
+          <div class="exp-expand-hint">Tap to reveal details</div>
           <ul class="exp-bullets">
             <li>Selected as a contributor working on real-world projects &mdash; fixing issues, adding features, and collaborating with maintainers globally.</li>
             <li>Built hands-on depth in Git workflows and open-source development best practices.</li>
@@ -352,8 +356,10 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
       <span class="s-label-pill" style="background:rgba(212,160,160,0.12);color:var(--rose-m);border:1px solid rgba(212,160,160,0.2);">Built</span>
       <h2>Projects</h2><div class="s-label-line"></div>
     </div>
-    <div class="proj-grid">
-      <div class="proj-card reveal" data-tilt>
+    <div class="mission-log-wrap">
+    <div class="mission-log-label">Mission Log — drag to explore</div>
+    <div class="proj-rail" id="proj-rail">
+      <div class="proj-card" data-tilt>
         <div class="proj-card-bar" style="background:linear-gradient(to right,var(--lav-m),var(--sky-m));"></div>
         <div class="proj-card-dots"><span></span><span></span><span></span></div>
         <div class="proj-shine"></div><div class="proj-scan"></div>
@@ -363,7 +369,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
         <div class="proj-tech"><span>Python</span><span>PyTorch</span><span>TensorFlow</span><span>OpenCV</span><span>React Native</span><span>Node.js</span><span>PostgreSQL</span><span>Polygon</span></div>
         <div class="proj-footer"><a href="https://github.com/khanakshah27" target="_blank" class="proj-link" style="background:rgba(181,168,232,0.08);color:var(--lav-m);border-color:rgba(181,168,232,0.25);">&#8599; GitHub</a></div>
       </div>
-      <div class="proj-card reveal" data-tilt>
+      <div class="proj-card" data-tilt>
         <div class="proj-card-bar" style="background:linear-gradient(to right,var(--rose-m),var(--butter-m));"></div>
         <div class="proj-card-dots"><span></span><span></span><span></span></div>
         <div class="proj-shine"></div><div class="proj-scan"></div>
@@ -373,7 +379,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
         <div class="proj-tech"><span>Python</span><span>Scikit-learn</span><span>SpaCy</span><span>Pandas</span><span>Flask</span></div>
         <div class="proj-footer"><a href="https://github.com/khanakshah27" target="_blank" class="proj-link" style="background:rgba(212,160,160,0.08);color:var(--rose-m);border-color:rgba(212,160,160,0.25);">&#8599; GitHub</a></div>
       </div>
-      <div class="proj-card reveal" data-tilt>
+      <div class="proj-card" data-tilt>
         <div class="proj-card-bar" style="background:linear-gradient(to right,var(--sage-m),var(--butter-m));"></div>
         <div class="proj-card-dots"><span></span><span></span><span></span></div>
         <div class="proj-shine"></div><div class="proj-scan"></div>
@@ -386,7 +392,12 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
           <a href="https://github.com/khanakshah27" target="_blank" class="proj-link" style="background:rgba(224,200,122,0.08);color:var(--butter-m);border-color:rgba(224,200,122,0.25);">&#127760; Live</a>
         </div>
       </div>
+    </div><!-- end proj-rail -->
+    <div class="proj-arrows">
+      <div class="proj-arrow" id="proj-prev">&#8592;</div>
+      <div class="proj-arrow" id="proj-next">&#8594;</div>
     </div>
+    </div><!-- end mission-log-wrap -->
   </div>
 </section>
 
@@ -476,6 +487,245 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 <footer>&#10022; Crafted by Khanak Shah &middot; 2026 &#10022;</footer>
 
 <script>
+// ── SCROLL PROGRESS ──
+const prog=document.getElementById("scroll-progress");
+window.addEventListener("scroll",()=>{const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;prog.style.width=pct+"%";},{passive:true});
+
+// ── WARP FLASH on section entry ──
+const warp=document.getElementById("warp-flash");
+let lastSection="";
+const warpObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&e.target.id!==lastSection){lastSection=e.target.id;warp.style.transition="opacity 0.08s";warp.style.opacity="1";setTimeout(()=>{warp.style.transition="opacity 0.6s";warp.style.opacity="0";},80);}});},{threshold:0.4});
+document.querySelectorAll("section[id]").forEach(s=>warpObs.observe(s));
+
+// ── DOT NAV ──
+const dotItems=document.querySelectorAll(".dot-nav-item");
+dotItems.forEach(d=>{d.addEventListener("click",()=>{document.getElementById(d.dataset.sec)?.scrollIntoView({behavior:"smooth"});});});
+const dotSecObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){dotItems.forEach(d=>d.classList.toggle("active",d.dataset.sec===e.target.id));}});},{threshold:0.4});
+document.querySelectorAll("section[id]").forEach(s=>dotSecObs.observe(s));
+
+// ── EXPERIENCE CARDS — click to expand ──
+document.querySelectorAll(".exp-card").forEach(card=>{card.addEventListener("click",()=>{const wasOpen=card.classList.contains("open");document.querySelectorAll(".exp-card").forEach(c=>c.classList.remove("open"));if(!wasOpen)card.classList.add("open");});});
+
+// ── PROJECT RAIL — drag scroll + arrow buttons ──
+const rail=document.getElementById("proj-rail");
+if(rail){
+  let isDown=false,startX,scrollLeft;
+  rail.addEventListener("mousedown",e=>{isDown=true;rail.style.cursor="grabbing";startX=e.pageX-rail.offsetLeft;scrollLeft=rail.scrollLeft;});
+  rail.addEventListener("mouseleave",()=>{isDown=false;rail.style.cursor="grab";});
+  rail.addEventListener("mouseup",()=>{isDown=false;rail.style.cursor="grab";});
+  rail.addEventListener("mousemove",e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-rail.offsetLeft;rail.scrollLeft=scrollLeft-(x-startX)*1.2;});
+  document.getElementById("proj-prev")?.addEventListener("click",()=>{rail.scrollBy({left:-340,behavior:"smooth"});});
+  document.getElementById("proj-next")?.addEventListener("click",()=>{rail.scrollBy({left:340,behavior:"smooth"});});
+}
+
+// ── SOLAR SYSTEM SKILLS ──
+(function(){
+  const cvs = document.getElementById("solar-canvas");
+  if(!cvs) return;
+  const ctx = cvs.getContext("2d");
+
+  const PLANETS = [
+    { name:"Languages",      color:"181,168,232", r:22, orbitR:0, speed:0,      skills:["Python","Java","C","C++","JavaScript","HTML/CSS","SQL","Dart","Groovy"] },
+    { name:"Frameworks",     color:"212,160,160", r:17, orbitR:0, speed:0.0007, skills:["React.js","Bootstrap","FastAPI","Flask","Flutter","TensorFlow","PyTorch","Streamlit"] },
+    { name:"DevOps & Cloud", color:"144,191,232", r:19, orbitR:0, speed:0.0005, skills:["AWS","Git","GitHub","Bitbucket","Vercel","Figma","Canva","Docker","Kubernetes","Jenkins","Postman"] },
+    { name:"Observability",  color:"224,200,122", r:13, orbitR:0, speed:0.0009, skills:["Dynatrace","Splunk","Catchpoint"] },
+    { name:"ML & Data Sci",  color:"157,196,179", r:20, orbitR:0, speed:0.0006, skills:["Neural Nets","Deep Learning","NLP","GenAI","Scikit-learn","NumPy","Pandas","Matplotlib","Seaborn","OpenCV","R","MATLAB"] },
+  ];
+
+  // angles, moons state
+  PLANETS.forEach((p, i) => { p.angle = (i / PLANETS.length) * Math.PI * 2; p.moonAngles = p.skills.map((_,j)=>((j/p.skills.length)*Math.PI*2)); p.moonSpeeds = p.skills.map((_,j)=>(0.002+j*0.0003)*(Math.random()>0.5?1:-1)); });
+
+  let W, H, CX, CY, SUN_R, paused = false, hoveredPlanet = -1, selectedPlanet = -1, mouseX=0, mouseY=0;
+
+  function resize() {
+    const wrap = cvs.parentElement;
+    W = cvs.width  = wrap.clientWidth;
+    H = cvs.height = Math.min(W * 0.75, 580);
+    CX = W/2; CY = H/2;
+    SUN_R = Math.min(W, H) * 0.085;
+    const minGap = SUN_R + 28;
+    const maxR   = Math.min(CX, CY) - 32;
+    const band   = (maxR - minGap) / PLANETS.length;
+    PLANETS.forEach((p,i) => { p.orbitR = minGap + band * (i + 0.6); });
+  }
+  resize();
+  window.addEventListener("resize", resize);
+
+  // Build legend
+  const leg = document.getElementById("solar-legend");
+  if(leg){ PLANETS.forEach((p,i)=>{ const el=document.createElement("div"); el.className="solar-legend-item"; el.innerHTML=`<span class="solar-legend-dot" style="background:rgba(${p.color},0.9);box-shadow:0 0 5px rgba(${p.color},0.6);"></span>${p.name}`; el.addEventListener("click",()=>{selectedPlanet=(selectedPlanet===i)?-1:i;}); leg.appendChild(el); }); }
+
+  function getPos(p){ return { x: CX + Math.cos(p.angle)*p.orbitR, y: CY + Math.sin(p.angle)*p.orbitR }; }
+  function getMoonPos(p, mi){ const px=getPos(p); const mr=p.r+18+mi*3; return { x:px.x+Math.cos(p.moonAngles[mi])*mr, y:px.y+Math.sin(p.moonAngles[mi])*mr }; }
+
+  cvs.addEventListener("mousemove", e=>{ const rc=cvs.getBoundingClientRect(); mouseX=e.clientX-rc.left; mouseY=e.clientY-rc.top; hoveredPlanet=-1; PLANETS.forEach((p,i)=>{ const pp=getPos(p); if(Math.hypot(pp.x-mouseX,pp.y-mouseY)<p.r+6) hoveredPlanet=i; }); paused=hoveredPlanet>=0||selectedPlanet>=0; });
+  cvs.addEventListener("mouseleave",()=>{ hoveredPlanet=-1; paused=selectedPlanet>=0; });
+  cvs.addEventListener("click", e=>{ const rc=cvs.getBoundingClientRect(); const cx2=e.clientX-rc.left,cy2=e.clientY-rc.top; let hit=-1; PLANETS.forEach((p,i)=>{ const pp=getPos(p); if(Math.hypot(pp.x-cx2,pp.y-cy2)<p.r+10) hit=i; }); if(hit>=0) selectedPlanet=(selectedPlanet===hit)?-1:hit; else { /* click on moon? */ if(selectedPlanet>=0){ const p=PLANETS[selectedPlanet]; p.skills.forEach((_,mi)=>{ const mp=getMoonPos(p,mi); /* no-op, just keep selected */ }); } selectedPlanet=(hit>=0?hit:selectedPlanet<0?-1:selectedPlanet); if(hit<0) selectedPlanet=-1; } paused=selectedPlanet>=0; });
+
+  let t = 0;
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t += 1;
+
+    // Update angles
+    if (!paused) {
+      PLANETS.forEach(p => {
+        p.angle += p.speed;
+        p.moonAngles.forEach((_, mi) => { p.moonAngles[mi] += p.moonSpeeds[mi]; });
+      });
+    } else if (selectedPlanet >= 0) {
+      // still spin moons of selected planet slowly
+      const p = PLANETS[selectedPlanet];
+      p.moonAngles.forEach((_, mi) => { p.moonAngles[mi] += p.moonSpeeds[mi] * 0.4; });
+    }
+
+    // Draw orbit rings
+    PLANETS.forEach((p, i) => {
+      const alpha = (selectedPlanet<0||selectedPlanet===i) ? (hoveredPlanet===i?0.22:0.08) : 0.03;
+      ctx.beginPath(); ctx.arc(CX, CY, p.orbitR, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(${p.color},${alpha})`;
+      ctx.lineWidth = hoveredPlanet===i ? 1 : 0.5;
+      ctx.setLineDash([4,8]); ctx.stroke(); ctx.setLineDash([]);
+    });
+
+    // Draw moons of selected planet
+    if (selectedPlanet >= 0) {
+      const p = PLANETS[selectedPlanet];
+      const pp = getPos(p);
+      const moonR = p.r + 18;
+      // Moon orbit ring
+      ctx.beginPath(); ctx.arc(pp.x, pp.y, moonR + p.skills.length*1.5, 0, Math.PI*2);
+      ctx.strokeStyle=`rgba(${p.color},0.12)`; ctx.lineWidth=0.5; ctx.setLineDash([3,6]); ctx.stroke(); ctx.setLineDash([]);
+
+      p.skills.forEach((skill, mi) => {
+        const mr = moonR + mi * 2.8;
+        const mx2 = pp.x + Math.cos(p.moonAngles[mi]) * mr;
+        const my2 = pp.y + Math.sin(p.moonAngles[mi]) * mr;
+        const moonSize = 5;
+
+        // Line from planet to moon
+        ctx.beginPath(); ctx.moveTo(pp.x, pp.y); ctx.lineTo(mx2, my2);
+        ctx.strokeStyle=`rgba(${p.color},0.18)`; ctx.lineWidth=0.5; ctx.stroke();
+
+        // Moon glow
+        const g2 = ctx.createRadialGradient(mx2,my2,0,mx2,my2,moonSize*3);
+        g2.addColorStop(0,`rgba(${p.color},0.4)`); g2.addColorStop(1,"transparent");
+        ctx.beginPath(); ctx.arc(mx2,my2,moonSize*3,0,Math.PI*2); ctx.fillStyle=g2; ctx.fill();
+
+        // Moon body
+        ctx.beginPath(); ctx.arc(mx2,my2,moonSize,0,Math.PI*2);
+        ctx.fillStyle=`rgba(${p.color},0.25)`; ctx.fill();
+        ctx.strokeStyle=`rgba(${p.color},0.8)`; ctx.lineWidth=1; ctx.stroke();
+
+        // Skill label
+        const angle = p.moonAngles[mi];
+        const lx = mx2 + Math.cos(angle)*18;
+        const ly = my2 + Math.sin(angle)*14;
+        ctx.font = "500 9.5px Outfit,sans-serif";
+        ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        ctx.fillStyle = `rgba(${p.color},0.95)`;
+        ctx.fillText(skill, lx, ly);
+      });
+    }
+
+    // Draw planets
+    PLANETS.forEach((p, i) => {
+      const pp = getPos(p);
+      const isHov = hoveredPlanet === i;
+      const isSel = selectedPlanet === i;
+      const dim = selectedPlanet>=0 && selectedPlanet!==i;
+      const r = p.r + (isHov||isSel ? 3 : 0);
+
+      // Orbit trail glow behind planet
+      ctx.beginPath();
+      ctx.arc(CX, CY, p.orbitR, p.angle - 0.35, p.angle, false);
+      const tr = ctx.createLinearGradient(
+        CX+Math.cos(p.angle-0.35)*p.orbitR, CY+Math.sin(p.angle-0.35)*p.orbitR, pp.x, pp.y
+      );
+      tr.addColorStop(0,"transparent"); tr.addColorStop(1,`rgba(${p.color},${dim?0.05:0.35})`);
+      ctx.strokeStyle=tr; ctx.lineWidth=2.5; ctx.stroke();
+
+      // Planet outer glow
+      const G = ctx.createRadialGradient(pp.x,pp.y,0,pp.x,pp.y,r*3.5);
+      G.addColorStop(0,`rgba(${p.color},${dim?0.04:(isSel?0.45:isHov?0.35:0.15)})`);
+      G.addColorStop(1,"transparent");
+      ctx.beginPath(); ctx.arc(pp.x,pp.y,r*3.5,0,Math.PI*2); ctx.fillStyle=G; ctx.fill();
+
+      // Planet body
+      const Gb = ctx.createRadialGradient(pp.x-r*0.3,pp.y-r*0.3,0,pp.x,pp.y,r);
+      Gb.addColorStop(0,`rgba(${p.color},${dim?0.15:0.55})`);
+      Gb.addColorStop(1,`rgba(${p.color},${dim?0.05:0.18})`);
+      ctx.beginPath(); ctx.arc(pp.x,pp.y,r,0,Math.PI*2);
+      ctx.fillStyle=Gb; ctx.fill();
+      ctx.strokeStyle=`rgba(${p.color},${dim?0.15:(isSel?1:isHov?0.85:0.55)})`;
+      ctx.lineWidth=isSel?2:1.2; ctx.stroke();
+
+      // Planet ring (Saturn-style) for selected
+      if (isSel) {
+        ctx.save(); ctx.translate(pp.x, pp.y); ctx.scale(1, 0.32);
+        ctx.beginPath(); ctx.arc(0, 0, r*1.7, 0, Math.PI*2);
+        ctx.strokeStyle=`rgba(${p.color},0.4)`; ctx.lineWidth=3; ctx.stroke();
+        ctx.restore();
+      }
+
+      // Planet label
+      if (!dim || isHov) {
+        ctx.font = `${isSel?"600":"500"} ${r>17?"11px":"10px"} Outfit,sans-serif`;
+        ctx.textAlign="center"; ctx.textBaseline="middle";
+        ctx.fillStyle=`rgba(240,234,250,${dim?0.3:1})`;
+        ctx.fillText(p.name, pp.x, pp.y + r + 14);
+      }
+    });
+
+    // Draw SUN
+    const pulse = 1 + 0.025 * Math.sin(t * 0.04);
+    // Sun corona layers
+    [4.5, 3, 2].forEach((mult, li) => {
+      const sg = ctx.createRadialGradient(CX,CY,0,CX,CY,SUN_R*mult*pulse);
+      sg.addColorStop(0,`rgba(255,230,150,${[0.04,0.08,0.12][li]})`);
+      sg.addColorStop(0.5,`rgba(181,168,232,${[0.02,0.04,0.06][li]})`);
+      sg.addColorStop(1,"transparent");
+      ctx.beginPath(); ctx.arc(CX,CY,SUN_R*mult*pulse,0,Math.PI*2); ctx.fillStyle=sg; ctx.fill();
+    });
+    // Sun body
+    const sb = ctx.createRadialGradient(CX-SUN_R*0.3,CY-SUN_R*0.3,0,CX,CY,SUN_R*pulse);
+    sb.addColorStop(0,"rgba(255,240,200,0.95)");
+    sb.addColorStop(0.5,"rgba(255,200,100,0.7)");
+    sb.addColorStop(1,"rgba(200,140,60,0.4)");
+    ctx.beginPath(); ctx.arc(CX,CY,SUN_R*pulse,0,Math.PI*2); ctx.fillStyle=sb; ctx.fill();
+    ctx.strokeStyle="rgba(255,220,140,0.6)"; ctx.lineWidth=1.5; ctx.stroke();
+    // Sun label
+    ctx.font="600 12px Cormorant Garamond,serif"; ctx.textAlign="center"; ctx.textBaseline="middle";
+    ctx.fillStyle="rgba(40,25,5,0.9)"; ctx.fillText("Khanak",CX,CY-5);
+    ctx.font="400 9px Outfit,sans-serif"; ctx.fillStyle="rgba(40,25,5,0.65)"; ctx.fillText("Shah",CX,CY+7);
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // Keyboard: Escape deselects
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ selectedPlanet=-1; paused=false; }});
+})();
+const statNums=document.querySelectorAll(".hero-stat-num");
+const statObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("pop");setTimeout(()=>e.target.classList.remove("pop"),800);statObs.unobserve(e.target);}});},{threshold:1});
+statNums.forEach(n=>statObs.observe(n));
+
+// ── AWARDS STAGGER ANIMATION ──
+const awardObs=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add("visible"),i*120);});},{threshold:0.1});
+document.querySelectorAll(".award-row").forEach(r=>awardObs.observe(r));
+
+// ── HERO MOUSE PARALLAX ──
+const heroWrap=document.querySelector(".hero-wrap");
+const pLine1=document.querySelector(".hero-name .line1");
+const pLine2=document.querySelector(".hero-name .line2");
+const pKicker=document.querySelector(".hero-kicker");
+document.getElementById("hero")?.addEventListener("mousemove",e=>{const r=document.getElementById("hero").getBoundingClientRect();const nx2=(e.clientX-r.left)/r.width-0.5;const ny2=(e.clientY-r.top)/r.height-0.5;if(pLine1)pLine1.style.transform="translate("+(nx2*18)+"px,"+(ny2*8)+"px)";if(pLine2)pLine2.style.transform="translate("+(nx2*28)+"px,"+(ny2*12)+"px)";if(pKicker)pKicker.style.transform="translate("+(nx2*10)+"px,"+(ny2*5)+"px)";});
+document.getElementById("hero")?.addEventListener("mouseleave",()=>{if(pLine1)pLine1.style.transform="";if(pLine2)pLine2.style.transform="";if(pKicker)pKicker.style.transform="";});
+
+// ── KONAMI CODE EASTER EGG ──
+const KC=[38,38,40,40,37,39,37,39,66,65];let kIdx=0;
+document.addEventListener("keydown",e=>{if(e.keyCode===KC[kIdx]){kIdx++;if(kIdx===KC.length){kIdx=0;const km=document.getElementById("konami-msg");km.style.opacity="1";setTimeout(()=>{km.style.transition="opacity 1s";km.style.opacity="0";},4000);}}else kIdx=0;});
+
 // CURSOR + COMET TRAIL
 const curDot=document.getElementById("cursor"),curRing=document.getElementById("cursor-ring");
 let mx=0,my=0,rx=0,ry=0;
@@ -525,9 +775,9 @@ function type(){const line=lines[li];if(!del){tw.textContent=line.slice(0,ci+1);
 const revO=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add("visible"),i*90);});},{threshold:0.08});
 document.querySelectorAll(".reveal").forEach(el=>revO.observe(el));
 
-// SKILL BARS
-const barO=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll(".skill-bar-fill").forEach(b=>{b.style.width=b.dataset.pct+"%";});barO.unobserve(e.target);}});},{threshold:0.25});
-document.querySelectorAll(".skill-groups").forEach(el=>barO.observe(el));
+// Skill chips: stagger-reveal on scroll
+const chipObs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){const chips=e.target.querySelectorAll(".s-chip");chips.forEach((c,i)=>{c.style.opacity="0";c.style.transform="translateY(10px)";setTimeout(()=>{c.style.transition="opacity 0.4s ease,transform 0.4s ease";c.style.opacity="1";c.style.transform="translateY(0)";},i*35+100);});chipObs.unobserve(e.target);}});},{threshold:0.15});
+document.querySelectorAll(".skill-cat-block").forEach(el=>chipObs.observe(el));
 
 // 3D TILT
 document.querySelectorAll("[data-tilt]").forEach(card=>{card.addEventListener("mousemove",e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-0.5,y=(e.clientY-r.top)/r.height-0.5;card.style.transform="perspective(900px) rotateY("+(x*10)+"deg) rotateX("+(-y*10)+"deg) translateZ(10px)";const sh=card.querySelector(".proj-shine");if(sh){sh.style.setProperty("--mx",(x*100+50)+"%");sh.style.setProperty("--my",(y*100+50)+"%");}});card.addEventListener("mouseleave",()=>{card.style.transform="perspective(900px) rotateY(0deg) rotateX(0deg) translateZ(0)";});});
