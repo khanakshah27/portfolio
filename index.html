@@ -99,14 +99,23 @@ section{padding:6rem 0 3rem;position:relative;z-index:1;}
 
 /* PROJECTS */
 .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
-.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.8rem;position:relative;overflow:hidden;transform-style:preserve-3d;transition:border-color 0.3s,box-shadow 0.3s;cursor:none;display:flex;flex-direction:column;}
-.proj-card:hover{border-color:rgba(181,168,232,0.3);box-shadow:0 0 40px rgba(99,85,199,0.12);}
+.proj-card{--acc:181,168,232;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:4.4rem 1.8rem 1.8rem;position:relative;overflow:hidden;transform-style:preserve-3d;transition:border-color 0.3s,box-shadow 0.3s;cursor:none;display:flex;flex-direction:column;}
+.proj-card:hover{border-color:rgba(var(--acc),0.35);box-shadow:0 0 40px rgba(var(--acc),0.16);}
 .proj-card-bar{position:absolute;top:0;left:0;right:0;height:3px;border-radius:20px 20px 0 0;}
-.proj-card-dots{position:absolute;top:14px;right:16px;display:flex;gap:4px;align-items:center;}
-.proj-card-dots span{width:4px;height:4px;border-radius:50%;background:var(--text-dim);animation:twinkle 2s ease-in-out infinite;}
-.proj-card-dots span:nth-child(2){animation-delay:0.5s;}
-.proj-card-dots span:nth-child(3){animation-delay:1s;}
 @keyframes twinkle{0%,100%{opacity:0.3;}50%{opacity:1;box-shadow:0 0 4px var(--accent);}}
+/* mission emblem — tiny orbiting moon around a planet core, per project */
+.proj-emblem{position:absolute;top:16px;left:20px;width:34px;height:34px;pointer-events:none;}
+.proj-emblem .core{position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(var(--acc),0.95),rgba(var(--acc),0.25));box-shadow:0 0 12px rgba(var(--acc),0.55);}
+.proj-emblem .ring{position:absolute;inset:0;border:1px dashed rgba(var(--acc),0.4);border-radius:50%;animation:orbitSpin 7s linear infinite;}
+.proj-emblem .ring::before{content:"";position:absolute;top:-2px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:rgba(var(--acc),0.95);box-shadow:0 0 6px rgba(var(--acc),0.85);}
+.proj-mission-no{position:absolute;top:20px;right:20px;font-family:monospace;font-size:0.6rem;font-weight:600;letter-spacing:0.14em;color:var(--text-dim);}
+/* HUD targeting corners — appear on hover */
+.proj-corners span{position:absolute;width:16px;height:16px;border:1.5px solid rgba(var(--acc),0.5);pointer-events:none;opacity:0;transition:opacity 0.3s,border-color 0.3s;}
+.proj-corners span:nth-child(1){top:10px;left:10px;border-right:none;border-bottom:none;}
+.proj-corners span:nth-child(2){top:10px;right:10px;border-left:none;border-bottom:none;}
+.proj-corners span:nth-child(3){bottom:10px;left:10px;border-right:none;border-top:none;}
+.proj-corners span:nth-child(4){bottom:10px;right:10px;border-left:none;border-top:none;}
+.proj-card:hover .proj-corners span{opacity:1;}
 .proj-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(181,168,232,0.4),transparent);top:-2px;pointer-events:none;opacity:0;}
 .proj-card:hover .proj-scan{animation:scanDown 1.2s ease-in-out forwards;}
 @keyframes scanDown{0%{top:0;opacity:1;}100%{top:100%;opacity:0;}}
@@ -342,7 +351,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
       </div>
       <div class="hero-stat">
         <div class="orbit-ring" style="animation-duration:11s;animation-direction:reverse;"></div>
-        <div class="hero-stat-num">3</div>
+        <div class="hero-stat-num">5</div>
         <div class="hero-stat-lbl">Impact Projects</div>
       </div>
     </div>
@@ -415,9 +424,11 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
     <div class="mission-log-wrap">
     <div class="mission-log-label">Mission Log — drag to explore</div>
     <div class="proj-rail" id="proj-rail">
-      <div class="proj-card" data-tilt>
+      <div class="proj-card" data-tilt style="--acc:181,168,232;">
         <div class="proj-card-bar" style="background:linear-gradient(to right,var(--lav-m),var(--sky-m));"></div>
-        <div class="proj-card-dots"><span></span><span></span><span></span></div>
+        <div class="proj-emblem"><span class="ring"></span><span class="core"></span></div>
+        <span class="proj-mission-no">MISSION 01</span>
+        <div class="proj-corners"><span></span><span></span><span></span><span></span></div>
         <div class="proj-shine"></div><div class="proj-scan"></div>
         <span class="proj-badge" style="background:rgba(181,168,232,0.12);color:var(--lav-m);border-color:rgba(181,168,232,0.25);">AI &middot; Blockchain &middot; Safety</span>
         <div class="proj-title">GuardianAI</div>
@@ -425,9 +436,11 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
         <div class="proj-tech"><span>Python</span><span>PyTorch</span><span>TensorFlow</span><span>OpenCV</span><span>React Native</span><span>Node.js</span><span>PostgreSQL</span><span>Polygon</span></div>
         <div class="proj-footer"><a href="https://github.com/khanakshah27" target="_blank" class="proj-link" style="background:rgba(181,168,232,0.08);color:var(--lav-m);border-color:rgba(181,168,232,0.25);">&#8599; GitHub</a></div>
       </div>
-      <div class="proj-card" data-tilt>
+      <div class="proj-card" data-tilt style="--acc:212,160,160;">
         <div class="proj-card-bar" style="background:linear-gradient(to right,var(--rose-m),var(--butter-m));"></div>
-        <div class="proj-card-dots"><span></span><span></span><span></span></div>
+        <div class="proj-emblem"><span class="ring"></span><span class="core"></span></div>
+        <span class="proj-mission-no">MISSION 02</span>
+        <div class="proj-corners"><span></span><span></span><span></span><span></span></div>
         <div class="proj-shine"></div><div class="proj-scan"></div>
         <span class="proj-badge" style="background:rgba(212,160,160,0.12);color:var(--rose-m);border-color:rgba(212,160,160,0.25);">NLP &middot; ML &middot; Social Impact</span>
         <div class="proj-title">Workplace Microaggression Detector</div>
@@ -435,9 +448,11 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
         <div class="proj-tech"><span>Python</span><span>Scikit-learn</span><span>SpaCy</span><span>Pandas</span><span>Flask</span></div>
         <div class="proj-footer"><a href="https://github.com/khanakshah27" target="_blank" class="proj-link" style="background:rgba(212,160,160,0.08);color:var(--rose-m);border-color:rgba(212,160,160,0.25);">&#8599; GitHub</a></div>
       </div>
-      <div class="proj-card" data-tilt>
+      <div class="proj-card" data-tilt style="--acc:157,196,179;">
         <div class="proj-card-bar" style="background:linear-gradient(to right,var(--sage-m),var(--butter-m));"></div>
-        <div class="proj-card-dots"><span></span><span></span><span></span></div>
+        <div class="proj-emblem"><span class="ring"></span><span class="core"></span></div>
+        <span class="proj-mission-no">MISSION 03</span>
+        <div class="proj-corners"><span></span><span></span><span></span><span></span></div>
         <div class="proj-shine"></div><div class="proj-scan"></div>
         <span class="proj-badge" style="background:rgba(157,196,179,0.12);color:var(--sage-m);border-color:rgba(157,196,179,0.25);">GenAI &middot; Healthcare &middot; Accessibility</span>
         <div class="proj-title">Medimate AI</div>
@@ -448,25 +463,35 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
           <a href="https://github.com/khanakshah27" target="_blank" class="proj-link" style="background:rgba(224,200,122,0.08);color:var(--butter-m);border-color:rgba(224,200,122,0.25);">&#127760; Live</a>
         </div>
       </div>
-      <div class="proj-card" data-tilt>
+      <div class="proj-card" data-tilt style="--acc:144,191,232;">
         <div class="proj-card-bar" style="background:linear-gradient(to right,var(--sky-m),var(--lav-m));"></div>
-        <div class="proj-card-dots"><span></span><span></span><span></span></div>
+        <div class="proj-emblem"><span class="ring"></span><span class="core"></span></div>
+        <span class="proj-mission-no">MISSION 04</span>
+        <div class="proj-corners"><span></span><span></span><span></span><span></span></div>
         <div class="proj-shine"></div><div class="proj-scan"></div>
         <span class="proj-badge" style="background:rgba(144,191,232,0.12);color:var(--sky-m);border-color:rgba(144,191,232,0.25);">Deep Learning &middot; Signal Processing</span>
         <div class="proj-title">Spectrapur</div>
         <div class="proj-desc">Web app that denoises raw spectral data using a ResUNet1D deep learning model. Users upload a spectrum and get back a cleaned, baseline-corrected signal with overlay visualization, residual noise chart, SNR/baseline metrics, and detected peaks.</div>
         <div class="proj-tech"><span>Python</span><span>Flask</span><span>PyTorch</span><span>NumPy</span><span>SciPy</span><span>Plotly.js</span></div>
-        <div class="proj-footer"><a href="https://github.com/khanakshah27/Spectrapur" target="_blank" class="proj-link" style="background:rgba(144,191,232,0.08);color:var(--sky-m);border-color:rgba(144,191,232,0.25);">&#8599; GitHub</a></div>
+        <div class="proj-footer">
+          <a href="https://github.com/khanakshah27/Spectrapur" target="_blank" class="proj-link" style="background:rgba(144,191,232,0.08);color:var(--sky-m);border-color:rgba(144,191,232,0.25);">&#8599; GitHub</a>
+          <a href="https://spectrapur.vercel.app/" target="_blank" class="proj-link" style="background:rgba(224,200,122,0.08);color:var(--butter-m);border-color:rgba(224,200,122,0.25);">&#127760; Live</a>
+        </div>
       </div>
-      <div class="proj-card" data-tilt>
+      <div class="proj-card" data-tilt style="--acc:224,184,122;">
         <div class="proj-card-bar" style="background:linear-gradient(to right,var(--peach-m),var(--rose-m));"></div>
-        <div class="proj-card-dots"><span></span><span></span><span></span></div>
+        <div class="proj-emblem"><span class="ring"></span><span class="core"></span></div>
+        <span class="proj-mission-no">MISSION 05</span>
+        <div class="proj-corners"><span></span><span></span><span></span><span></span></div>
         <div class="proj-shine"></div><div class="proj-scan"></div>
         <span class="proj-badge" style="background:rgba(224,184,122,0.12);color:var(--peach-m);border-color:rgba(224,184,122,0.25);">Bioinformatics &middot; NLP &middot; Knowledge Graphs</span>
         <div class="proj-title">BioLink</div>
         <div class="proj-desc">Research paper analyzer that extracts biomedical entities from PDFs and cross-references them against seven authoritative databases (NCBI, UniProt, PDB, KEGG, GO, ClinVar, STRING) to build interactive knowledge graphs and an AI-summarized dashboard.</div>
         <div class="proj-tech"><span>Python</span><span>FastAPI</span><span>scispaCy</span><span>PostgreSQL</span><span>Cytoscape.js</span></div>
-        <div class="proj-footer"><a href="https://github.com/khanakshah27/bio-link" target="_blank" class="proj-link" style="background:rgba(224,184,122,0.08);color:var(--peach-m);border-color:rgba(224,184,122,0.25);">&#8599; GitHub</a></div>
+        <div class="proj-footer">
+          <a href="https://github.com/khanakshah27/bio-link" target="_blank" class="proj-link" style="background:rgba(224,184,122,0.08);color:var(--peach-m);border-color:rgba(224,184,122,0.25);">&#8599; GitHub</a>
+          <a href="https://bio-link-psi-black.vercel.app/" target="_blank" class="proj-link" style="background:rgba(224,200,122,0.08);color:var(--butter-m);border-color:rgba(224,200,122,0.25);">&#127760; Live</a>
+        </div>
       </div>
     </div><!-- end proj-rail -->
     <div class="proj-arrows">
