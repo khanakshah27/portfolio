@@ -129,20 +129,52 @@ section{padding:6rem 0 3rem;position:relative;z-index:1;}
 @media (prefers-reduced-motion:reduce){.medal{animation:none;}.medal-ring{animation:none;}}
 @media (max-width:480px){.medal{width:118px;height:118px;}.medal-front .medal-icon{font-size:1.9rem;}.medal-year{font-size:1.2rem;}.medal-field{gap:2rem 1.4rem;}}
 
-/* PATENTS */
-.patent-row{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.3rem 1.7rem;margin-bottom:1rem;display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center;transition:border-color 0.3s;cursor:none;}
-.patent-row:hover{border-color:rgba(144,191,232,0.3);}
-.patent-icon{font-size:1.5rem;}
-.patent-title{font-size:0.92rem;font-weight:500;color:var(--text);margin-bottom:0.3rem;}
-.patent-meta{font-size:0.73rem;color:var(--text-muted);font-family:monospace;}
-.patent-pill{display:inline-block;font-size:0.62rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.18rem 0.55rem;border-radius:99px;background:rgba(157,196,179,0.12);color:var(--sage-m);border:1px solid rgba(157,196,179,0.25);margin-top:0.35rem;}
+/* PATENTS — deep-space transmission plates */
+.patent-field{display:flex;flex-wrap:wrap;gap:2.4rem;justify-content:center;padding:0.5rem 0 1rem;}
+.patent-plate{--acc:144,191,232;position:relative;width:300px;background:radial-gradient(circle at 30% 20%,rgba(var(--acc),0.12),var(--surface) 70%);border:1px solid rgba(var(--acc),0.3);clip-path:polygon(22px 0,calc(100% - 22px) 0,100% 50%,calc(100% - 22px) 100%,22px 100%,0 50%);padding:2rem 2.6rem;transition:transform 0.4s ease,border-color 0.3s ease;}
+.patent-plate:hover{transform:perspective(700px) rotateY(-4deg) rotateX(2deg);border-color:rgba(var(--acc),0.55);}
+.patent-signal-row{display:flex;align-items:center;gap:0.7rem;margin-bottom:1.1rem;}
+.patent-icon-ping{position:relative;display:inline-flex;align-items:center;justify-content:center;width:1.3em;height:1.3em;font-size:1.3rem;flex-shrink:0;}
+.patent-icon-ping::before,.patent-icon-ping::after{content:"";position:absolute;inset:-8px;border:1px solid rgba(var(--acc),0.4);border-radius:50%;animation:patentPing 2.6s ease-out infinite;pointer-events:none;}
+.patent-icon-ping::after{animation-delay:1.3s;}
+@keyframes patentPing{0%{transform:scale(0.5);opacity:0.9;}100%{transform:scale(2.4);opacity:0;}}
+.patent-wave{display:flex;align-items:flex-end;gap:2.5px;height:22px;margin-left:auto;}
+.patent-wave span{width:2.5px;border-radius:2px;background:rgba(var(--acc),0.7);animation:patentWave 1.2s ease-in-out infinite;}
+@keyframes patentWave{0%,100%{height:15%;}50%{height:var(--peak,90%);}}
+.patent-wave span:nth-child(1){--peak:55%;animation-delay:0s;}
+.patent-wave span:nth-child(2){--peak:85%;animation-delay:0.08s;}
+.patent-wave span:nth-child(3){--peak:100%;animation-delay:0.16s;}
+.patent-wave span:nth-child(4){--peak:65%;animation-delay:0.24s;}
+.patent-wave span:nth-child(5){--peak:92%;animation-delay:0.32s;}
+.patent-wave span:nth-child(6){--peak:50%;animation-delay:0.4s;}
+.patent-wave span:nth-child(7){--peak:78%;animation-delay:0.48s;}
+.patent-wave span:nth-child(8){--peak:60%;animation-delay:0.56s;}
+.patent-title{font-size:0.92rem;font-weight:500;color:var(--text);margin-bottom:0.7rem;line-height:1.4;}
+.patent-meta{font-size:0.66rem;color:var(--text-muted);font-family:monospace;letter-spacing:0.02em;}
+.patent-pill{display:inline-block;font-size:0.6rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:99px;background:rgba(var(--acc),0.12);color:rgba(var(--acc),1);border:1px solid rgba(var(--acc),0.3);margin-top:0.7rem;}
+@media (prefers-reduced-motion:reduce){.patent-icon-ping::before,.patent-icon-ping::after{animation:none;opacity:0;}.patent-wave span{animation:none;height:var(--peak,60%);}}
+@media (max-width:400px){.patent-plate{width:100%;padding:1.7rem 2rem;}}
 
-/* EXTRAS */
-.extra-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem 1.8rem;transition:border-color 0.3s;cursor:none;}
-.extra-card:hover{border-color:rgba(212,160,160,0.3);}
-.extra-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.7rem;}
+/* EXTRACURRICULARS — mission patch + duty log */
+.patch-wrap{display:flex;gap:2.4rem;align-items:center;flex-wrap:wrap;}
+.mission-patch{--acc:212,160,160;position:relative;width:170px;height:170px;flex-shrink:0;clip-path:polygon(50% 0%,100% 16%,100% 62%,50% 100%,0% 62%,0% 16%);background:radial-gradient(circle at 35% 25%,rgba(var(--acc),0.22),var(--surface) 72%);border:1px solid rgba(var(--acc),0.35);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.2rem 1.1rem 2rem;transition:transform 0.4s ease,box-shadow 0.4s ease;}
+.mission-patch:hover{transform:scale(1.04) rotate(-1deg);box-shadow:0 0 32px rgba(var(--acc),0.25);}
+.mission-patch::before{content:"";position:absolute;inset:8px;clip-path:polygon(50% 0%,100% 16%,100% 62%,50% 100%,0% 62%,0% 16%);border:1px dashed rgba(var(--acc),0.4);pointer-events:none;}
+.patch-icon{font-size:2.1rem;margin-bottom:0.5rem;filter:drop-shadow(0 0 8px rgba(var(--acc),0.5));}
+.patch-role{font-size:0.66rem;font-weight:700;letter-spacing:0.08em;color:var(--text);text-transform:uppercase;}
+.patch-dates{margin-top:0.4rem;font-family:monospace;font-size:0.56rem;letter-spacing:0.05em;color:rgba(var(--acc),1);}
+.duty-log{flex:1;min-width:240px;padding-left:1.6rem;border-left:1px dashed rgba(212,160,160,0.35);}
+.extra-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.8rem;}
 .extra-role{font-size:1rem;font-weight:600;color:var(--text);}
 .extra-org{font-size:0.84rem;color:var(--text-muted);font-weight:300;margin-top:0.1rem;}
+.duty-log-list{list-style:none;padding:0;margin-top:0.8rem;}
+.duty-log-list li{font-size:0.86rem;color:var(--text-muted);line-height:1.65;margin-bottom:0.5rem;position:relative;padding-left:1.2rem;}
+.duty-log-list li::before{content:"◆";position:absolute;left:0;top:0.05em;font-size:0.55em;color:var(--rose-m);}
+@media (max-width:600px){
+  .patch-wrap{flex-direction:column;text-align:center;}
+  .duty-log{border-left:none;border-top:1px dashed rgba(212,160,160,0.35);padding-left:0;padding-top:1.4rem;width:100%;}
+  .extra-head{justify-content:center;text-align:center;}
+}
 
 /* CERTS */
 .cert-grid{display:flex;flex-wrap:wrap;gap:0.75rem;}
@@ -583,13 +615,25 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
       <span class="s-label-pill" style="background:rgba(144,191,232,0.12);color:var(--sky-m);border:1px solid rgba(144,191,232,0.2);">Intellectual Property</span>
       <h2>Patents</h2><div class="s-label-line"></div>
     </div>
-    <div class="patent-row reveal">
-      <div class="patent-icon">&#128737;</div>
-      <div><div class="patent-title">System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</div><div class="patent-meta">Application No.: 202641018176</div><span class="patent-pill">Published March 2026</span></div>
-    </div>
-    <div class="patent-row reveal">
-      <div class="patent-icon">&#128300;</div>
-      <div><div class="patent-title">A System and Method for Machine Learning-Based FTIR Spectral Denoising</div><div class="patent-meta">Application No.: 202641053864</div><span class="patent-pill">Published April 2026</span></div>
+    <div class="patent-field">
+      <div class="patent-plate reveal" style="--acc:181,168,232;">
+        <div class="patent-signal-row">
+          <span class="patent-icon-ping">&#128737;</span>
+          <div class="patent-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="patent-title">System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</div>
+        <div class="patent-meta">APPLICATION NO. 202641018176</div>
+        <span class="patent-pill">Signal Published &middot; March 2026</span>
+      </div>
+      <div class="patent-plate reveal" style="--acc:144,191,232;">
+        <div class="patent-signal-row">
+          <span class="patent-icon-ping">&#128300;</span>
+          <div class="patent-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="patent-title">A System and Method for Machine Learning-Based FTIR Spectral Denoising</div>
+        <div class="patent-meta">APPLICATION NO. 202641053864</div>
+        <span class="patent-pill">Signal Published &middot; April 2026</span>
+      </div>
     </div>
   </div>
 </section>
@@ -600,15 +644,22 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
       <span class="s-label-pill" style="background:rgba(212,160,160,0.12);color:var(--rose-m);border:1px solid rgba(212,160,160,0.2);">Beyond Code</span>
       <h2>Extracurriculars</h2><div class="s-label-line"></div>
     </div>
-    <div class="extra-card reveal">
-      <div class="extra-head">
-        <div><div class="extra-role">Executive Secretary &amp; Machine Learning Lead</div><div class="extra-org">Indian Society for Technology Education (ISTE) &mdash; VIT Student Chapter</div></div>
-        <span class="exp-date">Mar 2025 &ndash; Apr 2026</span>
+    <div class="patch-wrap reveal">
+      <div class="mission-patch">
+        <span class="patch-icon">&#129489;&#8205;&#128640;</span>
+        <div class="patch-role">ML Lead</div>
+        <div class="patch-dates">MAR '25 &ndash; APR '26</div>
       </div>
-      <ul class="exp-bullets">
-        <li>Maintained chapter records, coordinated with Student Welfare, and supported initiatives organizing numerous workshops and hackathons.</li>
-        <li>Conducted ML sessions for juniors, mentoring across full project cycles.</li>
-      </ul>
+      <div class="duty-log">
+        <div class="extra-head">
+          <div><div class="extra-role">Executive Secretary &amp; Machine Learning Lead</div><div class="extra-org">Indian Society for Technology Education (ISTE) &mdash; VIT Student Chapter</div></div>
+          <span class="exp-date">Mar 2025 &ndash; Apr 2026</span>
+        </div>
+        <ul class="duty-log-list">
+          <li>Maintained chapter records, coordinated with Student Welfare, and supported initiatives organizing numerous workshops and hackathons.</li>
+          <li>Conducted ML sessions for juniors, mentoring across full project cycles.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
