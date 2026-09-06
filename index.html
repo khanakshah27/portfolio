@@ -108,16 +108,26 @@ section{padding:6rem 0 3rem;position:relative;z-index:1;}
 .proj-link{font-size:0.72rem;font-weight:500;padding:0.3rem 0.85rem;border-radius:99px;border:1px solid;text-decoration:none;transition:background 0.2s,box-shadow 0.2s,transform 0.2s;cursor:none;}
 .proj-link:hover{transform:translateY(-2px);}
 
-/* AWARDS */
-.awards-list{display:flex;flex-direction:column;gap:0.9rem;}
-.award-row{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1.6rem;display:flex;align-items:center;gap:1.4rem;transition:border-color 0.3s,transform 0.3s;cursor:none;position:relative;overflow:hidden;}
-.award-row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--butter-m);border-radius:99px;opacity:0;transition:opacity 0.3s;}
-.award-row:hover{border-color:rgba(224,200,122,0.3);transform:translateX(4px);}
-.award-row:hover::before{opacity:1;}
-.award-badge-big{font-size:1.5rem;min-width:36px;text-align:center;}
-.award-title{font-size:0.93rem;font-weight:500;color:var(--text);margin-bottom:0.15rem;}
-.award-sub{font-size:0.76rem;color:var(--text-muted);}
-.award-year{margin-left:auto;font-family:"Cormorant Garamond",serif;font-size:1.1rem;font-weight:600;color:var(--text-dim);white-space:nowrap;}
+/* AWARDS — zero-gravity medal case */
+.medal-hint{text-align:center;font-size:0.68rem;color:var(--text-dim);letter-spacing:0.08em;margin-bottom:2.4rem;}
+.medal-field{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:2.6rem 2.2rem;padding:1rem 0 1.8rem;}
+.medal-slot{perspective:1200px;}
+.medal{--acc:224,200,122;width:150px;height:150px;background:none;border:none;padding:0;display:block;cursor:none;animation:medalDrift var(--dur,6s) ease-in-out infinite;animation-delay:var(--delay,0s);}
+@keyframes medalDrift{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-10px) rotate(2deg);}}
+.medal-inner{position:relative;width:100%;height:100%;transition:transform 0.7s cubic-bezier(0.4,0.2,0.2,1);transform-style:preserve-3d;}
+.medal.flipped .medal-inner{transform:rotateY(180deg);}
+.medal-face{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid rgba(var(--acc),0.35);box-shadow:0 0 0 1px rgba(var(--acc),0.08) inset,0 0 28px rgba(var(--acc),0.14);transition:box-shadow 0.3s ease;}
+.medal-front{background:radial-gradient(circle at 35% 30%,rgba(var(--acc),0.2),var(--surface) 72%);}
+.medal-front .medal-icon{font-size:2.3rem;filter:drop-shadow(0 0 10px rgba(var(--acc),0.5));}
+.medal-ring{position:absolute;inset:9px;border:1px dashed rgba(var(--acc),0.35);border-radius:50%;animation:orbitSpin 12s linear infinite;}
+.medal-back{transform:rotateY(180deg);text-align:center;padding:1.1rem;background:radial-gradient(circle at 35% 30%,rgba(var(--acc),0.3),var(--surface2) 78%);}
+.medal-year{font-family:"Cormorant Garamond",serif;font-size:1.5rem;font-weight:700;color:rgba(var(--acc),1);line-height:1;}
+.medal-title{font-size:0.78rem;font-weight:600;color:var(--text);margin-top:0.3rem;}
+.medal-sub{font-size:0.6rem;color:var(--text-muted);margin-top:0.3rem;line-height:1.4;}
+.medal:hover .medal-face,.medal:focus-visible .medal-face{box-shadow:0 0 0 1px rgba(var(--acc),0.25) inset,0 0 42px rgba(var(--acc),0.28);}
+.medal:focus-visible{outline:2px solid rgba(var(--acc),0.6);outline-offset:6px;border-radius:50%;}
+@media (prefers-reduced-motion:reduce){.medal{animation:none;}.medal-ring{animation:none;}}
+@media (max-width:480px){.medal{width:118px;height:118px;}.medal-front .medal-icon{font-size:1.9rem;}.medal-year{font-size:1.2rem;}.medal-field{gap:2rem 1.4rem;}}
 
 /* PATENTS */
 .patent-row{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.3rem 1.7rem;margin-bottom:1rem;display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center;transition:border-color 0.3s;cursor:none;}
@@ -235,10 +245,6 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 /* ── STAT COUNTER ANIMATION ── */
 .hero-stat-num{transition:text-shadow 0.3s;}
 .hero-stat-num.pop{text-shadow:0 0 30px var(--accent),0 0 60px var(--lav-d);}
-
-/* ── AWARD ROWS — staggered on scroll ── */
-.award-row{transition:border-color 0.3s,transform 0.4s cubic-bezier(0.34,1.56,0.64,1),opacity 0.5s;opacity:0;transform:translateX(-24px);}
-.award-row.visible{opacity:1;transform:translateX(0);}
 
 /* ── EASTER EGG: KONAMI ── */
 #konami-msg{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity 0.5s;}
@@ -517,11 +523,56 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
       <span class="s-label-pill" style="background:rgba(224,200,122,0.12);color:var(--butter-m);border:1px solid rgba(224,200,122,0.2);">Recognition</span>
       <h2>Awards</h2><div class="s-label-line"></div>
     </div>
-    <div class="awards-list">
-      <div class="award-row reveal"><div class="award-badge-big">&#127942;</div><div><div class="award-title">1st Prize &mdash; InnovAct-2025 Hackathon</div><div class="award-sub">Vellore Institute of Technology</div></div><div class="award-year">2025</div></div>
-      <div class="award-row reveal"><div class="award-badge-big">&#129351;</div><div><div class="award-title">Merit Scholarship &mdash; 1st Rank in Branch</div><div class="award-sub">Academic Year 2023&ndash;24</div></div><div class="award-year">2024</div></div>
-      <div class="award-row reveal"><div class="award-badge-big">&#129352;</div><div><div class="award-title">Merit Scholarship &mdash; 2nd Rank in Branch</div><div class="award-sub">Academic Year 2024&ndash;25</div></div><div class="award-year">2025</div></div>
-      <div class="award-row reveal"><div class="award-badge-big">&#129353;</div><div><div class="award-title">Merit Scholarship &mdash; 3rd Rank in Branch</div><div class="award-sub">Academic Year 2025&ndash;26</div></div><div class="award-year">2026</div></div>
+    <div class="medal-hint">Tap a medal to flip it and read the mission record &nbsp;✦&nbsp; they drift free until you do</div>
+    <div class="medal-field">
+      <div class="medal-slot reveal">
+        <button type="button" class="medal" style="--acc:181,168,232;--delay:0s;--dur:6.4s;">
+          <div class="medal-inner">
+            <div class="medal-face medal-front"><span class="medal-ring"></span><span class="medal-icon">&#127942;</span></div>
+            <div class="medal-face medal-back">
+              <div class="medal-year">2025</div>
+              <div class="medal-title">1st Prize</div>
+              <div class="medal-sub">InnovAct-2025 Hackathon<br/>Vellore Institute of Technology</div>
+            </div>
+          </div>
+        </button>
+      </div>
+      <div class="medal-slot reveal">
+        <button type="button" class="medal" style="--acc:224,200,122;--delay:0.4s;--dur:5.6s;">
+          <div class="medal-inner">
+            <div class="medal-face medal-front"><span class="medal-ring"></span><span class="medal-icon">&#129351;</span></div>
+            <div class="medal-face medal-back">
+              <div class="medal-year">2024</div>
+              <div class="medal-title">Merit Scholarship &mdash; 1st Rank</div>
+              <div class="medal-sub">Academic Year 2023&ndash;24</div>
+            </div>
+          </div>
+        </button>
+      </div>
+      <div class="medal-slot reveal">
+        <button type="button" class="medal" style="--acc:192,196,205;--delay:0.8s;--dur:7s;">
+          <div class="medal-inner">
+            <div class="medal-face medal-front"><span class="medal-ring"></span><span class="medal-icon">&#129352;</span></div>
+            <div class="medal-face medal-back">
+              <div class="medal-year">2025</div>
+              <div class="medal-title">Merit Scholarship &mdash; 2nd Rank</div>
+              <div class="medal-sub">Academic Year 2024&ndash;25</div>
+            </div>
+          </div>
+        </button>
+      </div>
+      <div class="medal-slot reveal">
+        <button type="button" class="medal" style="--acc:214,158,110;--delay:1.2s;--dur:6.8s;">
+          <div class="medal-inner">
+            <div class="medal-face medal-front"><span class="medal-ring"></span><span class="medal-icon">&#129353;</span></div>
+            <div class="medal-face medal-back">
+              <div class="medal-year">2026</div>
+              <div class="medal-title">Merit Scholarship &mdash; 3rd Rank</div>
+              <div class="medal-sub">Academic Year 2025&ndash;26</div>
+            </div>
+          </div>
+        </button>
+      </div>
     </div>
   </div>
 </section>
@@ -859,9 +910,14 @@ const statNums=document.querySelectorAll(".hero-stat-num");
 const statObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("pop");setTimeout(()=>e.target.classList.remove("pop"),800);statObs.unobserve(e.target);}});},{threshold:1});
 statNums.forEach(n=>statObs.observe(n));
 
-// ── AWARDS STAGGER ANIMATION ──
-const awardObs=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add("visible"),i*120);});},{threshold:0.1});
-document.querySelectorAll(".award-row").forEach(r=>awardObs.observe(r));
+// ── ZERO-G MEDAL CASE — tap a medal to flip and read its record ──
+document.querySelectorAll(".medal").forEach(m=>{
+  m.setAttribute("aria-pressed","false");
+  m.addEventListener("click",()=>{
+    const flipped=m.classList.toggle("flipped");
+    m.setAttribute("aria-pressed",String(flipped));
+  });
+});
 
 // ── HERO MOUSE PARALLAX ──
 const heroWrap=document.querySelector(".hero-wrap");
