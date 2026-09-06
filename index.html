@@ -226,9 +226,65 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 /* ── EASTER EGG: KONAMI ── */
 #konami-msg{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity 0.5s;}
 #konami-msg span{font-family:"Cormorant Garamond",serif;font-size:clamp(1.5rem,4vw,3rem);color:var(--accent);text-align:center;line-height:1.5;text-shadow:0 0 40px var(--lav-m);padding:2rem 3rem;background:rgba(7,5,15,0.9);border:1px solid var(--border);border-radius:20px;}
+
+/* ── PRELOADER / LAUNCH SEQUENCE ── */
+#preloader{position:fixed;inset:0;z-index:10000;background:radial-gradient(ellipse at 50% 28%,#170f30 0%,var(--bg) 72%);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform 1.05s cubic-bezier(0.76,0,0.24,1);}
+#preloader.curtain-up{transform:translateY(-100%);}
+#preloader.done{display:none;}
+#preloader.launching{animation:screenShake 0.4s ease;}
+@keyframes screenShake{0%,100%{transform:translateX(0);}20%{transform:translateX(-3px);}40%{transform:translateX(3px);}60%{transform:translateX(-2px);}80%{transform:translateX(2px);}}
+.preloader-stars span{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;animation:twinkle 2.4s ease-in-out infinite;}
+.preloader-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;}
+.preloader-rocket{position:relative;display:flex;flex-direction:column;align-items:center;animation:rocketIdle 2.6s ease-in-out infinite;}
+@keyframes rocketIdle{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-9px) rotate(1deg);}}
+#preloader.launching .preloader-rocket{animation:rocketLaunch 1s cubic-bezier(0.6,0,1,0.4) forwards;}
+@keyframes rocketLaunch{0%{transform:translateY(0) rotate(0deg) scale(1);}14%{transform:translateY(-6px) rotate(-2deg) scale(1.03);}100%{transform:translateY(-950px) rotate(-6deg) scale(0.5);opacity:0.85;}}
+.rocket-flame{position:relative;width:26px;height:34px;margin-top:-8px;}
+.flame-outer,.flame-inner{position:absolute;left:50%;top:0;transform:translateX(-50%);border-radius:50% 50% 45% 45%/60% 60% 40% 40%;}
+.flame-outer{width:24px;height:32px;background:linear-gradient(to bottom,#e0c87a,#e0b87a 55%,transparent);animation:flameFlicker 0.3s ease-in-out infinite alternate;}
+.flame-inner{width:11px;height:19px;background:linear-gradient(to bottom,#f9f4ff,#d4a0a0 65%,transparent);animation:flameFlicker 0.2s ease-in-out infinite alternate-reverse;}
+#preloader.launching .flame-outer{animation-duration:0.12s;}
+#preloader.launching .flame-inner{animation-duration:0.09s;}
+@keyframes flameFlicker{0%{transform:translateX(-50%) scaleY(0.85) scaleX(0.88);opacity:0.85;}100%{transform:translateX(-50%) scaleY(1.18) scaleX(1.05);opacity:1;}}
+.preloader-status{font-family:"Outfit",sans-serif;font-size:0.74rem;font-weight:400;letter-spacing:0.06em;color:var(--text-muted);margin-top:1.7rem;min-height:1.3em;text-align:center;}
+.preloader-bar{width:180px;height:2px;background:rgba(181,168,232,0.15);border-radius:99px;margin-top:1rem;overflow:hidden;}
+.preloader-bar-fill{height:100%;width:0%;background:linear-gradient(to right,var(--lav-m),var(--sky-m));box-shadow:0 0 8px var(--lav-m);transition:width 0.55s ease;}
 </style>
 </head>
 <body>
+<div id="preloader" role="presentation" aria-hidden="true">
+  <div class="preloader-stars">
+    <span style="top:18%;left:22%;animation-delay:0.2s;"></span>
+    <span style="top:30%;left:78%;animation-delay:0.8s;"></span>
+    <span style="top:65%;left:15%;animation-delay:1.3s;"></span>
+    <span style="top:72%;left:82%;animation-delay:0.5s;"></span>
+    <span style="top:12%;left:55%;animation-delay:1.6s;"></span>
+    <span style="top:85%;left:48%;animation-delay:1s;"></span>
+  </div>
+  <div class="preloader-content">
+    <div class="preloader-rocket" id="preloader-rocket">
+      <svg viewBox="0 0 100 130" width="64" height="84" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f0eafa"/>
+            <stop offset="100%" stop-color="#b5a8e8"/>
+          </linearGradient>
+        </defs>
+        <path d="M50 4 C68 4 79 34 79 66 L79 104 L21 104 L21 66 C21 34 32 4 50 4 Z" fill="url(#bodyGrad)" stroke="#6355c7" stroke-width="2"/>
+        <path d="M21 88 L4 122 L21 110 Z" fill="#90bfe8" stroke="#6355c7" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M79 88 L96 122 L79 110 Z" fill="#90bfe8" stroke="#6355c7" stroke-width="2" stroke-linejoin="round"/>
+        <rect x="28" y="98" width="44" height="12" rx="4" fill="#e0c87a" stroke="#6355c7" stroke-width="2"/>
+        <circle cx="50" cy="48" r="12" fill="#07050f" stroke="#6355c7" stroke-width="2"/>
+        <circle cx="50" cy="48" r="7.5" fill="#90bfe8"/>
+        <circle cx="46.5" cy="44.5" r="2.2" fill="#f9f4ff" opacity="0.85"/>
+      </svg>
+      <div class="rocket-flame"><span class="flame-outer"></span><span class="flame-inner"></span></div>
+    </div>
+    <div class="preloader-status" id="preloader-status">Charting coordinates&hellip;</div>
+    <div class="preloader-bar"><div class="preloader-bar-fill" id="preloader-fill"></div></div>
+  </div>
+</div>
+<noscript><style>#preloader{display:none!important}</style></noscript>
 <div id="scroll-progress"></div>
 <div id="warp-flash"></div>
 <div id="cursor"></div>
@@ -492,7 +548,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
       <div class="contact-stars"></div>
       <div class="contact-glow"></div>
       <div id="contact-star" style="font-family:serif;font-size:2.8rem;margin-bottom:0.5rem;color:var(--accent);position:relative;z-index:1;">&#10022;</div>
-      <div class="contact-title">Let's build something.</div>
+      <div class="contact-title">Houston, I'm ready when you are.</div>
       <div class="contact-sub">Internships, research collabs, open source, or just a hello &mdash; I'm always open to connecting.</div>
       <div class="contact-links">
         <a href="mailto:khanakshah2005@gmail.com" class="c-link" style="background:rgba(212,160,160,0.08);color:var(--rose-m);border-color:rgba(212,160,160,0.25);">&#9993; khanakshah2005@gmail.com</a>
@@ -506,6 +562,38 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 <footer>&#10022; Crafted by Khanak Shah &middot; 2026 &#10022;</footer>
 
 <script>
+// ── PRELOADER / LAUNCH SEQUENCE ──
+(function(){
+  const pre=document.getElementById("preloader");
+  if(!pre){return;}
+  const statusEl=document.getElementById("preloader-status");
+  const fillEl=document.getElementById("preloader-fill");
+  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.body.style.overflow="hidden";
+  const lines=["Charting coordinates…","Calibrating constellations &amp; neural nets…","Pressurizing the mission log…","T-minus liftoff."];
+  let i=0,finished=false;
+  function finish(){
+    if(finished)return;finished=true;
+    document.body.style.overflow="";
+    pre.classList.add("curtain-up");
+    setTimeout(()=>{pre.classList.add("done");},1100);
+  }
+  function launch(){
+    if(statusEl)statusEl.textContent="T-minus liftoff.";
+    pre.classList.add("launching");
+    setTimeout(finish,reduced?150:900);
+  }
+  function nextLine(){
+    if(i>=lines.length){launch();return;}
+    if(statusEl)statusEl.innerHTML=lines[i];
+    if(fillEl)fillEl.style.width=(((i+1)/lines.length)*100)+"%";
+    i++;
+    setTimeout(nextLine,reduced?100:700);
+  }
+  setTimeout(nextLine,reduced?100:450);
+  setTimeout(finish,7000); // failsafe
+})();
+
 // ── SCROLL PROGRESS ──
 const prog=document.getElementById("scroll-progress");
 window.addEventListener("scroll",()=>{const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;prog.style.width=pct+"%";},{passive:true});
