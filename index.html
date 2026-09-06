@@ -97,37 +97,16 @@ section{padding:6rem 0 3rem;position:relative;z-index:1;}
 .exp-bullets{margin-top:0.7rem;padding-left:1rem;}
 .exp-bullets li{font-size:0.86rem;color:var(--text-muted);line-height:1.65;margin-bottom:0.3rem;}
 
-/* PROJECTS */
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
-.proj-card{--acc:181,168,232;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:4.4rem 1.8rem 1.8rem;position:relative;overflow:hidden;transform-style:preserve-3d;transition:border-color 0.3s,box-shadow 0.3s;cursor:none;display:flex;flex-direction:column;}
-.proj-card:hover{border-color:rgba(var(--acc),0.35);box-shadow:0 0 40px rgba(var(--acc),0.16);}
-.proj-card-bar{position:absolute;top:0;left:0;right:0;height:3px;border-radius:20px 20px 0 0;}
+/* PROJECTS — mission readout content (rendered inside the constellation panel) */
 @keyframes twinkle{0%,100%{opacity:0.3;}50%{opacity:1;box-shadow:0 0 4px var(--accent);}}
-/* mission emblem — tiny orbiting moon around a planet core, per project */
-.proj-emblem{position:absolute;top:16px;left:20px;width:34px;height:34px;pointer-events:none;}
-.proj-emblem .core{position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(var(--acc),0.95),rgba(var(--acc),0.25));box-shadow:0 0 12px rgba(var(--acc),0.55);}
-.proj-emblem .ring{position:absolute;inset:0;border:1px dashed rgba(var(--acc),0.4);border-radius:50%;animation:orbitSpin 7s linear infinite;}
-.proj-emblem .ring::before{content:"";position:absolute;top:-2px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:rgba(var(--acc),0.95);box-shadow:0 0 6px rgba(var(--acc),0.85);}
-.proj-mission-no{position:absolute;top:20px;right:20px;font-family:monospace;font-size:0.6rem;font-weight:600;letter-spacing:0.14em;color:var(--text-dim);}
-/* HUD targeting corners — appear on hover */
-.proj-corners span{position:absolute;width:16px;height:16px;border:1.5px solid rgba(var(--acc),0.5);pointer-events:none;opacity:0;transition:opacity 0.3s,border-color 0.3s;}
-.proj-corners span:nth-child(1){top:10px;left:10px;border-right:none;border-bottom:none;}
-.proj-corners span:nth-child(2){top:10px;right:10px;border-left:none;border-bottom:none;}
-.proj-corners span:nth-child(3){bottom:10px;left:10px;border-right:none;border-top:none;}
-.proj-corners span:nth-child(4){bottom:10px;right:10px;border-left:none;border-top:none;}
-.proj-card:hover .proj-corners span{opacity:1;}
-.proj-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(181,168,232,0.4),transparent);top:-2px;pointer-events:none;opacity:0;}
-.proj-card:hover .proj-scan{animation:scanDown 1.2s ease-in-out forwards;}
-@keyframes scanDown{0%{top:0;opacity:1;}100%{top:100%;opacity:0;}}
-.proj-shine{position:absolute;inset:0;border-radius:20px;background:radial-gradient(ellipse at var(--mx,50%) var(--my,50%),rgba(181,168,232,0.08) 0%,transparent 60%);pointer-events:none;opacity:0;transition:opacity 0.3s;}
-.proj-card:hover .proj-shine{opacity:1;}
-.proj-badge{font-size:0.62rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.65rem;border-radius:99px;border:1px solid;display:inline-block;margin-bottom:1rem;margin-top:0.2rem;}
-.proj-title{font-family:"Cormorant Garamond",serif;font-size:1.35rem;font-weight:700;color:var(--text);margin-bottom:0.7rem;line-height:1.25;}
-.proj-desc{font-size:0.83rem;color:var(--text-muted);line-height:1.65;flex:1;}
-.proj-tech{display:flex;flex-wrap:wrap;gap:0.32rem;margin-top:1rem;}
-.proj-tech span{font-size:0.65rem;padding:0.18rem 0.5rem;border-radius:5px;background:rgba(181,168,232,0.07);color:var(--text-dim);border:1px solid var(--border);}
-.proj-footer{margin-top:1.1rem;display:flex;gap:0.6rem;}
-.proj-link{font-size:0.7rem;font-weight:500;padding:0.26rem 0.75rem;border-radius:99px;border:1px solid;text-decoration:none;transition:background 0.2s,box-shadow 0.2s;cursor:none;}
+.proj-badge{font-size:0.62rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.65rem;border-radius:99px;border:1px solid;display:inline-block;}
+.proj-title{font-family:"Cormorant Garamond",serif;font-size:1.7rem;font-weight:700;color:var(--text);margin-bottom:0.8rem;line-height:1.2;}
+.proj-desc{font-size:0.88rem;color:var(--text-muted);line-height:1.7;max-width:640px;}
+.proj-tech{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:1.2rem;}
+.proj-tech span{font-size:0.66rem;padding:0.2rem 0.55rem;border-radius:5px;background:rgba(var(--acc),0.08);color:var(--text-dim);border:1px solid var(--border);}
+.proj-footer{margin-top:1.4rem;display:flex;gap:0.6rem;}
+.proj-link{font-size:0.72rem;font-weight:500;padding:0.3rem 0.85rem;border-radius:99px;border:1px solid;text-decoration:none;transition:background 0.2s,box-shadow 0.2s,transform 0.2s;cursor:none;}
+.proj-link:hover{transform:translateY(-2px);}
 
 /* AWARDS */
 .awards-list{display:flex;flex-direction:column;gap:0.9rem;}
@@ -200,21 +179,50 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 .exp-card.open .exp-expand-hint::after{transform:rotate(180deg);}
 .exp-card.open .exp-expand-hint{color:var(--lav-m);}
 
-/* ── HORIZONTAL PROJECT SCROLL (Mission Log) ── */
-#projects{overflow:hidden;}
-.mission-log-wrap{position:relative;}
+/* ── PROJECT MISSION CONSTELLATION ── */
+.constellation-wrap{position:relative;}
 .mission-log-label{font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);margin-bottom:1rem;display:flex;align-items:center;gap:0.6rem;}
 .mission-log-label::before{content:"";width:20px;height:1px;background:var(--text-dim);}
-.proj-rail{display:flex;gap:1.4rem;overflow-x:auto;padding-bottom:1.2rem;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;cursor:grab;}
-.proj-rail:active{cursor:grabbing;}
-.proj-rail::-webkit-scrollbar{height:3px;}
-.proj-rail::-webkit-scrollbar-track{background:var(--surface2);border-radius:99px;}
-.proj-rail::-webkit-scrollbar-thumb{background:var(--lav-d);border-radius:99px;}
-.proj-card{min-width:300px;max-width:340px;flex-shrink:0;scroll-snap-align:start;}
-/* drag hint arrows */
-.proj-arrows{display:flex;gap:0.6rem;margin-top:1rem;justify-content:flex-end;}
-.proj-arrow{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:0.9rem;cursor:pointer;transition:border-color 0.2s,color 0.2s,background 0.2s;}
-.proj-arrow:hover{border-color:var(--lav-m);color:var(--text);background:rgba(181,168,232,0.08);}
+.constellation-map{position:relative;width:100%;height:300px;margin-bottom:2.2rem;}
+.constellation-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+.constellation-lines polyline{fill:none;stroke:rgba(181,168,232,0.3);stroke-width:0.35;stroke-dasharray:1.4,1.6;}
+.constellation-lines.mobile-only{display:none;}
+.const-star{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;background:none;border:none;padding:6px;font-family:inherit;cursor:none;}
+.const-star-dot{width:11px;height:11px;border-radius:50%;position:relative;background:radial-gradient(circle at 35% 30%,rgba(var(--acc),1),rgba(var(--acc),0.35));box-shadow:0 0 8px rgba(var(--acc),0.55),0 0 18px rgba(var(--acc),0.2);transition:transform 0.3s ease,box-shadow 0.3s ease,background 0.3s ease;}
+.const-star-dot::after{content:"";position:absolute;inset:-9px;border:1px solid rgba(var(--acc),0.3);border-radius:50%;animation:twinkle 3s ease-in-out infinite;}
+.const-star-label{font-size:0.68rem;color:var(--text-muted);white-space:nowrap;letter-spacing:0.02em;transition:color 0.3s ease;}
+.const-star:hover .const-star-dot{transform:scale(1.3);}
+.const-star.active .const-star-dot{transform:scale(1.5);background:radial-gradient(circle at 35% 30%,#fff,rgba(var(--acc),0.85));box-shadow:0 0 14px rgba(var(--acc),0.9),0 0 32px rgba(var(--acc),0.4);}
+.const-star.active .const-star-label{color:var(--text);}
+.const-star:focus-visible{outline:2px solid rgba(var(--acc),0.6);outline-offset:4px;border-radius:8px;}
+.cs-1{left:8%;top:70%;}
+.cs-2{left:27%;top:26%;}
+.cs-3{left:48%;top:60%;}
+.cs-4{left:70%;top:22%;}
+.cs-5{left:91%;top:54%;}
+/* mission readout — non-rectangular HUD panel with corners cut, not a plain card */
+#mission-readout{position:relative;background:var(--surface);border:1px solid rgba(var(--acc),0.3);padding:2.2rem 2.4rem 2rem 2.6rem;clip-path:polygon(30px 0,100% 0,100% calc(100% - 30px),calc(100% - 30px) 100%,0 100%,0 30px);transition:border-color 0.4s ease;}
+#mission-readout .corner-accent{position:absolute;width:42px;height:2px;background:rgba(var(--acc),0.85);box-shadow:0 0 8px rgba(var(--acc),0.6);pointer-events:none;}
+#mission-readout .corner-accent.tl{top:15px;left:15px;transform:translate(-50%,-50%) rotate(135deg);}
+#mission-readout .corner-accent.br{top:calc(100% - 15px);left:calc(100% - 15px);transform:translate(-50%,-50%) rotate(135deg);}
+#mission-readout .readout-head{display:flex;align-items:center;flex-wrap:wrap;gap:0.9rem;margin-bottom:0.4rem;}
+#mission-readout .readout-emblem{position:relative;width:30px;height:30px;flex-shrink:0;}
+#mission-readout .readout-emblem .core{position:absolute;inset:5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(var(--acc),0.95),rgba(var(--acc),0.25));box-shadow:0 0 12px rgba(var(--acc),0.55);}
+#mission-readout .readout-emblem .ring{position:absolute;inset:0;border:1px dashed rgba(var(--acc),0.4);border-radius:50%;animation:orbitSpin 7s linear infinite;}
+#mission-readout .readout-mission-no{font-family:monospace;font-size:0.66rem;font-weight:600;letter-spacing:0.16em;color:var(--text-dim);}
+#mission-readout.entering{animation:readoutIn 0.5s ease;}
+@keyframes readoutIn{0%{opacity:0.35;transform:translateY(6px);}100%{opacity:1;transform:translateY(0);}}
+@media (max-width:680px){
+  .constellation-map{height:420px;}
+  .constellation-lines.desktop-only{display:none;}
+  .constellation-lines.mobile-only{display:block;}
+  .cs-1{left:22%;top:6%;}
+  .cs-2{left:74%;top:20%;}
+  .cs-3{left:18%;top:40%;}
+  .cs-4{left:78%;top:58%;}
+  .cs-5{left:30%;top:78%;}
+  #mission-readout{padding:1.9rem 1.6rem 1.6rem 1.9rem;}
+}
 
 /* ── SKILL NODE CANVAS ── */
 #skill-node-canvas{display:block;width:100%;border-radius:16px;margin-top:1.5rem;cursor:crosshair;}
@@ -421,40 +429,47 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
       <span class="s-label-pill" style="background:rgba(212,160,160,0.12);color:var(--rose-m);border:1px solid rgba(212,160,160,0.2);">Built</span>
       <h2>Projects</h2><div class="s-label-line"></div>
     </div>
-    <div class="mission-log-wrap">
-    <div class="mission-log-label">Mission Log — drag to explore</div>
-    <div class="proj-rail" id="proj-rail">
-      <div class="proj-card" data-tilt style="--acc:181,168,232;">
-        <div class="proj-card-bar" style="background:linear-gradient(to right,var(--lav-m),var(--sky-m));"></div>
-        <div class="proj-emblem"><span class="ring"></span><span class="core"></span></div>
-        <span class="proj-mission-no">MISSION 01</span>
-        <div class="proj-corners"><span></span><span></span><span></span><span></span></div>
-        <div class="proj-shine"></div><div class="proj-scan"></div>
-        <span class="proj-badge" style="background:rgba(181,168,232,0.12);color:var(--lav-m);border-color:rgba(181,168,232,0.25);">AI &middot; Blockchain &middot; Safety</span>
+    <div class="constellation-wrap">
+    <div class="mission-log-label">Mission Constellation — select a star to view its dossier</div>
+    <div class="constellation-map">
+      <svg class="constellation-lines desktop-only" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="8,70 27,26 48,60 70,22 91,54"/></svg>
+      <svg class="constellation-lines mobile-only" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="22,6 74,20 18,40 78,58 30,78"/></svg>
+      <button type="button" class="const-star cs-1 active" data-proj="0" data-acc="181,168,232"><span class="const-star-dot"></span><span class="const-star-label">GuardianAI</span></button>
+      <button type="button" class="const-star cs-2" data-proj="1" data-acc="212,160,160"><span class="const-star-dot"></span><span class="const-star-label">Microaggression Detector</span></button>
+      <button type="button" class="const-star cs-3" data-proj="2" data-acc="157,196,179"><span class="const-star-dot"></span><span class="const-star-label">Medimate AI</span></button>
+      <button type="button" class="const-star cs-4" data-proj="3" data-acc="144,191,232"><span class="const-star-dot"></span><span class="const-star-label">Spectrapur</span></button>
+      <button type="button" class="const-star cs-5" data-proj="4" data-acc="224,184,122"><span class="const-star-dot"></span><span class="const-star-label">BioLink</span></button>
+    </div>
+    <div id="mission-readout" style="--acc:181,168,232;border-color:rgba(181,168,232,0.3);">
+      <span class="corner-accent tl"></span><span class="corner-accent br"></span>
+      <div class="mission-detail" data-proj="0">
+        <div class="readout-head">
+          <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
+          <span class="readout-mission-no">MISSION 01</span>
+          <span class="proj-badge" style="background:rgba(181,168,232,0.12);color:var(--lav-m);border-color:rgba(181,168,232,0.25);">AI &middot; Blockchain &middot; Safety</span>
+        </div>
         <div class="proj-title">GuardianAI</div>
         <div class="proj-desc">AI-driven personal safety system detecting distress signals and classifying environments as safe or unsafe in real time. Uses 3D CNN (R3D-18) + Random Forest for multimodal video analysis. Evidence stored immutably on Polygon blockchain for legal admissibility.</div>
         <div class="proj-tech"><span>Python</span><span>PyTorch</span><span>TensorFlow</span><span>OpenCV</span><span>React Native</span><span>Node.js</span><span>PostgreSQL</span><span>Polygon</span></div>
         <div class="proj-footer"><a href="https://github.com/khanakshah27" target="_blank" class="proj-link" style="background:rgba(181,168,232,0.08);color:var(--lav-m);border-color:rgba(181,168,232,0.25);">&#8599; GitHub</a></div>
       </div>
-      <div class="proj-card" data-tilt style="--acc:212,160,160;">
-        <div class="proj-card-bar" style="background:linear-gradient(to right,var(--rose-m),var(--butter-m));"></div>
-        <div class="proj-emblem"><span class="ring"></span><span class="core"></span></div>
-        <span class="proj-mission-no">MISSION 02</span>
-        <div class="proj-corners"><span></span><span></span><span></span><span></span></div>
-        <div class="proj-shine"></div><div class="proj-scan"></div>
-        <span class="proj-badge" style="background:rgba(212,160,160,0.12);color:var(--rose-m);border-color:rgba(212,160,160,0.25);">NLP &middot; ML &middot; Social Impact</span>
+      <div class="mission-detail" data-proj="1" hidden>
+        <div class="readout-head">
+          <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
+          <span class="readout-mission-no">MISSION 02</span>
+          <span class="proj-badge" style="background:rgba(212,160,160,0.12);color:var(--rose-m);border-color:rgba(212,160,160,0.25);">NLP &middot; ML &middot; Social Impact</span>
+        </div>
         <div class="proj-title">Workplace Microaggression Detector</div>
         <div class="proj-desc">End-to-end ML web app detecting language that marginalizes women in workplace communication. Preprocessed with SpaCy NLP, deployed on Flask, with 91% accuracy using TF-IDF logistic regression.</div>
         <div class="proj-tech"><span>Python</span><span>Scikit-learn</span><span>SpaCy</span><span>Pandas</span><span>Flask</span></div>
         <div class="proj-footer"><a href="https://github.com/khanakshah27" target="_blank" class="proj-link" style="background:rgba(212,160,160,0.08);color:var(--rose-m);border-color:rgba(212,160,160,0.25);">&#8599; GitHub</a></div>
       </div>
-      <div class="proj-card" data-tilt style="--acc:157,196,179;">
-        <div class="proj-card-bar" style="background:linear-gradient(to right,var(--sage-m),var(--butter-m));"></div>
-        <div class="proj-emblem"><span class="ring"></span><span class="core"></span></div>
-        <span class="proj-mission-no">MISSION 03</span>
-        <div class="proj-corners"><span></span><span></span><span></span><span></span></div>
-        <div class="proj-shine"></div><div class="proj-scan"></div>
-        <span class="proj-badge" style="background:rgba(157,196,179,0.12);color:var(--sage-m);border-color:rgba(157,196,179,0.25);">GenAI &middot; Healthcare &middot; Accessibility</span>
+      <div class="mission-detail" data-proj="2" hidden>
+        <div class="readout-head">
+          <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
+          <span class="readout-mission-no">MISSION 03</span>
+          <span class="proj-badge" style="background:rgba(157,196,179,0.12);color:var(--sage-m);border-color:rgba(157,196,179,0.25);">GenAI &middot; Healthcare &middot; Accessibility</span>
+        </div>
         <div class="proj-title">Medimate AI</div>
         <div class="proj-desc">Rural-focused AI medical assistant explaining prescriptions in 20+ Indian languages via Gemini API. Designed to close healthcare literacy gaps for underserved populations across diverse regions.</div>
         <div class="proj-tech"><span>Python</span><span>Streamlit</span><span>Gemini API</span></div>
@@ -463,13 +478,12 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
           <a href="https://github.com/khanakshah27" target="_blank" class="proj-link" style="background:rgba(224,200,122,0.08);color:var(--butter-m);border-color:rgba(224,200,122,0.25);">&#127760; Live</a>
         </div>
       </div>
-      <div class="proj-card" data-tilt style="--acc:144,191,232;">
-        <div class="proj-card-bar" style="background:linear-gradient(to right,var(--sky-m),var(--lav-m));"></div>
-        <div class="proj-emblem"><span class="ring"></span><span class="core"></span></div>
-        <span class="proj-mission-no">MISSION 04</span>
-        <div class="proj-corners"><span></span><span></span><span></span><span></span></div>
-        <div class="proj-shine"></div><div class="proj-scan"></div>
-        <span class="proj-badge" style="background:rgba(144,191,232,0.12);color:var(--sky-m);border-color:rgba(144,191,232,0.25);">Deep Learning &middot; Signal Processing</span>
+      <div class="mission-detail" data-proj="3" hidden>
+        <div class="readout-head">
+          <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
+          <span class="readout-mission-no">MISSION 04</span>
+          <span class="proj-badge" style="background:rgba(144,191,232,0.12);color:var(--sky-m);border-color:rgba(144,191,232,0.25);">Deep Learning &middot; Signal Processing</span>
+        </div>
         <div class="proj-title">Spectrapur</div>
         <div class="proj-desc">Web app that denoises raw spectral data using a ResUNet1D deep learning model. Users upload a spectrum and get back a cleaned, baseline-corrected signal with overlay visualization, residual noise chart, SNR/baseline metrics, and detected peaks.</div>
         <div class="proj-tech"><span>Python</span><span>Flask</span><span>PyTorch</span><span>NumPy</span><span>SciPy</span><span>Plotly.js</span></div>
@@ -478,13 +492,12 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
           <a href="https://spectrapur.vercel.app/" target="_blank" class="proj-link" style="background:rgba(224,200,122,0.08);color:var(--butter-m);border-color:rgba(224,200,122,0.25);">&#127760; Live</a>
         </div>
       </div>
-      <div class="proj-card" data-tilt style="--acc:224,184,122;">
-        <div class="proj-card-bar" style="background:linear-gradient(to right,var(--peach-m),var(--rose-m));"></div>
-        <div class="proj-emblem"><span class="ring"></span><span class="core"></span></div>
-        <span class="proj-mission-no">MISSION 05</span>
-        <div class="proj-corners"><span></span><span></span><span></span><span></span></div>
-        <div class="proj-shine"></div><div class="proj-scan"></div>
-        <span class="proj-badge" style="background:rgba(224,184,122,0.12);color:var(--peach-m);border-color:rgba(224,184,122,0.25);">Bioinformatics &middot; NLP &middot; Knowledge Graphs</span>
+      <div class="mission-detail" data-proj="4" hidden>
+        <div class="readout-head">
+          <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
+          <span class="readout-mission-no">MISSION 05</span>
+          <span class="proj-badge" style="background:rgba(224,184,122,0.12);color:var(--peach-m);border-color:rgba(224,184,122,0.25);">Bioinformatics &middot; NLP &middot; Knowledge Graphs</span>
+        </div>
         <div class="proj-title">BioLink</div>
         <div class="proj-desc">Research paper analyzer that extracts biomedical entities from PDFs and cross-references them against seven authoritative databases (NCBI, UniProt, PDB, KEGG, GO, ClinVar, STRING) to build interactive knowledge graphs and an AI-summarized dashboard.</div>
         <div class="proj-tech"><span>Python</span><span>FastAPI</span><span>scispaCy</span><span>PostgreSQL</span><span>Cytoscape.js</span></div>
@@ -493,12 +506,8 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
           <a href="https://bio-link-psi-black.vercel.app/" target="_blank" class="proj-link" style="background:rgba(224,200,122,0.08);color:var(--butter-m);border-color:rgba(224,200,122,0.25);">&#127760; Live</a>
         </div>
       </div>
-    </div><!-- end proj-rail -->
-    <div class="proj-arrows">
-      <div class="proj-arrow" id="proj-prev">&#8592;</div>
-      <div class="proj-arrow" id="proj-next">&#8594;</div>
     </div>
-    </div><!-- end mission-log-wrap -->
+    </div><!-- end constellation-wrap -->
   </div>
 </section>
 
@@ -638,17 +647,25 @@ document.querySelectorAll("section[id]").forEach(s=>dotSecObs.observe(s));
 // ── EXPERIENCE CARDS — click to expand ──
 document.querySelectorAll(".exp-card").forEach(card=>{card.addEventListener("click",()=>{const wasOpen=card.classList.contains("open");document.querySelectorAll(".exp-card").forEach(c=>c.classList.remove("open"));if(!wasOpen)card.classList.add("open");});});
 
-// ── PROJECT RAIL — drag scroll + arrow buttons ──
-const rail=document.getElementById("proj-rail");
-if(rail){
-  let isDown=false,startX,scrollLeft;
-  rail.addEventListener("mousedown",e=>{isDown=true;rail.style.cursor="grabbing";startX=e.pageX-rail.offsetLeft;scrollLeft=rail.scrollLeft;});
-  rail.addEventListener("mouseleave",()=>{isDown=false;rail.style.cursor="grab";});
-  rail.addEventListener("mouseup",()=>{isDown=false;rail.style.cursor="grab";});
-  rail.addEventListener("mousemove",e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-rail.offsetLeft;rail.scrollLeft=scrollLeft-(x-startX)*1.2;});
-  document.getElementById("proj-prev")?.addEventListener("click",()=>{rail.scrollBy({left:-340,behavior:"smooth"});});
-  document.getElementById("proj-next")?.addEventListener("click",()=>{rail.scrollBy({left:340,behavior:"smooth"});});
-}
+// ── PROJECT MISSION CONSTELLATION — click a star to load its dossier ──
+(function(){
+  const stars=document.querySelectorAll(".const-star");
+  const readout=document.getElementById("mission-readout");
+  const details=document.querySelectorAll(".mission-detail");
+  if(!readout||!stars.length)return;
+  stars.forEach(star=>{
+    star.addEventListener("click",()=>{
+      const id=star.dataset.proj,acc=star.dataset.acc;
+      stars.forEach(s=>s.classList.toggle("active",s===star));
+      details.forEach(d=>{d.hidden=d.dataset.proj!==id;});
+      readout.style.setProperty("--acc",acc);
+      readout.style.borderColor="rgba("+acc+",0.3)";
+      readout.classList.remove("entering");
+      void readout.offsetWidth; // restart the entrance animation
+      readout.classList.add("entering");
+    });
+  });
+})();
 
 // ── SOLAR SYSTEM SKILLS ──
 (function(){
@@ -910,9 +927,6 @@ document.querySelectorAll(".reveal").forEach(el=>revO.observe(el));
 // Skill chips: stagger-reveal on scroll
 const chipObs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){const chips=e.target.querySelectorAll(".s-chip");chips.forEach((c,i)=>{c.style.opacity="0";c.style.transform="translateY(10px)";setTimeout(()=>{c.style.transition="opacity 0.4s ease,transform 0.4s ease";c.style.opacity="1";c.style.transform="translateY(0)";},i*35+100);});chipObs.unobserve(e.target);}});},{threshold:0.15});
 document.querySelectorAll(".skill-cat-block").forEach(el=>chipObs.observe(el));
-
-// 3D TILT
-document.querySelectorAll("[data-tilt]").forEach(card=>{card.addEventListener("mousemove",e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-0.5,y=(e.clientY-r.top)/r.height-0.5;card.style.transform="perspective(900px) rotateY("+(x*10)+"deg) rotateX("+(-y*10)+"deg) translateZ(10px)";const sh=card.querySelector(".proj-shine");if(sh){sh.style.setProperty("--mx",(x*100+50)+"%");sh.style.setProperty("--my",(y*100+50)+"%");}});card.addEventListener("mouseleave",()=>{card.style.transform="perspective(900px) rotateY(0deg) rotateX(0deg) translateZ(0)";});});
 
 // MAGNETIC BUTTONS
 document.querySelectorAll(".btn-mag").forEach(btn=>{btn.addEventListener("mousemove",e=>{const r=btn.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);btn.style.transform="translate("+(dx*0.18)+"px,"+(dy*0.22)+"px)";btn.style.setProperty("--bx",((e.clientX-r.left)/r.width*100)+"%");btn.style.setProperty("--by",((e.clientX-r.top)/r.height*100)+"%");});btn.addEventListener("mouseleave",()=>{btn.style.transform="";});});
