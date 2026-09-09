@@ -9,23 +9,36 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
 :root{
+  /* pastel, on-light tokens (default across the page) */
+  --rose-m:#b5657c;--sage-m:#2f8462;--sage-d:#256b4f;
+  --lav-m:#6355c7;--lav-d:#6355c7;
+  --butter-m:#96721a;--sky-m:#2f6fa8;--peach-m:#a8622a;
+  --bg:#e7b7c1;--surface:rgba(255,255,255,0.62);--surface2:rgba(255,255,255,0.42);
+  --border:rgba(53,42,77,0.10);
+  --text:#352a4d;--text-muted:#6d5f88;--text-dim:#8577a3;--accent:#6355c7;
+}
+body{font-family:"Outfit",sans-serif;background:radial-gradient(ellipse at 50% -8%,#f3d3da 0%,#e7b7c1 55%,#dda6b2 100%) fixed;color:var(--text);min-height:100vh;overflow-x:hidden;cursor:none;}
+
+/* ── SPACE WINDOW — dark astronomical porthole used for hero / skills / projects / contact ── */
+.space-window{
   --rose-m:#d4a0a0;--sage-m:#9dc4b3;--sage-d:#3d7a62;
   --lav-m:#b5a8e8;--lav-d:#6355c7;
   --butter-m:#e0c87a;--sky-m:#90bfe8;--peach-m:#e0b87a;
   --bg:#07050f;--surface:#110d22;--surface2:#1a1430;
   --border:rgba(181,168,232,0.13);
   --text:#f0eafa;--text-muted:#a090c8;--text-dim:#5a4a88;--accent:#b5a8e8;
+  background:var(--bg);color:var(--text);position:relative;overflow:hidden;border-radius:28px;
+  box-shadow:0 26px 60px -26px rgba(53,42,77,0.45),inset 0 0 0 1px rgba(255,255,255,0.06);
 }
-body{font-family:"Outfit",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;cursor:none;}
 
 /* CURSOR */
-#cursor{position:fixed;width:8px;height:8px;background:#fff;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 6px 2px rgba(181,168,232,0.8);}
-#cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(181,168,232,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s;}
-.cursor-big #cursor-ring{width:52px;height:52px;opacity:0.3;}
+#cursor{position:fixed;width:9px;height:9px;background:#6355c7;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 0 3px rgba(255,255,255,0.85),0 0 10px 2px rgba(99,85,199,0.5);}
+#cursor-ring{position:fixed;width:32px;height:32px;border:1.5px solid rgba(99,85,199,0.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s;}
+.cursor-big #cursor-ring{width:52px;height:52px;opacity:0.35;}
 .trail-dot{position:fixed;border-radius:50%;pointer-events:none;z-index:9990;transform:translate(-50%,-50%);}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(7,5,15,0.65);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;background:rgba(255,255,255,0.55);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
 .nav-logo{font-family:"Cormorant Garamond",serif;font-size:1.35rem;font-weight:700;letter-spacing:0.06em;color:var(--accent);cursor:none;display:flex;align-items:center;gap:0.5rem;}
 .nav-star{font-size:0.75rem;animation:navSpin 8s linear infinite;display:inline-block;}
 @keyframes navSpin{to{transform:rotate(360deg);}}
@@ -34,17 +47,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-links a::after{content:"";position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width 0.3s ease;}
 .nav-links a:hover{color:var(--text);}
 .nav-links a:hover::after{width:100%;}
+@media (max-width:640px){nav{padding:0 1.2rem;}.nav-links{gap:1rem;}.nav-links a{font-size:0.62rem;}}
+
+/* ── generic marquee mechanics (tools / certs sliders) ── */
+.marquee-outer{position:relative;overflow:hidden;width:100%;}
+.marquee-track{display:flex;width:max-content;will-change:transform;}
+.marquee-seg{display:flex;align-items:center;flex-shrink:0;}
+@keyframes marqueeScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion:reduce){.marquee-track{animation:none!important;}}
 
 /* HERO */
-#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;padding:6rem 2rem 2rem;}
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;padding:7.5rem 1.2rem 2.5rem;}
+.hero-card{width:100%;max-width:1180px;padding:4rem 3rem 3.5rem;}
 .hero-aurora{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 50% at 50% 40%,rgba(99,85,199,0.18) 0%,transparent 65%),radial-gradient(ellipse 40% 30% at 20% 70%,rgba(61,122,98,0.10) 0%,transparent 60%),radial-gradient(ellipse 30% 20% at 80% 60%,rgba(212,160,160,0.08) 0%,transparent 55%);animation:auroraShift 12s ease-in-out infinite alternate;}
 @keyframes auroraShift{0%{transform:scale(1) translateY(0);}100%{transform:scale(1.06) translateY(-20px);}}
-.hero-wrap{max-width:1000px;width:100%;position:relative;}
+.hero-card canvas{position:absolute;inset:0;pointer-events:none;}
+.hero-deco{position:absolute;inset:0;pointer-events:none;z-index:1;}
+.deco-planet{position:absolute;border-radius:50%;}
+.deco-sun{width:64px;height:64px;top:12%;right:9%;background:radial-gradient(circle at 35% 30%,#ffe6ad,#f0a94e 65%,#c97a2e 100%);box-shadow:0 0 40px rgba(240,169,78,0.4);animation:planetFloat 7s ease-in-out infinite reverse;}
+.deco-small{width:50px;height:50px;bottom:10%;right:16%;background:radial-gradient(circle at 35% 30%,#ffd0c2,#e8836f 60%,#b85847 100%);box-shadow:0 0 28px rgba(232,131,111,0.35);animation:planetFloat 8s ease-in-out infinite;}
+@keyframes planetFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+@media (max-width:760px){.hero-deco{display:none;}}
+
+/* ── pastel intro box — slides in after the name ── */
+.intro-slide{display:inline-block;max-width:560px;background:linear-gradient(135deg,#f6dbe3,#eee0f5);color:#3a2b4d;padding:1.1rem 1.6rem;border-radius:16px;font-size:0.92rem;font-weight:400;line-height:1.6;margin-bottom:2.2rem;box-shadow:0 20px 44px -18px rgba(0,0,0,0.4);opacity:0;transform:translateX(-26px);animation:introSlideIn 0.9s 0.5s cubic-bezier(.2,.8,.2,1) forwards;}
+@keyframes introSlideIn{to{opacity:1;transform:translateX(0);}}
+@media (prefers-reduced-motion:reduce){.intro-slide{animation:none;opacity:1;transform:none;}}
+.hero-wrap{max-width:1000px;width:100%;position:relative;z-index:2;margin:0 auto;}
 .hero-kicker{font-size:0.68rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--lav-m);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem;}
 .hero-kicker::before{content:"";width:28px;height:1px;background:var(--lav-m);}
-.hero-name{font-family:"Cormorant Garamond",serif;font-size:clamp(4rem,9vw,7.5rem);font-weight:700;line-height:0.92;letter-spacing:-0.025em;margin-bottom:1.5rem;}
-.hero-name .line1{display:block;color:var(--text);}
-.hero-name .line2{display:block;color:transparent;-webkit-text-stroke:1.5px var(--lav-m);font-style:italic;}
+.hero-name{font-family:"Cormorant Garamond",serif;font-size:clamp(3.4rem,8vw,7rem);font-weight:700;line-height:0.92;letter-spacing:-0.025em;margin-bottom:1.5rem;transform-style:preserve-3d;}
+.hero-name .line1{display:block;color:var(--text);will-change:transform;transition:transform 0.05s ease-out;}
+.hero-name .line2{display:block;color:transparent;-webkit-text-stroke:1.5px var(--lav-m);font-style:italic;will-change:transform;transition:transform 0.05s ease-out;}
 .hero-typewriter{font-size:1.05rem;font-weight:300;color:var(--text-muted);margin-bottom:2.5rem;line-height:1.7;min-height:2.8em;}
 .cursor-blink{display:inline-block;width:2px;height:1em;background:var(--accent);vertical-align:middle;animation:blink 1s step-end infinite;}
 @keyframes blink{50%{opacity:0;}}
@@ -53,7 +87,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .orbit-ring{position:absolute;top:50%;left:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border:1px solid rgba(181,168,232,0.15);border-radius:50%;animation:orbitSpin 6s linear infinite;pointer-events:none;}
 .orbit-ring::before{content:"º6";position:absolute;top:-7px;left:50%;transform:translateX(-50%);font-size:8px;color:var(--lav-m);background:var(--bg);padding:0 2px;}
 @keyframes orbitSpin{to{transform:rotate(360deg);}}
-.hero-stat-num{font-family:"Cormorant Garamond",serif;font-size:2.6rem;font-weight:700;color:var(--accent);line-height:1;position:relative;z-index:1;}
+.hero-stat-num{font-family:"Cormorant Garamond",serif;font-size:2.6rem;font-weight:700;color:var(--accent);line-height:1;position:relative;z-index:1;transition:text-shadow 0.3s;}
+.hero-stat-num.pop{text-shadow:0 0 30px var(--accent),0 0 60px var(--lav-d);}
 .hero-stat-lbl{font-size:0.73rem;color:var(--text-muted);margin-top:0.2rem;letter-spacing:0.04em;}
 .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;}
 .btn-mag{position:relative;display:inline-flex;align-items:center;gap:0.5rem;padding:0.78rem 1.9rem;border-radius:99px;font-family:"Outfit",sans-serif;font-size:0.84rem;font-weight:500;text-decoration:none;cursor:none;overflow:hidden;transition:box-shadow 0.3s,transform 0.2s;}
@@ -64,8 +99,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .btn-outline{background:transparent;color:var(--accent);border:1px solid rgba(181,168,232,0.4);}
 .btn-outline:hover{background:rgba(181,168,232,0.07);box-shadow:0 0 20px rgba(181,168,232,0.15);}
 
+/* ── TOOLS MARQUEE ── */
+.tools-section{padding:2.4rem 0 0.4rem;position:relative;z-index:1;}
+.tools-caption{text-align:center;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:1.1rem;}
+.tools-outer{max-width:920px;margin:0 auto;}
+.tools-outer .marquee-track{animation:marqueeScroll 24s linear infinite;}
+.tools-outer:hover .marquee-track{animation-play-state:paused;}
+.tool-chip{display:inline-flex;align-items:center;font-size:0.8rem;font-weight:500;color:var(--text-muted);padding:0.42rem 1.3rem;margin:0 0.35rem;background:var(--surface);border-radius:99px;box-shadow:0 8px 20px -12px rgba(53,42,77,0.28);backdrop-filter:blur(8px);white-space:nowrap;}
+
 /* SECTION BASE */
-section{padding:6rem 0 3rem;position:relative;z-index:1;}
+section{padding:5.5rem 0 3rem;position:relative;z-index:1;}
 .container{max-width:960px;margin:0 auto;padding:0 2.5rem;}
 .s-label{display:flex;align-items:center;gap:1rem;margin-bottom:3rem;}
 .s-label-pill{font-size:0.62rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;padding:0.28rem 0.75rem;border-radius:99px;}
@@ -73,31 +116,38 @@ section{padding:6rem 0 3rem;position:relative;z-index:1;}
 .s-label-line{flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent);position:relative;}
 .s-label-line::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-radius:50%;background:var(--text-dim);box-shadow:0 0 6px var(--accent);}
 
-/* SKILLS — Solar System */
-#solar-canvas{display:block;width:100%;border-radius:20px;cursor:crosshair;touch-action:none;}
-.solar-legend{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.2rem;justify-content:center;}
+/* SKILLS — Solar System, inside a dark space-window */
+.solar-window{padding:1.7rem 1.6rem 1.8rem;}
+#solar-canvas{display:block;width:100%;border-radius:16px;cursor:crosshair;touch-action:none;position:relative;z-index:1;}
+.solar-legend{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.2rem;justify-content:center;position:relative;z-index:1;}
 .solar-legend-item{display:flex;align-items:center;gap:0.4rem;font-size:0.7rem;color:var(--text-muted);padding:0.22rem 0.7rem;border-radius:99px;border:1px solid var(--border);background:var(--surface);transition:border-color 0.2s,color 0.2s;cursor:pointer;}
 .solar-legend-item:hover{color:var(--text);border-color:rgba(181,168,232,0.35);}
 .solar-legend-dot{width:7px;height:7px;border-radius:50%;}
-.solar-hint{text-align:center;font-size:0.68rem;color:var(--text-dim);letter-spacing:0.08em;margin-top:0.8rem;}
+.solar-hint{text-align:center;font-size:0.68rem;color:var(--text-dim);letter-spacing:0.08em;margin-top:0.8rem;position:relative;z-index:1;}
 
 /* EXPERIENCE */
 .exp-track{position:relative;padding-left:2.2rem;}
 .exp-track::before{content:"";position:absolute;left:5px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--lav-m),var(--sage-m),var(--border));}
 .exp-item{position:relative;margin-bottom:2.5rem;}
 .exp-dot{position:absolute;left:-2.2rem;top:0.5rem;width:11px;height:11px;border-radius:50%;border:2px solid;background:var(--bg);}
-.exp-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.4rem 1.7rem;transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;cursor:none;position:relative;overflow:hidden;}
-.exp-card::after{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(to right,transparent,rgba(181,168,232,0.04),transparent);transition:left 0.6s ease;pointer-events:none;}
+.exp-card{background:var(--surface);backdrop-filter:blur(12px);border-radius:26px 26px 26px 6px;padding:1.5rem 1.8rem;transition:transform 0.3s,box-shadow 0.3s;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 16px 36px -22px rgba(53,42,77,0.32);}
+.exp-card::after{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(to right,transparent,rgba(181,168,232,0.08),transparent);transition:left 0.6s ease;pointer-events:none;}
 .exp-card:hover::after{left:150%;}
-.exp-card:hover{border-color:rgba(181,168,232,0.35);transform:translateX(5px);box-shadow:0 0 24px rgba(99,85,199,0.1);}
+.exp-card:hover{transform:translateX(6px);box-shadow:0 20px 44px -18px rgba(99,85,199,0.25);}
 .exp-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.5rem;}
 .exp-role{font-size:1rem;font-weight:600;color:var(--text);}
 .exp-org{font-size:0.84rem;color:var(--text-muted);font-weight:300;margin-top:0.1rem;}
 .exp-date{font-size:0.7rem;padding:0.2rem 0.7rem;border-radius:99px;background:var(--surface2);color:var(--text-muted);border:1px solid var(--border);white-space:nowrap;}
-.exp-bullets{margin-top:0.7rem;padding-left:1rem;}
+.exp-bullets{margin-top:0.7rem;padding-left:1rem;max-height:0;overflow:hidden;transition:max-height 0.55s cubic-bezier(0.22,1,0.36,1),opacity 0.4s ease;opacity:0;}
 .exp-bullets li{font-size:0.86rem;color:var(--text-muted);line-height:1.65;margin-bottom:0.3rem;}
+.exp-card.open .exp-bullets{max-height:300px;opacity:1;margin-top:0.7rem;}
+.exp-expand-hint{font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.6rem;display:flex;align-items:center;gap:0.4rem;transition:color 0.2s;}
+.exp-expand-hint::after{content:"▾";transition:transform 0.35s ease;}
+.exp-card.open .exp-expand-hint::after{transform:rotate(180deg);}
+.exp-card.open .exp-expand-hint{color:var(--lav-m);}
 
-/* PROJECTS — mission readout content (rendered inside the constellation panel) */
+/* PROJECTS — mission constellation, inside a dark space-window */
+.constellation-window{padding:2rem 1.8rem 2.2rem;}
 @keyframes twinkle{0%,100%{opacity:0.3;}50%{opacity:1;box-shadow:0 0 4px var(--accent);}}
 .proj-badge{font-size:0.62rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.65rem;border-radius:99px;border:1px solid;display:inline-block;}
 .proj-title{font-family:"Cormorant Garamond",serif;font-size:1.7rem;font-weight:700;color:var(--text);margin-bottom:0.8rem;line-height:1.2;}
@@ -107,122 +157,6 @@ section{padding:6rem 0 3rem;position:relative;z-index:1;}
 .proj-footer{margin-top:1.4rem;display:flex;gap:0.6rem;}
 .proj-link{font-size:0.72rem;font-weight:500;padding:0.3rem 0.85rem;border-radius:99px;border:1px solid;text-decoration:none;transition:background 0.2s,box-shadow 0.2s,transform 0.2s;cursor:none;}
 .proj-link:hover{transform:translateY(-2px);}
-
-/* AWARDS — zero-gravity medal case */
-.medal-hint{text-align:center;font-size:0.68rem;color:var(--text-dim);letter-spacing:0.08em;margin-bottom:2.4rem;}
-.medal-field{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:2.6rem 2.2rem;padding:1rem 0 1.8rem;}
-.medal-slot{perspective:1200px;}
-.medal{--acc:224,200,122;width:150px;height:150px;background:none;border:none;padding:0;display:block;cursor:none;animation:medalDrift var(--dur,6s) ease-in-out infinite;animation-delay:var(--delay,0s);}
-@keyframes medalDrift{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-10px) rotate(2deg);}}
-.medal-inner{position:relative;width:100%;height:100%;transition:transform 0.7s cubic-bezier(0.4,0.2,0.2,1);transform-style:preserve-3d;}
-.medal.flipped .medal-inner{transform:rotateY(180deg);}
-.medal-face{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid rgba(var(--acc),0.35);box-shadow:0 0 0 1px rgba(var(--acc),0.08) inset,0 0 28px rgba(var(--acc),0.14);transition:box-shadow 0.3s ease;}
-.medal-front{background:radial-gradient(circle at 35% 30%,rgba(var(--acc),0.2),var(--surface) 72%);}
-.medal-front .medal-icon{font-size:2.3rem;filter:drop-shadow(0 0 10px rgba(var(--acc),0.5));}
-.medal-ring{position:absolute;inset:9px;border:1px dashed rgba(var(--acc),0.35);border-radius:50%;animation:orbitSpin 12s linear infinite;}
-.medal-back{transform:rotateY(180deg);text-align:center;padding:1.1rem;background:radial-gradient(circle at 35% 30%,rgba(var(--acc),0.3),var(--surface2) 78%);}
-.medal-year{font-family:"Cormorant Garamond",serif;font-size:1.5rem;font-weight:700;color:rgba(var(--acc),1);line-height:1;}
-.medal-title{font-size:0.78rem;font-weight:600;color:var(--text);margin-top:0.3rem;}
-.medal-sub{font-size:0.6rem;color:var(--text-muted);margin-top:0.3rem;line-height:1.4;}
-.medal:hover .medal-face,.medal:focus-visible .medal-face{box-shadow:0 0 0 1px rgba(var(--acc),0.25) inset,0 0 42px rgba(var(--acc),0.28);}
-.medal:focus-visible{outline:2px solid rgba(var(--acc),0.6);outline-offset:6px;border-radius:50%;}
-@media (prefers-reduced-motion:reduce){.medal{animation:none;}.medal-ring{animation:none;}}
-@media (max-width:480px){.medal{width:118px;height:118px;}.medal-front .medal-icon{font-size:1.9rem;}.medal-year{font-size:1.2rem;}.medal-field{gap:2rem 1.4rem;}}
-
-/* PATENTS — deep-space transmission plates */
-.patent-field{display:flex;flex-wrap:wrap;gap:2.4rem;justify-content:center;padding:0.5rem 0 1rem;}
-.patent-plate{--acc:144,191,232;position:relative;width:300px;background:radial-gradient(circle at 30% 20%,rgba(var(--acc),0.12),var(--surface) 70%);border:1px solid rgba(var(--acc),0.3);clip-path:polygon(22px 0,calc(100% - 22px) 0,100% 50%,calc(100% - 22px) 100%,22px 100%,0 50%);padding:2rem 2.6rem;transition:transform 0.4s ease,border-color 0.3s ease;}
-.patent-plate:hover{transform:perspective(700px) rotateY(-4deg) rotateX(2deg);border-color:rgba(var(--acc),0.55);}
-.patent-signal-row{display:flex;align-items:center;gap:0.7rem;margin-bottom:1.1rem;}
-.patent-icon-ping{position:relative;display:inline-flex;align-items:center;justify-content:center;width:1.3em;height:1.3em;font-size:1.3rem;flex-shrink:0;}
-.patent-icon-ping::before,.patent-icon-ping::after{content:"";position:absolute;inset:-8px;border:1px solid rgba(var(--acc),0.4);border-radius:50%;animation:patentPing 2.6s ease-out infinite;pointer-events:none;}
-.patent-icon-ping::after{animation-delay:1.3s;}
-@keyframes patentPing{0%{transform:scale(0.5);opacity:0.9;}100%{transform:scale(2.4);opacity:0;}}
-.patent-wave{display:flex;align-items:flex-end;gap:2.5px;height:22px;margin-left:auto;}
-.patent-wave span{width:2.5px;border-radius:2px;background:rgba(var(--acc),0.7);animation:patentWave 1.2s ease-in-out infinite;}
-@keyframes patentWave{0%,100%{height:15%;}50%{height:var(--peak,90%);}}
-.patent-wave span:nth-child(1){--peak:55%;animation-delay:0s;}
-.patent-wave span:nth-child(2){--peak:85%;animation-delay:0.08s;}
-.patent-wave span:nth-child(3){--peak:100%;animation-delay:0.16s;}
-.patent-wave span:nth-child(4){--peak:65%;animation-delay:0.24s;}
-.patent-wave span:nth-child(5){--peak:92%;animation-delay:0.32s;}
-.patent-wave span:nth-child(6){--peak:50%;animation-delay:0.4s;}
-.patent-wave span:nth-child(7){--peak:78%;animation-delay:0.48s;}
-.patent-wave span:nth-child(8){--peak:60%;animation-delay:0.56s;}
-.patent-title{font-size:0.92rem;font-weight:500;color:var(--text);margin-bottom:0.7rem;line-height:1.4;}
-.patent-meta{font-size:0.66rem;color:var(--text-muted);font-family:monospace;letter-spacing:0.02em;}
-.patent-pill{display:inline-block;font-size:0.6rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:99px;background:rgba(var(--acc),0.12);color:rgba(var(--acc),1);border:1px solid rgba(var(--acc),0.3);margin-top:0.7rem;}
-@media (prefers-reduced-motion:reduce){.patent-icon-ping::before,.patent-icon-ping::after{animation:none;opacity:0;}.patent-wave span{animation:none;height:var(--peak,60%);}}
-@media (max-width:400px){.patent-plate{width:100%;padding:1.7rem 2rem;}}
-
-/* EXTRACURRICULARS — mission patch + duty log */
-.patch-wrap{display:flex;gap:2.4rem;align-items:center;flex-wrap:wrap;}
-.mission-patch{--acc:212,160,160;position:relative;width:170px;height:170px;flex-shrink:0;clip-path:polygon(50% 0%,100% 16%,100% 62%,50% 100%,0% 62%,0% 16%);background:radial-gradient(circle at 35% 25%,rgba(var(--acc),0.22),var(--surface) 72%);border:1px solid rgba(var(--acc),0.35);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.2rem 1.1rem 2rem;transition:transform 0.4s ease,box-shadow 0.4s ease;}
-.mission-patch:hover{transform:scale(1.04) rotate(-1deg);box-shadow:0 0 32px rgba(var(--acc),0.25);}
-.mission-patch::before{content:"";position:absolute;inset:8px;clip-path:polygon(50% 0%,100% 16%,100% 62%,50% 100%,0% 62%,0% 16%);border:1px dashed rgba(var(--acc),0.4);pointer-events:none;}
-.patch-icon{font-size:2.1rem;margin-bottom:0.5rem;filter:drop-shadow(0 0 8px rgba(var(--acc),0.5));}
-.patch-role{font-size:0.66rem;font-weight:700;letter-spacing:0.08em;color:var(--text);text-transform:uppercase;}
-.patch-dates{margin-top:0.4rem;font-family:monospace;font-size:0.56rem;letter-spacing:0.05em;color:rgba(var(--acc),1);}
-.duty-log{flex:1;min-width:240px;padding-left:1.6rem;border-left:1px dashed rgba(212,160,160,0.35);}
-.extra-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.8rem;}
-.extra-role{font-size:1rem;font-weight:600;color:var(--text);}
-.extra-org{font-size:0.84rem;color:var(--text-muted);font-weight:300;margin-top:0.1rem;}
-.duty-log-list{list-style:none;padding:0;margin-top:0.8rem;}
-.duty-log-list li{font-size:0.86rem;color:var(--text-muted);line-height:1.65;margin-bottom:0.5rem;position:relative;padding-left:1.2rem;}
-.duty-log-list li::before{content:"◆";position:absolute;left:0;top:0.05em;font-size:0.55em;color:var(--rose-m);}
-@media (max-width:600px){
-  .patch-wrap{flex-direction:column;text-align:center;}
-  .duty-log{border-left:none;border-top:1px dashed rgba(212,160,160,0.35);padding-left:0;padding-top:1.4rem;width:100%;}
-  .extra-head{justify-content:center;text-align:center;}
-}
-
-/* CERTS */
-.cert-grid{display:flex;flex-wrap:wrap;gap:0.75rem;}
-.cert-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0.75rem 1.1rem;display:flex;align-items:center;gap:0.65rem;transition:border-color 0.3s,transform 0.2s;cursor:none;}
-.cert-card:hover{border-color:var(--lav-m);transform:translateY(-2px);}
-.cert-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.cert-name{font-size:0.82rem;color:var(--text);font-weight:400;}
-.cert-issuer{font-size:0.7rem;color:var(--text-muted);}
-
-/* CONTACT */
-#contact{padding:5rem 0 4rem;text-align:center;}
-.contact-wrap{max-width:580px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:3.5rem 2.5rem;position:relative;overflow:hidden;}
-.contact-stars{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(1px 1px at 15% 20%,rgba(181,168,232,0.6) 0%,transparent 100%),radial-gradient(1px 1px at 45% 60%,rgba(144,191,232,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 75% 30%,rgba(157,196,179,0.5) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 30% 85%,rgba(181,168,232,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 85% 75%,rgba(212,160,160,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 60% 10%,rgba(255,255,255,0.3) 0%,transparent 100%);}
-.contact-glow{position:absolute;inset:-40px;background:radial-gradient(ellipse at 50% 110%,rgba(99,85,199,0.22) 0%,transparent 60%);pointer-events:none;}
-.contact-title{font-family:"Cormorant Garamond",serif;font-size:2.2rem;font-weight:700;margin-bottom:0.5rem;position:relative;z-index:1;}
-.contact-sub{font-size:0.88rem;color:var(--text-muted);margin-bottom:2.2rem;line-height:1.6;position:relative;z-index:1;}
-.contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;position:relative;z-index:1;}
-.c-link{display:inline-flex;align-items:center;gap:0.5rem;padding:0.62rem 1.3rem;border-radius:99px;border:1px solid;font-size:0.82rem;font-weight:500;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;cursor:none;}
-.c-link:hover{transform:translateY(-3px);}
-
-footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);letter-spacing:0.08em;}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
-::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--lav-d);border-radius:99px;}
-
-/* ── SCROLL PROGRESS ── */
-#scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(to right,var(--lav-m),var(--sage-m),var(--rose-m));z-index:999;width:0%;transition:width 0.1s linear;box-shadow:0 0 8px var(--lav-m);}
-
-/* ── WARP FLASH ── */
-#warp-flash{position:fixed;inset:0;z-index:500;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 50% 50%,rgba(181,168,232,0.18) 0%,transparent 70%);}
-
-/* ── HERO PARALLAX LAYERS ── */
-.hero-name{transform-style:preserve-3d;}
-.line1{will-change:transform;transition:transform 0.05s ease-out;}
-.line2{will-change:transform;transition:transform 0.05s ease-out;}
-.hero-kicker{will-change:transform;transition:transform 0.08s ease-out;}
-
-/* ── EXPERIENCE CARDS — expandable ── */
-.exp-card{cursor:pointer;}
-.exp-bullets{max-height:0;overflow:hidden;transition:max-height 0.55s cubic-bezier(0.22,1,0.36,1),opacity 0.4s ease;opacity:0;margin-top:0;}
-.exp-card.open .exp-bullets{max-height:300px;opacity:1;margin-top:0.7rem;}
-.exp-expand-hint{font-size:0.68rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.6rem;display:flex;align-items:center;gap:0.4rem;transition:color 0.2s;}
-.exp-expand-hint::after{content:"▾";transition:transform 0.35s ease;}
-.exp-card.open .exp-expand-hint::after{transform:rotate(180deg);}
-.exp-card.open .exp-expand-hint{color:var(--lav-m);}
-
-/* ── PROJECT MISSION CONSTELLATION ── */
-.constellation-wrap{position:relative;}
 .mission-log-label{font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);margin-bottom:1rem;display:flex;align-items:center;gap:0.6rem;}
 .mission-log-label::before{content:"";width:20px;height:1px;background:var(--text-dim);}
 .constellation-map{position:relative;width:100%;height:300px;margin-bottom:2.2rem;}
@@ -242,7 +176,6 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 .cs-3{left:48%;top:60%;}
 .cs-4{left:70%;top:22%;}
 .cs-5{left:91%;top:54%;}
-/* mission readout — non-rectangular HUD panel with corners cut, not a plain card */
 #mission-readout{position:relative;background:var(--surface);border:1px solid rgba(var(--acc),0.3);padding:2.2rem 2.4rem 2rem 2.6rem;clip-path:polygon(30px 0,100% 0,100% calc(100% - 30px),calc(100% - 30px) 100%,0 100%,0 30px);transition:border-color 0.4s ease;}
 #mission-readout .corner-accent{position:absolute;width:42px;height:2px;background:rgba(var(--acc),0.85);box-shadow:0 0 8px rgba(var(--acc),0.6);pointer-events:none;}
 #mission-readout .corner-accent.tl{top:15px;left:15px;transform:translate(-50%,-50%) rotate(135deg);}
@@ -266,24 +199,101 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
   #mission-readout{padding:1.9rem 1.6rem 1.6rem 1.9rem;}
 }
 
-/* ── SKILL NODE CANVAS ── */
-#skill-node-canvas{display:block;width:100%;border-radius:16px;margin-top:1.5rem;cursor:crosshair;}
+/* AWARDS — zero-gravity medal case */
+.medal-hint{text-align:center;font-size:0.68rem;color:var(--text-dim);letter-spacing:0.08em;margin-bottom:2.4rem;}
+.medal-field{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:2.6rem 2.2rem;padding:1rem 0 1.8rem;}
+.medal-slot{perspective:1200px;}
+.medal{--acc:224,200,122;width:150px;height:150px;background:none;border:none;padding:0;display:block;cursor:none;animation:medalDrift var(--dur,6s) ease-in-out infinite;animation-delay:var(--delay,0s);}
+@keyframes medalDrift{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-10px) rotate(2deg);}}
+.medal-inner{position:relative;width:100%;height:100%;transition:transform 0.7s cubic-bezier(0.4,0.2,0.2,1);transform-style:preserve-3d;}
+.medal.flipped .medal-inner{transform:rotateY(180deg);}
+.medal-face{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid rgba(var(--acc),0.35);box-shadow:0 0 0 1px rgba(var(--acc),0.08) inset,0 0 28px rgba(var(--acc),0.14);transition:box-shadow 0.3s ease;backdrop-filter:blur(6px);}
+.medal-front{background:radial-gradient(circle at 35% 30%,rgba(var(--acc),0.25),var(--surface) 72%);}
+.medal-front .medal-icon{font-size:2.3rem;filter:drop-shadow(0 0 10px rgba(var(--acc),0.5));}
+.medal-ring{position:absolute;inset:9px;border:1px dashed rgba(var(--acc),0.35);border-radius:50%;animation:orbitSpin 12s linear infinite;}
+.medal-back{transform:rotateY(180deg);text-align:center;padding:1.1rem;background:radial-gradient(circle at 35% 30%,rgba(var(--acc),0.35),var(--surface2) 78%);}
+.medal-year{font-family:"Cormorant Garamond",serif;font-size:1.5rem;font-weight:700;color:rgb(var(--acc));line-height:1;}
+.medal-title{font-size:0.78rem;font-weight:600;color:var(--text);margin-top:0.3rem;}
+.medal-sub{font-size:0.6rem;color:var(--text-muted);margin-top:0.3rem;line-height:1.4;}
+.medal:hover .medal-face,.medal:focus-visible .medal-face{box-shadow:0 0 0 1px rgba(var(--acc),0.25) inset,0 0 42px rgba(var(--acc),0.28);}
+.medal:focus-visible{outline:2px solid rgba(var(--acc),0.6);outline-offset:6px;border-radius:50%;}
+@media (prefers-reduced-motion:reduce){.medal{animation:none;}.medal-ring{animation:none;}}
+@media (max-width:480px){.medal{width:118px;height:118px;}.medal-front .medal-icon{font-size:1.9rem;}.medal-year{font-size:1.2rem;}.medal-field{gap:2rem 1.4rem;}}
+
+/* PATENTS — organic signal blobs */
+.patent-field{display:flex;flex-wrap:wrap;gap:2.6rem;justify-content:center;padding:0.6rem 0 1rem;}
+.patent-plate{--acc:99,85,199;position:relative;width:290px;text-align:center;padding:2.5rem 2rem 2.1rem;background:linear-gradient(155deg,rgba(255,255,255,0.8),rgba(255,255,255,0.4));backdrop-filter:blur(14px);border-radius:44% 56% 61% 39%/46% 40% 60% 54%;box-shadow:0 22px 46px -22px rgba(var(--acc),0.42),inset 0 0 0 1px rgba(255,255,255,0.6);transition:transform 0.5s cubic-bezier(.2,.8,.2,1),border-radius 0.5s ease;}
+.patent-plate:hover{transform:translateY(-6px) rotate(-1deg);border-radius:58% 42% 39% 61%/40% 55% 45% 60%;}
+.patent-orb{position:relative;width:56px;height:56px;margin:0 auto 1.1rem;border-radius:50%;background:radial-gradient(circle at 32% 28%,rgba(var(--acc),0.95),rgba(var(--acc),0.3) 75%);box-shadow:0 0 0 1px rgba(var(--acc),0.3),0 0 26px rgba(var(--acc),0.4);display:flex;align-items:center;justify-content:center;font-size:1.4rem;}
+.patent-orb-ring{position:absolute;inset:-11px;border:1.5px dashed rgba(var(--acc),0.45);border-radius:50%;animation:orbitSpin 11s linear infinite;}
+.patent-title{font-size:0.92rem;font-weight:600;color:var(--text);margin-bottom:0.8rem;line-height:1.45;}
+.patent-meta{font-size:0.64rem;color:var(--text-muted);font-family:monospace;letter-spacing:0.02em;}
+.patent-pill{display:inline-block;margin-top:0.85rem;font-size:0.6rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.25rem 0.7rem;border-radius:99px;background:rgba(var(--acc),0.14);color:rgb(var(--acc));}
+@media (max-width:400px){.patent-plate{width:100%;padding:2.2rem 1.6rem;}}
+
+/* EXTRACURRICULARS — ringed badge + duty log */
+.patch-wrap{display:flex;gap:2.4rem;align-items:center;flex-wrap:wrap;}
+.orbit-badge{position:relative;width:150px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:22px;}
+.orbit-badge-ring{position:absolute;top:56px;left:50%;width:154px;height:46px;margin-left:-77px;border:2.5px solid rgba(212,160,160,0.5);border-radius:50%;transform:rotate(-12deg);z-index:0;}
+.orbit-badge-core{position:relative;z-index:1;width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 35% 28%,rgba(212,160,160,0.9),rgba(212,160,160,0.32) 72%);box-shadow:0 0 0 1px rgba(212,160,160,0.28),0 18px 34px -14px rgba(212,160,160,0.5);display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:0.9rem;transition:transform 0.4s ease;}
+.orbit-badge:hover .orbit-badge-core{transform:scale(1.05) rotate(-2deg);}
+.patch-role{font-size:0.66rem;font-weight:700;letter-spacing:0.08em;color:var(--text);text-transform:uppercase;position:relative;z-index:1;}
+.patch-dates{margin-top:0.4rem;font-family:monospace;font-size:0.56rem;letter-spacing:0.05em;color:var(--rose-m);position:relative;z-index:1;}
+.duty-log{flex:1;min-width:240px;background:var(--surface);backdrop-filter:blur(10px);border-radius:8px 30px 30px 30px;padding:1.7rem 1.9rem;box-shadow:0 18px 40px -22px rgba(53,42,77,0.32);}
+.extra-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.8rem;}
+.extra-role{font-size:1rem;font-weight:600;color:var(--text);}
+.extra-org{font-size:0.84rem;color:var(--text-muted);font-weight:300;margin-top:0.1rem;}
+.duty-log-list{list-style:none;padding:0;margin-top:0.8rem;}
+.duty-log-list li{font-size:0.86rem;color:var(--text-muted);line-height:1.65;margin-bottom:0.5rem;position:relative;padding-left:1.2rem;}
+.duty-log-list li::before{content:"◆";position:absolute;left:0;top:0.05em;font-size:0.55em;color:var(--rose-m);}
+@media (max-width:600px){
+  .patch-wrap{flex-direction:column;text-align:center;}
+  .duty-log{width:100%;}
+}
+
+/* CERTIFICATIONS — marquee slider */
+.cert-marquee{margin-top:0.5rem;}
+.cert-marquee .marquee-track{animation:marqueeScroll 20s linear infinite;}
+.cert-marquee:hover .marquee-track{animation-play-state:paused;}
+.cert-chip{display:flex;align-items:center;gap:0.65rem;padding:0.75rem 1.35rem;margin:0 0.5rem;background:var(--surface);border-radius:16px;box-shadow:0 10px 26px -16px rgba(53,42,77,0.32);backdrop-filter:blur(8px);white-space:nowrap;}
+.cert-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.cert-name{font-size:0.82rem;color:var(--text);font-weight:400;}
+.cert-issuer{font-size:0.7rem;color:var(--text-muted);}
+
+/* CONTACT — space window */
+#contact{padding:5rem 0 4rem;text-align:center;}
+.contact-wrap{max-width:600px;margin:0 auto;padding:3.6rem 2.6rem;position:relative;}
+.contact-stars{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(1px 1px at 15% 20%,rgba(181,168,232,0.6) 0%,transparent 100%),radial-gradient(1px 1px at 45% 60%,rgba(144,191,232,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 75% 30%,rgba(157,196,179,0.5) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 30% 85%,rgba(181,168,232,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 85% 75%,rgba(212,160,160,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 60% 10%,rgba(255,255,255,0.3) 0%,transparent 100%);}
+.contact-glow{position:absolute;inset:-40px;background:radial-gradient(ellipse at 50% 110%,rgba(99,85,199,0.22) 0%,transparent 60%);pointer-events:none;}
+.contact-title{font-family:"Cormorant Garamond",serif;font-size:2.2rem;font-weight:700;margin-bottom:0.5rem;position:relative;z-index:1;}
+.contact-sub{font-size:0.88rem;color:var(--text-muted);margin-bottom:2.2rem;line-height:1.6;position:relative;z-index:1;}
+.contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;position:relative;z-index:1;}
+.c-link{display:inline-flex;align-items:center;gap:0.5rem;padding:0.62rem 1.3rem;border-radius:99px;border:1px solid;font-size:0.82rem;font-weight:500;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;cursor:none;}
+.c-link:hover{transform:translateY(-3px);}
+
+footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);letter-spacing:0.08em;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--lav-d);border-radius:99px;}
+
+/* ── SCROLL PROGRESS ── */
+#scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(to right,#8a72e0,#4fae8c,#c97a8f);z-index:999;width:0%;transition:width 0.1s linear;box-shadow:0 0 8px rgba(138,114,224,0.6);}
+
+/* ── WARP FLASH ── */
+#warp-flash{position:fixed;inset:0;z-index:500;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 50% 50%,rgba(181,168,232,0.18) 0%,transparent 70%);}
 
 /* ── SECTION DOT NAV ── */
-#dot-nav{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:10px;}
-.dot-nav-item{width:7px;height:7px;border-radius:50%;background:var(--text-dim);transition:background 0.3s,box-shadow 0.3s,transform 0.3s;cursor:pointer;}
-.dot-nav-item.active{background:var(--lav-m);box-shadow:0 0 8px var(--lav-m);transform:scale(1.4);}
-
-/* ── STAT COUNTER ANIMATION ── */
-.hero-stat-num{transition:text-shadow 0.3s;}
-.hero-stat-num.pop{text-shadow:0 0 30px var(--accent),0 0 60px var(--lav-d);}
+#dot-nav{position:fixed;right:1.3rem;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,0.55);backdrop-filter:blur(10px);padding:12px 8px;border-radius:99px;box-shadow:0 10px 30px -14px rgba(53,42,77,0.35);}
+.dot-nav-item{width:7px;height:7px;border-radius:50%;background:#c9bfe0;transition:background 0.3s,box-shadow 0.3s,transform 0.3s;cursor:pointer;}
+.dot-nav-item.active{background:#6355c7;box-shadow:0 0 8px rgba(99,85,199,0.6);transform:scale(1.4);}
+@media (max-width:640px){#dot-nav{display:none;}}
 
 /* ── EASTER EGG: KONAMI ── */
 #konami-msg{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity 0.5s;}
-#konami-msg span{font-family:"Cormorant Garamond",serif;font-size:clamp(1.5rem,4vw,3rem);color:var(--accent);text-align:center;line-height:1.5;text-shadow:0 0 40px var(--lav-m);padding:2rem 3rem;background:rgba(7,5,15,0.9);border:1px solid var(--border);border-radius:20px;}
+#konami-msg span{font-family:"Cormorant Garamond",serif;font-size:clamp(1.5rem,4vw,3rem);color:#e7ddfb;text-align:center;line-height:1.5;text-shadow:0 0 40px #b5a8e8;padding:2rem 3rem;background:rgba(20,12,40,0.92);border:1px solid rgba(181,168,232,0.25);border-radius:20px;}
 
 /* ── PRELOADER / LAUNCH SEQUENCE ── */
-#preloader{position:fixed;inset:0;z-index:10000;background:radial-gradient(ellipse at 50% 28%,#170f30 0%,var(--bg) 72%);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform 1.05s cubic-bezier(0.76,0,0.24,1);}
+#preloader{position:fixed;inset:0;z-index:10000;background:radial-gradient(ellipse at 50% 28%,#1d1440 0%,#0c0820 72%);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform 1.05s cubic-bezier(0.76,0,0.24,1);}
 #preloader.curtain-up{transform:translateY(-100%);}
 #preloader.done{display:none;}
 #preloader.launching{animation:screenShake 0.4s ease;}
@@ -301,9 +311,9 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 #preloader.launching .flame-outer{animation-duration:0.12s;}
 #preloader.launching .flame-inner{animation-duration:0.09s;}
 @keyframes flameFlicker{0%{transform:translateX(-50%) scaleY(0.85) scaleX(0.88);opacity:0.85;}100%{transform:translateX(-50%) scaleY(1.18) scaleX(1.05);opacity:1;}}
-.preloader-status{font-family:"Outfit",sans-serif;font-size:0.74rem;font-weight:400;letter-spacing:0.06em;color:var(--text-muted);margin-top:1.7rem;min-height:1.3em;text-align:center;}
+.preloader-status{font-family:"Outfit",sans-serif;font-size:0.74rem;font-weight:400;letter-spacing:0.06em;color:#c9bdf0;margin-top:1.7rem;min-height:1.3em;text-align:center;}
 .preloader-bar{width:180px;height:2px;background:rgba(181,168,232,0.15);border-radius:99px;margin-top:1rem;overflow:hidden;}
-.preloader-bar-fill{height:100%;width:0%;background:linear-gradient(to right,var(--lav-m),var(--sky-m));box-shadow:0 0 8px var(--lav-m);transition:width 0.55s ease;}
+.preloader-bar-fill{height:100%;width:0%;background:linear-gradient(to right,#b5a8e8,#90bfe8);box-shadow:0 0 8px #b5a8e8;transition:width 0.55s ease;}
 </style>
 </head>
 <body>
@@ -346,87 +356,109 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 <div id="cursor-ring"></div>
 <div id="dot-nav">
   <div class="dot-nav-item active" data-sec="hero" title="Home"></div>
-  <div class="dot-nav-item" data-sec="skills" title="Skills"></div>
+  <div class="dot-nav-item" data-sec="skills" title="Toolbox"></div>
   <div class="dot-nav-item" data-sec="experience" title="Experience"></div>
-  <div class="dot-nav-item" data-sec="projects" title="Projects"></div>
-  <div class="dot-nav-item" data-sec="awards" title="Awards"></div>
+  <div class="dot-nav-item" data-sec="projects" title="Selected Work"></div>
+  <div class="dot-nav-item" data-sec="awards" title="Recognition"></div>
   <div class="dot-nav-item" data-sec="patents" title="Patents"></div>
-  <div class="dot-nav-item" data-sec="extra" title="Extracurriculars"></div>
+  <div class="dot-nav-item" data-sec="extra" title="Beyond the Desk"></div>
   <div class="dot-nav-item" data-sec="contact" title="Contact"></div>
 </div>
 <div id="konami-msg"><span>✦ You found the constellation code ✦<br/><small style="font-size:0.5em;opacity:0.7;">Khanak Shah · Explorer of the digital cosmos</small></span></div>
-<canvas id="nebula-canvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.55;"></canvas>
-<canvas id="star-canvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
-<canvas id="shoot-canvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
 
 <nav>
   <span class="nav-logo">KS <span class="nav-star">&#10022;</span></span>
   <div class="nav-links">
-    <a href="#skills">Skills</a>
+    <a href="#skills">Toolbox</a>
     <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#awards">Awards</a>
+    <a href="#projects">Work</a>
+    <a href="#awards">Recognition</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
 
 <section id="hero">
-  <div class="hero-aurora"></div>
-  <div class="hero-wrap">
-    <div class="hero-kicker">&#10022; Bangalore, India &middot; Open to Opportunities</div>
-    <h1 class="hero-name">
-      <span class="line1">Khanak</span>
-      <span class="line2">Shah</span>
-    </h1>
-    <p class="hero-typewriter"><span id="tw-text"></span><span class="cursor-blink"></span></p>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="orbit-ring"></div>
-        <div class="hero-stat-num">9.46</div>
-        <div class="hero-stat-lbl">CGPA &middot; VIT Vellore</div>
-      </div>
-      <div class="hero-stat">
-        <div class="orbit-ring" style="animation-duration:9s;animation-direction:reverse;"></div>
-        <div class="hero-stat-num">2</div>
-        <div class="hero-stat-lbl">Patents Filed</div>
-      </div>
-      <div class="hero-stat">
-        <div class="orbit-ring" style="animation-duration:7s;"></div>
-        <div class="hero-stat-num">#1</div>
-        <div class="hero-stat-lbl">Branch Rank &rsquo;23&ndash;24</div>
-      </div>
-      <div class="hero-stat">
-        <div class="orbit-ring" style="animation-duration:11s;animation-direction:reverse;"></div>
-        <div class="hero-stat-num">5</div>
-        <div class="hero-stat-lbl">Impact Projects</div>
-      </div>
+  <div class="hero-card space-window">
+    <canvas id="nebula-canvas" style="opacity:0.55;"></canvas>
+    <canvas id="star-canvas"></canvas>
+    <canvas id="shoot-canvas"></canvas>
+    <div class="hero-aurora"></div>
+    <div class="hero-deco">
+      <div class="deco-planet deco-sun"></div>
+      <div class="deco-planet deco-small"></div>
     </div>
-    <div class="hero-cta">
-      <a href="mailto:khanakshah2005@gmail.com" class="btn-mag btn-fill">&#9993; Email Me</a>
-      <a href="https://github.com/khanakshah27" target="_blank" class="btn-mag btn-outline">GitHub &#8599;</a>
-      <a href="https://linkedin.com/in/khanak-shah-206a94284" target="_blank" class="btn-mag btn-outline">LinkedIn &#8599;</a>
+    <div class="hero-wrap">
+      <div class="hero-kicker">&#10022; Bangalore, India &middot; Open to Opportunities</div>
+      <h1 class="hero-name">
+        <span class="line1">Khanak</span>
+        <span class="line2">Shah</span>
+      </h1>
+      <div class="intro-slide">I enjoy simplifying the way things work &mdash; automating workflows and building impactful systems that make a meaningful difference.</div>
+      <p class="hero-typewriter"><span id="tw-text"></span><span class="cursor-blink"></span></p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="orbit-ring"></div>
+          <div class="hero-stat-num">9.46</div>
+          <div class="hero-stat-lbl">CGPA &middot; VIT Vellore</div>
+        </div>
+        <div class="hero-stat">
+          <div class="orbit-ring" style="animation-duration:9s;animation-direction:reverse;"></div>
+          <div class="hero-stat-num">2</div>
+          <div class="hero-stat-lbl">Patents Filed</div>
+        </div>
+        <div class="hero-stat">
+          <div class="orbit-ring" style="animation-duration:7s;"></div>
+          <div class="hero-stat-num">#1</div>
+          <div class="hero-stat-lbl">Branch Rank &rsquo;23&ndash;24</div>
+        </div>
+        <div class="hero-stat">
+          <div class="orbit-ring" style="animation-duration:11s;animation-direction:reverse;"></div>
+          <div class="hero-stat-num">5</div>
+          <div class="hero-stat-lbl">Impact Projects</div>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href="mailto:khanakshah2005@gmail.com" class="btn-mag btn-fill">&#9993; Email Me</a>
+        <a href="https://github.com/khanakshah27" target="_blank" class="btn-mag btn-outline">GitHub &#8599;</a>
+        <a href="https://linkedin.com/in/khanak-shah-206a94284" target="_blank" class="btn-mag btn-outline">LinkedIn &#8599;</a>
+      </div>
     </div>
   </div>
 </section>
 
+<div class="tools-section">
+  <div class="tools-caption">Currently vibing with</div>
+  <div class="tools-outer marquee-outer">
+    <div class="marquee-track">
+      <div class="marquee-seg">
+        <span class="tool-chip">Python</span><span class="tool-chip">PyTorch</span><span class="tool-chip">React.js</span><span class="tool-chip">AWS</span><span class="tool-chip">Docker</span><span class="tool-chip">FastAPI</span><span class="tool-chip">TensorFlow</span><span class="tool-chip">GenAI</span><span class="tool-chip">PostgreSQL</span><span class="tool-chip">Figma</span>
+      </div>
+      <div class="marquee-seg">
+        <span class="tool-chip">Python</span><span class="tool-chip">PyTorch</span><span class="tool-chip">React.js</span><span class="tool-chip">AWS</span><span class="tool-chip">Docker</span><span class="tool-chip">FastAPI</span><span class="tool-chip">TensorFlow</span><span class="tool-chip">GenAI</span><span class="tool-chip">PostgreSQL</span><span class="tool-chip">Figma</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <section id="skills">
   <div class="container">
     <div class="s-label reveal">
-      <span class="s-label-pill" style="background:rgba(181,168,232,0.12);color:var(--lav-m);border:1px solid rgba(181,168,232,0.2);">Technical</span>
-      <h2>Skills</h2><div class="s-label-line"></div>
+      <span class="s-label-pill" style="background:rgba(181,168,232,0.12);color:var(--lav-m);border:1px solid rgba(181,168,232,0.2);">Capabilities</span>
+      <h2>The Toolbox</h2><div class="s-label-line"></div>
     </div>
-    <canvas id="solar-canvas"></canvas>
-    <div class="solar-legend" id="solar-legend"></div>
-    <div class="solar-hint">Click a planet to explore its skills &nbsp;✦&nbsp; Hover to pause orbit</div>
-    <canvas id="skill-node-canvas" height="0" style="display:none;"></canvas>
+    <div class="space-window solar-window reveal">
+      <canvas id="solar-canvas"></canvas>
+      <div class="solar-legend" id="solar-legend"></div>
+      <div class="solar-hint">Click a planet to explore its skills &nbsp;✦&nbsp; Hover to pause orbit</div>
+    </div>
   </div>
 </section>
 
 <section id="experience">
   <div class="container">
     <div class="s-label reveal">
-      <span class="s-label-pill" style="background:rgba(157,196,179,0.12);color:var(--sage-m);border:1px solid rgba(157,196,179,0.2);">Work</span>
-      <h2>Experience</h2><div class="s-label-line"></div>
+      <span class="s-label-pill" style="background:rgba(157,196,179,0.12);color:var(--sage-m);border:1px solid rgba(157,196,179,0.2);">On the Job</span>
+      <h2>Where I've Worked</h2><div class="s-label-line"></div>
     </div>
     <div class="exp-track">
       <div class="exp-item reveal">
@@ -465,10 +497,10 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
   <div class="container">
     <div class="s-label reveal">
       <span class="s-label-pill" style="background:rgba(212,160,160,0.12);color:var(--rose-m);border:1px solid rgba(212,160,160,0.2);">Built</span>
-      <h2>Projects</h2><div class="s-label-line"></div>
+      <h2>Selected Work</h2><div class="s-label-line"></div>
     </div>
-    <div class="constellation-wrap">
-    <div class="mission-log-label">Mission Constellation — select a star to view its dossier</div>
+    <div class="space-window constellation-window reveal">
+    <div class="mission-log-label">Selected Work — choose one to view details</div>
     <div class="constellation-map">
       <svg class="constellation-lines desktop-only" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="8,70 27,26 48,60 70,22 91,54"/></svg>
       <svg class="constellation-lines mobile-only" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="22,6 74,20 18,40 78,58 30,78"/></svg>
@@ -483,7 +515,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
       <div class="mission-detail" data-proj="0">
         <div class="readout-head">
           <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
-          <span class="readout-mission-no">MISSION 01</span>
+          <span class="readout-mission-no">PROJECT 01</span>
           <span class="proj-badge" style="background:rgba(181,168,232,0.12);color:var(--lav-m);border-color:rgba(181,168,232,0.25);">AI &middot; Blockchain &middot; Safety</span>
         </div>
         <div class="proj-title">GuardianAI</div>
@@ -494,7 +526,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
       <div class="mission-detail" data-proj="1" hidden>
         <div class="readout-head">
           <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
-          <span class="readout-mission-no">MISSION 02</span>
+          <span class="readout-mission-no">PROJECT 02</span>
           <span class="proj-badge" style="background:rgba(212,160,160,0.12);color:var(--rose-m);border-color:rgba(212,160,160,0.25);">NLP &middot; ML &middot; Social Impact</span>
         </div>
         <div class="proj-title">Workplace Microaggression Detector</div>
@@ -505,7 +537,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
       <div class="mission-detail" data-proj="2" hidden>
         <div class="readout-head">
           <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
-          <span class="readout-mission-no">MISSION 03</span>
+          <span class="readout-mission-no">PROJECT 03</span>
           <span class="proj-badge" style="background:rgba(157,196,179,0.12);color:var(--sage-m);border-color:rgba(157,196,179,0.25);">GenAI &middot; Healthcare &middot; Accessibility</span>
         </div>
         <div class="proj-title">Medimate AI</div>
@@ -519,7 +551,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
       <div class="mission-detail" data-proj="3" hidden>
         <div class="readout-head">
           <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
-          <span class="readout-mission-no">MISSION 04</span>
+          <span class="readout-mission-no">PROJECT 04</span>
           <span class="proj-badge" style="background:rgba(144,191,232,0.12);color:var(--sky-m);border-color:rgba(144,191,232,0.25);">Deep Learning &middot; Signal Processing</span>
         </div>
         <div class="proj-title">Spectrapur</div>
@@ -533,7 +565,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
       <div class="mission-detail" data-proj="4" hidden>
         <div class="readout-head">
           <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
-          <span class="readout-mission-no">MISSION 05</span>
+          <span class="readout-mission-no">PROJECT 05</span>
           <span class="proj-badge" style="background:rgba(224,184,122,0.12);color:var(--peach-m);border-color:rgba(224,184,122,0.25);">Bioinformatics &middot; NLP &middot; Knowledge Graphs</span>
         </div>
         <div class="proj-title">BioLink</div>
@@ -545,20 +577,20 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
         </div>
       </div>
     </div>
-    </div><!-- end constellation-wrap -->
+    </div><!-- end space-window constellation-window -->
   </div>
 </section>
 
 <section id="awards">
   <div class="container">
     <div class="s-label reveal">
-      <span class="s-label-pill" style="background:rgba(224,200,122,0.12);color:var(--butter-m);border:1px solid rgba(224,200,122,0.2);">Recognition</span>
-      <h2>Awards</h2><div class="s-label-line"></div>
+      <span class="s-label-pill" style="background:rgba(224,200,122,0.12);color:var(--butter-m);border:1px solid rgba(224,200,122,0.2);">Honors</span>
+      <h2>Recognition</h2><div class="s-label-line"></div>
     </div>
     <div class="medal-hint">Tap a medal to flip it and read the mission record &nbsp;✦&nbsp; they drift free until you do</div>
     <div class="medal-field">
       <div class="medal-slot reveal">
-        <button type="button" class="medal" style="--acc:181,168,232;--delay:0s;--dur:6.4s;">
+        <button type="button" class="medal" style="--acc:99,85,199;--delay:0s;--dur:6.4s;">
           <div class="medal-inner">
             <div class="medal-face medal-front"><span class="medal-ring"></span><span class="medal-icon">&#127942;</span></div>
             <div class="medal-face medal-back">
@@ -570,7 +602,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
         </button>
       </div>
       <div class="medal-slot reveal">
-        <button type="button" class="medal" style="--acc:224,200,122;--delay:0.4s;--dur:5.6s;">
+        <button type="button" class="medal" style="--acc:163,124,26;--delay:0.4s;--dur:5.6s;">
           <div class="medal-inner">
             <div class="medal-face medal-front"><span class="medal-ring"></span><span class="medal-icon">&#129351;</span></div>
             <div class="medal-face medal-back">
@@ -582,7 +614,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
         </button>
       </div>
       <div class="medal-slot reveal">
-        <button type="button" class="medal" style="--acc:192,196,205;--delay:0.8s;--dur:7s;">
+        <button type="button" class="medal" style="--acc:110,114,124;--delay:0.8s;--dur:7s;">
           <div class="medal-inner">
             <div class="medal-face medal-front"><span class="medal-ring"></span><span class="medal-icon">&#129352;</span></div>
             <div class="medal-face medal-back">
@@ -594,7 +626,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
         </button>
       </div>
       <div class="medal-slot reveal">
-        <button type="button" class="medal" style="--acc:214,158,110;--delay:1.2s;--dur:6.8s;">
+        <button type="button" class="medal" style="--acc:158,96,46;--delay:1.2s;--dur:6.8s;">
           <div class="medal-inner">
             <div class="medal-face medal-front"><span class="medal-ring"></span><span class="medal-icon">&#129353;</span></div>
             <div class="medal-face medal-back">
@@ -612,24 +644,18 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 <section id="patents">
   <div class="container">
     <div class="s-label reveal">
-      <span class="s-label-pill" style="background:rgba(144,191,232,0.12);color:var(--sky-m);border:1px solid rgba(144,191,232,0.2);">Intellectual Property</span>
-      <h2>Patents</h2><div class="s-label-line"></div>
+      <span class="s-label-pill" style="background:rgba(144,191,232,0.12);color:var(--sky-m);border:1px solid rgba(144,191,232,0.2);">Filed &amp; Published</span>
+      <h2>Patents &amp; Publications</h2><div class="s-label-line"></div>
     </div>
     <div class="patent-field">
-      <div class="patent-plate reveal" style="--acc:181,168,232;">
-        <div class="patent-signal-row">
-          <span class="patent-icon-ping">&#128737;</span>
-          <div class="patent-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        </div>
+      <div class="patent-plate reveal" style="--acc:99,85,199;">
+        <div class="patent-orb"><span class="patent-orb-ring"></span>&#128737;</div>
         <div class="patent-title">System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</div>
         <div class="patent-meta">APPLICATION NO. 202641018176</div>
         <span class="patent-pill">Signal Published &middot; March 2026</span>
       </div>
-      <div class="patent-plate reveal" style="--acc:144,191,232;">
-        <div class="patent-signal-row">
-          <span class="patent-icon-ping">&#128300;</span>
-          <div class="patent-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        </div>
+      <div class="patent-plate reveal" style="--acc:40,110,168;">
+        <div class="patent-orb"><span class="patent-orb-ring"></span>&#128300;</div>
         <div class="patent-title">A System and Method for Machine Learning-Based FTIR Spectral Denoising</div>
         <div class="patent-meta">APPLICATION NO. 202641053864</div>
         <span class="patent-pill">Signal Published &middot; April 2026</span>
@@ -641,12 +667,13 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 <section id="extra">
   <div class="container">
     <div class="s-label reveal">
-      <span class="s-label-pill" style="background:rgba(212,160,160,0.12);color:var(--rose-m);border:1px solid rgba(212,160,160,0.2);">Beyond Code</span>
-      <h2>Extracurriculars</h2><div class="s-label-line"></div>
+      <span class="s-label-pill" style="background:rgba(212,160,160,0.12);color:var(--rose-m);border:1px solid rgba(212,160,160,0.2);">Involvement</span>
+      <h2>Beyond the Desk</h2><div class="s-label-line"></div>
     </div>
     <div class="patch-wrap reveal">
-      <div class="mission-patch">
-        <span class="patch-icon">&#129489;&#8205;&#128640;</span>
+      <div class="orbit-badge">
+        <div class="orbit-badge-ring"></div>
+        <div class="orbit-badge-core"><span class="patch-icon">&#129489;&#8205;&#128640;</span></div>
         <div class="patch-role">ML Lead</div>
         <div class="patch-dates">MAR '25 &ndash; APR '26</div>
       </div>
@@ -667,20 +694,29 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 <section id="certs">
   <div class="container">
     <div class="s-label reveal">
-      <span class="s-label-pill" style="background:rgba(224,184,122,0.12);color:var(--peach-m);border:1px solid rgba(224,184,122,0.2);">Credentials</span>
-      <h2>Certifications</h2><div class="s-label-line"></div>
+      <span class="s-label-pill" style="background:rgba(224,184,122,0.12);color:var(--peach-m);border:1px solid rgba(224,184,122,0.2);">Certified</span>
+      <h2>Credentials</h2><div class="s-label-line"></div>
     </div>
-    <div class="cert-grid reveal">
-      <div class="cert-card"><div class="cert-dot" style="background:var(--sky-m);box-shadow:0 0 5px var(--sky-m);"></div><div><div class="cert-name">Gen AI Using IBM Watsonx</div><div class="cert-issuer">IBM &middot; Jun 2025</div></div></div>
-      <div class="cert-card"><div class="cert-dot" style="background:var(--butter-m);box-shadow:0 0 5px var(--butter-m);"></div><div><div class="cert-name">Java</div><div class="cert-issuer">Udemy &middot; Jun 2024</div></div></div>
-      <div class="cert-card"><div class="cert-dot" style="background:var(--sage-m);box-shadow:0 0 5px var(--sage-m);"></div><div><div class="cert-name">C &amp; C++ (Beginner to Advanced)</div><div class="cert-issuer">Udemy &middot; May 2023</div></div></div>
+  </div>
+  <div class="cert-marquee marquee-outer">
+    <div class="marquee-track">
+      <div class="marquee-seg">
+        <div class="cert-chip"><div class="cert-dot" style="background:var(--sky-m);box-shadow:0 0 5px var(--sky-m);"></div><div><div class="cert-name">Gen AI Using IBM Watsonx</div><div class="cert-issuer">IBM &middot; Jun 2025</div></div></div>
+        <div class="cert-chip"><div class="cert-dot" style="background:var(--butter-m);box-shadow:0 0 5px var(--butter-m);"></div><div><div class="cert-name">Java</div><div class="cert-issuer">Udemy &middot; Jun 2024</div></div></div>
+        <div class="cert-chip"><div class="cert-dot" style="background:var(--sage-m);box-shadow:0 0 5px var(--sage-m);"></div><div><div class="cert-name">C &amp; C++ (Beginner to Advanced)</div><div class="cert-issuer">Udemy &middot; May 2023</div></div></div>
+      </div>
+      <div class="marquee-seg">
+        <div class="cert-chip"><div class="cert-dot" style="background:var(--sky-m);box-shadow:0 0 5px var(--sky-m);"></div><div><div class="cert-name">Gen AI Using IBM Watsonx</div><div class="cert-issuer">IBM &middot; Jun 2025</div></div></div>
+        <div class="cert-chip"><div class="cert-dot" style="background:var(--butter-m);box-shadow:0 0 5px var(--butter-m);"></div><div><div class="cert-name">Java</div><div class="cert-issuer">Udemy &middot; Jun 2024</div></div></div>
+        <div class="cert-chip"><div class="cert-dot" style="background:var(--sage-m);box-shadow:0 0 5px var(--sage-m);"></div><div><div class="cert-name">C &amp; C++ (Beginner to Advanced)</div><div class="cert-issuer">Udemy &middot; May 2023</div></div></div>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="contact">
   <div class="container">
-    <div class="contact-wrap reveal">
+    <div class="contact-wrap space-window reveal">
       <div class="contact-stars"></div>
       <div class="contact-glow"></div>
       <div id="contact-star" style="font-family:serif;font-size:2.8rem;margin-bottom:0.5rem;color:var(--accent);position:relative;z-index:1;">&#10022;</div>
@@ -971,7 +1007,6 @@ document.querySelectorAll(".medal").forEach(m=>{
 });
 
 // ── HERO MOUSE PARALLAX ──
-const heroWrap=document.querySelector(".hero-wrap");
 const pLine1=document.querySelector(".hero-name .line1");
 const pLine2=document.querySelector(".hero-name .line2");
 const pKicker=document.querySelector(".hero-kicker");
@@ -986,54 +1021,54 @@ document.addEventListener("keydown",e=>{if(e.keyCode===KC[kIdx]){kIdx++;if(kIdx=
 const curDot=document.getElementById("cursor"),curRing=document.getElementById("cursor-ring");
 let mx=0,my=0,rx=0,ry=0;
 const TC=14,trails=[];
-for(let i=0;i<TC;i++){const d=document.createElement("div");d.className="trail-dot";const sz=Math.max(1.5,5*(1-i/TC));d.style.cssText="width:"+sz+"px;height:"+sz+"px;opacity:0;background:hsl("+(240+i*7)+",60%,75%)";document.body.appendChild(d);trails.push({el:d,x:0,y:0});}
+for(let i=0;i<TC;i++){const d=document.createElement("div");d.className="trail-dot";const sz=Math.max(1.5,5*(1-i/TC));d.style.cssText="width:"+sz+"px;height:"+sz+"px;opacity:0;background:hsl("+(255+i*4)+",70%,68%)";document.body.appendChild(d);trails.push({el:d,x:0,y:0});}
 document.addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;curDot.style.left=mx+"px";curDot.style.top=my+"px";document.body.classList.toggle("cursor-big",!!e.target.closest("a,button"));});
 (function loop(){rx+=(mx-rx)*0.14;ry+=(my-ry)*0.14;curRing.style.left=rx+"px";curRing.style.top=ry+"px";for(let i=TC-1;i>0;i--){trails[i].x+=(trails[i-1].x-trails[i].x)*0.3;trails[i].y+=(trails[i-1].y-trails[i].y)*0.3;trails[i].el.style.left=trails[i].x+"px";trails[i].el.style.top=trails[i].y+"px";trails[i].el.style.opacity=(1-i/TC)*0.55;}trails[0].x+=(mx-trails[0].x)*0.4;trails[0].y+=(my-trails[0].y)*0.4;trails[0].el.style.left=trails[0].x+"px";trails[0].el.style.top=trails[0].y+"px";trails[0].el.style.opacity=0.7;requestAnimationFrame(loop);})();
 
+// ── astronomical canvases, confined to the hero space-window ──
+const heroCardEl=document.querySelector(".hero-card");
+function heroRect(){return heroCardEl?heroCardEl.getBoundingClientRect():{width:window.innerWidth,height:window.innerHeight};}
+
 // NEBULA CANVAS
 const nc=document.getElementById("nebula-canvas"),nx=nc.getContext("2d");
-let NW,NH;function resN(){NW=nc.width=window.innerWidth;NH=nc.height=window.innerHeight;}resN();window.addEventListener("resize",resN);
+let NW,NH;function resN(){const r=heroRect();NW=nc.width=r.width;NH=nc.height=r.height;}resN();window.addEventListener("resize",resN);
 const nebs=[{x:0.25,y:0.3,rx:0.45,ry:0.35,r:130,g:85,b:199,p:0},{x:0.75,y:0.6,rx:0.35,ry:0.45,r:61,g:122,b:98,p:2},{x:0.5,y:0.85,rx:0.4,ry:0.3,r:180,g:100,b:100,p:4},{x:0.1,y:0.75,rx:0.3,ry:0.25,r:42,g:111,b:168,p:1}];
 let nT=0;
 function drawNeb(){nx.clearRect(0,0,NW,NH);nT+=0.004;nebs.forEach(n=>{const dr=Math.sin(nT+n.p)*0.04,cx=(n.x+dr)*NW,cy=(n.y+Math.cos(nT*0.7+n.p)*0.03)*NH,R=Math.min(NW,NH)*0.4,g2=nx.createRadialGradient(cx,cy,0,cx,cy,R),a=0.06+0.04*Math.sin(nT*1.2+n.p);g2.addColorStop(0,"rgba("+n.r+","+n.g+","+n.b+","+a+")");g2.addColorStop(0.5,"rgba("+n.r+","+n.g+","+n.b+","+(a*0.4)+")");g2.addColorStop(1,"transparent");nx.beginPath();nx.ellipse(cx,cy,Math.min(NW,NH)*n.rx,Math.min(NW,NH)*n.ry,nT*0.05,0,Math.PI*2);nx.fillStyle=g2;nx.fill();});requestAnimationFrame(drawNeb);}drawNeb();
 
 // STAR FIELD + CONSTELLATIONS
 const sc=document.getElementById("star-canvas"),sx=sc.getContext("2d");
-let SW,SH;function resS(){SW=sc.width=window.innerWidth;SH=sc.height=window.innerHeight;}resS();window.addEventListener("resize",resS);
+let SW,SH;function resS(){const r=heroRect();SW=sc.width=r.width;SH=sc.height=r.height;}resS();window.addEventListener("resize",resS);
 const SC=["255,255,255","181,168,232","157,196,179","212,160,160","144,191,232","224,200,122"];
 const stars=[];
-for(let i=0;i<300;i++)stars.push({x:Math.random()*1920,y:Math.random()*1200,r:Math.pow(Math.random(),3)*1.8+0.2,ts:0.4+Math.random()*2,to:Math.random()*Math.PI*2,c:SC[Math.floor(Math.random()*SC.length)],d:0.2+Math.random()*0.8});
-let sT=0,scY=0;window.addEventListener("scroll",()=>{scY=window.scrollY;},{passive:true});
-function drawStars(){sx.clearRect(0,0,SW,SH);sT+=0.008;const sc2=scY*0.08;
-stars.forEach(s=>{const tw=0.4+0.6*(0.5+0.5*Math.sin(sT*s.ts+s.to)),px=(s.x%SW+SW)%SW,py=((s.y-sc2*s.d)%SH+SH)%SH;
+for(let i=0;i<220;i++)stars.push({x:Math.random()*1400,y:Math.random()*900,r:Math.pow(Math.random(),3)*1.8+0.2,ts:0.4+Math.random()*2,to:Math.random()*Math.PI*2,c:SC[Math.floor(Math.random()*SC.length)],d:0.2+Math.random()*0.8});
+let sT=0;
+function drawStars(){sx.clearRect(0,0,SW,SH);sT+=0.008;
+stars.forEach(s=>{const tw=0.4+0.6*(0.5+0.5*Math.sin(sT*s.ts+s.to)),px=(s.x%SW+SW)%SW,py=(s.y%SH+SH)%SH;
 if(s.r>1.2){const g=sx.createRadialGradient(px,py,0,px,py,s.r*4);g.addColorStop(0,"rgba("+s.c+","+(tw*0.5)+")");g.addColorStop(1,"transparent");sx.beginPath();sx.arc(px,py,s.r*4,0,Math.PI*2);sx.fillStyle=g;sx.fill();}
 if(s.r>1.5){sx.save();sx.globalAlpha=tw*0.5;sx.strokeStyle="rgba("+s.c+",0.6)";sx.lineWidth=0.4;const sp=s.r*7;sx.beginPath();sx.moveTo(px-sp,py);sx.lineTo(px+sp,py);sx.stroke();sx.beginPath();sx.moveTo(px,py-sp);sx.lineTo(px,py+sp);sx.stroke();sx.restore();}
 sx.beginPath();sx.arc(px,py,s.r,0,Math.PI*2);sx.fillStyle="rgba("+s.c+","+tw+")";sx.fill();});
 // constellation lines
 sx.save();sx.lineWidth=0.5;
-for(let i=0;i<stars.length;i++){const a=stars[i];if(a.r<0.8)continue;const ax=(a.x%SW+SW)%SW,ay=((a.y-sc2*a.d)%SH+SH)%SH;for(let j=i+1;j<stars.length;j++){const b=stars[j];if(b.r<0.8)continue;const bx=(b.x%SW+SW)%SW,by=((b.y-sc2*b.d)%SH+SH)%SH,dist=Math.hypot(ax-bx,ay-by);if(dist<75){sx.globalAlpha=(1-dist/75)*0.08;sx.strokeStyle="rgba(181,168,232,1)";sx.beginPath();sx.moveTo(ax,ay);sx.lineTo(bx,by);sx.stroke();}}}sx.restore();
+for(let i=0;i<stars.length;i++){const a=stars[i];if(a.r<0.8)continue;const ax=(a.x%SW+SW)%SW,ay=(a.y%SH+SH)%SH;for(let j=i+1;j<stars.length;j++){const b=stars[j];if(b.r<0.8)continue;const bx=(b.x%SW+SW)%SW,by=(b.y%SH+SH)%SH,dist=Math.hypot(ax-bx,ay-by);if(dist<75){sx.globalAlpha=(1-dist/75)*0.08;sx.strokeStyle="rgba(181,168,232,1)";sx.beginPath();sx.moveTo(ax,ay);sx.lineTo(bx,by);sx.stroke();}}}sx.restore();
 requestAnimationFrame(drawStars);}drawStars();
 
 // SHOOTING STARS
 const shc=document.getElementById("shoot-canvas"),shx=shc.getContext("2d");
-let SHW,SHH;function resSh(){SHW=shc.width=window.innerWidth;SHH=shc.height=window.innerHeight;}resSh();window.addEventListener("resize",resSh);
+let SHW,SHH;function resSh(){const r=heroRect();SHW=shc.width=r.width;SHH=shc.height=r.height;}resSh();window.addEventListener("resize",resSh);
 const shooters=[];
 function spawnShooter(){shooters.push({x:Math.random()*SHW*1.3,y:Math.random()*SHH*0.4,vx:-(4+Math.random()*7),vy:(1.5+Math.random()*3.5),len:90+Math.random()*160,alpha:1,w:0.8+Math.random()*1.4,c:SC[Math.floor(Math.random()*SC.length)]});}
 let lastShoot=0;
 function drawShooters(ts){shx.clearRect(0,0,SHW,SHH);if(ts-lastShoot>1800+Math.random()*2500){spawnShooter();lastShoot=ts;}for(let i=shooters.length-1;i>=0;i--){const s=shooters[i];s.x+=s.vx;s.y+=s.vy;s.alpha-=0.011;if(s.alpha<=0||s.x<-200){shooters.splice(i,1);continue;}const tx=s.x-s.vx*(s.len/Math.abs(s.vx)),ty=s.y-s.vy*(s.len/Math.abs(s.vx)),g=shx.createLinearGradient(tx,ty,s.x,s.y);g.addColorStop(0,"rgba("+s.c+",0)");g.addColorStop(1,"rgba("+s.c+","+s.alpha+")");shx.save();shx.beginPath();shx.moveTo(tx,ty);shx.lineTo(s.x,s.y);shx.strokeStyle=g;shx.lineWidth=s.w;shx.lineCap="round";shx.stroke();shx.beginPath();shx.arc(s.x,s.y,s.w*1.8,0,Math.PI*2);shx.fillStyle="rgba("+s.c+","+s.alpha+")";shx.fill();shx.restore();}requestAnimationFrame(drawShooters);}requestAnimationFrame(drawShooters);
 
 // TYPEWRITER
-const lines=["CS + Bioinformatics student at VIT Vellore.","Building AI systems that solve real problems.","Associate SDE Intern @ Gartner · DevOps Automation.","2\u00d7 Patentee \u00b7 Open source contributor.","Passionate about ML, GenAI, DevOps & Cloud."];
+const lines=["CS + Bioinformatics student at VIT Vellore.","Building AI systems that solve real problems.","Associate SDE Intern @ Gartner · DevOps Automation.","2× Patentee · Open source contributor.","Passionate about ML, GenAI, DevOps & Cloud."];
 let li=0,ci=0,del=false,tw=document.getElementById("tw-text");
 function type(){const line=lines[li];if(!del){tw.textContent=line.slice(0,ci+1);ci++;if(ci===line.length){del=true;setTimeout(type,1800);return;}}else{tw.textContent=line.slice(0,ci-1);ci--;if(ci===0){del=false;li=(li+1)%lines.length;setTimeout(type,400);return;}}setTimeout(type,del?36:60);}type();
 
 // SCROLL REVEAL
 const revO=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add("visible"),i*90);});},{threshold:0.08});
 document.querySelectorAll(".reveal").forEach(el=>revO.observe(el));
-
-// Skill chips: stagger-reveal on scroll
-const chipObs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){const chips=e.target.querySelectorAll(".s-chip");chips.forEach((c,i)=>{c.style.opacity="0";c.style.transform="translateY(10px)";setTimeout(()=>{c.style.transition="opacity 0.4s ease,transform 0.4s ease";c.style.opacity="1";c.style.transform="translateY(0)";},i*35+100);});chipObs.unobserve(e.target);}});},{threshold:0.15});
-document.querySelectorAll(".skill-cat-block").forEach(el=>chipObs.observe(el));
 
 // MAGNETIC BUTTONS
 document.querySelectorAll(".btn-mag").forEach(btn=>{btn.addEventListener("mousemove",e=>{const r=btn.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);btn.style.transform="translate("+(dx*0.18)+"px,"+(dy*0.22)+"px)";btn.style.setProperty("--bx",((e.clientX-r.left)/r.width*100)+"%");btn.style.setProperty("--by",((e.clientX-r.top)/r.height*100)+"%");});btn.addEventListener("mouseleave",()=>{btn.style.transform="";});});
