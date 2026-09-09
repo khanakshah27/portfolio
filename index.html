@@ -13,11 +13,23 @@ html{scroll-behavior:smooth;font-size:16px}
   --rose-m:#b5657c;--sage-m:#2f8462;--sage-d:#256b4f;
   --lav-m:#6355c7;--lav-d:#6355c7;
   --butter-m:#96721a;--sky-m:#2f6fa8;--peach-m:#a8622a;
-  --bg:#e7b7c1;--surface:rgba(255,255,255,0.62);--surface2:rgba(255,255,255,0.42);
+  --bg:#d99aa9;--surface:rgba(255,255,255,0.62);--surface2:rgba(255,255,255,0.42);
   --border:rgba(53,42,77,0.10);
   --text:#352a4d;--text-muted:#6d5f88;--text-dim:#8577a3;--accent:#6355c7;
 }
-body{font-family:"Outfit",sans-serif;background:radial-gradient(ellipse at 50% -8%,#f3d3da 0%,#e7b7c1 55%,#dda6b2 100%) fixed;color:var(--text);min-height:100vh;overflow-x:hidden;cursor:none;}
+body{font-family:"Outfit",sans-serif;background:radial-gradient(ellipse at 50% -8%,#e8b9c4 0%,#d99aa9 50%,#c17e8f 100%) fixed;color:var(--text);min-height:100vh;overflow-x:hidden;cursor:none;}
+
+/* ── ambient astronomical outlines on the pastel backdrop ── */
+.bg-deco{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-deco span{position:absolute;border-radius:50%;border:1.5px solid rgba(58,22,38,0.14);}
+.bg-deco .r1{width:380px;height:380px;top:-140px;left:-130px;}
+.bg-deco .r2{width:230px;height:230px;top:58%;right:-100px;border-style:dashed;border-color:rgba(58,22,38,0.16);}
+.bg-deco .r3{width:150px;height:150px;bottom:8%;left:4%;}
+.bg-deco .r4{width:64px;height:64px;top:20%;right:12%;border-color:rgba(58,22,38,0.2);}
+.bg-deco .r5{width:26px;height:26px;top:32%;left:18%;border-color:rgba(58,22,38,0.22);}
+.bg-deco .e1{width:280px;height:96px;top:42%;left:-90px;transform:rotate(-20deg);}
+.bg-deco .e2{width:150px;height:52px;bottom:16%;right:8%;transform:rotate(14deg);border-color:rgba(58,22,38,0.16);}
+@media (max-width:760px){.bg-deco{display:none;}}
 
 /* ── SPACE WINDOW — dark astronomical porthole used for hero / skills / projects / contact ── */
 .space-window{
@@ -70,9 +82,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 @media (max-width:760px){.hero-deco{display:none;}}
 
 /* ── pastel intro box — slides in after the name ── */
-.intro-slide{display:inline-block;max-width:560px;background:linear-gradient(135deg,#f6dbe3,#eee0f5);color:#3a2b4d;padding:1.1rem 1.6rem;border-radius:16px;font-size:0.92rem;font-weight:400;line-height:1.6;margin-bottom:2.2rem;box-shadow:0 20px 44px -18px rgba(0,0,0,0.4);opacity:0;transform:translateX(-26px);animation:introSlideIn 0.9s 0.5s cubic-bezier(.2,.8,.2,1) forwards;}
-@keyframes introSlideIn{to{opacity:1;transform:translateX(0);}}
-@media (prefers-reduced-motion:reduce){.intro-slide{animation:none;opacity:1;transform:none;}}
+/* ── INTRO CURTAIN — slides in with the "about me" line after the rocket launch, then slides out to reveal the page ── */
+#intro-curtain{position:fixed;inset:0;z-index:9500;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8899f,#d9738f);transform:translateX(-100%);transition:transform 0.9s cubic-bezier(0.65,0,0.35,1);}
+#intro-curtain.enter{transform:translateX(0);}
+#intro-curtain.exit{transform:translateX(100%);}
+#intro-curtain.done{display:none;}
+#intro-curtain p{max-width:640px;padding:0 2.5rem;color:#3a1626;font-family:"Cormorant Garamond",serif;font-size:clamp(1.35rem,3.2vw,2.1rem);font-weight:600;font-style:italic;line-height:1.5;text-align:center;}
+@media (prefers-reduced-motion:reduce){#intro-curtain{transition:none;}}
 .hero-wrap{max-width:1000px;width:100%;position:relative;z-index:2;margin:0 auto;}
 .hero-kicker{font-size:0.68rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--lav-m);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem;}
 .hero-kicker::before{content:"";width:28px;height:1px;background:var(--lav-m);}
@@ -101,14 +117,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 
 /* ── TOOLS MARQUEE ── */
 .tools-section{padding:2.4rem 0 0.4rem;position:relative;z-index:1;}
-.tools-caption{text-align:center;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:1.1rem;}
 .tools-outer{max-width:920px;margin:0 auto;}
 .tools-outer .marquee-track{animation:marqueeScroll 24s linear infinite;}
 .tools-outer:hover .marquee-track{animation-play-state:paused;}
 .tool-chip{display:inline-flex;align-items:center;font-size:0.8rem;font-weight:500;color:var(--text-muted);padding:0.42rem 1.3rem;margin:0 0.35rem;background:var(--surface);border-radius:99px;box-shadow:0 8px 20px -12px rgba(53,42,77,0.28);backdrop-filter:blur(8px);white-space:nowrap;}
 
 /* SECTION BASE */
-section{padding:5.5rem 0 3rem;position:relative;z-index:1;}
+section{padding:6.5rem 0 3.5rem;position:relative;z-index:1;}
 .container{max-width:960px;margin:0 auto;padding:0 2.5rem;}
 .s-label{display:flex;align-items:center;gap:1rem;margin-bottom:3rem;}
 .s-label-pill{font-size:0.62rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;padding:0.28rem 0.75rem;border-radius:99px;}
@@ -350,6 +365,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
   </div>
 </div>
 <noscript><style>#preloader{display:none!important}</style></noscript>
+<div id="intro-curtain" class="done" aria-hidden="true"><p>I enjoy simplifying the way things work &mdash; automating workflows and building impactful systems that make a meaningful difference.</p></div>
 <div id="scroll-progress"></div>
 <div id="warp-flash"></div>
 <div id="cursor"></div>
@@ -365,6 +381,10 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
   <div class="dot-nav-item" data-sec="contact" title="Contact"></div>
 </div>
 <div id="konami-msg"><span>✦ You found the constellation code ✦<br/><small style="font-size:0.5em;opacity:0.7;">Khanak Shah · Explorer of the digital cosmos</small></span></div>
+
+<div class="bg-deco" aria-hidden="true">
+  <span class="r1"></span><span class="r2"></span><span class="r3"></span><span class="r4"></span><span class="r5"></span><span class="e1"></span><span class="e2"></span>
+</div>
 
 <nav>
   <span class="nav-logo">KS <span class="nav-star">&#10022;</span></span>
@@ -393,7 +413,6 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
         <span class="line1">Khanak</span>
         <span class="line2">Shah</span>
       </h1>
-      <div class="intro-slide">I enjoy simplifying the way things work &mdash; automating workflows and building impactful systems that make a meaningful difference.</div>
       <p class="hero-typewriter"><span id="tw-text"></span><span class="cursor-blink"></span></p>
       <div class="hero-stats">
         <div class="hero-stat">
@@ -427,7 +446,6 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 </section>
 
 <div class="tools-section">
-  <div class="tools-caption">Currently vibing with</div>
   <div class="tools-outer marquee-outer">
     <div class="marquee-track">
       <div class="marquee-seg">
@@ -695,7 +713,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
   <div class="container">
     <div class="s-label reveal">
       <span class="s-label-pill" style="background:rgba(224,184,122,0.12);color:var(--peach-m);border:1px solid rgba(224,184,122,0.2);">Certified</span>
-      <h2>Credentials</h2><div class="s-label-line"></div>
+      <h2>Certifications</h2><div class="s-label-line"></div>
     </div>
   </div>
   <div class="cert-marquee marquee-outer">
@@ -746,9 +764,18 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
   let i=0,finished=false;
   function finish(){
     if(finished)return;finished=true;
-    document.body.style.overflow="";
     pre.classList.add("curtain-up");
     setTimeout(()=>{pre.classList.add("done");},1100);
+    const curtain=document.getElementById("intro-curtain");
+    if(!curtain||reduced){
+      document.body.style.overflow="";
+      if(curtain)curtain.classList.add("done");
+      return;
+    }
+    curtain.classList.remove("done");
+    setTimeout(()=>{curtain.classList.add("enter");},1150);
+    setTimeout(()=>{curtain.classList.remove("enter");curtain.classList.add("exit");},3200);
+    setTimeout(()=>{curtain.classList.add("done");document.body.style.overflow="";},4150);
   }
   function launch(){
     if(statusEl)statusEl.textContent="T-minus liftoff.";
