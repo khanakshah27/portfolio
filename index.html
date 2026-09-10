@@ -142,7 +142,9 @@ section{padding:6.5rem 0 3.5rem;position:relative;z-index:1;}
 
 /* SKILLS — Solar System, inside a dark space-window */
 .solar-window{padding:1.7rem 1.6rem 1.8rem;}
-#solar-canvas{display:block;width:100%;border-radius:16px;cursor:crosshair;touch-action:none;position:relative;z-index:1;}
+#solar-canvas{display:block;width:100%;border-radius:16px;cursor:crosshair;touch-action:none;position:relative;z-index:1;opacity:0;transform:scale(0.88);transition:opacity 0.9s ease 0.15s,transform 0.9s cubic-bezier(.22,1,.36,1) 0.15s;}
+.solar-window.reveal.visible #solar-canvas{opacity:1;transform:scale(1);}
+@media (prefers-reduced-motion:reduce){#solar-canvas{transition:opacity 0.3s ease!important;transform:none!important;opacity:1!important;}}
 .solar-legend{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.2rem;justify-content:center;position:relative;z-index:1;}
 .solar-legend-item{display:flex;align-items:center;gap:0.4rem;font-size:0.7rem;color:var(--text-muted);padding:0.22rem 0.7rem;border-radius:99px;border:1px solid var(--border);background:var(--surface);transition:border-color 0.2s,color 0.2s;cursor:pointer;}
 .solar-legend-item:hover{color:var(--text);border-color:rgba(181,168,232,0.35);}
@@ -151,7 +153,8 @@ section{padding:6.5rem 0 3.5rem;position:relative;z-index:1;}
 
 /* EXPERIENCE */
 .exp-track{position:relative;padding-left:2.2rem;}
-.exp-track::before{content:"";position:absolute;left:5px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--lav-m),var(--sage-m),var(--border));}
+.exp-track::before{content:"";position:absolute;left:5px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--lav-m),var(--sage-m),var(--border));transform-origin:top;transform:scaleY(0);transition:transform 1.1s cubic-bezier(.22,1,.36,1);}
+.exp-track.grown::before{transform:scaleY(1);}
 .exp-item{position:relative;margin-bottom:2.5rem;}
 .exp-dot{position:absolute;left:-2.2rem;top:0.5rem;width:11px;height:11px;border-radius:50%;border:2px solid;background:var(--bg);}
 .exp-card{background:var(--surface);backdrop-filter:blur(12px);border-radius:26px 26px 26px 6px;padding:1.5rem 1.8rem;transition:transform 0.3s,box-shadow 0.3s;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 16px 36px -22px rgba(53,42,77,0.32);}
@@ -187,7 +190,16 @@ section{padding:6.5rem 0 3.5rem;position:relative;z-index:1;}
 .constellation-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
 .constellation-lines polyline{fill:none;stroke:rgba(181,168,232,0.3);stroke-width:0.35;stroke-dasharray:1.4,1.6;}
 .constellation-lines.mobile-only{display:none;}
-.const-star{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;background:none;border:none;padding:6px;font-family:inherit;cursor:none;}
+.constellation-lines{clip-path:inset(0 100% 0 0);transition:clip-path 1.3s cubic-bezier(.22,1,.36,1);}
+.constellation-window.drawn .constellation-lines{clip-path:inset(0 0 0 0);}
+.const-star{position:absolute;transform:translate(-50%,-50%) scale(0.4);opacity:0;display:flex;flex-direction:column;align-items:center;gap:0.5rem;background:none;border:none;padding:6px;font-family:inherit;cursor:none;transition:opacity 0.5s ease,transform 0.5s cubic-bezier(.34,1.56,.64,1);}
+.constellation-window.drawn .const-star{opacity:1;transform:translate(-50%,-50%) scale(1);}
+.constellation-window.drawn .const-star:nth-child(3){transition-delay:0.15s;}
+.constellation-window.drawn .const-star:nth-child(4){transition-delay:0.3s;}
+.constellation-window.drawn .const-star:nth-child(5){transition-delay:0.45s;}
+.constellation-window.drawn .const-star:nth-child(6){transition-delay:0.6s;}
+.constellation-window.drawn .const-star:nth-child(7){transition-delay:0.75s;}
+@media (prefers-reduced-motion:reduce){.constellation-lines,.const-star{transition:opacity 0.3s ease!important;clip-path:none!important;transform:translate(-50%,-50%)!important;opacity:1!important;}}
 .const-star-dot{width:11px;height:11px;border-radius:50%;position:relative;background:radial-gradient(circle at 35% 30%,rgba(var(--acc),1),rgba(var(--acc),0.35));box-shadow:0 0 8px rgba(var(--acc),0.55),0 0 18px rgba(var(--acc),0.2);transition:transform 0.3s ease,box-shadow 0.3s ease,background 0.3s ease;}
 .const-star-dot::after{content:"";position:absolute;inset:-9px;border:1px solid rgba(var(--acc),0.3);border-radius:50%;animation:twinkle 3s ease-in-out infinite;}
 .const-star-label{font-size:0.68rem;color:var(--text-muted);white-space:nowrap;letter-spacing:0.02em;transition:color 0.3s ease;}
@@ -292,8 +304,19 @@ section{padding:6.5rem 0 3.5rem;position:relative;z-index:1;}
 .c-link:hover{transform:translateY(-3px);}
 
 footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);letter-spacing:0.08em;}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s cubic-bezier(.22,1,.36,1);}
 .reveal.visible{opacity:1;transform:translateY(0);}
+/* ── directional variants — same elements, more deliberate entrances ── */
+.about-card.reveal,.solar-window.reveal,.constellation-window.reveal,.contact-wrap.reveal{transform:scale(0.94) translateY(16px);}
+.about-card.reveal.visible,.solar-window.reveal.visible,.constellation-window.reveal.visible,.contact-wrap.reveal.visible{transform:scale(1) translateY(0);}
+.exp-item.reveal{transform:translateX(-26px);}
+.exp-item.reveal.visible{transform:translateX(0);}
+.patent-plate.reveal:nth-child(odd){transform:translateX(-26px);}
+.patent-plate.reveal:nth-child(even){transform:translateX(26px);}
+.patent-plate.reveal.visible{transform:translateX(0);}
+.medal-slot.reveal{transform:translateY(18px) rotate(-6deg) scale(0.85);}
+.medal-slot.reveal.visible{transform:translateY(0) rotate(0deg) scale(1);}
+@media (prefers-reduced-motion:reduce){.reveal,.reveal.visible{transition:opacity 0.3s ease;transform:none!important;}}
 ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--lav-d);border-radius:99px;}
 
 /* ── SCROLL PROGRESS ── */
@@ -304,6 +327,7 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 
 /* ── SECTION DOT NAV ── */
 #dot-nav{position:fixed;right:1.3rem;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,0.55);backdrop-filter:blur(10px);padding:12px 8px;border-radius:99px;box-shadow:0 10px 30px -14px rgba(53,42,77,0.35);}
+#dot-nav::before{content:"";position:absolute;left:50%;top:12px;bottom:12px;width:1px;background:linear-gradient(to bottom,rgba(99,85,199,0.08),rgba(99,85,199,0.4) 50%,rgba(99,85,199,0.08));transform:translateX(-50%);z-index:-1;}
 .dot-nav-item{width:7px;height:7px;border-radius:50%;background:#c9bfe0;transition:background 0.3s,box-shadow 0.3s,transform 0.3s;cursor:pointer;}
 .dot-nav-item.active{background:#6355c7;box-shadow:0 0 8px rgba(99,85,199,0.6);transform:scale(1.4);}
 @media (max-width:640px){#dot-nav{display:none;}}
@@ -795,11 +819,28 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 const prog=document.getElementById("scroll-progress");
 window.addEventListener("scroll",()=>{const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;prog.style.width=pct+"%";},{passive:true});
 
-// ── WARP FLASH on section entry ──
+// ── WARP FLASH on section entry — tinted with that section's own accent ──
 const warp=document.getElementById("warp-flash");
+const warpColors={hero:"181,168,232",about:"181,168,232",skills:"181,168,232",experience:"157,196,179",projects:"212,160,160",awards:"224,200,122",patents:"144,191,232",extra:"212,160,160",certs:"224,184,122",contact:"181,168,232"};
 let lastSection="";
-const warpObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&e.target.id!==lastSection){lastSection=e.target.id;warp.style.transition="opacity 0.08s";warp.style.opacity="1";setTimeout(()=>{warp.style.transition="opacity 0.6s";warp.style.opacity="0";},80);}});},{threshold:0.4});
+const warpObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&e.target.id!==lastSection){lastSection=e.target.id;const c=warpColors[e.target.id]||"181,168,232";warp.style.background="radial-gradient(ellipse at 50% 50%,rgba("+c+",0.18) 0%,transparent 70%)";warp.style.transition="opacity 0.08s";warp.style.opacity="1";setTimeout(()=>{warp.style.transition="opacity 0.6s";warp.style.opacity="0";},80);}});},{threshold:0.4});
 document.querySelectorAll("section[id]").forEach(s=>warpObs.observe(s));
+
+// ── EXPERIENCE TIMELINE — path grows in as the section arrives ──
+(function(){
+  const track=document.querySelector(".exp-track");
+  if(!track)return;
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){track.classList.add("grown");obs.unobserve(track);}});},{threshold:0.25});
+  obs.observe(track);
+})();
+
+// ── PROJECT CONSTELLATION — lines + stars draw in as the section arrives ──
+(function(){
+  const win=document.querySelector(".constellation-window");
+  if(!win)return;
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){win.classList.add("drawn");obs.unobserve(win);}});},{threshold:0.2});
+  obs.observe(win);
+})();
 
 // ── MOBILE NAV TOGGLE ──
 (function(){
