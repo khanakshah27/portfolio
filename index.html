@@ -261,21 +261,24 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 .ledger-row.reveal:nth-child(even){transform:translateX(22px);}
 .ledger-row.reveal.visible{transform:translateX(0);}
 
-/* ── a distinct entrance signature per list section, so the run from Recognition
-   through Certifications doesn't all move the same way ── */
-#awards .ledger-row.reveal{transform:translateX(-24px) scale(0.94) rotate(-1.2deg);}
-#awards .ledger-row.reveal:nth-child(even){transform:translateX(24px) scale(0.94) rotate(1.2deg);}
-#awards .ledger-row.reveal.visible{transform:translateX(0) scale(1) rotate(0deg);}
-#patents .ledger-row.reveal{transition:opacity 0.75s ease,transform 0.75s cubic-bezier(.22,1,.36,1),filter 0.7s ease;filter:blur(7px);transform:translateY(18px);}
-#patents .ledger-row.reveal:nth-child(even){transform:translateY(18px);}
-#patents .ledger-row.reveal.visible{filter:blur(0);transform:translateY(0);}
-#extra .ledger-row.reveal{transform:translateY(38px) scale(0.92);}
-#extra .ledger-row.reveal.visible{transform:translateY(0) scale(1);}
-.cert-chip.reveal{opacity:0;transform:translateY(16px) scale(0.88);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(.34,1.56,.64,1);}
-.cert-chip.reveal.visible{opacity:1;transform:translateY(0) scale(1);}
-.cert-field .cert-chip:nth-child(2){transition-delay:0.09s;}
-.cert-field .cert-chip:nth-child(3){transition-delay:0.18s;}
-.cert-field .cert-chip:nth-child(4){transition-delay:0.27s;}
+/* ── a distinct, unmissable entrance signature per list section, so the run from
+   Recognition through Certifications each arrives in its own way ── */
+#awards .ledger-row.reveal{transition:opacity 0.7s ease,transform 0.9s cubic-bezier(.34,1.56,.64,1);transform:translateX(-110px) rotate(-9deg) scale(0.78);}
+#awards .ledger-row.reveal:nth-child(even){transform:translateX(110px) rotate(9deg) scale(0.78);}
+#awards .ledger-row.reveal.visible{transform:translateX(0) rotate(0deg) scale(1);}
+
+#patents .ledger-row.reveal{transition:opacity 0.85s ease,transform 0.95s cubic-bezier(.16,1,.3,1),filter 0.95s ease;filter:blur(18px);transform:translateY(80px) scale(0.9);}
+#patents .ledger-row.reveal.visible{filter:blur(0);transform:translateY(0) scale(1);}
+
+#extra .ledger-row.reveal{transition:opacity 0.8s ease,transform 1s cubic-bezier(.34,1.56,.64,1);transform:translateY(110px) scale(0.72) rotate(-3deg);}
+#extra .ledger-row.reveal.visible{transform:translateY(0) scale(1) rotate(0deg);}
+
+.cert-chip.reveal{opacity:0;transform:translateY(46px) scale(0.55) rotate(-12deg);transition:opacity 0.6s ease,transform 0.75s cubic-bezier(.34,1.56,.64,1);}
+.cert-chip.reveal:nth-child(even){transform:translateY(46px) scale(0.55) rotate(12deg);}
+.cert-chip.reveal.visible{opacity:1;transform:translateY(0) scale(1) rotate(0deg);}
+.cert-field .cert-chip:nth-child(2){transition-delay:0.14s;}
+.cert-field .cert-chip:nth-child(3){transition-delay:0.28s;}
+.cert-field .cert-chip:nth-child(4){transition-delay:0.42s;}
 @media (prefers-reduced-motion:reduce){.reveal,.reveal.visible,.cert-chip.reveal,.cert-chip.reveal.visible{transition:opacity 0.3s ease;transform:none!important;filter:none!important;}}
 ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--lav-d);border-radius:99px;}
 
@@ -775,21 +778,23 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 const prog=document.getElementById("scroll-progress");
 window.addEventListener("scroll",()=>{const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;prog.style.width=pct+"%";},{passive:true});
 
-// ── BACKGROUND CIRCLES — breathe in and out of size as you scroll ──
+// ── BACKGROUND CIRCLES — swell, drift and spin as you scroll ──
 (function(){
   const decos=document.querySelectorAll(".bg-deco span");
   if(!decos.length)return;
-  const baseRotate={e1:"-20deg",e2:"14deg"};
+  const baseRotate={e1:-20,e2:14};
   const items=Array.from(decos).map((el,i)=>{
     const key=el.classList.contains("e1")?"e1":el.classList.contains("e2")?"e2":null;
-    return {el,phase:i*0.9,rot:key?baseRotate[key]:null};
+    return {el,phase:i*1.1,rot:key?baseRotate[key]:0,spin:(i%2===0?1:-1)*(8+i*3)};
   });
   let ticking=false;
   function update(){
     const y=window.scrollY;
     items.forEach(it=>{
-      const scale=1+0.22*Math.sin(y/260+it.phase);
-      it.el.style.transform=(it.rot?"rotate("+it.rot+") ":"")+"scale("+scale.toFixed(3)+")";
+      const scale=1+0.55*Math.sin(y/170+it.phase);
+      const drift=34*Math.sin(y/230+it.phase*1.4);
+      const rot=it.rot+(y/1000)*it.spin;
+      it.el.style.transform="translateY("+drift.toFixed(1)+"px) rotate("+rot.toFixed(1)+"deg) scale("+Math.max(0.25,scale).toFixed(3)+")";
     });
     ticking=false;
   }
