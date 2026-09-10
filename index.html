@@ -262,11 +262,9 @@ section{padding:6.5rem 0 3.5rem;position:relative;z-index:1;}
   .duty-log{width:100%;}
 }
 
-/* CERTIFICATIONS — marquee slider */
-.cert-marquee{margin-top:0.5rem;}
-.cert-marquee .marquee-track{animation:marqueeScroll 20s linear infinite;}
-.cert-marquee:hover .marquee-track{animation-play-state:paused;}
-.cert-chip{display:flex;align-items:center;gap:0.65rem;padding:0.75rem 1.35rem;margin:0 0.5rem;background:var(--surface);border-radius:16px;box-shadow:0 10px 26px -16px rgba(53,42,77,0.32);backdrop-filter:blur(8px);white-space:nowrap;}
+/* CERTIFICATIONS */
+.cert-field{display:flex;flex-wrap:wrap;justify-content:center;gap:0.9rem;margin-top:0.5rem;}
+.cert-chip{display:flex;align-items:center;gap:0.65rem;padding:0.75rem 1.35rem;background:var(--surface);border-radius:16px;box-shadow:0 10px 26px -16px rgba(53,42,77,0.32);backdrop-filter:blur(8px);}
 .cert-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .cert-name{font-size:0.82rem;color:var(--text);font-weight:400;}
 .cert-issuer{font-size:0.7rem;color:var(--text-muted);}
@@ -673,13 +671,13 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
         <div class="patent-orb">01</div>
         <div class="patent-title">System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</div>
         <div class="patent-meta">APPLICATION NO. 202641018176</div>
-        <span class="patent-pill">Signal Published &middot; March 2026</span>
+        <span class="patent-pill">Published &middot; March 2026</span>
       </div>
       <div class="patent-plate reveal" style="--acc:40,110,168;">
         <div class="patent-orb">02</div>
         <div class="patent-title">A System and Method for Machine Learning-Based FTIR Spectral Denoising</div>
         <div class="patent-meta">APPLICATION NO. 202641053864</div>
-        <span class="patent-pill">Signal Published &middot; April 2026</span>
+        <span class="patent-pill">Published &middot; April 2026</span>
       </div>
     </div>
   </div>
@@ -719,18 +717,11 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
       <h2>Certifications</h2><div class="s-label-line"></div>
     </div>
   </div>
-  <div class="cert-marquee marquee-outer">
-    <div class="marquee-track">
-      <div class="marquee-seg">
-        <div class="cert-chip"><div class="cert-dot" style="background:var(--sky-m);box-shadow:0 0 5px var(--sky-m);"></div><div><div class="cert-name">Gen AI Using IBM Watsonx</div><div class="cert-issuer">IBM &middot; Jun 2025</div></div></div>
-        <div class="cert-chip"><div class="cert-dot" style="background:var(--butter-m);box-shadow:0 0 5px var(--butter-m);"></div><div><div class="cert-name">Java</div><div class="cert-issuer">Udemy &middot; Jun 2024</div></div></div>
-        <div class="cert-chip"><div class="cert-dot" style="background:var(--sage-m);box-shadow:0 0 5px var(--sage-m);"></div><div><div class="cert-name">C &amp; C++ (Beginner to Advanced)</div><div class="cert-issuer">Udemy &middot; May 2023</div></div></div>
-      </div>
-      <div class="marquee-seg">
-        <div class="cert-chip"><div class="cert-dot" style="background:var(--sky-m);box-shadow:0 0 5px var(--sky-m);"></div><div><div class="cert-name">Gen AI Using IBM Watsonx</div><div class="cert-issuer">IBM &middot; Jun 2025</div></div></div>
-        <div class="cert-chip"><div class="cert-dot" style="background:var(--butter-m);box-shadow:0 0 5px var(--butter-m);"></div><div><div class="cert-name">Java</div><div class="cert-issuer">Udemy &middot; Jun 2024</div></div></div>
-        <div class="cert-chip"><div class="cert-dot" style="background:var(--sage-m);box-shadow:0 0 5px var(--sage-m);"></div><div><div class="cert-name">C &amp; C++ (Beginner to Advanced)</div><div class="cert-issuer">Udemy &middot; May 2023</div></div></div>
-      </div>
+  <div class="container">
+    <div class="cert-field">
+      <div class="cert-chip"><div class="cert-dot" style="background:var(--sky-m);box-shadow:0 0 5px var(--sky-m);"></div><div><div class="cert-name">Gen AI Using IBM Watsonx</div><div class="cert-issuer">IBM &middot; Jun 2025</div></div></div>
+      <div class="cert-chip"><div class="cert-dot" style="background:var(--butter-m);box-shadow:0 0 5px var(--butter-m);"></div><div><div class="cert-name">Java</div><div class="cert-issuer">Udemy &middot; Jun 2024</div></div></div>
+      <div class="cert-chip"><div class="cert-dot" style="background:var(--sage-m);box-shadow:0 0 5px var(--sage-m);"></div><div><div class="cert-name">C &amp; C++ (Beginner to Advanced)</div><div class="cert-issuer">Udemy &middot; May 2023</div></div></div>
     </div>
   </div>
 </section>
