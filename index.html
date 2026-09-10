@@ -15,7 +15,7 @@ html{scroll-behavior:smooth;font-size:16px}
   --butter-m:#96721a;--sky-m:#2f6fa8;--peach-m:#a8622a;
   --bg:#f1eef8;--surface:rgba(255,255,255,0.72);--surface2:rgba(255,255,255,0.5);
   --border:rgba(44,37,74,0.09);
-  --text:#221d38;--text-muted:#5b5674;--text-dim:#87839c;--accent:#6355c7;
+  --text:#221d38;--text-muted:#5b5674;--text-dim:#6a6584;--accent:#6355c7;
 }
 body{font-family:"Outfit",sans-serif;background:radial-gradient(ellipse at 50% -8%,#ffffff 0%,#f1eef8 45%,#ddd7ec 100%) fixed;color:var(--text);min-height:100vh;overflow-x:hidden;cursor:none;}
 
@@ -38,7 +38,7 @@ body{font-family:"Outfit",sans-serif;background:radial-gradient(ellipse at 50% -
   --butter-m:#e0c87a;--sky-m:#90bfe8;--peach-m:#e0b87a;
   --bg:#07050f;--surface:#110d22;--surface2:#1a1430;
   --border:rgba(181,168,232,0.13);
-  --text:#f0eafa;--text-muted:#a090c8;--text-dim:#5a4a88;--accent:#b5a8e8;
+  --text:#f0eafa;--text-muted:#a090c8;--text-dim:#8878b8;--accent:#b5a8e8;
   background:var(--bg);color:var(--text);position:relative;overflow:hidden;border-radius:28px;
   box-shadow:0 26px 60px -26px rgba(53,42,77,0.45),inset 0 0 0 1px rgba(255,255,255,0.06);
 }
@@ -59,7 +59,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 .nav-links a::after{content:"";position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width 0.3s ease;}
 .nav-links a:hover{color:var(--text);}
 .nav-links a:hover::after{width:100%;}
-@media (max-width:640px){nav{padding:0 1.2rem;}.nav-links{gap:1rem;}.nav-links a{font-size:0.62rem;}}
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:30px;height:30px;background:none;border:none;padding:0;cursor:none;}
+.nav-toggle span{display:block;width:100%;height:2px;background:var(--text);border-radius:2px;transition:transform 0.25s ease,opacity 0.2s ease;}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle.open span:nth-child(2){opacity:0;}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media (max-width:640px){
+  nav{padding:0 1.2rem;}
+  .nav-toggle{display:flex;}
+  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:rgba(255,255,255,0.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0.4rem 1.2rem 1rem;box-shadow:0 16px 30px -18px rgba(53,42,77,0.3);}
+  .nav-links.open{display:flex;}
+  .nav-links a{font-size:0.78rem;padding:0.8rem 0;width:100%;}
+}
 
 /* ── generic marquee mechanics (tools / certs sliders) ── */
 .marquee-outer{position:relative;overflow:hidden;width:100%;}
@@ -93,7 +104,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;ali
 .hero-stats{display:flex;gap:2.5rem;flex-wrap:wrap;margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border);}
 .hero-stat{position:relative;display:flex;flex-direction:column;}
 .orbit-ring{position:absolute;top:50%;left:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border:1px solid rgba(181,168,232,0.15);border-radius:50%;animation:orbitSpin 6s linear infinite;pointer-events:none;}
-.orbit-ring::before{content:"º6";position:absolute;top:-7px;left:50%;transform:translateX(-50%);font-size:8px;color:var(--lav-m);background:var(--bg);padding:0 2px;}
+.orbit-ring::before{content:"";position:absolute;top:-2px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--lav-m);box-shadow:0 0 6px var(--lav-m);}
 @keyframes orbitSpin{to{transform:rotate(360deg);}}
 .hero-stat-num{font-family:"Cormorant Garamond",serif;font-size:2.6rem;font-weight:700;color:var(--accent);line-height:1;position:relative;z-index:1;transition:text-shadow 0.3s;}
 .hero-stat-num.pop{text-shadow:0 0 30px var(--accent),0 0 60px var(--lav-d);}
@@ -382,7 +393,10 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 
 <nav>
   <span class="nav-logo">KS <span class="nav-star">&#10022;</span></span>
-  <div class="nav-links">
+  <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="nav-links">
     <a href="#skills">Toolbox</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Work</a>
@@ -786,6 +800,21 @@ const warp=document.getElementById("warp-flash");
 let lastSection="";
 const warpObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&e.target.id!==lastSection){lastSection=e.target.id;warp.style.transition="opacity 0.08s";warp.style.opacity="1";setTimeout(()=>{warp.style.transition="opacity 0.6s";warp.style.opacity="0";},80);}});},{threshold:0.4});
 document.querySelectorAll("section[id]").forEach(s=>warpObs.observe(s));
+
+// ── MOBILE NAV TOGGLE ──
+(function(){
+  const toggle=document.getElementById("nav-toggle");
+  const links=document.getElementById("nav-links");
+  if(!toggle||!links)return;
+  function setOpen(open){
+    toggle.classList.toggle("open",open);
+    links.classList.toggle("open",open);
+    toggle.setAttribute("aria-expanded",String(open));
+  }
+  toggle.addEventListener("click",()=>setOpen(!links.classList.contains("open")));
+  links.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>setOpen(false)));
+  document.addEventListener("click",e=>{if(links.classList.contains("open")&&!links.contains(e.target)&&!toggle.contains(e.target))setOpen(false);});
+})();
 
 // ── DOT NAV ──
 const dotItems=document.querySelectorAll(".dot-nav-item");
