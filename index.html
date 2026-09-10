@@ -260,7 +260,23 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
 .ledger-row.reveal:nth-child(odd){transform:translateX(-22px);}
 .ledger-row.reveal:nth-child(even){transform:translateX(22px);}
 .ledger-row.reveal.visible{transform:translateX(0);}
-@media (prefers-reduced-motion:reduce){.reveal,.reveal.visible{transition:opacity 0.3s ease;transform:none!important;}}
+
+/* ── a distinct entrance signature per list section, so the run from Recognition
+   through Certifications doesn't all move the same way ── */
+#awards .ledger-row.reveal{transform:translateX(-24px) scale(0.94) rotate(-1.2deg);}
+#awards .ledger-row.reveal:nth-child(even){transform:translateX(24px) scale(0.94) rotate(1.2deg);}
+#awards .ledger-row.reveal.visible{transform:translateX(0) scale(1) rotate(0deg);}
+#patents .ledger-row.reveal{transition:opacity 0.75s ease,transform 0.75s cubic-bezier(.22,1,.36,1),filter 0.7s ease;filter:blur(7px);transform:translateY(18px);}
+#patents .ledger-row.reveal:nth-child(even){transform:translateY(18px);}
+#patents .ledger-row.reveal.visible{filter:blur(0);transform:translateY(0);}
+#extra .ledger-row.reveal{transform:translateY(38px) scale(0.92);}
+#extra .ledger-row.reveal.visible{transform:translateY(0) scale(1);}
+.cert-chip.reveal{opacity:0;transform:translateY(16px) scale(0.88);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(.34,1.56,.64,1);}
+.cert-chip.reveal.visible{opacity:1;transform:translateY(0) scale(1);}
+.cert-field .cert-chip:nth-child(2){transition-delay:0.09s;}
+.cert-field .cert-chip:nth-child(3){transition-delay:0.18s;}
+.cert-field .cert-chip:nth-child(4){transition-delay:0.27s;}
+@media (prefers-reduced-motion:reduce){.reveal,.reveal.visible,.cert-chip.reveal,.cert-chip.reveal.visible{transition:opacity 0.3s ease;transform:none!important;filter:none!important;}}
 ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--lav-d);border-radius:99px;}
 
 /* ── SCROLL PROGRESS ── */
@@ -699,9 +715,9 @@ footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);l
       <h2>Certifications</h2><div class="s-label-line"></div>
     </div>
     <div class="cert-field">
-      <div class="cert-chip"><div class="cert-dot" style="background:var(--sky-m);box-shadow:0 0 5px var(--sky-m);"></div><div><div class="cert-name">Gen AI Using IBM Watsonx</div><div class="cert-issuer">IBM &middot; Jun 2025</div></div></div>
-      <div class="cert-chip"><div class="cert-dot" style="background:var(--butter-m);box-shadow:0 0 5px var(--butter-m);"></div><div><div class="cert-name">Java</div><div class="cert-issuer">Udemy &middot; Jun 2024</div></div></div>
-      <div class="cert-chip"><div class="cert-dot" style="background:var(--sage-m);box-shadow:0 0 5px var(--sage-m);"></div><div><div class="cert-name">C &amp; C++ (Beginner to Advanced)</div><div class="cert-issuer">Udemy &middot; May 2023</div></div></div>
+      <div class="cert-chip reveal"><div class="cert-dot" style="background:var(--sky-m);box-shadow:0 0 5px var(--sky-m);"></div><div><div class="cert-name">Gen AI Using IBM Watsonx</div><div class="cert-issuer">IBM &middot; Jun 2025</div></div></div>
+      <div class="cert-chip reveal"><div class="cert-dot" style="background:var(--butter-m);box-shadow:0 0 5px var(--butter-m);"></div><div><div class="cert-name">Java</div><div class="cert-issuer">Udemy &middot; Jun 2024</div></div></div>
+      <div class="cert-chip reveal"><div class="cert-dot" style="background:var(--sage-m);box-shadow:0 0 5px var(--sage-m);"></div><div><div class="cert-name">C &amp; C++ (Beginner to Advanced)</div><div class="cert-issuer">Udemy &middot; May 2023</div></div></div>
     </div>
   </div>
 </section>
