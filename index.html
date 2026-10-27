@@ -259,17 +259,22 @@ footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid v
 
 
 /* ── INTRO: the quote unwinds along its own spiral ── */
-#intro{position:fixed;inset:0;z-index:1000;background:transparent}
+#intro{position:fixed;inset:0;z-index:1000;background:#150f2b;cursor:pointer}
+#intro.ready{background:transparent}
+#intro .g{transition:opacity .45s ease .75s}
+#intro.open .g{opacity:0}
 #intro.gone{display:none}
 #intro svg{display:block;width:100%;height:100%}
-#sp-line{fill:none;stroke:var(--lilac);stroke-width:1.2;opacity:0.5;transition:stroke-dashoffset 2.6s cubic-bezier(.45,0,.2,1)}
-#sp-hole{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;transition:stroke-dashoffset 1.9s cubic-bezier(.6,0,.25,1)}
+#sp-line{fill:none;stroke:var(--lilac);stroke-width:1;opacity:0.4;transition:stroke-dashoffset 2.4s cubic-bezier(.45,0,.2,1)}
+#sp-hole{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;transition:stroke-dashoffset 1.15s cubic-bezier(.5,0,.2,1)}
 .i-q{font-family:var(--poem);font-style:italic;fill:var(--star);opacity:0;transition:opacity 1s ease .3s}
 .i-q tspan.em{fill:var(--lilac)}
 .i-sub{font-family:var(--mono);letter-spacing:0.14em;text-transform:uppercase;fill:var(--star-60);opacity:0;transition:opacity 1s ease 1s}
 #intro.show .i-q,#intro.show .i-sub{opacity:1}
+#intro.open .i-q,#intro.open .i-sub{opacity:0;transition:opacity .3s ease}
 .i-skip{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:2;opacity:0;transition:opacity .8s ease 1.6s;pointer-events:none}
-#intro.show .i-skip{opacity:1}
+#intro.show .i-skip{opacity:1;animation:hint 2.4s ease-in-out 2.6s infinite}
+@keyframes hint{50%{opacity:0.35}}
 #intro.open .i-skip{opacity:0;transition:opacity .2s}
 body.intro-lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){#intro{display:none}}
@@ -348,9 +353,9 @@ body.intro-lock{overflow:hidden}
 <div id="lb" hidden><img alt="" /></div>
 <div id="progress"></div>
 <div id="intro" role="presentation" aria-hidden="true">
-  <svg id="intro-svg" preserveAspectRatio="none">
+  <svg id="intro-svg">
     <defs><mask id="spmask" maskUnits="userSpaceOnUse"><rect id="sp-rect" fill="#fff"/><path id="sp-hole"/></mask></defs>
-    <g mask="url(#spmask)">
+    <g class="g" mask="url(#spmask)">
       <rect id="sp-bg" fill="#150f2b"/>
       <path id="sp-line"/>
       <text id="i-q" class="i-q" text-anchor="middle"><tspan>Per aspera </tspan><tspan class="em">ad astra</tspan></text>
@@ -662,91 +667,47 @@ body.intro-lock{overflow:hidden}
 </section>
 
 <script>
-// intro: the quote unwinds along its spiral
+// intro: starts on the quote; a click unwinds it along its spiral
 (function(){
   const el=document.getElementById("intro");if(!el)return;
   if(matchMedia("(prefers-reduced-motion: reduce)").matches){el.remove();return;}
-  const W=innerWidth,H=innerHeight,cx=W/2,cy=H/2;
   const svg=document.getElementById("intro-svg");
-  svg.setAttribute("viewBox","0 0 "+W+" "+H);
-  ["sp-rect","sp-bg"].forEach(id=>{const r=document.getElementById(id);r.setAttribute("width",W);r.setAttribute("height",H);});
-  const mask=document.getElementById("spmask");mask.setAttribute("x",0);mask.setAttribute("y",0);mask.setAttribute("width",W);mask.setAttribute("height",H);
-  // one spiral, used for both the drawn line and the reveal
-  const R=Math.hypot(W,H)/2+60,N=5,b=R/(2*Math.PI*N);let d="";
-  for(let t=0;t<=2*Math.PI*N+0.05;t+=0.05){const r=b*t,x=cx+r*Math.cos(t-1.5708),y=cy+r*Math.sin(t-1.5708);d+=(t?"L":"M")+x.toFixed(1)+" "+y.toFixed(1);}
   const line=document.getElementById("sp-line"),hole=document.getElementById("sp-hole");
-  line.setAttribute("d",d);hole.setAttribute("d",d);
-  hole.style.strokeWidth=(2*Math.PI*b*1.08)+"px";
-  const L=line.getTotalLength();
-  [line,hole].forEach(p=>{p.style.strokeDasharray=L;p.style.strokeDashoffset=L;});
   const q=document.getElementById("i-q"),sub=document.getElementById("i-sub");
-  const fs=Math.min(Math.max(W*0.085,42),118);
-  q.setAttribute("x",cx);q.setAttribute("y",cy);q.style.fontSize=fs+"px";
-  sub.setAttribute("x",cx);sub.setAttribute("y",cy+fs*0.7);sub.style.fontSize=Math.max(11,fs*0.12)+"px";
+  const mask=document.getElementById("spmask");
+  let opened=false,drawn=false;
+  // set a dash offset instantly, with no transition (avoids a flash of the page on load)
+  function set(p,v){p.style.transition="none";p.style.strokeDashoffset=v;p.getBoundingClientRect();p.style.transition="";}
+  function build(){
+    const W=innerWidth,H=innerHeight,cx=W/2,cy=H/2;
+    svg.setAttribute("width",W);svg.setAttribute("height",H);
+    ["sp-rect","sp-bg"].forEach(id=>{const r=document.getElementById(id);r.setAttribute("width",W);r.setAttribute("height",H);});
+    mask.setAttribute("x",0);mask.setAttribute("y",0);mask.setAttribute("width",W);mask.setAttribute("height",H);
+    // one spiral, used for both the drawn line and the reveal
+    const R=Math.hypot(W,H)/2+60,N=3,b=R/(2*Math.PI*N);let d="";
+    for(let t=0;t<=2*Math.PI*N+0.05;t+=0.05){const r=b*t,x=cx+r*Math.cos(t-1.5708),y=cy+r*Math.sin(t-1.5708);d+=(t?"L":"M")+x.toFixed(1)+" "+y.toFixed(1);}
+    line.setAttribute("d",d);hole.setAttribute("d",d);
+    hole.style.strokeWidth=(2*Math.PI*b*1.1)+"px";
+    const L=line.getTotalLength();
+    [line,hole].forEach(p=>p.style.strokeDasharray=L);
+    set(line,drawn?0:L);
+    set(hole,opened?0:L);
+    const fs=Math.min(Math.max(W*0.075,38),112);
+    q.setAttribute("x",cx);q.setAttribute("y",cy);q.style.fontSize=fs+"px";
+    sub.setAttribute("x",cx);sub.setAttribute("y",cy+fs*0.75);sub.style.fontSize=Math.max(11,fs*0.12)+"px";
+  }
+  build();
+  el.classList.add("ready");
   document.body.classList.add("intro-lock");
-  let opened=false;
+  addEventListener("resize",build);
   function open(){
     if(opened)return;opened=true;
     el.classList.add("open");hole.style.strokeDashoffset=0;
-    setTimeout(()=>{el.classList.add("gone");document.body.classList.remove("intro-lock");},2000);
+    setTimeout(()=>{el.classList.add("gone");document.body.classList.remove("intro-lock");removeEventListener("resize",build);},1400);
   }
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{el.classList.add("show");line.style.strokeDashoffset=0;}));
-  setTimeout(open,3600);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{el.classList.add("show");drawn=true;line.style.strokeDashoffset=0;}));
   el.addEventListener("click",open);
-  addEventListener("keydown",open,{once:true});
-  addEventListener("wheel",open,{once:true,passive:true});
-  addEventListener("touchstart",open,{once:true,passive:true});
-})();
-
-// desk interactions
-(function(){
-  const desk=document.getElementById("desk");if(!desk)return;
-  const notes={
-    records:["Records","Maintained chapter records."],
-    welfare:["Student Welfare","Coordinated with Student Welfare."],
-    events:["Workshops & hackathons","Supported initiatives organizing numerous workshops and hackathons."],
-    laptop:["ML sessions","Conducted ML sessions for juniors, mentoring across full project cycles."],
-    lamp:["The lamp","Light on. Late-night chapter work, mostly."]
-  };
-  const objs=[...desk.querySelectorAll(".d-obj")],order=["records","welfare","events","laptop"];
-  const k=document.getElementById("dn-k"),t=document.getElementById("dn-t");
-  function show(key){
-    objs.forEach(o=>o.classList.toggle("on",o.dataset.note===key));
-    const n=notes[key];k.textContent=n[0];t.textContent=n[1];
-  }
-  let idx=0,timer,touched=false;
-  function auto(){if(touched||matchMedia("(prefers-reduced-motion: reduce)").matches)return;show(order[idx++%order.length]);}
-  show("records");idx=1;
-  const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){timer=setInterval(auto,4200);}else clearInterval(timer);},{threshold:0.4});
-  io.observe(desk);
-  objs.forEach(o=>{
-    const act=()=>{
-      touched=true;clearInterval(timer);
-      if(o.dataset.note==="lamp"){const on=desk.classList.toggle("lit");show("lamp");t.textContent=on?notes.lamp[1]:"Light off. Tap again to switch it on.";}
-      else show(o.dataset.note);
-    };
-    o.addEventListener("click",act);
-    o.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act();}});
-  });
-})();
-
-// Gartner photos: drop images/gartner-1.jpg, gartner-2.jpg … into the repo and they appear
-(function(){
-  const gal=document.getElementById("gartner-gal");if(!gal)return;
-  const exts=["jpg","jpeg","png","webp"];
-  function probe(base){return new Promise(res=>{let i=0;(function next(){if(i>=exts.length)return res(null);const src=base+"."+exts[i++],im=new Image();im.onload=()=>res(src);im.onerror=next;im.src=src;})();});}
-  (async function(){
-    const found=[];
-    for(let n=1;n<=12;n++){const src=await probe("images/gartner-"+n);if(!src)break;found.push(src);}
-    if(!found.length)return;
-    const rots=[-2.2,1.6,-1,2.4,-1.8,1.2];
-    found.forEach((src,i)=>{const f=document.createElement("figure"),im=document.createElement("img");im.src=src;im.alt="Gartner internship photo "+(i+1);im.loading="lazy";f.style.setProperty("--r",rots[i%rots.length]+"deg");f.appendChild(im);gal.appendChild(f);});
-    gal.hidden=false;
-    const lb=document.getElementById("lb"),lbi=lb.querySelector("img");
-    gal.addEventListener("click",e=>{const im=e.target.closest("img");if(!im)return;lbi.src=im.src;lbi.alt=im.alt;lb.hidden=false;});
-    lb.addEventListener("click",()=>{lb.hidden=true;});
-    addEventListener("keydown",e=>{if(e.key==="Escape")lb.hidden=true;});
-  })();
+  addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "||e.key==="Escape"){e.preventDefault();open();}});
 })();
 
 // copy email
