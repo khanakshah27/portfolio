@@ -241,9 +241,6 @@ footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid v
 .duo .row{grid-template-columns:minmax(0,1fr);padding:1.5rem 0}
 .duo .row-date{padding-top:0;margin-bottom:0.2rem}
 .duo .row h3{font-size:clamp(1.35rem,2vw,1.8rem)}
-.duo .certs{grid-template-columns:minmax(0,1fr)}
-.duo .cert{padding:1.3rem 0}
-.duo .cert+.cert{padding-left:0;border-left:none;border-top:1px solid var(--line)}
 @media (max-width:900px){.duo{grid-template-columns:minmax(0,1fr)}}
 
 
@@ -261,30 +258,74 @@ footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid v
 
 
 
-/* ── INTRO: quote splits open to reveal the site ── */
-#intro{position:fixed;inset:0;z-index:1000;display:flex;pointer-events:auto}
+/* ── INTRO: the quote unwinds along its own spiral ── */
+#intro{position:fixed;inset:0;z-index:1000;background:transparent}
 #intro.gone{display:none}
-.i-half{position:relative;width:50%;height:100%;overflow:hidden;background:var(--plum);transition:transform 1.15s cubic-bezier(.77,0,.18,1)}
-.i-half.r{background:var(--plum)}
-.i-in{position:absolute;top:0;width:100vw;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 var(--pad)}
-.i-half.l .i-in{left:0}.i-half.r .i-in{left:-50vw}
-.i-half::after{content:"";position:absolute;top:0;bottom:0;width:1px;background:var(--lilac);opacity:0;transition:opacity .6s ease .5s}
-.i-half.l::after{right:0}.i-half.r::after{left:0}
-#intro.show .i-half::after{opacity:0.7}
-#intro.open .i-half.l{transform:translateX(-101%)}
-#intro.open .i-half.r{transform:translateX(101%)}
-#intro.open .i-half::after,#intro.open .i-skip{opacity:0;transition:opacity .2s}
-.i-rings{position:absolute;left:50%;top:50%;width:min(130vw,980px);transform:translate(-50%,-50%);opacity:0.6}
-.i-rings circle{fill:none;stroke:rgba(236,231,218,0.1);stroke-width:1}
-.i-text{position:relative}
-.i-text q{display:block;quotes:none;font-family:var(--poem);font-style:italic;font-size:clamp(2.6rem,8.5vw,7.4rem);line-height:1;color:var(--star);letter-spacing:-0.01em;opacity:0;transform:translateY(14px);transition:opacity 1s ease .2s,transform 1.2s var(--ease) .2s}
-.i-text q em{color:var(--lilac)}
-.i-text .mono{display:block;margin-top:1.6rem;opacity:0;transition:opacity 1s ease .9s}
-.i-skip{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:2;opacity:0;transition:opacity .8s ease 1.4s;pointer-events:none}
-#intro.show .i-text q{opacity:1;transform:none}
-#intro.show .i-text .mono,#intro.show .i-skip{opacity:1}
+#intro svg{display:block;width:100%;height:100%}
+#sp-line{fill:none;stroke:var(--lilac);stroke-width:1.2;opacity:0.5;transition:stroke-dashoffset 2.6s cubic-bezier(.45,0,.2,1)}
+#sp-hole{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;transition:stroke-dashoffset 1.9s cubic-bezier(.6,0,.25,1)}
+.i-q{font-family:var(--poem);font-style:italic;fill:var(--star);opacity:0;transition:opacity 1s ease .3s}
+.i-q tspan.em{fill:var(--lilac)}
+.i-sub{font-family:var(--mono);letter-spacing:0.14em;text-transform:uppercase;fill:var(--star-60);opacity:0;transition:opacity 1s ease 1s}
+#intro.show .i-q,#intro.show .i-sub{opacity:1}
+.i-skip{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:2;opacity:0;transition:opacity .8s ease 1.6s;pointer-events:none}
+#intro.show .i-skip{opacity:1}
+#intro.open .i-skip{opacity:0;transition:opacity .2s}
 body.intro-lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){#intro{display:none}}
+
+
+/* ── DESK ── */
+.desk{margin-top:1.4rem}
+.desk-svg{width:100%;height:auto;display:block;overflow:visible}
+.desk-svg *{vector-effect:non-scaling-stroke}
+.desk-svg .d-top{fill:var(--ink-2);stroke:var(--star-60);stroke-width:1.5}
+.desk-svg .d-leg{stroke:var(--star-40);stroke-width:1.5}
+.d-obj{cursor:pointer;outline:none}
+.d-obj>*:not(.hit):not(g){fill:none;stroke:var(--star-60);stroke-width:1.5;stroke-linejoin:round;transition:stroke .25s,fill .25s}
+.d-obj .hit{fill:transparent;stroke:none}
+.d-obj g *{stroke:var(--star-40);stroke-width:1.2;fill:none;transition:stroke .25s}
+.d-obj .heart{fill:var(--star-40)!important;stroke:none!important}
+.d-obj .cal-h{fill:var(--star-40)!important}
+.d-obj .dots circle{fill:var(--star-40);stroke:none}
+.d-obj .dots .mark{fill:none!important;stroke:var(--star-60)}
+.d-obj:hover>*:not(.hit):not(g),.d-obj:focus-visible>*:not(.hit):not(g),.d-obj.on>*:not(.hit):not(g){stroke:var(--amber)}
+.d-obj.on>*:not(.hit):not(g):not(.bulb){fill:rgba(234,162,63,0.08)}
+.d-obj:hover g *,.d-obj.on g *{stroke:var(--amber)}
+.d-obj.on .heart{fill:var(--amber)!important}
+.d-obj.on .dots circle:not(.mark){fill:var(--amber)}
+.d-obj.on .cal-h{fill:var(--amber)!important}
+.steam{stroke-width:1.2;opacity:0;stroke-dasharray:3 4;animation:steam 2.6s linear infinite}
+.d-obj:hover .steam,.d-obj.on .steam{opacity:0.9}
+.steam.s2{animation-delay:-1.2s}
+@keyframes steam{to{stroke-dashoffset:-14}}
+.bulb{fill:var(--ink)!important}
+.desk.lit .bulb{fill:var(--amber)!important;stroke:var(--amber)!important}
+.beam{opacity:0;transition:opacity .5s ease;pointer-events:none}
+.desk.lit .beam{opacity:1}
+.desk.lit .d-top{stroke:var(--amber)}
+.desk-note{margin-top:1.2rem;padding:1rem 1.2rem;border-left:2px solid var(--amber);background:rgba(234,162,63,0.06);min-height:5.2rem}
+.desk-note p{margin-top:0.35rem;font-family:var(--poem);font-style:italic;font-size:1.2rem;line-height:1.4;color:var(--star)}
+.desk-hint{margin-top:0.8rem;opacity:0.7}
+
+/* ── CERTIFICATES ── */
+.duo .certs{display:grid;grid-template-columns:minmax(0,1fr);gap:1.3rem;border:none;margin-top:0.2rem}
+.duo .cert,.duo .cert+.cert{position:relative;padding:1.2rem 5.4rem 1.2rem 1.7rem;background:#efe8d4;color:#1d1830;border:none;border-radius:2px;transform:rotate(var(--rot,0deg));transition:transform .4s var(--ease),box-shadow .4s;box-shadow:0 18px 30px -18px rgba(0,0,0,0.8);outline:1px solid rgba(29,24,48,0.55);outline-offset:-8px}
+.duo .cert::before{content:"";position:absolute;inset:12px;border:1px solid rgba(29,24,48,0.22);pointer-events:none}
+.duo .cert:hover{transform:rotate(0deg) translateY(-4px);box-shadow:0 26px 36px -18px rgba(0,0,0,0.9)}
+.duo .cert small{display:block;color:#7a4a0c;margin-bottom:0.4rem}
+.duo .cert h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,2.1vw,1.9rem);line-height:1.1;margin-bottom:0.5rem;color:#1d1830}
+.duo .cert .mono{color:rgba(29,24,48,0.62)}
+.duo .cert .seal{position:absolute;right:1.4rem;top:50%;width:46px;height:58px;transform:translateY(-50%)}
+
+/* ── GARTNER PHOTOS ── */
+.gal{display:flex;flex-wrap:wrap;gap:1rem 1.2rem;margin-top:1.6rem}
+.gal figure{width:clamp(130px,17vw,190px);background:#efe8d4;padding:7px 7px 22px;transform:rotate(var(--r,0deg));transition:transform .35s var(--ease);box-shadow:0 14px 24px -14px rgba(0,0,0,0.9);cursor:zoom-in}
+.gal figure:hover{transform:rotate(0) translateY(-5px) scale(1.04)}
+.gal img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+#lb{position:fixed;inset:0;z-index:600;background:rgba(11,14,23,0.92);display:flex;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
+#lb[hidden]{display:none}
+#lb img{max-width:100%;max-height:100%;box-shadow:0 30px 80px rgba(0,0,0,0.7)}
 
 /* ── scrubbed preface ── */
 .w{opacity:0.16;transition:opacity .35s ease}
@@ -303,16 +344,19 @@ body.intro-lock{overflow:hidden}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="seal" viewBox="0 0 64 80"><path d="M20 44 L12 78 L26 70 L32 78 L34 46Z" fill="#b8741b"/><path d="M44 44 L52 78 L38 70 L32 78 L30 46Z" fill="#d68f2a"/><circle cx="32" cy="30" r="26" fill="#eaa23f"/><circle cx="32" cy="30" r="20" fill="none" stroke="#7a4a0c" stroke-width="1.2" stroke-dasharray="2 2.6"/><circle cx="32" cy="30" r="14" fill="none" stroke="#7a4a0c" stroke-width="1"/><path d="M32 19 l3.2 8 8.4 .7 -6.4 5.5 2 8.3 -7.2 -4.5 -7.2 4.5 2 -8.3 -6.4 -5.5 8.4 -.7z" fill="#7a4a0c"/></symbol></svg>
+<div id="lb" hidden><img alt="" /></div>
 <div id="progress"></div>
 <div id="intro" role="presentation" aria-hidden="true">
-  <div class="i-half l"><div class="i-in">
-    <svg class="i-rings" viewBox="0 0 600 600" aria-hidden="true"><circle cx="300" cy="300" r="120"/><circle cx="300" cy="300" r="190"/><circle cx="300" cy="300" r="260"/><circle cx="300" cy="300" r="295"/></svg>
-    <div class="i-text"><q>Per aspera <em>ad astra</em></q><span class="mono">Through hardship, to the stars</span></div>
-  </div></div>
-  <div class="i-half r"><div class="i-in">
-    <svg class="i-rings" viewBox="0 0 600 600" aria-hidden="true"><circle cx="300" cy="300" r="120"/><circle cx="300" cy="300" r="190"/><circle cx="300" cy="300" r="260"/><circle cx="300" cy="300" r="295"/></svg>
-    <div class="i-text"><q>Per aspera <em>ad astra</em></q><span class="mono">Through hardship, to the stars</span></div>
-  </div></div>
+  <svg id="intro-svg" preserveAspectRatio="none">
+    <defs><mask id="spmask" maskUnits="userSpaceOnUse"><rect id="sp-rect" fill="#fff"/><path id="sp-hole"/></mask></defs>
+    <g mask="url(#spmask)">
+      <rect id="sp-bg" fill="#150f2b"/>
+      <path id="sp-line"/>
+      <text id="i-q" class="i-q" text-anchor="middle"><tspan>Per aspera </tspan><tspan class="em">ad astra</tspan></text>
+      <text id="i-sub" class="i-sub" text-anchor="middle">Through hardship, to the stars</text>
+    </g>
+  </svg>
   <span class="i-skip mono">Click to enter</span>
 </div>
 
@@ -356,11 +400,11 @@ body.intro-lock{overflow:hidden}
     </div>
     <h1><span>Khanak</span><span><em>Shah</em></span></h1>
     <div class="hero-lower">
-      <p class="hero-lede">CS + Bioinformatics student at <b>VIT Vellore</b>. Associate SDE Intern at <b>Gartner</b>, building AI systems that solve real problems, and automating the cloud plumbing underneath. Two patents, open source contributor.</p>
+      <p class="hero-lede">CS + Bioinformatics student at <b>VIT Vellore</b>. Associate SDE Intern at <b>Gartner</b>, building AI systems that solve real problems, and automating the cloud plumbing underneath. Three patents, open source contributor.</p>
       <div>
         <div class="stats">
           <div class="stat"><div class="stat-n">9.46</div><div class="stat-l mono">CGPA · VIT Vellore</div></div>
-          <div class="stat"><div class="stat-n">2</div><div class="stat-l mono">Patents filed</div></div>
+          <div class="stat"><div class="stat-n">3</div><div class="stat-l mono">Patents filed</div></div>
           <div class="stat"><div class="stat-n">#1</div><div class="stat-l mono">Branch rank ’23–24</div></div>
           <div class="stat"><div class="stat-n">5</div><div class="stat-l mono">Impact projects</div></div>
         </div>
@@ -421,6 +465,7 @@ body.intro-lock{overflow:hidden}
             <li>Automated the AWS Lambda runtime upgrade pipeline using AWS Transform, reducing manual effort, migration time, and operational costs by <b>70–80%</b>; identified 171 inactive AWS Lambda functions, contributing to the cleanup of 123 to improve cloud scalability and reduce infrastructure costs.</li>
             <li>Built an App Configuration Validator to detect invalid endpoints during the PR stage, reducing troubleshooting time by <b>75–85%</b>, from 2+ hours to just 10–15 minutes and preventing deployment failures; automated the deployment of an AI-powered Conference Assistant using AWS services and supported API Gateway version migration and release.</li>
           </ul>
+          <div class="gal" id="gartner-gal" hidden></div>
         </div>
       </article>
       <article class="row">
@@ -513,6 +558,7 @@ body.intro-lock{overflow:hidden}
       <div class="ch-no">Chapter IV</div>
       <h2><em>Recognition</em></h2>
       <div class="rows">
+        <article class="row"><div class="row-date">Sept 2026</div><div><h3>Winner — Best PCM Project, Engineerings Day ’26</h3><div class="row-meta mono">Vellore Institute of Technology</div></div></article>
         <article class="row"><div class="row-date">2025</div><div><h3>1st Prize — InnovAct-2025 Hackathon</h3><div class="row-meta mono">Vellore Institute of Technology</div></div></article>
         <article class="row"><div class="row-date">2024</div><div><h3>Merit Scholarship — 1st Rank</h3><div class="row-meta mono">Academic Year 2023–24</div></div></article>
         <article class="row"><div class="row-date">2025</div><div><h3>Merit Scholarship — 2nd Rank</h3><div class="row-meta mono">Academic Year 2024–25</div></div></article>
@@ -525,6 +571,7 @@ body.intro-lock{overflow:hidden}
       <div class="rows">
         <article class="row"><div class="row-date">March 2026</div><div><h3>System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</h3><div class="row-meta mono">Application No. 202641018176 · Published</div></div></article>
         <article class="row"><div class="row-date">April 2026</div><div><h3>A System and Method for Machine Learning-Based FTIR Spectral Denoising</h3><div class="row-meta mono">Application No. 202641053864 · Published</div></div></article>
+        <article class="row"><div class="row-date">2026</div><div><h3>Method for Resolution-Adaptive Spatial-Semantic Attention Conditioning in Diffusion Image Generation</h3><div class="row-meta mono">Application No. 202641123781 · Published</div></div></article>
       </div>
     </div>
   </div>
@@ -541,10 +588,48 @@ body.intro-lock{overflow:hidden}
           <div>
             <h3>Indian Society for Technology Education (ISTE) — VIT Student Chapter</h3>
             <div class="row-role">Executive Secretary &amp; Machine Learning Lead</div>
-            <ul>
-              <li>Maintained chapter records, coordinated with Student Welfare, and supported initiatives organizing numerous workshops and hackathons.</li>
-              <li>Conducted ML sessions for juniors, mentoring across full project cycles.</li>
-            </ul>
+            <div class="desk" id="desk">
+              <svg class="desk-svg" viewBox="0 98 520 212" role="group" aria-label="Interactive desk">
+        <defs>
+          <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eaa23f" stop-opacity="0.34"/><stop offset="1" stop-color="#eaa23f" stop-opacity="0"/></linearGradient>
+        </defs>
+        <polygon class="beam" points="98,134 136,148 300,226 70,226" fill="url(#beam)"/>
+        <rect class="d-top" x="14" y="226" width="492" height="12" rx="2"/>
+        <line class="d-leg" x1="48" y1="238" x2="48" y2="304"/><line class="d-leg" x1="472" y1="238" x2="472" y2="304"/>
+        <line class="d-leg" x1="48" y1="274" x2="472" y2="274" opacity="0.35"/>
+        <g class="d-obj" id="d-lamp" tabindex="0" role="button" aria-label="Desk lamp: toggle the light" data-note="lamp">
+          <ellipse cx="68" cy="222" rx="30" ry="6"/><polyline points="68,216 68,168 116,122" fill="none"/>
+          <polygon points="100,112 144,128 130,156 88,138"/><circle class="bulb" cx="118" cy="146" r="4"/>
+          <rect class="hit" x="30" y="100" width="130" height="130"/>
+        </g>
+        <g class="d-obj" data-note="records" tabindex="0" role="button" aria-label="Clipboard: chapter records">
+          <rect x="172" y="164" width="50" height="58" rx="3"/><rect x="188" y="157" width="18" height="11" rx="2"/>
+          <line x1="181" y1="182" x2="213" y2="182"/><line x1="181" y1="192" x2="213" y2="192"/><line x1="181" y1="202" x2="203" y2="202"/>
+          <rect class="hit" x="168" y="152" width="58" height="72"/>
+        </g>
+        <g class="d-obj" data-note="welfare" tabindex="0" role="button" aria-label="Mug: Student Welfare">
+          <rect x="242" y="196" width="30" height="26" rx="4"/><path d="M272 202 q12 0 12 9 q0 9 -12 9" fill="none"/>
+          <path d="M257 216 l-5 -5 a3.5 3.5 0 0 1 5 -5 a3.5 3.5 0 0 1 5 5 z" class="heart"/>
+          <path class="steam s1" d="M250 190 q-5 -8 0 -14 q5 -6 0 -12" fill="none"/><path class="steam s2" d="M262 190 q-5 -8 0 -14 q5 -6 0 -12" fill="none"/>
+          <rect class="hit" x="236" y="156" width="58" height="68"/>
+        </g>
+        <g class="d-obj" data-note="laptop" tabindex="0" role="button" aria-label="Laptop: ML sessions for juniors">
+          <rect x="304" y="144" width="104" height="68" rx="4"/>
+          <path d="M296 214 L416 214 L408 224 L304 224 Z"/>
+          <g class="net" fill="none"><line x1="326" y1="168" x2="356" y2="158"/><line x1="326" y1="168" x2="356" y2="184"/><line x1="356" y1="158" x2="386" y2="170"/><line x1="356" y1="184" x2="386" y2="170"/><line x1="356" y1="158" x2="356" y2="184"/>
+            <circle cx="326" cy="168" r="4"/><circle cx="356" cy="158" r="4"/><circle cx="356" cy="184" r="4"/><circle cx="386" cy="170" r="4"/></g>
+          <rect class="hit" x="292" y="138" width="130" height="90"/>
+        </g>
+        <g class="d-obj" data-note="events" tabindex="0" role="button" aria-label="Calendar: workshops and hackathons">
+          <rect x="434" y="152" width="58" height="70" rx="3"/><rect x="434" y="152" width="58" height="16" rx="3" class="cal-h"/>
+          <line x1="446" y1="147" x2="446" y2="157"/><line x1="480" y1="147" x2="480" y2="157"/>
+          <g class="dots"><circle cx="447" cy="180" r="2"/><circle cx="463" cy="180" r="2"/><circle cx="479" cy="180" r="2"/><circle cx="447" cy="194" r="2"/><circle cx="463" cy="194" r="2" class="mark"/><circle cx="479" cy="194" r="2"/><circle cx="447" cy="208" r="2"/><circle cx="463" cy="208" r="2"/></g>
+          <rect class="hit" x="428" y="142" width="70" height="84"/>
+        </g>
+      </svg>
+              <div class="desk-note" aria-live="polite"><span class="mono" id="dn-k"></span><p id="dn-t"></p></div>
+              <div class="mono desk-hint">Tap an object on the desk · tap the lamp for light</div>
+            </div>
           </div>
         </article>
       </div>
@@ -553,9 +638,9 @@ body.intro-lock{overflow:hidden}
       <div class="ch-no">Chapter VII</div>
       <h2><em>Certifications</em></h2>
       <div class="certs">
-        <div class="cert"><h3>Gen AI Using IBM Watsonx</h3><div class="mono">IBM · Jun 2025</div></div>
-        <div class="cert"><h3>Java</h3><div class="mono">Udemy · Jun 2024</div></div>
-        <div class="cert"><h3>C &amp; C++ (Beginner to Advanced)</h3><div class="mono">Udemy · May 2023</div></div>
+        <div class="cert" style="--rot:-1.4deg"><small class="mono">Certificate</small><h3>Gen AI Using IBM Watsonx</h3><div class="mono">IBM · Jun 2025</div><svg class="seal" viewBox="0 0 64 80" aria-hidden="true"><use href="#seal"/></svg></div>
+        <div class="cert" style="--rot:1deg"><small class="mono">Certificate</small><h3>Java</h3><div class="mono">Udemy · Jun 2024</div><svg class="seal" viewBox="0 0 64 80" aria-hidden="true"><use href="#seal"/></svg></div>
+        <div class="cert" style="--rot:-0.6deg"><small class="mono">Certificate</small><h3>C &amp; C++ (Beginner to Advanced)</h3><div class="mono">Udemy · May 2023</div><svg class="seal" viewBox="0 0 64 80" aria-hidden="true"><use href="#seal"/></svg></div>
       </div>
     </div>
   </div>
@@ -577,24 +662,91 @@ body.intro-lock{overflow:hidden}
 </section>
 
 <script>
-// intro: quote splits open
+// intro: the quote unwinds along its spiral
 (function(){
   const el=document.getElementById("intro");if(!el)return;
-  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if(reduced){el.remove();return;}
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches){el.remove();return;}
+  const W=innerWidth,H=innerHeight,cx=W/2,cy=H/2;
+  const svg=document.getElementById("intro-svg");
+  svg.setAttribute("viewBox","0 0 "+W+" "+H);
+  ["sp-rect","sp-bg"].forEach(id=>{const r=document.getElementById(id);r.setAttribute("width",W);r.setAttribute("height",H);});
+  const mask=document.getElementById("spmask");mask.setAttribute("x",0);mask.setAttribute("y",0);mask.setAttribute("width",W);mask.setAttribute("height",H);
+  // one spiral, used for both the drawn line and the reveal
+  const R=Math.hypot(W,H)/2+60,N=5,b=R/(2*Math.PI*N);let d="";
+  for(let t=0;t<=2*Math.PI*N+0.05;t+=0.05){const r=b*t,x=cx+r*Math.cos(t-1.5708),y=cy+r*Math.sin(t-1.5708);d+=(t?"L":"M")+x.toFixed(1)+" "+y.toFixed(1);}
+  const line=document.getElementById("sp-line"),hole=document.getElementById("sp-hole");
+  line.setAttribute("d",d);hole.setAttribute("d",d);
+  hole.style.strokeWidth=(2*Math.PI*b*1.08)+"px";
+  const L=line.getTotalLength();
+  [line,hole].forEach(p=>{p.style.strokeDasharray=L;p.style.strokeDashoffset=L;});
+  const q=document.getElementById("i-q"),sub=document.getElementById("i-sub");
+  const fs=Math.min(Math.max(W*0.085,42),118);
+  q.setAttribute("x",cx);q.setAttribute("y",cy);q.style.fontSize=fs+"px";
+  sub.setAttribute("x",cx);sub.setAttribute("y",cy+fs*0.7);sub.style.fontSize=Math.max(11,fs*0.12)+"px";
   document.body.classList.add("intro-lock");
   let opened=false;
   function open(){
     if(opened)return;opened=true;
-    el.classList.add("open");
-    setTimeout(()=>{el.classList.add("gone");document.body.classList.remove("intro-lock");},1250);
+    el.classList.add("open");hole.style.strokeDashoffset=0;
+    setTimeout(()=>{el.classList.add("gone");document.body.classList.remove("intro-lock");},2000);
   }
-  requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add("show")));
-  setTimeout(open,3300);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{el.classList.add("show");line.style.strokeDashoffset=0;}));
+  setTimeout(open,3600);
   el.addEventListener("click",open);
   addEventListener("keydown",open,{once:true});
   addEventListener("wheel",open,{once:true,passive:true});
   addEventListener("touchstart",open,{once:true,passive:true});
+})();
+
+// desk interactions
+(function(){
+  const desk=document.getElementById("desk");if(!desk)return;
+  const notes={
+    records:["Records","Maintained chapter records."],
+    welfare:["Student Welfare","Coordinated with Student Welfare."],
+    events:["Workshops & hackathons","Supported initiatives organizing numerous workshops and hackathons."],
+    laptop:["ML sessions","Conducted ML sessions for juniors, mentoring across full project cycles."],
+    lamp:["The lamp","Light on. Late-night chapter work, mostly."]
+  };
+  const objs=[...desk.querySelectorAll(".d-obj")],order=["records","welfare","events","laptop"];
+  const k=document.getElementById("dn-k"),t=document.getElementById("dn-t");
+  function show(key){
+    objs.forEach(o=>o.classList.toggle("on",o.dataset.note===key));
+    const n=notes[key];k.textContent=n[0];t.textContent=n[1];
+  }
+  let idx=0,timer,touched=false;
+  function auto(){if(touched||matchMedia("(prefers-reduced-motion: reduce)").matches)return;show(order[idx++%order.length]);}
+  show("records");idx=1;
+  const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){timer=setInterval(auto,4200);}else clearInterval(timer);},{threshold:0.4});
+  io.observe(desk);
+  objs.forEach(o=>{
+    const act=()=>{
+      touched=true;clearInterval(timer);
+      if(o.dataset.note==="lamp"){const on=desk.classList.toggle("lit");show("lamp");t.textContent=on?notes.lamp[1]:"Light off. Tap again to switch it on.";}
+      else show(o.dataset.note);
+    };
+    o.addEventListener("click",act);
+    o.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act();}});
+  });
+})();
+
+// Gartner photos: drop images/gartner-1.jpg, gartner-2.jpg … into the repo and they appear
+(function(){
+  const gal=document.getElementById("gartner-gal");if(!gal)return;
+  const exts=["jpg","jpeg","png","webp"];
+  function probe(base){return new Promise(res=>{let i=0;(function next(){if(i>=exts.length)return res(null);const src=base+"."+exts[i++],im=new Image();im.onload=()=>res(src);im.onerror=next;im.src=src;})();});}
+  (async function(){
+    const found=[];
+    for(let n=1;n<=12;n++){const src=await probe("images/gartner-"+n);if(!src)break;found.push(src);}
+    if(!found.length)return;
+    const rots=[-2.2,1.6,-1,2.4,-1.8,1.2];
+    found.forEach((src,i)=>{const f=document.createElement("figure"),im=document.createElement("img");im.src=src;im.alt="Gartner internship photo "+(i+1);im.loading="lazy";f.style.setProperty("--r",rots[i%rots.length]+"deg");f.appendChild(im);gal.appendChild(f);});
+    gal.hidden=false;
+    const lb=document.getElementById("lb"),lbi=lb.querySelector("img");
+    gal.addEventListener("click",e=>{const im=e.target.closest("img");if(!im)return;lbi.src=im.src;lbi.alt=im.alt;lb.hidden=false;});
+    lb.addEventListener("click",()=>{lb.hidden=true;});
+    addEventListener("keydown",e=>{if(e.key==="Escape")lb.hidden=true;});
+  })();
 })();
 
 // copy email
