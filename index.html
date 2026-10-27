@@ -7,7 +7,7 @@
 <meta name="description" content="Khanak Shah — CS + Bioinformatics student at VIT Vellore. AI systems, DevOps automation, patents and open source."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IM+Fell+English:ital@1&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -19,7 +19,11 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   --star:#ece7da;         /* starlight */
   --star-60:rgba(236,231,218,0.62);
   --star-40:rgba(236,231,218,0.42);
-  --amber:#eaa23f;        /* the one accent */
+  --amber:#eaa23f;        /* accent: sun */
+  --lilac:#b9a7f0;        /* accent: nebula */
+  --lilac-bg:#d9cff7;     /* light lilac band */
+  --plum:#150f2b;         /* deep purple band */
+  --poem:"IM Fell English","Cormorant Garamond",Georgia,serif;
   --serif:"Instrument Serif",Georgia,serif;
   --sans:"Hanken Grotesk",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
@@ -30,6 +34,7 @@ body{background:var(--ink);color:var(--star);font-family:var(--sans);font-weight
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--amber);color:var(--ink)}
 :focus-visible{outline:1px solid var(--amber);outline-offset:4px}
+.poem{font-family:var(--poem);font-style:italic;font-weight:400;letter-spacing:0.005em}
 .mono{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--star-60)}
 .wrap{max-width:1240px;margin:0 auto;padding:0 var(--pad)}
 
@@ -74,7 +79,7 @@ nav a.on::before{content:"";position:absolute;left:-0.7rem;top:50%;width:4px;hei
 .hero-meta .amb{color:var(--amber)}
 h1{font-family:var(--serif);font-weight:400;font-size:clamp(4.6rem,16.5vw,15.5rem);line-height:0.84;letter-spacing:-0.025em;margin-left:-0.04em}
 h1 span{display:block}
-h1 em{color:var(--amber);padding-left:0.55em}
+h1 em{color:var(--lilac);padding-left:0.55em}
 .hero-lower{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:2rem 4rem;margin-top:3rem;align-items:end}
 .hero-lede{font-size:clamp(1.02rem,1.5vw,1.2rem);color:var(--star-60);max-width:30rem;line-height:1.65;font-weight:300}
 .hero-lede b{color:var(--star);font-weight:400}
@@ -95,11 +100,11 @@ h1 em{color:var(--amber);padding-left:0.55em}
 .tlink.main{color:var(--amber);border-color:var(--amber)}
 
 /* ── MARQUEE ── */
-.marquee{border-bottom:1px solid var(--line);overflow:hidden;padding:1.05rem 0}
+.marquee{background:var(--lilac-bg);overflow:hidden;padding:1.05rem 0}
 .m-track{display:flex;width:max-content;animation:slide 40s linear infinite}
 .marquee:hover .m-track{animation-play-state:paused}
-.m-track span{font-family:var(--mono);font-size:0.76rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--star-60);padding:0 1.4rem;white-space:nowrap}
-.m-track span::after{content:"✦";color:var(--amber);margin-left:2.8rem;font-size:0.6rem}
+.m-track span{font-family:var(--mono);font-size:0.76rem;letter-spacing:0.12em;text-transform:uppercase;color:#1b1433;padding:0 1.4rem;white-space:nowrap}
+.m-track span::after{content:"✦";color:#6a4ee0;margin-left:2.8rem;font-size:0.6rem}
 @keyframes slide{to{transform:translateX(-50%)}}
 
 /* ── CHAPTER LAYOUT ── */
@@ -109,13 +114,13 @@ section.ch{padding:clamp(4.5rem,9vw,8rem) 0;border-bottom:1px solid var(--line)}
 .ch-no{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem}
 .ch-no::after{content:"";width:2.2rem;height:1px;background:var(--amber)}
 h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,4.4vw,4rem);line-height:1;letter-spacing:-0.01em}
-h2 em{color:var(--amber)}
-.ch-note{margin-top:1rem;font-size:0.92rem;color:var(--star-40);max-width:16rem}
+h2 em{color:var(--lilac)}
+.ch-note{margin-top:1.1rem;font-family:var(--poem);font-style:italic;font-size:1.2rem;line-height:1.35;color:var(--star-60);max-width:17rem}
 @media (max-width:900px){.ch-grid{grid-template-columns:minmax(0,1fr)}.ch-side{position:static}}
 
 /* ── PREFACE ── */
 #about .big{font-family:var(--serif);font-size:clamp(1.9rem,4.2vw,3.5rem);line-height:1.12;letter-spacing:-0.01em}
-#about .big em{color:var(--amber)}
+#about .big em{color:var(--lilac)}
 
 /* ── TOOLBOX (orbits) ── */
 .orbit-row{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:0.6rem 2rem;padding:1.6rem 0;border-top:1px solid var(--line);transition:background .3s}
@@ -136,7 +141,7 @@ h2 em{color:var(--amber)}
 .row-date{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--star-40);padding-top:0.55rem}
 .row h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,2.4vw,2.1rem);line-height:1.12;letter-spacing:-0.005em;transition:color .25s}
 .row:hover h3{color:var(--amber)}
-.row-role{margin-top:0.4rem;color:var(--star-60);font-size:0.96rem}
+.row-role{margin-top:0.4rem;color:var(--star-60);font-family:var(--poem);font-style:italic;font-size:1.15rem}
 .row-meta{margin-top:0.5rem}
 .row ul{list-style:none;margin-top:1rem;display:grid;gap:0.7rem}
 .row li{position:relative;padding-left:1.4rem;color:var(--star-60);font-size:0.95rem;font-weight:300;line-height:1.7;max-width:46rem}
@@ -187,16 +192,52 @@ h2 em{color:var(--amber)}
 @media (max-width:800px){.certs{grid-template-columns:1fr}.cert{padding:1.3rem 0}.cert+.cert{padding-left:0;border-left:none;border-top:1px solid var(--line)}}
 
 /* ── CONTACT ── */
-#contact{padding:clamp(5rem,10vw,9rem) 0 2rem;position:relative;overflow:hidden}
+#contact{padding:clamp(4.5rem,9vw,8rem) 0 2rem;position:relative;overflow:hidden}
 #contact .mono.k{color:var(--amber)}
-.say{font-family:var(--serif);font-size:clamp(3rem,9.5vw,9rem);line-height:0.92;letter-spacing:-0.02em;margin:1.6rem 0 2.4rem}
+.say{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,5vw,4.3rem);line-height:1;letter-spacing:-0.015em;margin:1.4rem 0 2rem;max-width:20ch}
 .say em{color:var(--amber)}
 .mail{display:inline-block;font-family:var(--serif);font-size:clamp(1.5rem,3.4vw,2.8rem);border-bottom:1px solid var(--line-strong);padding-bottom:0.3rem;transition:color .25s,border-color .25s;word-break:break-all}
 .mail:hover{color:var(--amber);border-color:var(--amber)}
-.contact-sub{max-width:34rem;margin-top:1.5rem;color:var(--star-60);font-weight:300}
+.contact-sub{max-width:34rem;margin-top:1.6rem;font-family:var(--poem);font-style:italic;font-size:1.35rem;line-height:1.4;color:var(--star-60)}
 footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem 2rem}
 
+
+/* ── COLOUR BANDS (break the dark scroll with lilac + plum) ── */
+.band-lilac{background:var(--lilac-bg);--star:#17122b;--star-60:rgba(23,18,43,0.7);--star-40:rgba(23,18,43,0.5);--line:rgba(23,18,43,0.16);--line-strong:rgba(23,18,43,0.36);--amber:#5a3ed1;--lilac:#5a3ed1;border-color:transparent!important;color:var(--star)}
+.band-lilac ::selection{background:#17122b;color:var(--lilac-bg)}
+.band-plum{background:var(--plum)}
+.duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3rem clamp(2.5rem,6vw,6rem)}
+.duo h2{margin-bottom:2rem}
+.duo .row{grid-template-columns:minmax(0,1fr);padding:1.5rem 0}
+.duo .row-date{padding-top:0;margin-bottom:0.2rem}
+.duo .row h3{font-size:clamp(1.35rem,2vw,1.8rem)}
+.duo .certs{grid-template-columns:minmax(0,1fr)}
+.duo .cert{padding:1.3rem 0}
+.duo .cert+.cert{padding-left:0;border-left:none;border-top:1px solid var(--line)}
+@media (max-width:900px){.duo{grid-template-columns:minmax(0,1fr)}}
+.interlude{padding:clamp(4rem,9vw,8rem) 0;border-bottom:1px solid var(--line);text-align:center;position:relative;overflow:hidden}
+.interlude q{display:block;quotes:none;font-family:var(--poem);font-style:italic;font-size:clamp(2.4rem,7vw,6.2rem);line-height:1.02;color:var(--star);letter-spacing:-0.01em}
+.interlude q em{color:var(--lilac)}
+.interlude .mono{display:block;margin-top:1.6rem}
+.interlude svg{position:absolute;left:50%;top:50%;width:min(120vw,900px);transform:translate(-50%,-50%);opacity:0.5;pointer-events:none}
+.interlude svg circle{fill:none;stroke:var(--line);stroke-width:1}
+.interlude .wrap{position:relative}
+
+/* ── SOLAR SYSTEM (toolbox) ── */
+#skills{background:var(--plum);padding-bottom:clamp(3rem,6vw,5rem)}
+.solar-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.2rem 3rem;margin-bottom:2.2rem}
+.solar-head .ch-note{max-width:26rem;margin-top:0}
+#solar{display:block;width:100%;cursor:crosshair;touch-action:manipulation;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.solar-legend{display:flex;flex-wrap:wrap;gap:0.4rem 2rem;margin-top:1.4rem}
+.solar-legend button{background:none;border:none;border-bottom:1px solid transparent;color:var(--star-60);font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0;cursor:pointer;display:flex;align-items:center;gap:0.55rem;transition:color .2s,border-color .2s}
+.solar-legend button i{width:7px;height:7px;border-radius:50%;background:var(--c)}
+.solar-legend button:hover,.solar-legend button.on{color:var(--star);border-color:var(--c)}
+#solar-detail{margin-top:1.4rem;min-height:3.4rem;font-family:var(--poem);font-style:italic;font-size:clamp(1.1rem,2vw,1.45rem);line-height:1.5;color:var(--star-60);max-width:56rem}
+#solar-detail b{font-weight:400;color:var(--lilac)}
+
 /* ── REVEAL ── */
+.rv.l{transform:translateX(-34px)}.rv.r{transform:translateX(34px)}
+.rv.l.in,.rv.r.in{transform:none}
 .rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .9s var(--ease)}
 .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
@@ -274,32 +315,32 @@ footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid v
   <div class="wrap ch-grid">
     <div class="ch-side rv">
       <div class="ch-no">Preface</div>
-      <h2>A note</h2>
+      <h2 class="poem">A note</h2>
     </div>
     <p class="big rv">I enjoy <em>simplifying</em> the way things work &mdash; automating workflows and building impactful systems that make a meaningful difference.</p>
   </div>
 </section>
 
 <section class="ch" id="skills">
-  <div class="wrap ch-grid">
-    <div class="ch-side rv">
-      <div class="ch-no">Chapter I</div>
-      <h2>The <em>Toolbox</em></h2>
-      <p class="ch-note">Five orbits of capability, from the languages at the core to the observability layer at the edge.</p>
+  <div class="wrap">
+    <div class="solar-head rv">
+      <div>
+        <div class="ch-no">Chapter I</div>
+        <h2>The <em>Toolbox</em></h2>
+      </div>
+      <p class="ch-note">Five planets of capability. Choose one, and its skills fall into orbit.</p>
     </div>
-    <div class="rv">
-      <div class="orbit-row"><div class="orbit-name"><span class="mono">O.1</span><h3>Languages</h3></div><div class="orbit-skills"><span>Python</span><span>Java</span><span>C</span><span>C++</span><span>JavaScript</span><span>HTML/CSS</span><span>SQL</span><span>Dart</span><span>Groovy</span></div></div>
-      <div class="orbit-row"><div class="orbit-name"><span class="mono">O.2</span><h3>Frameworks</h3></div><div class="orbit-skills"><span>React.js</span><span>Bootstrap</span><span>FastAPI</span><span>Flask</span><span>Flutter</span><span>TensorFlow</span><span>PyTorch</span><span>Streamlit</span></div></div>
-      <div class="orbit-row"><div class="orbit-name"><span class="mono">O.3</span><h3>DevOps &amp; Cloud</h3></div><div class="orbit-skills"><span>AWS</span><span>Git</span><span>GitHub</span><span>Bitbucket</span><span>Vercel</span><span>Figma</span><span>Canva</span><span>Docker</span><span>Kubernetes</span><span>Jenkins</span><span>Postman</span></div></div>
-      <div class="orbit-row"><div class="orbit-name"><span class="mono">O.4</span><h3>Observability</h3></div><div class="orbit-skills"><span>Dynatrace</span><span>Splunk</span><span>Catchpoint</span></div></div>
-      <div class="orbit-row"><div class="orbit-name"><span class="mono">O.5</span><h3>ML &amp; Data Science</h3></div><div class="orbit-skills"><span>Neural Nets</span><span>Deep Learning</span><span>NLP</span><span>GenAI</span><span>Scikit-learn</span><span>NumPy</span><span>Pandas</span><span>Matplotlib</span><span>Seaborn</span><span>OpenCV</span><span>R</span><span>MATLAB</span></div></div>
-    </div>
+  </div>
+  <div class="wrap rv">
+    <canvas id="solar" aria-label="Interactive solar system of skills"></canvas>
+    <div class="solar-legend" id="solar-legend"></div>
+    <p id="solar-detail" aria-live="polite"></p>
   </div>
 </section>
 
 <section class="ch" id="experience">
   <div class="wrap ch-grid">
-    <div class="ch-side rv">
+    <div class="ch-side rv l">
       <div class="ch-no">Chapter II</div>
       <h2>Where I’ve <em>worked</em></h2>
     </div>
@@ -329,6 +370,14 @@ footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid v
     </div>
   </div>
 </section>
+
+<div class="interlude">
+  <svg viewBox="0 0 600 600" aria-hidden="true"><circle cx="300" cy="300" r="120"/><circle cx="300" cy="300" r="190"/><circle cx="300" cy="300" r="260"/><circle cx="300" cy="300" r="295"/></svg>
+  <div class="wrap rv">
+    <q>Per aspera <em>ad astra</em></q>
+    <span class="mono">Through hardship, to the stars</span>
+  </div>
+</div>
 
 <section class="ch" id="projects">
   <div class="wrap ch-grid">
@@ -399,74 +448,64 @@ footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid v
   </div>
 </section>
 
-<section class="ch" id="awards">
-  <div class="wrap ch-grid">
-    <div class="ch-side rv">
+<section class="ch band-lilac" id="awards">
+  <div class="wrap duo">
+    <div class="rv l">
       <div class="ch-no">Chapter IV</div>
       <h2><em>Recognition</em></h2>
+      <div class="rows">
+        <article class="row"><div class="row-date">2025</div><div><h3>1st Prize — InnovAct-2025 Hackathon</h3><div class="row-meta mono">Vellore Institute of Technology</div></div></article>
+        <article class="row"><div class="row-date">2024</div><div><h3>Merit Scholarship — 1st Rank</h3><div class="row-meta mono">Academic Year 2023–24</div></div></article>
+        <article class="row"><div class="row-date">2025</div><div><h3>Merit Scholarship — 2nd Rank</h3><div class="row-meta mono">Academic Year 2024–25</div></div></article>
+        <article class="row"><div class="row-date">2026</div><div><h3>Merit Scholarship — 3rd Rank</h3><div class="row-meta mono">Academic Year 2025–26</div></div></article>
+      </div>
     </div>
-    <div class="rows rv">
-      <article class="row"><div class="row-date">2025</div><div><h3>1st Prize — InnovAct-2025 Hackathon</h3><div class="row-meta mono">Vellore Institute of Technology</div></div></article>
-      <article class="row"><div class="row-date">2024</div><div><h3>Merit Scholarship — 1st Rank</h3><div class="row-meta mono">Academic Year 2023–24</div></div></article>
-      <article class="row"><div class="row-date">2025</div><div><h3>Merit Scholarship — 2nd Rank</h3><div class="row-meta mono">Academic Year 2024–25</div></div></article>
-      <article class="row"><div class="row-date">2026</div><div><h3>Merit Scholarship — 3rd Rank</h3><div class="row-meta mono">Academic Year 2025–26</div></div></article>
-    </div>
-  </div>
-</section>
-
-<section class="ch" id="patents">
-  <div class="wrap ch-grid">
-    <div class="ch-side rv">
+    <div class="rv r" id="patents">
       <div class="ch-no">Chapter V</div>
       <h2>Patents &amp; <em>publications</em></h2>
-    </div>
-    <div class="rows rv">
-      <article class="row"><div class="row-date">March 2026</div><div><h3>System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</h3><div class="row-meta mono">Application No. 202641018176 · Published</div></div></article>
-      <article class="row"><div class="row-date">April 2026</div><div><h3>A System and Method for Machine Learning-Based FTIR Spectral Denoising</h3><div class="row-meta mono">Application No. 202641053864 · Published</div></div></article>
+      <div class="rows">
+        <article class="row"><div class="row-date">March 2026</div><div><h3>System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</h3><div class="row-meta mono">Application No. 202641018176 · Published</div></div></article>
+        <article class="row"><div class="row-date">April 2026</div><div><h3>A System and Method for Machine Learning-Based FTIR Spectral Denoising</h3><div class="row-meta mono">Application No. 202641053864 · Published</div></div></article>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="ch" id="extra">
-  <div class="wrap ch-grid">
-    <div class="ch-side rv">
+  <div class="wrap duo">
+    <div class="rv l">
       <div class="ch-no">Chapter VI</div>
       <h2>Beyond the <em>desk</em></h2>
+      <div class="rows">
+        <article class="row">
+          <div class="row-date">Mar 2025 – Apr 2026</div>
+          <div>
+            <h3>Indian Society for Technology Education (ISTE) — VIT Student Chapter</h3>
+            <div class="row-role">Executive Secretary &amp; Machine Learning Lead</div>
+            <ul>
+              <li>Maintained chapter records, coordinated with Student Welfare, and supported initiatives organizing numerous workshops and hackathons.</li>
+              <li>Conducted ML sessions for juniors, mentoring across full project cycles.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
     </div>
-    <div class="rows rv">
-      <article class="row">
-        <div class="row-date">Mar 2025 – Apr 2026</div>
-        <div>
-          <h3>Indian Society for Technology Education (ISTE) — VIT Student Chapter</h3>
-          <div class="row-role">Executive Secretary &amp; Machine Learning Lead</div>
-          <ul>
-            <li>Maintained chapter records, coordinated with Student Welfare, and supported initiatives organizing numerous workshops and hackathons.</li>
-            <li>Conducted ML sessions for juniors, mentoring across full project cycles.</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="ch" id="certs">
-  <div class="wrap ch-grid">
-    <div class="ch-side rv">
+    <div class="rv r" id="certs">
       <div class="ch-no">Chapter VII</div>
       <h2><em>Certifications</em></h2>
-    </div>
-    <div class="certs rv">
-      <div class="cert"><h3>Gen AI Using IBM Watsonx</h3><div class="mono">IBM · Jun 2025</div></div>
-      <div class="cert"><h3>Java</h3><div class="mono">Udemy · Jun 2024</div></div>
-      <div class="cert"><h3>C &amp; C++ (Beginner to Advanced)</h3><div class="mono">Udemy · May 2023</div></div>
+      <div class="certs">
+        <div class="cert"><h3>Gen AI Using IBM Watsonx</h3><div class="mono">IBM · Jun 2025</div></div>
+        <div class="cert"><h3>Java</h3><div class="mono">Udemy · Jun 2024</div></div>
+        <div class="cert"><h3>C &amp; C++ (Beginner to Advanced)</h3><div class="mono">Udemy · May 2023</div></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="contact">
+<section id="contact" class="band-lilac">
   <div class="wrap">
     <div class="mono k rv">✦ Transmission open</div>
-    <h2 class="say rv">Houston, I’m <em>ready</em> when you are.</h2>
+    <h2 class="say poem rv">Houston, I’m <em>ready</em> when you are.</h2>
     <a class="mail rv" href="mailto:khanakshah2005@gmail.com">khanakshah2005@gmail.com</a>
     <p class="contact-sub rv">Internships, research collabs, open source, or just a hello — I’m always open to connecting.</p>
     <div class="hero-links rv">
@@ -523,6 +562,76 @@ footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid v
     stars.forEach(x=>x.classList.toggle("on",x===s));
     projs.forEach(p=>p.classList.toggle("on",p.dataset.i===i));
   }));
+})();
+
+// solar system skills
+(function(){
+  const cvs=document.getElementById("solar");if(!cvs)return;
+  const ctx=cvs.getContext("2d"),reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const PL=[
+    {name:"Languages",c:"185,167,240",r:22,sp:0.0006,skills:["Python","Java","C","C++","JavaScript","HTML/CSS","SQL","Dart","Groovy"]},
+    {name:"Frameworks",c:"236,160,196",r:17,sp:0.0007,skills:["React.js","Bootstrap","FastAPI","Flask","Flutter","TensorFlow","PyTorch","Streamlit"]},
+    {name:"DevOps & Cloud",c:"140,190,240",r:19,sp:0.0005,skills:["AWS","Git","GitHub","Bitbucket","Vercel","Figma","Canva","Docker","Kubernetes","Jenkins","Postman"]},
+    {name:"Observability",c:"234,162,63",r:13,sp:0.0009,skills:["Dynatrace","Splunk","Catchpoint"]},
+    {name:"ML & Data Science",c:"150,214,190",r:20,sp:0.0006,skills:["Neural Nets","Deep Learning","NLP","GenAI","Scikit-learn","NumPy","Pandas","Matplotlib","Seaborn","OpenCV","R","MATLAB"]}
+  ];
+  PL.forEach((p,i)=>{p.a=i/PL.length*6.283+0.6;p.m=p.skills.map((_,j)=>j/p.skills.length*6.283);p.ms=p.skills.map((_,j)=>(0.004+j*0.0004)*(j%2?-1:1));});
+  let W,H,CX,CY,SR,sel=-1,hov=-1,mx=-1,my=-1,t=0;
+  function resize(){
+    const d=Math.min(devicePixelRatio||1,2);W=cvs.parentElement.clientWidth;
+    H=Math.round(Math.max(Math.min(W*0.6,580),W<600?W*1.05:0));
+    cvs.style.height=H+"px";cvs.width=W*d;cvs.height=H*d;ctx.setTransform(d,0,0,d,0,0);
+    CX=W/2;CY=H/2;SR=Math.min(W,H)*0.075;
+    const min=SR+30,max=Math.min(CX,CY)-34,band=(max-min)/PL.length;
+    PL.forEach((p,i)=>p.o=min+band*(i+0.55));
+  }
+  const pos=p=>({x:CX+Math.cos(p.a)*p.o,y:CY+Math.sin(p.a)*p.o});
+  const detail=document.getElementById("solar-detail"),leg=document.getElementById("solar-legend");
+  function setSel(i){
+    sel=(sel===i)?-1:i;
+    [...leg.children].forEach((b,j)=>b.classList.toggle("on",j===sel));
+    detail.innerHTML=sel<0?"":"<b>"+PL[sel].name+"</b> — "+PL[sel].skills.join(", ")+".";
+  }
+  PL.forEach((p,i)=>{const b=document.createElement("button");b.style.setProperty("--c","rgb("+p.c+")");b.innerHTML="<i></i>"+p.name;b.addEventListener("click",()=>setSel(i));leg.appendChild(b);});
+  function hit(x,y,pad){let h=-1;PL.forEach((p,i)=>{const q=pos(p);if(Math.hypot(q.x-x,q.y-y)<p.r+pad)h=i;});return h;}
+  cvs.addEventListener("mousemove",e=>{const r=cvs.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;hov=hit(mx,my,6);});
+  cvs.addEventListener("mouseleave",()=>{hov=-1;});
+  cvs.addEventListener("click",e=>{const r=cvs.getBoundingClientRect(),h=hit(e.clientX-r.left,e.clientY-r.top,12);if(h>=0)setSel(h);else if(sel>=0)setSel(sel);});
+  const stars=Array.from({length:90},()=>({x:Math.random(),y:Math.random(),r:Math.random()*0.9+0.2,p:Math.random()*6.28}));
+  function frame(){
+    t++;ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{ctx.fillStyle="rgba(236,231,218,"+(0.2+0.3*Math.sin(t*0.02+s.p)).toFixed(2)+")";ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,6.283);ctx.fill();});
+    const paused=hov>=0||sel>=0;
+    if(!reduced){PL.forEach((p,i)=>{if(!paused)p.a+=p.sp;if(!paused||i===sel)p.m=p.m.map((a,j)=>a+p.ms[j]*(paused?0.4:1));});}
+    PL.forEach((p,i)=>{
+      ctx.beginPath();ctx.arc(CX,CY,p.o,0,6.283);
+      ctx.strokeStyle="rgba("+p.c+","+((sel<0||sel===i)?(hov===i?0.4:0.17):0.06)+")";ctx.lineWidth=1;ctx.setLineDash([3,7]);ctx.stroke();ctx.setLineDash([]);
+    });
+    if(sel>=0){
+      const p=PL[sel],q=pos(p),base=p.r+20;
+      ctx.beginPath();ctx.arc(q.x,q.y,base,0,6.283);ctx.strokeStyle="rgba("+p.c+",0.18)";ctx.setLineDash([2,5]);ctx.stroke();ctx.setLineDash([]);
+      p.skills.forEach((k,j)=>{
+        const rr=base+j*2.6,x=q.x+Math.cos(p.m[j])*rr,y=q.y+Math.sin(p.m[j])*rr;
+        ctx.beginPath();ctx.moveTo(q.x,q.y);ctx.lineTo(x,y);ctx.strokeStyle="rgba("+p.c+",0.16)";ctx.stroke();
+        ctx.beginPath();ctx.arc(x,y,4,0,6.283);ctx.fillStyle="rgba(11,14,23,1)";ctx.fill();ctx.strokeStyle="rgba("+p.c+",0.95)";ctx.stroke();
+        if(W>600){ctx.font="italic 13px 'IM Fell English',Georgia,serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="rgba("+p.c+",1)";ctx.fillText(k,x+Math.cos(p.m[j])*(14+k.length*2.4),y+Math.sin(p.m[j])*13);}
+      });
+    }
+    PL.forEach((p,i)=>{
+      const q=pos(p),on=hov===i||sel===i,dim=sel>=0&&sel!==i,r=p.r+(on?3:0);
+      ctx.beginPath();ctx.arc(q.x,q.y,r,0,6.283);
+      ctx.fillStyle="rgba("+p.c+","+(dim?0.12:on?0.9:0.7)+")";ctx.fill();
+      if(sel===i){ctx.save();ctx.translate(q.x,q.y);ctx.scale(1,0.32);ctx.beginPath();ctx.arc(0,0,r*1.8,0,6.283);ctx.strokeStyle="rgba("+p.c+",0.7)";ctx.lineWidth=2;ctx.stroke();ctx.restore();ctx.lineWidth=1;}
+      if(sel!==i&&(!dim||hov===i)){ctx.font="italic 15px 'IM Fell English',Georgia,serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="rgba(236,231,218,"+(dim?0.4:0.95)+")";ctx.fillText(p.name,q.x,q.y+r+16);}
+    });
+    const pu=1+0.02*Math.sin(t*0.04);
+    ctx.beginPath();ctx.arc(CX,CY,SR*pu,0,6.283);ctx.fillStyle="#eaa23f";ctx.fill();
+    ctx.font="400 "+Math.max(13,SR*0.52)+"px 'Instrument Serif',serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="#150f2b";
+    ctx.fillText("Khanak",CX,CY-SR*0.12);ctx.font="italic "+Math.max(11,SR*0.4)+"px 'Instrument Serif',serif";ctx.fillText("Shah",CX,CY+SR*0.26);
+    requestAnimationFrame(frame);
+  }
+  resize();addEventListener("resize",resize);
+  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>requestAnimationFrame(frame));
 })();
 
 // starfield: fine static dots, a few slow twinkles, pointer parallax
