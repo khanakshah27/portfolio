@@ -348,6 +348,23 @@ body.intro-lock{overflow:hidden}
 .w{opacity:0.16;transition:opacity .35s ease}
 .w.lit{opacity:1}
 
+
+/* ── ASTRONOMICAL STICKERS (lilac sections) ── */
+.band-lilac{position:relative;overflow:hidden}
+.band-lilac>.wrap{position:relative;z-index:1}
+.stickers{position:absolute;inset:0;z-index:0;pointer-events:none}
+.stk{display:inline-block;width:var(--w,90px);height:var(--w,90px);transform:rotate(var(--r,0deg));filter:drop-shadow(0 7px 7px rgba(23,18,43,0.28));transition:transform .45s var(--ease)}
+.stk svg{display:block;width:100%;height:100%;overflow:visible}
+.stickers .stk{position:absolute;pointer-events:auto;cursor:grab}
+.stickers .stk:hover{transform:rotate(calc(var(--r,0deg) + 9deg)) scale(1.12)}
+.stickers .stk.bob{animation:bob 6s ease-in-out infinite}
+.stickers .stk.bob:hover{animation-play-state:paused}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -9px}}
+.m-track .stk{--w:34px;vertical-align:middle;margin:-8px 1.6rem -8px 1.2rem;filter:drop-shadow(0 3px 3px rgba(23,18,43,0.25))}
+.m-track span::after{content:none!important}
+@media (max-width:900px){.stickers .stk.hide-s{display:none}.stickers .stk{--w:calc(var(--w0,90px) * 0.7)}}
+@media (prefers-reduced-motion:reduce){.stickers .stk.bob{animation:none}}
+
 /* ── REVEAL ── */
 .rv.l{transform:translateX(-34px)}.rv.r{transform:translateX(34px)}
 .rv.l.in,.rv.r.in{transform:none}
@@ -569,6 +586,14 @@ body.intro-lock{overflow:hidden}
 </section>
 
 <section class="ch band-lilac" id="awards">
+  <div class="stickers" aria-hidden="true">
+    <span class="stk bob" data-s="saturn" style="--w:120px;--w0:120px;--r:14deg;right:2.5%;top:2.2rem"></span>
+    <span class="stk" data-s="moon" style="--w:84px;--w0:84px;--r:-16deg;left:1.5%;top:1.4rem"></span>
+    <span class="stk hide-s" data-s="sparkle" style="--w:58px;--w0:58px;--r:10deg;left:47%;top:5.2rem"></span>
+    <span class="stk bob" data-s="rocket" style="--w:138px;--w0:138px;--r:24deg;right:9%;bottom:3.2rem"></span>
+    <span class="stk hide-s" data-s="comet" style="--w:110px;--w0:110px;--r:-8deg;right:34%;bottom:2.4rem"></span>
+    <span class="stk hide-s" data-s="planet" style="--w:76px;--w0:76px;--r:-12deg;left:2%;bottom:2.6rem"></span>
+  </div>
   <div class="wrap duo">
     <div class="rv l">
       <div class="ch-no">Chapter IV</div>
@@ -663,6 +688,14 @@ body.intro-lock{overflow:hidden}
 </section>
 
 <section id="contact" class="band-lilac">
+  <div class="stickers" aria-hidden="true">
+    <span class="stk bob" data-s="helmet" style="--w:170px;--w0:170px;--r:-9deg;right:9%;top:24%"></span>
+    <span class="stk" data-s="moon" style="--w:100px;--w0:100px;--r:18deg;right:30%;top:8%"></span>
+    <span class="stk hide-s" data-s="sparkle" style="--w:64px;--w0:64px;--r:-6deg;right:3%;top:58%"></span>
+    <span class="stk bob" data-s="planet" style="--w:96px;--w0:96px;--r:12deg;right:27%;bottom:20%"></span>
+    <span class="stk hide-s" data-s="comet" style="--w:128px;--w0:128px;--r:-14deg;right:6%;bottom:11%"></span>
+    <span class="stk" data-s="saturn" style="--w:110px;--w0:110px;--r:-18deg;left:3%;top:4%"></span>
+  </div>
   <div class="wrap">
     <div class="mono k rv">✦ Transmission open</div>
     <h2 class="say poem rv">Houston, I’m <em>ready</em> when you are.</h2>
@@ -824,11 +857,36 @@ body.intro-lock{overflow:hidden}
   });
 })();
 
+// stickers: flat art with a white die-cut border, built from one shape list
+(function(){
+  const E=(tag,a,fill,stroke,sw)=>({tag,a,fill,stroke,sw});
+  const ART={
+    saturn:[E("circle",{cx:50,cy:50,r:22},"#eaa23f"),E("circle",{cx:43,cy:43,r:5},"#f7cd85"),E("ellipse",{cx:50,cy:52,rx:42,ry:12,transform:"rotate(-22 50 52)"},"none","#5a3ed1",6)],
+    moon:[E("path",{d:"M64 10a42 42 0 1 0 24 58a33 33 0 0 1-24-58z"},"#f3d77e"),E("circle",{cx:38,cy:56,r:5},"#e2c25f"),E("circle",{cx:52,cy:74,r:3.5},"#e2c25f"),E("path",{d:"M78 22l2.4 6 6 2.4-6 2.4-2.4 6-2.4-6-6-2.4 6-2.4z"},"#5a3ed1")],
+    rocket:[E("path",{d:"M34 54L16 80l18-6z"},"#eaa23f"),E("path",{d:"M66 54l18 26-18-6z"},"#eaa23f"),E("path",{d:"M42 70L50 94 58 70z"},"#e85d4a"),E("path",{d:"M50 6C68 22 72 46 67 72H33C28 46 32 22 50 6z"},"#7b5cf0"),E("circle",{cx:50,cy:42,r:9},"#cfe9ff","#17122b",3.5)],
+    comet:[E("path",{d:"M66 40Q34 58 6 92Q42 80 80 50z"},"#7b5cf0"),E("path",{d:"M60 50Q38 64 22 84Q46 76 70 54z"},"#a995f6"),E("circle",{cx:72,cy:36,r:17},"#eaa23f"),E("circle",{cx:67,cy:31,r:5},"#f7cd85")],
+    sparkle:[E("path",{d:"M50 4L60 40 96 50 60 60 50 96 40 60 4 50 40 40z"},"#eaa23f"),E("path",{d:"M50 28L54 46 72 50 54 54 50 72 46 54 28 50 46 46z"},"#fbe3b0")],
+    planet:[E("circle",{cx:50,cy:50,r:32},"#e58bb4"),E("circle",{cx:38,cy:40,r:7},"#cf6f9b"),E("circle",{cx:62,cy:60,r:9},"#cf6f9b"),E("circle",{cx:60,cy:34,r:4},"#cf6f9b"),E("path",{d:"M24 36a32 32 0 0 1 22-16",},"none","#f6c2da",4)],
+    helmet:[E("rect",{x:12,y:62,width:76,height:26,rx:10},"#d7d0f2","#17122b",3.5),E("circle",{cx:50,cy:46,r:34},"#ece8fb","#17122b",3.5),E("rect",{x:24,y:30,width:52,height:34,rx:16},"#241a4d"),E("path",{d:"M32 42q6-8 16-8",},"none","#9fb8ff",3.5),E("circle",{cx:50,cy:76,r:4},"#eaa23f")]
+  };
+  function attrs(a){return Object.keys(a).map(k=>k+'="'+a[k]+'"').join(" ");}
+  window.stickerSVG=function(n){
+    const sh=ART[n];if(!sh)return"";
+    const out=sh.map(x=>"<"+x.tag+" "+attrs(x.a)+' fill="'+(x.fill==="none"?"none":"#fff")+'" stroke="#fff" stroke-width="'+((x.sw||0)+10)+'" stroke-linejoin="round" stroke-linecap="round"/>').join("");
+    const top=sh.map(x=>"<"+x.tag+" "+attrs(x.a)+' fill="'+x.fill+'"'+(x.stroke?' stroke="'+x.stroke+'" stroke-width="'+(x.sw||2)+'" stroke-linejoin="round" stroke-linecap="round"':"")+"/>").join("");
+    return '<svg viewBox="-6 -6 112 112" aria-hidden="true">'+out+top+"</svg>";
+  };
+  window.fillStickers=function(root){(root||document).querySelectorAll("[data-s]").forEach(el=>{if(!el.firstChild)el.innerHTML=stickerSVG(el.dataset.s);});};
+})();
+
 // tools marquee
 (function(){
   const items=["Python","PyTorch","React.js","AWS","Docker","FastAPI","TensorFlow","GenAI","PostgreSQL","Figma"];
-  const html=items.map(t=>"<span>"+t+"</span>").join("");
-  document.getElementById("m-track").innerHTML=html+html;
+  const names=["saturn","sparkle","moon","rocket","planet","comet","helmet"];
+  const html=items.map((t,i)=>"<span>"+t+'</span><i class="stk" data-s="'+names[i%names.length]+'"></i>').join("");
+  const track=document.getElementById("m-track");
+  track.innerHTML=html+html;
+  fillStickers(document);
 })();
 
 // header + progress + active nav
