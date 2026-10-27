@@ -235,6 +235,32 @@ footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid v
 #solar-detail{margin-top:1.4rem;min-height:3.4rem;font-family:var(--poem);font-style:italic;font-size:clamp(1.1rem,2vw,1.45rem);line-height:1.5;color:var(--star-60);max-width:56rem}
 #solar-detail b{font-weight:400;color:var(--lilac)}
 
+
+/* ── FLOW: stacking experience cards, pinned scroll-through work, scrubbed preface ── */
+#experience .rows{border-top:none;display:block}
+#experience .row{position:sticky;top:6.5rem;background:var(--ink-2);border:1px solid var(--line-strong);padding:2rem 2rem 2.2rem;margin-bottom:3rem;box-shadow:0 -18px 40px -18px rgba(0,0,0,0.7)}
+#experience .row:nth-child(2){top:9rem;background:#14192a}
+#experience .row:last-child{margin-bottom:0}
+#experience .rows::after{content:"";display:block;height:34svh}
+#experience .row:hover h3{color:var(--lilac)}
+@media (max-width:700px){#experience .rows::after{display:none}#experience .row{position:static;padding:1.4rem 1.2rem;margin-bottom:1.5rem}}
+.w{opacity:0.16;transition:opacity .35s ease}
+.w.lit{opacity:1}
+.pin-hint{display:none}
+@media (min-width:901px){
+  #projects{padding:0}
+  .pin-track{height:calc(100svh + 4 * 68svh)}
+  .pin-stick{position:sticky;top:0;height:100svh;display:flex;align-items:center;padding-top:4.5rem}
+  .pin-stick .ch-grid{width:100%}
+  .pin-stick .ch-side{position:static}
+  .pin-stick .sky{height:clamp(200px,28svh,300px)}
+  .pin-stick .proj{padding-top:1.4rem}
+  .pin-hint{display:block;margin-top:1rem}
+  .pin-bar{height:1px;background:var(--line);margin-top:1.6rem;position:relative}
+  .pin-bar i{position:absolute;left:0;top:-1px;height:3px;width:0;background:var(--lilac)}
+}
+@media (max-width:900px){.pin-track,.pin-stick{height:auto}#projects{padding:clamp(4.5rem,9vw,8rem) 0}}
+
 /* ── REVEAL ── */
 .rv.l{transform:translateX(-34px)}.rv.r{transform:translateX(34px)}
 .rv.l.in,.rv.r.in{transform:none}
@@ -380,11 +406,14 @@ footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid v
 </div>
 
 <section class="ch" id="projects">
+ <div class="pin-track" id="pin-track"><div class="pin-stick">
   <div class="wrap ch-grid">
     <div class="ch-side rv">
       <div class="ch-no">Chapter III</div>
       <h2>Selected <em>work</em></h2>
-      <p class="ch-note">Five projects charted as a constellation. Pick a star.</p>
+      <p class="ch-note">Five projects charted as a constellation. Pick a star, or just keep scrolling.</p>
+      <div class="pin-hint mono" id="pin-count">01 / 05</div>
+      <div class="pin-bar pin-hint"><i id="pin-fill"></i></div>
     </div>
     <div class="rv">
       <div class="sky" id="sky">
@@ -446,6 +475,7 @@ footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid v
       </div>
     </div>
   </div>
+ </div></div>
 </section>
 
 <section class="ch band-lilac" id="awards">
@@ -507,7 +537,7 @@ footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid v
     <div class="mono k rv">✦ Transmission open</div>
     <h2 class="say poem rv">Houston, I’m <em>ready</em> when you are.</h2>
     <a class="mail rv" href="mailto:khanakshah2005@gmail.com">khanakshah2005@gmail.com</a>
-    <p class="contact-sub rv">Internships, research collabs, open source, or just a hello — I’m always open to connecting.</p>
+    <p class="contact-sub rv">Internships, freelance work, research collabs, open source, or just a hello — I’m always open to connecting.</p>
     <div class="hero-links rv">
       <a class="tlink main" href="mailto:khanakshah2005@gmail.com">Email</a>
       <a class="tlink" href="https://github.com/khanakshah27" target="_blank" rel="noopener">GitHub ↗</a>
@@ -554,14 +584,63 @@ footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid v
   els.forEach(e=>io.observe(e));
 })();
 
-// constellation selector
+// constellation selector + pinned scroll-through
 (function(){
-  const stars=document.querySelectorAll(".star"),projs=document.querySelectorAll(".proj");
-  stars.forEach(s=>s.addEventListener("click",()=>{
-    const i=s.dataset.i;
-    stars.forEach(x=>x.classList.toggle("on",x===s));
-    projs.forEach(p=>p.classList.toggle("on",p.dataset.i===i));
+  const stars=[...document.querySelectorAll(".star")],projs=[...document.querySelectorAll(".proj")];
+  const track=document.getElementById("pin-track"),count=document.getElementById("pin-count"),fill=document.getElementById("pin-fill");
+  const pinned=()=>matchMedia("(min-width:901px)").matches;
+  let cur=0;
+  function show(i){
+    if(i===cur&&stars[i].classList.contains("on"))return;
+    cur=i;
+    stars.forEach((x,j)=>x.classList.toggle("on",j===i));
+    projs.forEach((x,j)=>x.classList.toggle("on",j===i));
+    if(count)count.textContent="0"+(i+1)+" / 05";
+  }
+  const range=()=>track.offsetHeight-innerHeight;
+  stars.forEach((s,i)=>s.addEventListener("click",()=>{
+    if(pinned()){scrollTo({top:track.offsetTop+range()*(i+0.5)/5,behavior:"smooth"});}
+    show(i);
   }));
+  function onScroll(){
+    if(!pinned())return;
+    const p=Math.min(1,Math.max(0,(scrollY-track.offsetTop)/range()));
+    if(fill)fill.style.width=(p*100)+"%";
+    if(scrollY>=track.offsetTop-10&&scrollY<=track.offsetTop+track.offsetHeight)show(Math.min(4,Math.floor(p*5)));
+  }
+  addEventListener("scroll",onScroll,{passive:true});onScroll();
+})();
+
+// preface: words light up as you scroll
+(function(){
+  const el=document.querySelector("#about .big");if(!el)return;
+  const words=[];
+  (function walk(n){
+    [...n.childNodes].forEach(c=>{
+      if(c.nodeType===3){
+        const f=document.createDocumentFragment();
+        c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){f.appendChild(document.createTextNode(t));return;}const w=document.createElement("span");w.className="w";w.textContent=t;words.push(w);f.appendChild(w);});
+        c.replaceWith(f);
+      }else if(c.nodeType===1)walk(c);
+    });
+  })(el);
+  function upd(){
+    const r=el.getBoundingClientRect();
+    const p=Math.min(1,Math.max(0,(innerHeight*0.82-r.top)/(innerHeight*0.45)));
+    const n=Math.ceil(p*words.length);
+    words.forEach((w,i)=>w.classList.toggle("lit",i<n));
+  }
+  addEventListener("scroll",upd,{passive:true});upd();
+})();
+
+// hero orrery drifts and turns as you scroll away
+(function(){
+  const o=document.querySelector(".orrery svg"),h=document.getElementById("hero");if(!o)return;
+  addEventListener("scroll",()=>{
+    const y=Math.min(scrollY,innerHeight*1.2);
+    o.style.transform="rotate("+(y*0.06)+"deg) scale("+(1+y*0.0005)+")";
+    o.parentElement.style.opacity=Math.max(0,0.95-y/innerHeight*0.9);
+  },{passive:true});
 })();
 
 // solar system skills
