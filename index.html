@@ -323,14 +323,18 @@ body.intro-lock{overflow:hidden}
 .duo .cert .mono{color:rgba(29,24,48,0.62)}
 .duo .cert .seal{position:absolute;right:1.4rem;top:50%;width:46px;height:58px;transform:translateY(-50%)}
 
-/* ── GARTNER PHOTOS ── */
-.gal{display:flex;flex-wrap:wrap;gap:1rem 1.2rem;margin-top:1.6rem}
-.gal figure{width:clamp(130px,17vw,190px);background:#efe8d4;padding:7px 7px 22px;transform:rotate(var(--r,0deg));transition:transform .35s var(--ease);box-shadow:0 14px 24px -14px rgba(0,0,0,0.9);cursor:zoom-in}
-.gal figure:hover{transform:rotate(0) translateY(-5px) scale(1.04)}
-.gal img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
-#lb{position:fixed;inset:0;z-index:600;background:rgba(11,14,23,0.92);display:flex;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
-#lb[hidden]{display:none}
-#lb img{max-width:100%;max-height:100%;box-shadow:0 30px 80px rgba(0,0,0,0.7)}
+/* ── GARTNER PHOTOS: a pile of polaroids ── */
+.pile-wrap{margin-top:2rem}
+.pile{position:relative;width:min(100%,360px);aspect-ratio:1/0.9;margin-left:0.4rem}
+.pile figure{position:absolute;left:0;top:0;width:100%;background:#f1ecdc;padding:12px 12px 46px;margin:0;box-shadow:0 18px 30px -16px rgba(0,0,0,0.85);transform:translate(var(--tx,0),var(--ty,0)) rotate(var(--rot,0deg));z-index:var(--z,1);transition:transform .55s var(--ease),opacity .4s ease;user-select:none;-webkit-user-drag:none}
+.pile figure.top{cursor:pointer}
+.pile figure.top:hover{transform:translate(var(--tx,0),calc(var(--ty,0) - 5px)) rotate(calc(var(--rot,0deg) * 0.5))}
+.pile figure.fly{transform:translate(118%,-4%) rotate(14deg)!important;transition:transform .42s cubic-bezier(.5,0,.75,0)}
+.pile figure.hid{opacity:0;pointer-events:none}
+.pile img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#d8d2bf;pointer-events:none}
+.pile figcaption{position:absolute;left:14px;right:14px;bottom:11px;display:flex;justify-content:space-between;font-family:var(--poem);font-style:italic;font-size:1.05rem;color:#3a3350}
+.pile figcaption span:last-child{font-family:var(--mono);font-style:normal;font-size:0.62rem;letter-spacing:0.1em;padding-top:0.3rem;opacity:0.7}
+.pile-hint{margin-top:1.1rem;opacity:0.75}
 
 /* ── scrubbed preface ── */
 .w{opacity:0.16;transition:opacity .35s ease}
@@ -350,7 +354,6 @@ body.intro-lock{overflow:hidden}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="seal" viewBox="0 0 64 80"><path d="M20 44 L12 78 L26 70 L32 78 L34 46Z" fill="#b8741b"/><path d="M44 44 L52 78 L38 70 L32 78 L30 46Z" fill="#d68f2a"/><circle cx="32" cy="30" r="26" fill="#eaa23f"/><circle cx="32" cy="30" r="20" fill="none" stroke="#7a4a0c" stroke-width="1.2" stroke-dasharray="2 2.6"/><circle cx="32" cy="30" r="14" fill="none" stroke="#7a4a0c" stroke-width="1"/><path d="M32 19 l3.2 8 8.4 .7 -6.4 5.5 2 8.3 -7.2 -4.5 -7.2 4.5 2 -8.3 -6.4 -5.5 8.4 -.7z" fill="#7a4a0c"/></symbol></svg>
-<div id="lb" hidden><img alt="" /></div>
 <div id="progress"></div>
 <div id="intro" role="presentation" aria-hidden="true">
   <svg id="intro-svg">
@@ -470,7 +473,7 @@ body.intro-lock{overflow:hidden}
             <li>Automated the AWS Lambda runtime upgrade pipeline using AWS Transform, reducing manual effort, migration time, and operational costs by <b>70–80%</b>; identified 171 inactive AWS Lambda functions, contributing to the cleanup of 123 to improve cloud scalability and reduce infrastructure costs.</li>
             <li>Built an App Configuration Validator to detect invalid endpoints during the PR stage, reducing troubleshooting time by <b>75–85%</b>, from 2+ hours to just 10–15 minutes and preventing deployment failures; automated the deployment of an AI-powered Conference Assistant using AWS services and supported API Gateway version migration and release.</li>
           </ul>
-          <div class="gal" id="gartner-gal" hidden></div>
+          <div class="pile-wrap" id="gartner-gal" hidden><div class="pile" id="pile"></div><div class="mono pile-hint" id="pile-hint"></div></div>
         </div>
       </article>
       <article class="row">
@@ -742,22 +745,63 @@ body.intro-lock{overflow:hidden}
   });
 })();
 
-// Gartner photos: drop images/gartner-1.jpg, gartner-2.jpg … into the repo and they appear
+// Gartner photos: drop images/gartner-1.jpg, gartner-2.jpg … into the repo and they appear (HEIC works too)
 (function(){
-  const gal=document.getElementById("gartner-gal");if(!gal)return;
-  const exts=["jpg","jpeg","png","webp"];
-  function probe(base){return new Promise(res=>{let i=0;(function next(){if(i>=exts.length)return res(null);const src=base+"."+exts[i++],im=new Image();im.onload=()=>res(src);im.onerror=next;im.src=src;})();});}
+  const wrap=document.getElementById("gartner-gal");if(!wrap)return;
+  const pile=document.getElementById("pile"),hint=document.getElementById("pile-hint");
+  const exts=["jpg","jpeg","png","webp","JPG","JPEG","PNG","WEBP"];
+  function tryImg(src){return new Promise(res=>{const im=new Image();im.onload=()=>res(src);im.onerror=()=>res(null);im.src=src;});}
+  let heicLib;
+  function loadHeic(url){
+    return fetch(url,{method:"HEAD"}).then(r=>{if(!r.ok)throw 0;
+      heicLib=heicLib||new Promise((ok,no)=>{const sc=document.createElement("script");sc.src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js";sc.onload=()=>ok(window.heic2any);sc.onerror=no;document.head.appendChild(sc);});
+      return Promise.all([fetch(url).then(r=>r.blob()),heicLib]);
+    }).then(([blob,h2a])=>h2a({blob,toType:"image/jpeg",quality:0.82})).then(out=>URL.createObjectURL(Array.isArray(out)?out[0]:out)).catch(()=>null);
+  }
+  async function find(n){
+    const base="images/gartner-"+n;
+    for(const e of exts){const r=await tryImg(base+"."+e);if(r)return r;}
+    for(const e of ["heic","HEIC","heif","HEIF"]){const r=await loadHeic(base+"."+e);if(r)return r;}
+    return null;
+  }
+  const slots=[{rot:-1.5,tx:0,ty:0},{rot:3.2,tx:14,ty:-8},{rot:-4.5,tx:-12,ty:6}];
   (async function(){
-    const found=[];
-    for(let n=1;n<=12;n++){const src=await probe("images/gartner-"+n);if(!src)break;found.push(src);}
-    if(!found.length)return;
-    const rots=[-2.2,1.6,-1,2.4,-1.8,1.2];
-    found.forEach((src,i)=>{const f=document.createElement("figure"),im=document.createElement("img");im.src=src;im.alt="Gartner internship photo "+(i+1);im.loading="lazy";f.style.setProperty("--r",rots[i%rots.length]+"deg");f.appendChild(im);gal.appendChild(f);});
-    gal.hidden=false;
-    const lb=document.getElementById("lb"),lbi=lb.querySelector("img");
-    gal.addEventListener("click",e=>{const im=e.target.closest("img");if(!im)return;lbi.src=im.src;lbi.alt=im.alt;lb.hidden=false;});
-    lb.addEventListener("click",()=>{lb.hidden=true;});
-    addEventListener("keydown",e=>{if(e.key==="Escape")lb.hidden=true;});
+    const srcs=[];
+    for(let n=1;n<=12;n++){const r=await find(n);if(!r)break;srcs.push(r);}
+    if(!srcs.length)return;
+    const figs=srcs.map((src,i)=>{
+      const f=document.createElement("figure"),im=document.createElement("img"),c=document.createElement("figcaption");
+      im.src=src;im.alt="Gartner internship photo "+(i+1);im.draggable=false;
+      c.innerHTML="<span>Gartner ’26</span><span>"+String(i+1).padStart(2,"0")+" / "+String(srcs.length).padStart(2,"0")+"</span>";
+      f.appendChild(im);f.appendChild(c);pile.appendChild(f);return f;
+    });
+    let order=figs.slice(),busy=false;
+    function layout(){
+      order.forEach((f,k)=>{
+        const sl=slots[Math.min(k,slots.length-1)];
+        f.style.setProperty("--rot",sl.rot+"deg");f.style.setProperty("--tx",sl.tx+"px");f.style.setProperty("--ty",sl.ty+"px");
+        f.style.setProperty("--z",order.length-k);
+        f.classList.toggle("top",k===0);f.classList.toggle("hid",k>2);
+        f.tabIndex=k===0&&order.length>1?0:-1;
+        if(k===0){f.setAttribute("role","button");f.setAttribute("aria-label","Photo "+(figs.indexOf(f)+1)+" of "+figs.length+". Press for the next photo.");}
+        else{f.removeAttribute("role");f.removeAttribute("aria-label");}
+      });
+      hint.textContent=order.length>1?"Tap the photo for the next one":"";
+    }
+    layout();wrap.hidden=false;
+    if(order.length<2)return;
+    function next(){
+      if(busy)return;busy=true;
+      const top=order[0];top.classList.add("fly");
+      setTimeout(()=>{
+        order.push(order.shift());
+        top.classList.remove("fly");
+        layout();
+        setTimeout(()=>{busy=false;},520);
+      },420);
+    }
+    pile.addEventListener("click",e=>{if(e.target.closest("figure")===order[0])next();});
+    pile.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&document.activeElement===order[0]){e.preventDefault();next();}});
   })();
 })();
 
@@ -884,7 +928,7 @@ body.intro-lock{overflow:hidden}
   PL.forEach((p,i)=>{p.a=i/PL.length*6.283+0.6;p.m=p.skills.map((_,j)=>j/p.skills.length*6.283);p.ms=p.skills.map((_,j)=>(0.004+j*0.0004)*(j%2?-1:1));});
   let W,H,CX,CY,SR,sel=-1,hov=-1,mx=-1,my=-1,t=0;
   function resize(){
-    const d=Math.min(devicePixelRatio||1,2);W=cvs.parentElement.clientWidth;
+    const d=Math.min(devicePixelRatio||1,2);W=cvs.clientWidth||cvs.parentElement.clientWidth;
     H=Math.round(Math.max(Math.min(W*0.6,580),W<600?W*1.05:0));
     cvs.style.height=H+"px";cvs.width=W*d;cvs.height=H*d;ctx.setTransform(d,0,0,d,0,0);
     CX=W/2;CY=H/2;SR=Math.min(W,H)*0.075;
@@ -905,6 +949,7 @@ body.intro-lock{overflow:hidden}
   cvs.addEventListener("click",e=>{const r=cvs.getBoundingClientRect(),h=hit(e.clientX-r.left,e.clientY-r.top,12);if(h>=0)setSel(h);else if(sel>=0)setSel(sel);});
   const stars=Array.from({length:90},()=>({x:Math.random(),y:Math.random(),r:Math.random()*0.9+0.2,p:Math.random()*6.28}));
   function frame(){
+    if(cvs.clientWidth&&Math.abs(cvs.clientWidth-W)>1)resize();
     t++;ctx.clearRect(0,0,W,H);
     stars.forEach(s=>{ctx.fillStyle="rgba(236,231,218,"+(0.2+0.3*Math.sin(t*0.02+s.p)).toFixed(2)+")";ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,6.283);ctx.fill();});
     const paused=hov>=0||sel>=0;
