@@ -710,6 +710,57 @@ body.intro-lock{overflow:hidden}
   addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "||e.key==="Escape"){e.preventDefault();open();}});
 })();
 
+// desk interactions
+(function(){
+  const desk=document.getElementById("desk");if(!desk)return;
+  const notes={
+    records:["Records","Maintained chapter records."],
+    welfare:["Student Welfare","Coordinated with Student Welfare."],
+    events:["Workshops & hackathons","Supported initiatives organizing numerous workshops and hackathons."],
+    laptop:["ML sessions","Conducted ML sessions for juniors, mentoring across full project cycles."],
+    lamp:["The lamp","Light on. Late-night chapter work, mostly."]
+  };
+  const objs=[...desk.querySelectorAll(".d-obj")],order=["records","welfare","events","laptop"];
+  const k=document.getElementById("dn-k"),t=document.getElementById("dn-t");
+  function show(key){
+    objs.forEach(o=>o.classList.toggle("on",o.dataset.note===key));
+    const n=notes[key];k.textContent=n[0];t.textContent=n[1];
+  }
+  let idx=0,timer,touched=false;
+  function auto(){if(touched||matchMedia("(prefers-reduced-motion: reduce)").matches)return;show(order[idx++%order.length]);}
+  show("records");idx=1;
+  const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){timer=setInterval(auto,4200);}else clearInterval(timer);},{threshold:0.4});
+  io.observe(desk);
+  objs.forEach(o=>{
+    const act=()=>{
+      touched=true;clearInterval(timer);
+      if(o.dataset.note==="lamp"){const on=desk.classList.toggle("lit");show("lamp");t.textContent=on?notes.lamp[1]:"Light off. Tap again to switch it on.";}
+      else show(o.dataset.note);
+    };
+    o.addEventListener("click",act);
+    o.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act();}});
+  });
+})();
+
+// Gartner photos: drop images/gartner-1.jpg, gartner-2.jpg … into the repo and they appear
+(function(){
+  const gal=document.getElementById("gartner-gal");if(!gal)return;
+  const exts=["jpg","jpeg","png","webp"];
+  function probe(base){return new Promise(res=>{let i=0;(function next(){if(i>=exts.length)return res(null);const src=base+"."+exts[i++],im=new Image();im.onload=()=>res(src);im.onerror=next;im.src=src;})();});}
+  (async function(){
+    const found=[];
+    for(let n=1;n<=12;n++){const src=await probe("images/gartner-"+n);if(!src)break;found.push(src);}
+    if(!found.length)return;
+    const rots=[-2.2,1.6,-1,2.4,-1.8,1.2];
+    found.forEach((src,i)=>{const f=document.createElement("figure"),im=document.createElement("img");im.src=src;im.alt="Gartner internship photo "+(i+1);im.loading="lazy";f.style.setProperty("--r",rots[i%rots.length]+"deg");f.appendChild(im);gal.appendChild(f);});
+    gal.hidden=false;
+    const lb=document.getElementById("lb"),lbi=lb.querySelector("img");
+    gal.addEventListener("click",e=>{const im=e.target.closest("img");if(!im)return;lbi.src=im.src;lbi.alt=im.alt;lb.hidden=false;});
+    lb.addEventListener("click",()=>{lb.hidden=true;});
+    addEventListener("keydown",e=>{if(e.key==="Escape")lb.hidden=true;});
+  })();
+})();
+
 // copy email
 (function(){
   const b=document.getElementById("copy-mail");if(!b)return;
