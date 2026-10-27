@@ -4,1141 +4,551 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Khanak Shah</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<meta name="description" content="Khanak Shah — CS + Bioinformatics student at VIT Vellore. AI systems, DevOps automation, patents and open source."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 :root{
-  /* pastel, on-light tokens (default across the page) */
-  --rose-m:#b5657c;--sage-m:#2f8462;--sage-d:#256b4f;
-  --lav-m:#6355c7;--lav-d:#6355c7;
-  --butter-m:#96721a;--sky-m:#2f6fa8;--peach-m:#a8622a;
-  --bg:#f1eef8;--surface:rgba(255,255,255,0.72);--surface2:rgba(255,255,255,0.5);
-  --border:rgba(44,37,74,0.09);
-  --text:#221d38;--text-muted:#5b5674;--text-dim:#6a6584;--accent:#6355c7;
+  --ink:#0b0e17;          /* night sky */
+  --ink-2:#10141f;        /* raised panel */
+  --line:rgba(236,231,218,0.13);
+  --line-strong:rgba(236,231,218,0.28);
+  --star:#ece7da;         /* starlight */
+  --star-60:rgba(236,231,218,0.62);
+  --star-40:rgba(236,231,218,0.42);
+  --amber:#eaa23f;        /* the one accent */
+  --serif:"Instrument Serif",Georgia,serif;
+  --sans:"Hanken Grotesk",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --pad:clamp(1.25rem,4vw,3.5rem);
+  --ease:cubic-bezier(.16,1,.3,1);
 }
-body{font-family:"Outfit",sans-serif;background:radial-gradient(ellipse at 50% -8%,#ffffff 0%,#f1eef8 45%,#ddd7ec 100%) fixed;color:var(--text);min-height:100vh;overflow-x:hidden;cursor:none;}
+body{background:var(--ink);color:var(--star);font-family:var(--sans);font-weight:400;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--amber);color:var(--ink)}
+:focus-visible{outline:1px solid var(--amber);outline-offset:4px}
+.mono{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--star-60)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 var(--pad)}
 
-/* ── ambient astronomical outlines on the pastel backdrop ── */
-.bg-deco{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
-.bg-deco span{position:absolute;border-radius:50%;border:1.5px solid rgba(44,37,74,0.12);}
-.bg-deco .r1{width:380px;height:380px;top:-140px;left:-130px;}
-.bg-deco .r2{width:230px;height:230px;top:58%;right:-100px;border-style:dashed;border-color:rgba(44,37,74,0.14);}
-.bg-deco .r3{width:150px;height:150px;bottom:8%;left:4%;}
-.bg-deco .r4{width:64px;height:64px;top:20%;right:12%;border-color:rgba(44,37,74,0.18);}
-.bg-deco .r5{width:26px;height:26px;top:32%;left:18%;border-color:rgba(44,37,74,0.2);}
-.bg-deco .e1{width:280px;height:96px;top:42%;left:-90px;transform:rotate(-20deg);}
-.bg-deco .e2{width:150px;height:52px;bottom:16%;right:8%;transform:rotate(14deg);border-color:rgba(44,37,74,0.14);}
-@media (max-width:760px){.bg-deco{display:none;}}
+/* progress hairline */
+#progress{position:fixed;top:0;left:0;height:1px;width:0;background:var(--amber);z-index:300}
 
-/* ── SPACE WINDOW — full-bleed dark astronomical bands used for hero / skills / projects / contact ── */
-.space-window{
-  --rose-m:#d4a0a0;--sage-m:#9dc4b3;--sage-d:#3d7a62;
-  --lav-m:#b5a8e8;--lav-d:#6355c7;
-  --butter-m:#e0c87a;--sky-m:#90bfe8;--peach-m:#e0b87a;
-  --bg:#07050f;--surface:#110d22;--surface2:#1a1430;
-  --border:rgba(181,168,232,0.13);
-  --text:#f0eafa;--text-muted:#a090c8;--text-dim:#8878b8;--accent:#b5a8e8;
-  background:var(--bg);color:var(--text);position:relative;overflow:hidden;width:100%;
-}
-
-/* CURSOR */
-#cursor{position:fixed;width:9px;height:9px;background:#6355c7;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 0 3px rgba(255,255,255,0.85),0 0 10px 2px rgba(99,85,199,0.5);}
-#cursor-ring{position:fixed;width:32px;height:32px;border:1.5px solid rgba(99,85,199,0.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s;}
-.cursor-big #cursor-ring{width:52px;height:52px;opacity:0.35;}
-.trail-dot{position:fixed;border-radius:50%;pointer-events:none;z-index:9990;transform:translate(-50%,-50%);}
-
-/* NAV — hidden over the hero, arrives once you scroll past it */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;background:rgba(255,255,255,0.55);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transform:translateY(-100%);opacity:0;pointer-events:none;transition:transform 0.5s cubic-bezier(.22,1,.36,1),opacity 0.35s ease;}
-nav.visible{transform:translateY(0);opacity:1;pointer-events:auto;}
-.nav-logo{font-family:"Cormorant Garamond",serif;font-size:1.35rem;font-weight:700;letter-spacing:0.06em;color:var(--accent);cursor:none;display:flex;align-items:center;gap:0.5rem;}
-.nav-star{font-size:0.75rem;animation:navSpin 8s linear infinite;display:inline-block;}
-@keyframes navSpin{to{transform:rotate(360deg);}}
-.nav-links{display:flex;gap:2.2rem;}
-.nav-links a{font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;color:var(--text-muted);position:relative;transition:color 0.25s;cursor:none;}
-.nav-links a::after{content:"";position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width 0.3s ease;}
-.nav-links a:hover{color:var(--text);}
-.nav-links a:hover::after{width:100%;}
-.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:30px;height:30px;background:none;border:none;padding:0;cursor:none;}
-.nav-toggle span{display:block;width:100%;height:2px;background:var(--text);border-radius:2px;transition:transform 0.25s ease,opacity 0.2s ease;}
-.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.nav-toggle.open span:nth-child(2){opacity:0;}
-.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-@media (max-width:640px){
-  nav{padding:0 1.2rem;}
-  .nav-toggle{display:flex;}
-  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:rgba(255,255,255,0.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0.4rem 1.2rem 1rem;box-shadow:0 16px 30px -18px rgba(53,42,77,0.3);}
-  .nav-links.open{display:flex;}
-  .nav-links a{font-size:0.78rem;padding:0.8rem 0;width:100%;}
+/* ── HEADER ── */
+header{position:fixed;top:0;left:0;right:0;z-index:200;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(11,14,23,0.86);backdrop-filter:blur(10px);border-bottom-color:var(--line)}
+.head-in{max-width:1240px;margin:0 auto;padding:1.1rem var(--pad);display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
+.brand{font-family:var(--serif);font-size:1.4rem;line-height:1;letter-spacing:0.01em}
+.brand i{color:var(--amber)}
+nav{display:flex;gap:1.9rem}
+nav a{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--star-60);transition:color .2s;position:relative;padding:0.2rem 0}
+nav a:hover,nav a.on{color:var(--star)}
+nav a.on::before{content:"";position:absolute;left:-0.7rem;top:50%;width:4px;height:4px;border-radius:50%;background:var(--amber);transform:translateY(-50%)}
+.menu-btn{display:none;background:none;border:1px solid var(--line-strong);color:var(--star);font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.4rem 0.8rem;cursor:pointer}
+@media (max-width:760px){
+  .menu-btn{display:block}
+  nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--ink);border-bottom:1px solid var(--line);padding:0.5rem var(--pad) 1rem}
+  nav.open{display:flex}
+  nav a{padding:0.85rem 0;border-bottom:1px solid var(--line)}
+  nav a.on::before{display:none}
 }
 
-/* ── FLOATING BACK-TO-TOP — persistent pinned marker, arrives with the nav ── */
-#back-to-top{position:fixed;right:1.5rem;bottom:1.5rem;z-index:150;width:44px;height:44px;border-radius:12px;background:var(--lav-d);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.1rem;box-shadow:0 12px 26px -12px rgba(99,85,199,0.55);opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity 0.3s ease,transform 0.3s ease,box-shadow 0.2s ease;cursor:none;}
-#back-to-top.visible{opacity:1;transform:translateY(0);pointer-events:auto;}
-#back-to-top:hover{box-shadow:0 16px 32px -12px rgba(99,85,199,0.7);transform:translateY(-3px);}
-@media (max-width:640px){#back-to-top{right:1rem;bottom:1rem;width:40px;height:40px;}}
-
-/* ── generic marquee mechanics (tools slider) ── */
-.marquee-outer{position:relative;overflow:hidden;width:100%;}
-.marquee-track{display:flex;width:max-content;will-change:transform;}
-.marquee-seg{display:flex;align-items:center;flex-shrink:0;}
-@keyframes marqueeScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-@media (prefers-reduced-motion:reduce){.marquee-track{animation:none!important;}}
-
-/* HERO — full-bleed, edge to edge */
-#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:7.5rem 0 3.5rem;}
-.hero-card canvas{position:absolute;inset:0;pointer-events:none;}
-.hero-aurora{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 50% at 50% 40%,rgba(99,85,199,0.18) 0%,transparent 65%),radial-gradient(ellipse 40% 30% at 20% 70%,rgba(61,122,98,0.10) 0%,transparent 60%),radial-gradient(ellipse 30% 20% at 80% 60%,rgba(212,160,160,0.08) 0%,transparent 55%);animation:auroraShift 12s ease-in-out infinite alternate;}
-@keyframes auroraShift{0%{transform:scale(1) translateY(0);}100%{transform:scale(1.06) translateY(-20px);}}
-.hero-deco{position:absolute;inset:0;pointer-events:none;z-index:1;}
-.deco-planet{position:absolute;border-radius:50%;}
-.deco-sun{width:64px;height:64px;top:12%;right:9%;background:radial-gradient(circle at 35% 30%,#ffe6ad,#f0a94e 65%,#c97a2e 100%);box-shadow:0 0 40px rgba(240,169,78,0.4);animation:planetFloat 7s ease-in-out infinite reverse;}
-.deco-small{width:50px;height:50px;bottom:10%;right:16%;background:radial-gradient(circle at 35% 30%,#ffd0c2,#e8836f 60%,#b85847 100%);box-shadow:0 0 28px rgba(232,131,111,0.35);animation:planetFloat 8s ease-in-out infinite;}
-@keyframes planetFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
-@media (max-width:760px){.hero-deco{display:none;}}
-
-.hero-wrap{max-width:1000px;width:100%;position:relative;z-index:2;margin:0 auto;padding:0 2.5rem;}
-.hero-kicker{font-size:0.68rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--lav-m);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem;}
-.hero-kicker::before{content:"";width:28px;height:1px;background:var(--lav-m);}
-.hero-name{font-family:"Playfair Display",serif;display:flex;flex-wrap:wrap;align-items:baseline;gap:0.28em;font-size:clamp(2.6rem,7vw,5.6rem);font-weight:900;line-height:1;letter-spacing:-0.015em;margin-bottom:1.5rem;transform-style:preserve-3d;}
-.hero-name .line1{color:var(--text);will-change:transform;transition:transform 0.05s ease-out;}
-.hero-name .line2{color:transparent;-webkit-text-stroke:1.5px var(--lav-m);font-style:italic;will-change:transform;transition:transform 0.05s ease-out;}
-.hero-typewriter{font-size:1.05rem;font-weight:300;color:var(--text-muted);margin-bottom:2.5rem;line-height:1.7;min-height:2.8em;}
-.cursor-blink{display:inline-block;width:2px;height:1em;background:var(--accent);vertical-align:middle;animation:blink 1s step-end infinite;}
-@keyframes blink{50%{opacity:0;}}
-.hero-stats{display:flex;gap:2.5rem;flex-wrap:wrap;margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border);}
-.hero-stat{position:relative;display:flex;flex-direction:column;}
-.orbit-ring{position:absolute;top:50%;left:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border:1px solid rgba(181,168,232,0.15);border-radius:50%;animation:orbitSpin 6s linear infinite;pointer-events:none;}
-.orbit-ring::before{content:"";position:absolute;top:-2px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--lav-m);box-shadow:0 0 6px var(--lav-m);}
-@keyframes orbitSpin{to{transform:rotate(360deg);}}
-.hero-stat-num{font-family:"Cormorant Garamond",serif;font-size:2.6rem;font-weight:700;color:var(--accent);line-height:1;position:relative;z-index:1;transition:text-shadow 0.3s;}
-.hero-stat-num.pop{text-shadow:0 0 30px var(--accent),0 0 60px var(--lav-d);}
-.hero-stat-lbl{font-size:0.73rem;color:var(--text-muted);margin-top:0.2rem;letter-spacing:0.04em;}
-.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;}
-.btn-mag{position:relative;display:inline-flex;align-items:center;gap:0.5rem;padding:0.78rem 1.9rem;border-radius:99px;font-family:"Outfit",sans-serif;font-size:0.84rem;font-weight:500;text-decoration:none;cursor:none;overflow:hidden;transition:box-shadow 0.3s,transform 0.2s;}
-.btn-mag::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at var(--bx,50%) var(--by,50%),rgba(255,255,255,0.12) 0%,transparent 70%);opacity:0;transition:opacity 0.3s;}
-.btn-mag:hover::before{opacity:1;}
-.btn-fill{background:var(--lav-d);color:#fff;border:none;}
-.btn-fill:hover{box-shadow:0 0 32px rgba(99,85,199,0.55),0 0 64px rgba(99,85,199,0.2);}
-.btn-outline{background:transparent;color:var(--accent);border:1px solid rgba(181,168,232,0.4);}
-.btn-outline:hover{background:rgba(181,168,232,0.07);box-shadow:0 0 20px rgba(181,168,232,0.15);}
-
-/* ── ABOUT — full-bleed lavender breather band, a pause between the hero and the rest ── */
-#about{padding:0;}
-.about-band{width:100%;background:linear-gradient(135deg,#ece7fb 0%,#ded2f3 100%);padding:4.5rem 2.5rem;}
-.about-band p{max-width:720px;margin:0 auto;font-family:"Outfit",sans-serif;font-size:clamp(1.1rem,2vw,1.35rem);font-weight:400;line-height:1.85;color:var(--text);text-align:center;letter-spacing:0.01em;}
-@media (max-width:640px){.about-band{padding:3.2rem 1.6rem;}}
-
-/* ── TOOLS MARQUEE ── */
-.tools-section{padding:2.4rem 0 0.4rem;position:relative;z-index:1;}
-.tools-outer{max-width:920px;margin:0 auto;}
-.tools-outer .marquee-track{animation:marqueeScroll 24s linear infinite;}
-.tools-outer:hover .marquee-track{animation-play-state:paused;}
-.tool-chip{display:inline-flex;align-items:center;font-size:0.8rem;font-weight:500;color:var(--text-muted);padding:0.42rem 1.3rem;margin:0 0.35rem;background:var(--surface);border-radius:99px;box-shadow:0 8px 20px -12px rgba(53,42,77,0.28);backdrop-filter:blur(8px);white-space:nowrap;}
-
-/* SECTION BASE */
-section{padding:6.5rem 0 3.5rem;position:relative;z-index:1;}
-.container{max-width:960px;margin:0 auto;padding:0 2.5rem;}
-.s-label{display:flex;align-items:center;gap:1rem;margin-bottom:3rem;}
-.s-label-pill{font-size:0.62rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;padding:0.28rem 0.75rem;border-radius:99px;}
-.s-label h2{font-family:"Cormorant Garamond",serif;font-size:2.2rem;font-weight:700;color:var(--text);}
-.s-label-line{flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent);position:relative;}
-.s-label-line::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-radius:50%;background:var(--text-dim);box-shadow:0 0 6px var(--accent);}
-
-/* SKILLS — Solar System, inside a full-bleed dark band */
-.solar-window{padding:3.2rem 0;}
-#solar-canvas{display:block;width:100%;border-radius:16px;cursor:crosshair;touch-action:none;position:relative;z-index:1;opacity:0;transform:scale(0.88);transition:opacity 0.9s ease 0.15s,transform 0.9s cubic-bezier(.22,1,.36,1) 0.15s;}
-.solar-window.reveal.visible #solar-canvas{opacity:1;transform:scale(1);}
-@media (prefers-reduced-motion:reduce){#solar-canvas{transition:opacity 0.3s ease!important;transform:none!important;opacity:1!important;}}
-.solar-legend{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.2rem;justify-content:center;position:relative;z-index:1;}
-.solar-legend-item{display:flex;align-items:center;gap:0.4rem;font-size:0.7rem;color:var(--text-muted);padding:0.22rem 0.7rem;border-radius:99px;border:1px solid var(--border);background:var(--surface);transition:border-color 0.2s,color 0.2s;cursor:pointer;}
-.solar-legend-item:hover{color:var(--text);border-color:rgba(181,168,232,0.35);}
-.solar-legend-dot{width:7px;height:7px;border-radius:50%;}
-.solar-hint{text-align:center;font-size:0.68rem;color:var(--text-dim);letter-spacing:0.08em;margin-top:0.8rem;position:relative;z-index:1;}
-
-/* ── LEDGER — shared numbered case-study rows: Experience, Recognition, Patents, Beyond the Desk ── */
-.ledger{border-top:1px solid var(--border);}
-.ledger-row{display:flex;gap:1.5rem;padding:2rem 0;border-bottom:1px solid var(--border);}
-.ledger-index{font-family:"Cormorant Garamond",serif;font-size:0.95rem;color:var(--text-dim);width:26px;flex-shrink:0;padding-top:0.35rem;}
-.ledger-body{flex:1;min-width:0;}
-.ledger-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:0.5rem 1.2rem;margin-bottom:0.25rem;}
-.ledger-title{font-family:"Cormorant Garamond",serif;font-size:1.45rem;font-weight:700;color:var(--text);line-height:1.25;}
-.ledger-date{font-size:0.68rem;color:var(--text-dim);letter-spacing:0.04em;white-space:nowrap;flex-shrink:0;}
-.ledger-role{font-size:0.87rem;color:var(--text-muted);margin-bottom:0.7rem;}
-.ledger-meta{font-family:monospace;font-size:0.66rem;color:var(--text-dim);letter-spacing:0.02em;margin-top:0.3rem;}
-.ledger-caption{font-size:0.6rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);margin:0.5rem 0 0.5rem;}
-.ledger-list{list-style:none;padding:0;}
-.ledger-list li{font-size:0.86rem;color:var(--text-muted);line-height:1.7;margin-bottom:0.5rem;padding-left:1.1rem;position:relative;}
-.ledger-list li::before{content:"—";position:absolute;left:0;color:var(--text-dim);}
-@media (max-width:600px){
-  .ledger-row{gap:0.9rem;}
-  .ledger-title{font-size:1.2rem;}
+/* ── HERO ── */
+#hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:7rem 0 2.2rem;overflow:hidden;border-bottom:1px solid var(--line)}
+#stars{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.orrery{position:absolute;right:calc(var(--pad) * -1.5);top:50%;width:min(78vh,56vw);aspect-ratio:1;transform:translateY(-50%);pointer-events:none;opacity:0.95}
+.orrery svg{width:100%;height:100%;overflow:visible}
+.orrery .orb{fill:none;stroke:var(--line-strong);stroke-width:0.8}
+.orrery .orb.dash{stroke-dasharray:2 7}
+.orrery .arm{transform-box:view-box;transform-origin:300px 300px;animation:spin linear infinite}
+.orrery .sun{fill:var(--amber)}
+.orrery .pl{fill:var(--ink);stroke:var(--star);stroke-width:1}
+.orrery .pl.f{fill:var(--star);stroke:none}
+.orrery text{font-family:var(--mono);font-size:8px;letter-spacing:1.2px;fill:var(--star-40);text-transform:uppercase}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (max-width:900px){.orrery{width:120vw;right:-52vw;top:36%;opacity:0.4}}
+.hero-body{position:relative;z-index:2}
+.hero-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem 2rem;margin-bottom:2.2rem}
+.hero-meta .amb{color:var(--amber)}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(4.6rem,16.5vw,15.5rem);line-height:0.84;letter-spacing:-0.025em;margin-left:-0.04em}
+h1 span{display:block}
+h1 em{color:var(--amber);padding-left:0.55em}
+.hero-lower{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:2rem 4rem;margin-top:3rem;align-items:end}
+.hero-lede{font-size:clamp(1.02rem,1.5vw,1.2rem);color:var(--star-60);max-width:30rem;line-height:1.65;font-weight:300}
+.hero-lede b{color:var(--star);font-weight:400}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line-strong)}
+.stat{padding:1rem 1rem 0 0}
+.stat+.stat{padding-left:1rem;border-left:1px solid var(--line)}
+.stat-n{font-family:var(--serif);font-size:clamp(2rem,3.6vw,3.2rem);line-height:1}
+.stat-l{margin-top:0.5rem;font-size:0.72rem}
+@media (max-width:900px){
+  .hero-lower{grid-template-columns:minmax(0,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(3){padding-left:0;border-left:none}
+  .stat:nth-child(n+3){border-top:1px solid var(--line);margin-top:1rem}
 }
+.hero-links{display:flex;flex-wrap:wrap;gap:0.6rem 2rem;margin-top:2rem}
+.tlink{font-family:var(--mono);font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;padding-bottom:0.3rem;border-bottom:1px solid var(--line-strong);transition:color .25s,border-color .25s}
+.tlink:hover{color:var(--amber);border-color:var(--amber)}
+.tlink.main{color:var(--amber);border-color:var(--amber)}
 
-/* PROJECTS — mission constellation, inside a full-bleed dark band */
-.constellation-window{padding:3rem 0;}
-@keyframes twinkle{0%,100%{opacity:0.3;}50%{opacity:1;box-shadow:0 0 4px var(--accent);}}
-.proj-badge{font-size:0.62rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.65rem;border-radius:99px;border:1px solid;display:inline-block;}
-.proj-title{font-family:"Cormorant Garamond",serif;font-size:1.7rem;font-weight:700;color:var(--text);margin-bottom:0.8rem;line-height:1.2;}
-.proj-desc{font-size:0.88rem;color:var(--text-muted);line-height:1.7;max-width:640px;}
-.proj-tech{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:1.2rem;}
-.proj-tech span{font-size:0.66rem;padding:0.2rem 0.55rem;border-radius:5px;background:rgba(var(--acc),0.08);color:var(--text-dim);border:1px solid var(--border);}
-.proj-footer{margin-top:1.4rem;display:flex;gap:0.6rem;}
-.proj-link{font-size:0.72rem;font-weight:500;padding:0.3rem 0.85rem;border-radius:99px;border:1px solid;text-decoration:none;transition:background 0.2s,box-shadow 0.2s,transform 0.2s;cursor:none;}
-.proj-link:hover{transform:translateY(-2px);}
-.mission-log-label{font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);margin-bottom:1rem;display:flex;align-items:center;gap:0.6rem;}
-.mission-log-label::before{content:"";width:20px;height:1px;background:var(--text-dim);}
-.constellation-map{position:relative;width:100%;height:300px;margin-bottom:2.2rem;}
-.constellation-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
-.constellation-lines polyline{fill:none;stroke:rgba(181,168,232,0.3);stroke-width:0.35;stroke-dasharray:1.4,1.6;}
-.constellation-lines.mobile-only{display:none;}
-.constellation-lines{clip-path:inset(0 100% 0 0);transition:clip-path 1.3s cubic-bezier(.22,1,.36,1);}
-.constellation-window.drawn .constellation-lines{clip-path:inset(0 0 0 0);}
-.const-star{position:absolute;transform:translate(-50%,-50%) scale(0.4);opacity:0;display:flex;flex-direction:column;align-items:center;gap:0.5rem;background:none;border:none;padding:6px;font-family:inherit;cursor:none;transition:opacity 0.5s ease,transform 0.5s cubic-bezier(.34,1.56,.64,1);}
-.constellation-window.drawn .const-star{opacity:1;transform:translate(-50%,-50%) scale(1);}
-.constellation-window.drawn .const-star:nth-child(3){transition-delay:0.15s;}
-.constellation-window.drawn .const-star:nth-child(4){transition-delay:0.3s;}
-.constellation-window.drawn .const-star:nth-child(5){transition-delay:0.45s;}
-.constellation-window.drawn .const-star:nth-child(6){transition-delay:0.6s;}
-.constellation-window.drawn .const-star:nth-child(7){transition-delay:0.75s;}
-@media (prefers-reduced-motion:reduce){.constellation-lines,.const-star{transition:opacity 0.3s ease!important;clip-path:none!important;transform:translate(-50%,-50%)!important;opacity:1!important;}}
-.const-star-dot{width:11px;height:11px;border-radius:50%;position:relative;background:radial-gradient(circle at 35% 30%,rgba(var(--acc),1),rgba(var(--acc),0.35));box-shadow:0 0 8px rgba(var(--acc),0.55),0 0 18px rgba(var(--acc),0.2);transition:transform 0.3s ease,box-shadow 0.3s ease,background 0.3s ease;}
-.const-star-dot::after{content:"";position:absolute;inset:-9px;border:1px solid rgba(var(--acc),0.3);border-radius:50%;animation:twinkle 3s ease-in-out infinite;}
-.const-star-label{font-size:0.68rem;color:var(--text-muted);white-space:nowrap;letter-spacing:0.02em;transition:color 0.3s ease;}
-.const-star:hover .const-star-dot{transform:scale(1.3);}
-.const-star.active .const-star-dot{transform:scale(1.5);background:radial-gradient(circle at 35% 30%,#fff,rgba(var(--acc),0.85));box-shadow:0 0 14px rgba(var(--acc),0.9),0 0 32px rgba(var(--acc),0.4);}
-.const-star.active .const-star-label{color:var(--text);}
-.const-star:focus-visible{outline:2px solid rgba(var(--acc),0.6);outline-offset:4px;border-radius:8px;}
-.cs-1{left:8%;top:70%;}
-.cs-2{left:27%;top:26%;}
-.cs-3{left:48%;top:60%;}
-.cs-4{left:70%;top:22%;}
-.cs-5{left:91%;top:54%;}
-#mission-readout{position:relative;background:var(--surface);border:1px solid rgba(var(--acc),0.3);border-radius:20px;padding:2rem 2.2rem 2.1rem;transition:border-color 0.4s ease;}
-#mission-readout[hidden]{display:none;}
-#mission-readout .readout-head{display:flex;align-items:center;flex-wrap:wrap;gap:0.9rem;margin-bottom:0.4rem;}
-#mission-readout .readout-emblem{position:relative;width:30px;height:30px;flex-shrink:0;}
-#mission-readout .readout-emblem .core{position:absolute;inset:5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(var(--acc),0.95),rgba(var(--acc),0.25));box-shadow:0 0 12px rgba(var(--acc),0.55);}
-#mission-readout .readout-emblem .ring{position:absolute;inset:0;border:1px dashed rgba(var(--acc),0.4);border-radius:50%;animation:orbitSpin 7s linear infinite;}
-#mission-readout .readout-mission-no{font-family:monospace;font-size:0.66rem;font-weight:600;letter-spacing:0.16em;color:var(--text-dim);}
-#mission-readout.entering{animation:readoutIn 0.5s ease;}
-@keyframes readoutIn{0%{opacity:0.35;transform:translateY(6px);}100%{opacity:1;transform:translateY(0);}}
-@media (max-width:680px){
-  .constellation-map{height:420px;}
-  .constellation-lines.desktop-only{display:none;}
-  .constellation-lines.mobile-only{display:block;}
-  .cs-1{left:22%;top:6%;}
-  .cs-2{left:74%;top:20%;}
-  .cs-3{left:18%;top:40%;}
-  .cs-4{left:78%;top:58%;}
-  .cs-5{left:30%;top:78%;}
-  #mission-readout{padding:1.7rem 1.5rem 1.8rem;}
+/* ── MARQUEE ── */
+.marquee{border-bottom:1px solid var(--line);overflow:hidden;padding:1.05rem 0}
+.m-track{display:flex;width:max-content;animation:slide 40s linear infinite}
+.marquee:hover .m-track{animation-play-state:paused}
+.m-track span{font-family:var(--mono);font-size:0.76rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--star-60);padding:0 1.4rem;white-space:nowrap}
+.m-track span::after{content:"✦";color:var(--amber);margin-left:2.8rem;font-size:0.6rem}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ── CHAPTER LAYOUT ── */
+section.ch{padding:clamp(4.5rem,9vw,8rem) 0;border-bottom:1px solid var(--line)}
+.ch-grid{display:grid;grid-template-columns:minmax(0,3.2fr) minmax(0,8.8fr);gap:2rem clamp(2rem,5vw,5rem)}
+.ch-side{align-self:start;position:sticky;top:6rem}
+.ch-no{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem}
+.ch-no::after{content:"";width:2.2rem;height:1px;background:var(--amber)}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,4.4vw,4rem);line-height:1;letter-spacing:-0.01em}
+h2 em{color:var(--amber)}
+.ch-note{margin-top:1rem;font-size:0.92rem;color:var(--star-40);max-width:16rem}
+@media (max-width:900px){.ch-grid{grid-template-columns:minmax(0,1fr)}.ch-side{position:static}}
+
+/* ── PREFACE ── */
+#about .big{font-family:var(--serif);font-size:clamp(1.9rem,4.2vw,3.5rem);line-height:1.12;letter-spacing:-0.01em}
+#about .big em{color:var(--amber)}
+
+/* ── TOOLBOX (orbits) ── */
+.orbit-row{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:0.6rem 2rem;padding:1.6rem 0;border-top:1px solid var(--line);transition:background .3s}
+.orbit-row:last-child{border-bottom:1px solid var(--line)}
+.orbit-name{display:flex;align-items:baseline;gap:0.9rem}
+.orbit-name .mono{width:2.2rem;flex-shrink:0}
+.orbit-name h3{font-family:var(--serif);font-weight:400;font-size:1.6rem;line-height:1.1}
+.orbit-skills{display:flex;flex-wrap:wrap;gap:0.35rem 0;font-size:1.02rem;color:var(--star-60);font-weight:300}
+.orbit-skills span{transition:color .2s;cursor:default}
+.orbit-skills span:not(:last-child)::after{content:"/";color:var(--star-40);margin:0 0.65rem;opacity:0.6}
+.orbit-skills span:hover{color:var(--amber)}
+.orbit-row:hover .orbit-name h3{color:var(--amber)}
+@media (max-width:700px){.orbit-row{grid-template-columns:1fr}}
+
+/* ── LEDGER (shared rows) ── */
+.rows{border-top:1px solid var(--line-strong)}
+.row{display:grid;grid-template-columns:minmax(0,2.4fr) minmax(0,7.6fr);gap:0.6rem 2rem;padding:1.9rem 0;border-bottom:1px solid var(--line)}
+.row-date{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--star-40);padding-top:0.55rem}
+.row h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,2.4vw,2.1rem);line-height:1.12;letter-spacing:-0.005em;transition:color .25s}
+.row:hover h3{color:var(--amber)}
+.row-role{margin-top:0.4rem;color:var(--star-60);font-size:0.96rem}
+.row-meta{margin-top:0.5rem}
+.row ul{list-style:none;margin-top:1rem;display:grid;gap:0.7rem}
+.row li{position:relative;padding-left:1.4rem;color:var(--star-60);font-size:0.95rem;font-weight:300;line-height:1.7;max-width:46rem}
+.row li::before{content:"";position:absolute;left:0;top:0.82em;width:0.55rem;height:1px;background:var(--amber)}
+.row li b{color:var(--star);font-weight:500}
+@media (max-width:700px){.row{grid-template-columns:minmax(0,1fr)}.row-date{padding-top:0}}
+
+/* ── WORK (constellation) ── */
+.sky{position:relative;height:clamp(250px,32vw,330px);border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:100% 25%,12.5% 100%;background-position:0 -1px,-1px 0}
+.sky svg{position:absolute;inset:0;width:100%;height:100%}
+.sky polyline{fill:none;stroke:var(--star-40);stroke-width:1;stroke-dasharray:3 5;vector-effect:non-scaling-stroke}
+.sky-axis{position:absolute;font-family:var(--mono);font-size:0.6rem;letter-spacing:0.12em;color:var(--star-40);text-transform:uppercase}
+.sky-axis.a1{left:0.7rem;top:0.55rem}
+.sky-axis.a2{right:0.7rem;bottom:0.55rem}
+.star{position:absolute;transform:translate(-50%,-50%);background:none;border:none;color:var(--star);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:0.55rem;padding:0.6rem;font-family:inherit}
+.star i{display:block;width:11px;height:11px;border-radius:50%;background:var(--ink);border:1px solid var(--star);position:relative;transition:background .25s,border-color .25s,transform .35s var(--ease)}
+.star i::after{content:"";position:absolute;inset:-8px;border:1px solid transparent;border-radius:50%;transition:border-color .25s}
+.star span{font-size:0.8rem;color:var(--star-60);white-space:nowrap;transition:color .25s}
+.star small{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.12em;color:var(--star-40)}
+.star:hover i{border-color:var(--amber)}
+.star:hover span{color:var(--star)}
+.star.on i{background:var(--amber);border-color:var(--amber);transform:scale(1.25)}
+.star.on i::after{border-color:var(--amber)}
+.star.on span{color:var(--amber)}
+.s1{left:9%;top:68%}.s2{left:28%;top:28%}.s3{left:49%;top:62%}.s4{left:70%;top:26%}.s5{left:90%;top:58%}
+@media (max-width:700px){
+  .sky{height:380px;background-size:100% 20%,25% 100%}
+  .s1{left:24%;top:8%}.s2{left:72%;top:26%}.s3{left:24%;top:46%}.s4{left:74%;top:64%}.s5{left:36%;top:86%}
+  .sky svg.d{display:none}
 }
+@media (min-width:701px){.sky svg.m{display:none}}
+.proj{padding:2rem 0 0;display:none}
+.proj.on{display:grid;grid-template-columns:minmax(0,2.4fr) minmax(0,7.6fr);gap:0.6rem 2rem;animation:swap .6s var(--ease)}
+@keyframes swap{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.proj h3{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.6vw,3rem);line-height:1.05}
+.proj p{margin-top:1rem;color:var(--star-60);font-weight:300;max-width:42rem;line-height:1.75}
+.proj .tags{margin-top:1.2rem;display:flex;flex-wrap:wrap;gap:0.3rem 1.1rem}
+.proj .tags span{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.06em;color:var(--star-40)}
+.proj .hero-links{margin-top:1.5rem}
+@media (max-width:700px){.proj.on{grid-template-columns:1fr}}
+.proj-hint{margin-top:1rem}
 
-/* CERTIFICATIONS — flat divided tag row */
-.cert-field{display:flex;flex-wrap:wrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-top:0.5rem;}
-.cert-chip{display:flex;align-items:center;gap:0.6rem;padding:1rem 1.5rem;border-right:1px solid var(--border);flex:1 1 auto;}
-.cert-chip:last-child{border-right:none;}
-.cert-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.cert-name{font-size:0.82rem;color:var(--text);font-weight:400;}
-.cert-issuer{font-size:0.7rem;color:var(--text-muted);}
+/* ── CERTS ── */
+.certs{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line)}
+.cert{padding:1.5rem 1.4rem 1.6rem 0}
+.cert+.cert{padding-left:1.4rem;border-left:1px solid var(--line)}
+.cert h3{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.15;margin-bottom:0.7rem}
+@media (max-width:800px){.certs{grid-template-columns:1fr}.cert{padding:1.3rem 0}.cert+.cert{padding-left:0;border-left:none;border-top:1px solid var(--line)}}
 
-/* CONTACT — full-bleed dark band */
-#contact{padding:5rem 0 4rem;text-align:center;}
-.contact-wrap{max-width:600px;margin:0 auto;padding:3.6rem 2.6rem;position:relative;}
-.contact-stars{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(1px 1px at 15% 20%,rgba(181,168,232,0.6) 0%,transparent 100%),radial-gradient(1px 1px at 45% 60%,rgba(144,191,232,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 75% 30%,rgba(157,196,179,0.5) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 30% 85%,rgba(181,168,232,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 85% 75%,rgba(212,160,160,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 60% 10%,rgba(255,255,255,0.3) 0%,transparent 100%);}
-.contact-glow{position:absolute;inset:-40px;background:radial-gradient(ellipse at 50% 110%,rgba(99,85,199,0.22) 0%,transparent 60%);pointer-events:none;}
-.contact-title{font-family:"Cormorant Garamond",serif;font-size:2.2rem;font-weight:700;margin-bottom:0.5rem;position:relative;z-index:1;}
-.contact-sub{font-size:0.88rem;color:var(--text-muted);margin-bottom:2.2rem;line-height:1.6;position:relative;z-index:1;}
-.contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;position:relative;z-index:1;}
-.c-link{display:inline-flex;align-items:center;gap:0.5rem;padding:0.62rem 1.3rem;border-radius:99px;border:1px solid;font-size:0.82rem;font-weight:500;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;cursor:none;}
-.c-link:hover{transform:translateY(-3px);}
+/* ── CONTACT ── */
+#contact{padding:clamp(5rem,10vw,9rem) 0 2rem;position:relative;overflow:hidden}
+#contact .mono.k{color:var(--amber)}
+.say{font-family:var(--serif);font-size:clamp(3rem,9.5vw,9rem);line-height:0.92;letter-spacing:-0.02em;margin:1.6rem 0 2.4rem}
+.say em{color:var(--amber)}
+.mail{display:inline-block;font-family:var(--serif);font-size:clamp(1.5rem,3.4vw,2.8rem);border-bottom:1px solid var(--line-strong);padding-bottom:0.3rem;transition:color .25s,border-color .25s;word-break:break-all}
+.mail:hover{color:var(--amber);border-color:var(--amber)}
+.contact-sub{max-width:34rem;margin-top:1.5rem;color:var(--star-60);font-weight:300}
+footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem 2rem}
 
-footer{text-align:center;padding:1.5rem;font-size:0.7rem;color:var(--text-dim);letter-spacing:0.08em;}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s cubic-bezier(.22,1,.36,1);}
-.reveal.visible{opacity:1;transform:translateY(0);}
-.ledger-row.reveal:nth-child(odd){transform:translateX(-22px);}
-.ledger-row.reveal:nth-child(even){transform:translateX(22px);}
-.ledger-row.reveal.visible{transform:translateX(0);}
-
-/* ── a distinct, unmissable entrance signature per list section, so the run from
-   Recognition through Certifications each arrives in its own way ── */
-#awards .ledger-row.reveal{transition:opacity 0.7s ease,transform 0.9s cubic-bezier(.34,1.56,.64,1);transform:translateX(-110px) rotate(-9deg) scale(0.78);}
-#awards .ledger-row.reveal:nth-child(even){transform:translateX(110px) rotate(9deg) scale(0.78);}
-#awards .ledger-row.reveal.visible{transform:translateX(0) rotate(0deg) scale(1);}
-
-#patents .ledger-row.reveal{transition:opacity 0.85s ease,transform 0.95s cubic-bezier(.16,1,.3,1),filter 0.95s ease;filter:blur(18px);transform:translateY(80px) scale(0.9);}
-#patents .ledger-row.reveal.visible{filter:blur(0);transform:translateY(0) scale(1);}
-
-#extra .ledger-row.reveal{transition:opacity 0.8s ease,transform 1s cubic-bezier(.34,1.56,.64,1);transform:translateY(110px) scale(0.72) rotate(-3deg);}
-#extra .ledger-row.reveal.visible{transform:translateY(0) scale(1) rotate(0deg);}
-
-.cert-chip.reveal{opacity:0;transform:translateY(46px) scale(0.55) rotate(-12deg);transition:opacity 0.6s ease,transform 0.75s cubic-bezier(.34,1.56,.64,1);}
-.cert-chip.reveal:nth-child(even){transform:translateY(46px) scale(0.55) rotate(12deg);}
-.cert-chip.reveal.visible{opacity:1;transform:translateY(0) scale(1) rotate(0deg);}
-.cert-field .cert-chip:nth-child(2){transition-delay:0.14s;}
-.cert-field .cert-chip:nth-child(3){transition-delay:0.28s;}
-.cert-field .cert-chip:nth-child(4){transition-delay:0.42s;}
-@media (prefers-reduced-motion:reduce){.reveal,.reveal.visible,.cert-chip.reveal,.cert-chip.reveal.visible{transition:opacity 0.3s ease;transform:none!important;filter:none!important;}}
-::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--lav-d);border-radius:99px;}
-
-/* ── SCROLL PROGRESS ── */
-#scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(to right,#8a72e0,#4fae8c,#c97a8f);z-index:999;width:0%;transition:width 0.1s linear;box-shadow:0 0 8px rgba(138,114,224,0.6);}
-
-/* ── WARP FLASH ── */
-#warp-flash{position:fixed;inset:0;z-index:500;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 50% 50%,rgba(181,168,232,0.18) 0%,transparent 70%);}
-
-/* ── SECTION DOT NAV ── */
-#dot-nav{position:fixed;right:1.3rem;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,0.55);backdrop-filter:blur(10px);padding:12px 8px;border-radius:99px;box-shadow:0 10px 30px -14px rgba(53,42,77,0.35);}
-#dot-nav::before{content:"";position:absolute;left:50%;top:12px;bottom:12px;width:1px;background:linear-gradient(to bottom,rgba(99,85,199,0.08),rgba(99,85,199,0.4) 50%,rgba(99,85,199,0.08));transform:translateX(-50%);z-index:-1;}
-.dot-nav-item{width:7px;height:7px;border-radius:50%;background:#c9bfe0;transition:background 0.3s,box-shadow 0.3s,transform 0.3s;cursor:pointer;}
-.dot-nav-item.active{background:#6355c7;box-shadow:0 0 8px rgba(99,85,199,0.6);transform:scale(1.4);}
-@media (max-width:640px){#dot-nav{display:none;}}
-
-/* ── EASTER EGG: KONAMI ── */
-#konami-msg{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity 0.5s;}
-#konami-msg span{font-family:"Cormorant Garamond",serif;font-size:clamp(1.5rem,4vw,3rem);color:#e7ddfb;text-align:center;line-height:1.5;text-shadow:0 0 40px #b5a8e8;padding:2rem 3rem;background:rgba(20,12,40,0.92);border:1px solid rgba(181,168,232,0.25);border-radius:20px;}
-
-/* ── PRELOADER / LAUNCH SEQUENCE ── */
-#preloader{position:fixed;inset:0;z-index:10000;background:radial-gradient(ellipse at 50% 28%,#1d1440 0%,#0c0820 72%);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform 1.05s cubic-bezier(0.76,0,0.24,1);}
-#preloader.curtain-up{transform:translateY(-100%);}
-#preloader.done{display:none;}
-#preloader.launching{animation:screenShake 0.4s ease;}
-@keyframes screenShake{0%,100%{transform:translateX(0);}20%{transform:translateX(-3px);}40%{transform:translateX(3px);}60%{transform:translateX(-2px);}80%{transform:translateX(2px);}}
-.preloader-stars span{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;animation:twinkle 2.4s ease-in-out infinite;}
-.preloader-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;}
-.preloader-rocket{position:relative;display:flex;flex-direction:column;align-items:center;animation:rocketIdle 2.6s ease-in-out infinite;}
-@keyframes rocketIdle{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-9px) rotate(1deg);}}
-#preloader.launching .preloader-rocket{animation:rocketLaunch 1s cubic-bezier(0.6,0,1,0.4) forwards;}
-@keyframes rocketLaunch{0%{transform:translateY(0) rotate(0deg) scale(1);}14%{transform:translateY(-6px) rotate(-2deg) scale(1.03);}100%{transform:translateY(-950px) rotate(-6deg) scale(0.5);opacity:0.85;}}
-.rocket-flame{position:relative;width:26px;height:34px;margin-top:-8px;}
-.flame-outer,.flame-inner{position:absolute;left:50%;top:0;transform:translateX(-50%);border-radius:50% 50% 45% 45%/60% 60% 40% 40%;}
-.flame-outer{width:24px;height:32px;background:linear-gradient(to bottom,#e0c87a,#e0b87a 55%,transparent);animation:flameFlicker 0.3s ease-in-out infinite alternate;}
-.flame-inner{width:11px;height:19px;background:linear-gradient(to bottom,#f9f4ff,#d4a0a0 65%,transparent);animation:flameFlicker 0.2s ease-in-out infinite alternate-reverse;}
-#preloader.launching .flame-outer{animation-duration:0.12s;}
-#preloader.launching .flame-inner{animation-duration:0.09s;}
-@keyframes flameFlicker{0%{transform:translateX(-50%) scaleY(0.85) scaleX(0.88);opacity:0.85;}100%{transform:translateX(-50%) scaleY(1.18) scaleX(1.05);opacity:1;}}
-.preloader-status{font-family:"Outfit",sans-serif;font-size:0.74rem;font-weight:400;letter-spacing:0.06em;color:#c9bdf0;margin-top:1.7rem;min-height:1.3em;text-align:center;}
-.preloader-bar{width:180px;height:2px;background:rgba(181,168,232,0.15);border-radius:99px;margin-top:1rem;overflow:hidden;}
-.preloader-bar-fill{height:100%;width:0%;background:linear-gradient(to right,#b5a8e8,#90bfe8);box-shadow:0 0 8px #b5a8e8;transition:width 0.55s ease;}
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
 </style>
 </head>
 <body>
-<div id="preloader" role="presentation" aria-hidden="true">
-  <div class="preloader-stars">
-    <span style="top:18%;left:22%;animation-delay:0.2s;"></span>
-    <span style="top:30%;left:78%;animation-delay:0.8s;"></span>
-    <span style="top:65%;left:15%;animation-delay:1.3s;"></span>
-    <span style="top:72%;left:82%;animation-delay:0.5s;"></span>
-    <span style="top:12%;left:55%;animation-delay:1.6s;"></span>
-    <span style="top:85%;left:48%;animation-delay:1s;"></span>
-  </div>
-  <div class="preloader-content">
-    <div class="preloader-rocket" id="preloader-rocket">
-      <svg viewBox="0 0 100 130" width="64" height="84" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#f0eafa"/>
-            <stop offset="100%" stop-color="#b5a8e8"/>
-          </linearGradient>
-        </defs>
-        <path d="M50 4 C68 4 79 34 79 66 L79 104 L21 104 L21 66 C21 34 32 4 50 4 Z" fill="url(#bodyGrad)" stroke="#6355c7" stroke-width="2"/>
-        <path d="M21 88 L4 122 L21 110 Z" fill="#90bfe8" stroke="#6355c7" stroke-width="2" stroke-linejoin="round"/>
-        <path d="M79 88 L96 122 L79 110 Z" fill="#90bfe8" stroke="#6355c7" stroke-width="2" stroke-linejoin="round"/>
-        <rect x="28" y="98" width="44" height="12" rx="4" fill="#e0c87a" stroke="#6355c7" stroke-width="2"/>
-        <circle cx="50" cy="48" r="12" fill="#07050f" stroke="#6355c7" stroke-width="2"/>
-        <circle cx="50" cy="48" r="7.5" fill="#90bfe8"/>
-        <circle cx="46.5" cy="44.5" r="2.2" fill="#f9f4ff" opacity="0.85"/>
-      </svg>
-      <div class="rocket-flame"><span class="flame-outer"></span><span class="flame-inner"></span></div>
-    </div>
-    <div class="preloader-status" id="preloader-status">Charting coordinates&hellip;</div>
-    <div class="preloader-bar"><div class="preloader-bar-fill" id="preloader-fill"></div></div>
-  </div>
-</div>
-<noscript><style>#preloader{display:none!important}</style></noscript>
-<div id="scroll-progress"></div>
-<div id="warp-flash"></div>
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-<a href="#hero" id="back-to-top" aria-label="Back to top">&#8593;</a>
-<div id="dot-nav">
-  <div class="dot-nav-item active" data-sec="hero" title="Home"></div>
-  <div class="dot-nav-item" data-sec="about" title="About"></div>
-  <div class="dot-nav-item" data-sec="skills" title="Toolbox"></div>
-  <div class="dot-nav-item" data-sec="experience" title="Experience"></div>
-  <div class="dot-nav-item" data-sec="projects" title="Selected Work"></div>
-  <div class="dot-nav-item" data-sec="awards" title="Recognition"></div>
-  <div class="dot-nav-item" data-sec="patents" title="Patents"></div>
-  <div class="dot-nav-item" data-sec="extra" title="Beyond the Desk"></div>
-  <div class="dot-nav-item" data-sec="contact" title="Contact"></div>
-</div>
-<div id="konami-msg"><span>✦ You found the constellation code ✦<br/><small style="font-size:0.5em;opacity:0.7;">Khanak Shah · Explorer of the digital cosmos</small></span></div>
+<div id="progress"></div>
 
-<div class="bg-deco" aria-hidden="true">
-  <span class="r1"></span><span class="r2"></span><span class="r3"></span><span class="r4"></span><span class="r5"></span><span class="e1"></span><span class="e2"></span>
-</div>
+<header id="top">
+  <div class="head-in">
+    <a href="#hero" class="brand">Khanak <i>Shah</i></a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav">
+      <a href="#skills">Toolbox</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Work</a>
+      <a href="#awards">Recognition</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-<nav>
-  <span class="nav-logo">KS <span class="nav-star">&#10022;</span></span>
-  <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
-    <span></span><span></span><span></span>
-  </button>
-  <div class="nav-links" id="nav-links">
-    <a href="#skills">Toolbox</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Work</a>
-    <a href="#awards">Recognition</a>
-    <a href="#contact">Contact</a>
+<section id="hero">
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="orrery" aria-hidden="true">
+    <svg viewBox="0 0 600 600">
+      <circle class="orb" cx="300" cy="300" r="70"/>
+      <circle class="orb dash" cx="300" cy="300" r="118"/>
+      <circle class="orb" cx="300" cy="300" r="170"/>
+      <circle class="orb dash" cx="300" cy="300" r="222"/>
+      <circle class="orb" cx="300" cy="300" r="276"/>
+      <circle class="sun" cx="300" cy="300" r="7"/>
+      <g class="arm" style="animation-duration:40s"><circle class="pl f" cx="370" cy="300" r="4"/></g>
+      <g class="arm" style="animation-duration:70s;animation-direction:reverse"><circle class="pl" cx="418" cy="300" r="6"/></g>
+      <g class="arm" style="animation-duration:110s"><circle class="pl f" cx="470" cy="300" r="8"/><circle class="pl" cx="482" cy="288" r="2.5"/></g>
+      <g class="arm" style="animation-duration:160s;animation-direction:reverse"><circle class="pl" cx="522" cy="300" r="5"/></g>
+      <g class="arm" style="animation-duration:230s"><circle class="pl f" cx="576" cy="300" r="4"/></g>
+      <text x="306" y="22">Orbit V</text>
+    </svg>
   </div>
-</nav>
-
-<section id="hero" class="hero-card space-window">
-  <canvas id="nebula-canvas" style="opacity:0.55;"></canvas>
-  <canvas id="star-canvas"></canvas>
-  <canvas id="shoot-canvas"></canvas>
-  <div class="hero-aurora"></div>
-  <div class="hero-deco">
-    <div class="deco-planet deco-sun"></div>
-    <div class="deco-planet deco-small"></div>
-  </div>
-  <div class="hero-wrap">
-    <div class="hero-kicker">&#10022; Bangalore, India &middot; Open to Opportunities</div>
-    <h1 class="hero-name">
-      <span class="line1">Khanak</span>
-      <span class="line2">Shah</span>
-    </h1>
-    <p class="hero-typewriter"><span id="tw-text"></span><span class="cursor-blink"></span></p>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="orbit-ring"></div>
-        <div class="hero-stat-num">9.46</div>
-        <div class="hero-stat-lbl">CGPA &middot; VIT Vellore</div>
-      </div>
-      <div class="hero-stat">
-        <div class="orbit-ring" style="animation-duration:9s;animation-direction:reverse;"></div>
-        <div class="hero-stat-num">2</div>
-        <div class="hero-stat-lbl">Patents Filed</div>
-      </div>
-      <div class="hero-stat">
-        <div class="orbit-ring" style="animation-duration:7s;"></div>
-        <div class="hero-stat-num">#1</div>
-        <div class="hero-stat-lbl">Branch Rank &rsquo;23&ndash;24</div>
-      </div>
-      <div class="hero-stat">
-        <div class="orbit-ring" style="animation-duration:11s;animation-direction:reverse;"></div>
-        <div class="hero-stat-num">5</div>
-        <div class="hero-stat-lbl">Impact Projects</div>
-      </div>
+  <div class="wrap hero-body">
+    <div class="hero-meta mono">
+      <span>12.97° N &nbsp;77.59° E &nbsp;·&nbsp; Bangalore, India</span>
+      <span class="amb">● Open to opportunities</span>
     </div>
-    <div class="hero-cta">
-      <a href="mailto:khanakshah2005@gmail.com" class="btn-mag btn-fill">Email Me</a>
-      <a href="https://github.com/khanakshah27" target="_blank" class="btn-mag btn-outline">GitHub &#8599;</a>
-      <a href="https://linkedin.com/in/khanak-shah-206a94284" target="_blank" class="btn-mag btn-outline">LinkedIn &#8599;</a>
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <div class="about-band reveal">
-    <p>I enjoy simplifying the way things work &mdash; automating workflows and building impactful systems that make a meaningful difference.</p>
-  </div>
-</section>
-
-<div class="tools-section">
-  <div class="tools-outer marquee-outer">
-    <div class="marquee-track">
-      <div class="marquee-seg">
-        <span class="tool-chip">Python</span><span class="tool-chip">PyTorch</span><span class="tool-chip">React.js</span><span class="tool-chip">AWS</span><span class="tool-chip">Docker</span><span class="tool-chip">FastAPI</span><span class="tool-chip">TensorFlow</span><span class="tool-chip">GenAI</span><span class="tool-chip">PostgreSQL</span><span class="tool-chip">Figma</span>
-      </div>
-      <div class="marquee-seg">
-        <span class="tool-chip">Python</span><span class="tool-chip">PyTorch</span><span class="tool-chip">React.js</span><span class="tool-chip">AWS</span><span class="tool-chip">Docker</span><span class="tool-chip">FastAPI</span><span class="tool-chip">TensorFlow</span><span class="tool-chip">GenAI</span><span class="tool-chip">PostgreSQL</span><span class="tool-chip">Figma</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<section id="skills">
-  <div class="container">
-    <div class="s-label reveal">
-      <span class="s-label-pill" style="background:rgba(181,168,232,0.12);color:var(--lav-m);border:1px solid rgba(181,168,232,0.2);">Capabilities</span>
-      <h2>The Toolbox</h2><div class="s-label-line"></div>
-    </div>
-  </div>
-  <div class="space-window solar-window reveal">
-    <div class="container">
-      <canvas id="solar-canvas"></canvas>
-      <div class="solar-legend" id="solar-legend"></div>
-      <div class="solar-hint">Click a planet to explore its skills &nbsp;✦&nbsp; Hover to pause orbit</div>
-    </div>
-  </div>
-</section>
-
-<section id="experience">
-  <div class="container">
-    <div class="s-label reveal">
-      <span class="s-label-pill" style="background:rgba(157,196,179,0.12);color:var(--sage-m);border:1px solid rgba(157,196,179,0.2);">On the Job</span>
-      <h2>Where I've Worked</h2><div class="s-label-line"></div>
-    </div>
-    <div class="ledger">
-      <div class="ledger-row reveal">
-        <div class="ledger-index">01</div>
-        <div class="ledger-body">
-          <div class="ledger-top">
-            <h3 class="ledger-title">Gartner</h3>
-            <span class="ledger-date">May 2026 &ndash; Jul 2026</span>
-          </div>
-          <div class="ledger-role">Associate SDE Intern &middot; DevOps Team</div>
-          <div class="ledger-caption">What I worked on</div>
-          <ul class="ledger-list">
-            <li>Automated the AWS Lambda runtime upgrade pipeline using AWS Transform, reducing manual effort, migration time, and operational costs by 70&ndash;80%; identified 171 inactive AWS Lambda functions, contributing to the cleanup of 123 to improve cloud scalability and reduce infrastructure costs.</li>
-            <li>Built an App Configuration Validator to detect invalid endpoints during the PR stage, reducing troubleshooting time by 75&ndash;85%, from 2+ hours to just 10&ndash;15 minutes and preventing deployment failures; automated the deployment of an AI-powered Conference Assistant using AWS services and supported API Gateway version migration and release.</li>
-          </ul>
+    <h1><span>Khanak</span><span><em>Shah</em></span></h1>
+    <div class="hero-lower">
+      <p class="hero-lede">CS + Bioinformatics student at <b>VIT Vellore</b>. Associate SDE Intern at <b>Gartner</b>, building AI systems that solve real problems, and automating the cloud plumbing underneath. Two patents, open source contributor.</p>
+      <div>
+        <div class="stats">
+          <div class="stat"><div class="stat-n">9.46</div><div class="stat-l mono">CGPA · VIT Vellore</div></div>
+          <div class="stat"><div class="stat-n">2</div><div class="stat-l mono">Patents filed</div></div>
+          <div class="stat"><div class="stat-n">#1</div><div class="stat-l mono">Branch rank ’23–24</div></div>
+          <div class="stat"><div class="stat-n">5</div><div class="stat-l mono">Impact projects</div></div>
+        </div>
+        <div class="hero-links">
+          <a class="tlink main" href="mailto:khanakshah2005@gmail.com">Email me</a>
+          <a class="tlink" href="https://github.com/khanakshah27" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="tlink" href="https://linkedin.com/in/khanak-shah-206a94284" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
-      <div class="ledger-row reveal">
-        <div class="ledger-index">02</div>
-        <div class="ledger-body">
-          <div class="ledger-top">
-            <h3 class="ledger-title">GirlScript Summer of Code (GSSoC &rsquo;25)</h3>
-            <span class="ledger-date">Jul &ndash; Sep 2025</span>
-          </div>
-          <div class="ledger-role">Open Source Contributor</div>
-          <div class="ledger-caption">What I worked on</div>
-          <ul class="ledger-list">
-            <li>Selected as a contributor working on real-world projects &mdash; fixing issues, adding features, and collaborating with maintainers globally.</li>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="m-track" id="m-track"></div>
+</div>
+
+<section class="ch" id="about">
+  <div class="wrap ch-grid">
+    <div class="ch-side rv">
+      <div class="ch-no">Preface</div>
+      <h2>A note</h2>
+    </div>
+    <p class="big rv">I enjoy <em>simplifying</em> the way things work &mdash; automating workflows and building impactful systems that make a meaningful difference.</p>
+  </div>
+</section>
+
+<section class="ch" id="skills">
+  <div class="wrap ch-grid">
+    <div class="ch-side rv">
+      <div class="ch-no">Chapter I</div>
+      <h2>The <em>Toolbox</em></h2>
+      <p class="ch-note">Five orbits of capability, from the languages at the core to the observability layer at the edge.</p>
+    </div>
+    <div class="rv">
+      <div class="orbit-row"><div class="orbit-name"><span class="mono">O.1</span><h3>Languages</h3></div><div class="orbit-skills"><span>Python</span><span>Java</span><span>C</span><span>C++</span><span>JavaScript</span><span>HTML/CSS</span><span>SQL</span><span>Dart</span><span>Groovy</span></div></div>
+      <div class="orbit-row"><div class="orbit-name"><span class="mono">O.2</span><h3>Frameworks</h3></div><div class="orbit-skills"><span>React.js</span><span>Bootstrap</span><span>FastAPI</span><span>Flask</span><span>Flutter</span><span>TensorFlow</span><span>PyTorch</span><span>Streamlit</span></div></div>
+      <div class="orbit-row"><div class="orbit-name"><span class="mono">O.3</span><h3>DevOps &amp; Cloud</h3></div><div class="orbit-skills"><span>AWS</span><span>Git</span><span>GitHub</span><span>Bitbucket</span><span>Vercel</span><span>Figma</span><span>Canva</span><span>Docker</span><span>Kubernetes</span><span>Jenkins</span><span>Postman</span></div></div>
+      <div class="orbit-row"><div class="orbit-name"><span class="mono">O.4</span><h3>Observability</h3></div><div class="orbit-skills"><span>Dynatrace</span><span>Splunk</span><span>Catchpoint</span></div></div>
+      <div class="orbit-row"><div class="orbit-name"><span class="mono">O.5</span><h3>ML &amp; Data Science</h3></div><div class="orbit-skills"><span>Neural Nets</span><span>Deep Learning</span><span>NLP</span><span>GenAI</span><span>Scikit-learn</span><span>NumPy</span><span>Pandas</span><span>Matplotlib</span><span>Seaborn</span><span>OpenCV</span><span>R</span><span>MATLAB</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="experience">
+  <div class="wrap ch-grid">
+    <div class="ch-side rv">
+      <div class="ch-no">Chapter II</div>
+      <h2>Where I’ve <em>worked</em></h2>
+    </div>
+    <div class="rows rv">
+      <article class="row">
+        <div class="row-date">May 2026 – Jul 2026</div>
+        <div>
+          <h3>Gartner</h3>
+          <div class="row-role">Associate SDE Intern · DevOps Team</div>
+          <ul>
+            <li>Automated the AWS Lambda runtime upgrade pipeline using AWS Transform, reducing manual effort, migration time, and operational costs by <b>70–80%</b>; identified 171 inactive AWS Lambda functions, contributing to the cleanup of 123 to improve cloud scalability and reduce infrastructure costs.</li>
+            <li>Built an App Configuration Validator to detect invalid endpoints during the PR stage, reducing troubleshooting time by <b>75–85%</b>, from 2+ hours to just 10–15 minutes and preventing deployment failures; automated the deployment of an AI-powered Conference Assistant using AWS services and supported API Gateway version migration and release.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="row">
+        <div class="row-date">Jul – Sep 2025</div>
+        <div>
+          <h3>GirlScript Summer of Code (GSSoC ’25)</h3>
+          <div class="row-role">Open Source Contributor</div>
+          <ul>
+            <li>Selected as a contributor working on real-world projects — fixing issues, adding features, and collaborating with maintainers globally.</li>
             <li>Built hands-on depth in Git workflows and open-source development best practices.</li>
           </ul>
         </div>
-      </div>
+      </article>
     </div>
   </div>
 </section>
 
-<section id="projects">
-  <div class="container">
-    <div class="s-label reveal">
-      <span class="s-label-pill" style="background:rgba(212,160,160,0.12);color:var(--rose-m);border:1px solid rgba(212,160,160,0.2);">Built</span>
-      <h2>Selected Work</h2><div class="s-label-line"></div>
+<section class="ch" id="projects">
+  <div class="wrap ch-grid">
+    <div class="ch-side rv">
+      <div class="ch-no">Chapter III</div>
+      <h2>Selected <em>work</em></h2>
+      <p class="ch-note">Five projects charted as a constellation. Pick a star.</p>
     </div>
-  </div>
-  <div class="space-window constellation-window reveal">
-    <div class="container">
-    <div class="mission-log-label">Selected Work — click a point to view details</div>
-    <div class="constellation-map">
-      <svg class="constellation-lines desktop-only" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="8,70 27,26 48,60 70,22 91,54"/></svg>
-      <svg class="constellation-lines mobile-only" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="22,6 74,20 18,40 78,58 30,78"/></svg>
-      <button type="button" class="const-star cs-1" data-proj="0" data-acc="181,168,232"><span class="const-star-dot"></span><span class="const-star-label">GuardianAI</span></button>
-      <button type="button" class="const-star cs-2" data-proj="1" data-acc="212,160,160"><span class="const-star-dot"></span><span class="const-star-label">Microaggression Detector</span></button>
-      <button type="button" class="const-star cs-3" data-proj="2" data-acc="157,196,179"><span class="const-star-dot"></span><span class="const-star-label">Medimate AI</span></button>
-      <button type="button" class="const-star cs-4" data-proj="3" data-acc="144,191,232"><span class="const-star-dot"></span><span class="const-star-label">Spectrapur</span></button>
-      <button type="button" class="const-star cs-5" data-proj="4" data-acc="224,184,122"><span class="const-star-dot"></span><span class="const-star-label">BioLink</span></button>
-    </div>
-    <div id="mission-readout" hidden style="--acc:181,168,232;border-color:rgba(181,168,232,0.3);">
-      <div class="mission-detail" data-proj="0">
-        <div class="readout-head">
-          <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
-          <span class="readout-mission-no">PROJECT 01</span>
-          <span class="proj-badge" style="background:rgba(181,168,232,0.12);color:var(--lav-m);border-color:rgba(181,168,232,0.25);">AI &middot; Blockchain &middot; Safety</span>
-        </div>
-        <div class="proj-title">GuardianAI</div>
-        <div class="proj-desc">AI-driven personal safety system detecting distress signals and classifying environments as safe or unsafe in real time. Uses 3D CNN (R3D-18) + Random Forest for multimodal video analysis. Evidence stored immutably on Polygon blockchain for legal admissibility.</div>
-        <div class="proj-tech"><span>Python</span><span>PyTorch</span><span>TensorFlow</span><span>OpenCV</span><span>React Native</span><span>Node.js</span><span>PostgreSQL</span><span>Polygon</span></div>
-        <div class="proj-footer"><a href="https://github.com/khanakshah27" target="_blank" class="proj-link" style="background:rgba(181,168,232,0.08);color:var(--lav-m);border-color:rgba(181,168,232,0.25);">&#8599; GitHub</a></div>
+    <div class="rv">
+      <div class="sky" id="sky">
+        <span class="sky-axis a1">Sector 03 · Projects</span>
+        <span class="sky-axis a2">Select a point</span>
+        <svg class="d" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="9,68 28,28 49,62 70,26 90,58"/></svg>
+        <svg class="m" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="24,8 72,26 24,46 74,64 36,86"/></svg>
+        <button class="star s1 on" data-i="0"><i></i><span>GuardianAI</span><small>P.01</small></button>
+        <button class="star s2" data-i="1"><i></i><span>Microaggression Detector</span><small>P.02</small></button>
+        <button class="star s3" data-i="2"><i></i><span>Medimate AI</span><small>P.03</small></button>
+        <button class="star s4" data-i="3"><i></i><span>Spectrapur</span><small>P.04</small></button>
+        <button class="star s5" data-i="4"><i></i><span>BioLink</span><small>P.05</small></button>
       </div>
-      <div class="mission-detail" data-proj="1" hidden>
-        <div class="readout-head">
-          <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
-          <span class="readout-mission-no">PROJECT 02</span>
-          <span class="proj-badge" style="background:rgba(212,160,160,0.12);color:var(--rose-m);border-color:rgba(212,160,160,0.25);">NLP &middot; ML &middot; Social Impact</span>
-        </div>
-        <div class="proj-title">Workplace Microaggression Detector</div>
-        <div class="proj-desc">End-to-end ML web app detecting language that marginalizes women in workplace communication. Preprocessed with SpaCy NLP, deployed on Flask, with 91% accuracy using TF-IDF logistic regression.</div>
-        <div class="proj-tech"><span>Python</span><span>Scikit-learn</span><span>SpaCy</span><span>Pandas</span><span>Flask</span></div>
-        <div class="proj-footer"><a href="https://github.com/khanakshah27" target="_blank" class="proj-link" style="background:rgba(212,160,160,0.08);color:var(--rose-m);border-color:rgba(212,160,160,0.25);">&#8599; GitHub</a></div>
-      </div>
-      <div class="mission-detail" data-proj="2" hidden>
-        <div class="readout-head">
-          <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
-          <span class="readout-mission-no">PROJECT 03</span>
-          <span class="proj-badge" style="background:rgba(157,196,179,0.12);color:var(--sage-m);border-color:rgba(157,196,179,0.25);">GenAI &middot; Healthcare &middot; Accessibility</span>
-        </div>
-        <div class="proj-title">Medimate AI</div>
-        <div class="proj-desc">Rural-focused AI medical assistant explaining prescriptions in 20+ Indian languages via Gemini API. Designed to close healthcare literacy gaps for underserved populations across diverse regions.</div>
-        <div class="proj-tech"><span>Python</span><span>Streamlit</span><span>Gemini API</span></div>
-        <div class="proj-footer">
-          <a href="https://github.com/khanakshah27" target="_blank" class="proj-link" style="background:rgba(157,196,179,0.08);color:var(--sage-m);border-color:rgba(157,196,179,0.25);">&#8599; GitHub</a>
-          <a href="https://github.com/khanakshah27" target="_blank" class="proj-link" style="background:rgba(224,200,122,0.08);color:var(--butter-m);border-color:rgba(224,200,122,0.25);">&#8599; Live</a>
-        </div>
-      </div>
-      <div class="mission-detail" data-proj="3" hidden>
-        <div class="readout-head">
-          <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
-          <span class="readout-mission-no">PROJECT 04</span>
-          <span class="proj-badge" style="background:rgba(144,191,232,0.12);color:var(--sky-m);border-color:rgba(144,191,232,0.25);">Deep Learning &middot; Signal Processing</span>
-        </div>
-        <div class="proj-title">Spectrapur</div>
-        <div class="proj-desc">Web app that denoises raw spectral data using a ResUNet1D deep learning model. Users upload a spectrum and get back a cleaned, baseline-corrected signal with overlay visualization, residual noise chart, SNR/baseline metrics, and detected peaks.</div>
-        <div class="proj-tech"><span>Python</span><span>Flask</span><span>PyTorch</span><span>NumPy</span><span>SciPy</span><span>Plotly.js</span></div>
-        <div class="proj-footer">
-          <a href="https://github.com/khanakshah27/Spectrapur" target="_blank" class="proj-link" style="background:rgba(144,191,232,0.08);color:var(--sky-m);border-color:rgba(144,191,232,0.25);">&#8599; GitHub</a>
-          <a href="https://spectrapur.vercel.app/" target="_blank" class="proj-link" style="background:rgba(224,200,122,0.08);color:var(--butter-m);border-color:rgba(224,200,122,0.25);">&#8599; Live</a>
-        </div>
-      </div>
-      <div class="mission-detail" data-proj="4" hidden>
-        <div class="readout-head">
-          <div class="readout-emblem"><span class="ring"></span><span class="core"></span></div>
-          <span class="readout-mission-no">PROJECT 05</span>
-          <span class="proj-badge" style="background:rgba(224,184,122,0.12);color:var(--peach-m);border-color:rgba(224,184,122,0.25);">Bioinformatics &middot; NLP &middot; Knowledge Graphs</span>
-        </div>
-        <div class="proj-title">BioLink</div>
-        <div class="proj-desc">Research paper analyzer that extracts biomedical entities from PDFs and cross-references them against seven authoritative databases (NCBI, UniProt, PDB, KEGG, GO, ClinVar, STRING) to build interactive knowledge graphs and an AI-summarized dashboard.</div>
-        <div class="proj-tech"><span>Python</span><span>FastAPI</span><span>scispaCy</span><span>PostgreSQL</span><span>Cytoscape.js</span></div>
-        <div class="proj-footer">
-          <a href="https://github.com/khanakshah27/bio-link" target="_blank" class="proj-link" style="background:rgba(224,184,122,0.08);color:var(--peach-m);border-color:rgba(224,184,122,0.25);">&#8599; GitHub</a>
-          <a href="https://bio-link-psi-black.vercel.app/" target="_blank" class="proj-link" style="background:rgba(224,200,122,0.08);color:var(--butter-m);border-color:rgba(224,200,122,0.25);">&#8599; Live</a>
-        </div>
-      </div>
-    </div>
-    </div>
-  </div><!-- end space-window constellation-window -->
-</section>
 
-<section id="awards">
-  <div class="container">
-    <div class="s-label reveal">
-      <span class="s-label-pill" style="background:rgba(224,200,122,0.12);color:var(--butter-m);border:1px solid rgba(224,200,122,0.2);">Honors</span>
-      <h2>Recognition</h2><div class="s-label-line"></div>
-    </div>
-    <div class="ledger">
-      <div class="ledger-row reveal">
-        <div class="ledger-index">01</div>
-        <div class="ledger-body">
-          <div class="ledger-top">
-            <h3 class="ledger-title">1st Prize &mdash; InnovAct-2025 Hackathon</h3>
-            <span class="ledger-date">2025</span>
-          </div>
-          <div class="ledger-meta">Vellore Institute of Technology</div>
+      <div class="proj on" data-i="0">
+        <div class="row-date">P.01 · AI · Blockchain · Safety</div>
+        <div>
+          <h3>GuardianAI</h3>
+          <p>AI-driven personal safety system detecting distress signals and classifying environments as safe or unsafe in real time. Uses 3D CNN (R3D-18) + Random Forest for multimodal video analysis. Evidence stored immutably on Polygon blockchain for legal admissibility.</p>
+          <div class="tags"><span>Python</span><span>PyTorch</span><span>TensorFlow</span><span>OpenCV</span><span>React Native</span><span>Node.js</span><span>PostgreSQL</span><span>Polygon</span></div>
+          <div class="hero-links"><a class="tlink" href="https://github.com/khanakshah27" target="_blank" rel="noopener">GitHub ↗</a></div>
         </div>
       </div>
-      <div class="ledger-row reveal">
-        <div class="ledger-index">02</div>
-        <div class="ledger-body">
-          <div class="ledger-top">
-            <h3 class="ledger-title">Merit Scholarship &mdash; 1st Rank</h3>
-            <span class="ledger-date">2024</span>
-          </div>
-          <div class="ledger-meta">Academic Year 2023&ndash;24</div>
+      <div class="proj" data-i="1">
+        <div class="row-date">P.02 · NLP · ML · Social Impact</div>
+        <div>
+          <h3>Workplace Microaggression Detector</h3>
+          <p>End-to-end ML web app detecting language that marginalizes women in workplace communication. Preprocessed with SpaCy NLP, deployed on Flask, with 91% accuracy using TF-IDF logistic regression.</p>
+          <div class="tags"><span>Python</span><span>Scikit-learn</span><span>SpaCy</span><span>Pandas</span><span>Flask</span></div>
+          <div class="hero-links"><a class="tlink" href="https://github.com/khanakshah27" target="_blank" rel="noopener">GitHub ↗</a></div>
         </div>
       </div>
-      <div class="ledger-row reveal">
-        <div class="ledger-index">03</div>
-        <div class="ledger-body">
-          <div class="ledger-top">
-            <h3 class="ledger-title">Merit Scholarship &mdash; 2nd Rank</h3>
-            <span class="ledger-date">2025</span>
-          </div>
-          <div class="ledger-meta">Academic Year 2024&ndash;25</div>
+      <div class="proj" data-i="2">
+        <div class="row-date">P.03 · GenAI · Healthcare · Accessibility</div>
+        <div>
+          <h3>Medimate AI</h3>
+          <p>Rural-focused AI medical assistant explaining prescriptions in 20+ Indian languages via Gemini API. Designed to close healthcare literacy gaps for underserved populations across diverse regions.</p>
+          <div class="tags"><span>Python</span><span>Streamlit</span><span>Gemini API</span></div>
+          <div class="hero-links"><a class="tlink" href="https://github.com/khanakshah27" target="_blank" rel="noopener">GitHub ↗</a><a class="tlink main" href="https://github.com/khanakshah27" target="_blank" rel="noopener">Live ↗</a></div>
         </div>
       </div>
-      <div class="ledger-row reveal">
-        <div class="ledger-index">04</div>
-        <div class="ledger-body">
-          <div class="ledger-top">
-            <h3 class="ledger-title">Merit Scholarship &mdash; 3rd Rank</h3>
-            <span class="ledger-date">2026</span>
-          </div>
-          <div class="ledger-meta">Academic Year 2025&ndash;26</div>
+      <div class="proj" data-i="3">
+        <div class="row-date">P.04 · Deep Learning · Signal Processing</div>
+        <div>
+          <h3>Spectrapur</h3>
+          <p>Web app that denoises raw spectral data using a ResUNet1D deep learning model. Users upload a spectrum and get back a cleaned, baseline-corrected signal with overlay visualization, residual noise chart, SNR/baseline metrics, and detected peaks.</p>
+          <div class="tags"><span>Python</span><span>Flask</span><span>PyTorch</span><span>NumPy</span><span>SciPy</span><span>Plotly.js</span></div>
+          <div class="hero-links"><a class="tlink" href="https://github.com/khanakshah27/Spectrapur" target="_blank" rel="noopener">GitHub ↗</a><a class="tlink main" href="https://spectrapur.vercel.app/" target="_blank" rel="noopener">Live ↗</a></div>
+        </div>
+      </div>
+      <div class="proj" data-i="4">
+        <div class="row-date">P.05 · Bioinformatics · NLP · Knowledge Graphs</div>
+        <div>
+          <h3>BioLink</h3>
+          <p>Research paper analyzer that extracts biomedical entities from PDFs and cross-references them against seven authoritative databases (NCBI, UniProt, PDB, KEGG, GO, ClinVar, STRING) to build interactive knowledge graphs and an AI-summarized dashboard.</p>
+          <div class="tags"><span>Python</span><span>FastAPI</span><span>scispaCy</span><span>PostgreSQL</span><span>Cytoscape.js</span></div>
+          <div class="hero-links"><a class="tlink" href="https://github.com/khanakshah27/bio-link" target="_blank" rel="noopener">GitHub ↗</a><a class="tlink main" href="https://bio-link-psi-black.vercel.app/" target="_blank" rel="noopener">Live ↗</a></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="patents">
-  <div class="container">
-    <div class="s-label reveal">
-      <span class="s-label-pill" style="background:rgba(144,191,232,0.12);color:var(--sky-m);border:1px solid rgba(144,191,232,0.2);">Filed &amp; Published</span>
-      <h2>Patents &amp; Publications</h2><div class="s-label-line"></div>
+<section class="ch" id="awards">
+  <div class="wrap ch-grid">
+    <div class="ch-side rv">
+      <div class="ch-no">Chapter IV</div>
+      <h2><em>Recognition</em></h2>
     </div>
-    <div class="ledger">
-      <div class="ledger-row reveal">
-        <div class="ledger-index">01</div>
-        <div class="ledger-body">
-          <div class="ledger-top">
-            <h3 class="ledger-title">System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</h3>
-            <span class="ledger-date">March 2026</span>
-          </div>
-          <div class="ledger-meta">APPLICATION NO. 202641018176 &middot; Published</div>
-        </div>
-      </div>
-      <div class="ledger-row reveal">
-        <div class="ledger-index">02</div>
-        <div class="ledger-body">
-          <div class="ledger-top">
-            <h3 class="ledger-title">A System and Method for Machine Learning-Based FTIR Spectral Denoising</h3>
-            <span class="ledger-date">April 2026</span>
-          </div>
-          <div class="ledger-meta">APPLICATION NO. 202641053864 &middot; Published</div>
-        </div>
-      </div>
+    <div class="rows rv">
+      <article class="row"><div class="row-date">2025</div><div><h3>1st Prize — InnovAct-2025 Hackathon</h3><div class="row-meta mono">Vellore Institute of Technology</div></div></article>
+      <article class="row"><div class="row-date">2024</div><div><h3>Merit Scholarship — 1st Rank</h3><div class="row-meta mono">Academic Year 2023–24</div></div></article>
+      <article class="row"><div class="row-date">2025</div><div><h3>Merit Scholarship — 2nd Rank</h3><div class="row-meta mono">Academic Year 2024–25</div></div></article>
+      <article class="row"><div class="row-date">2026</div><div><h3>Merit Scholarship — 3rd Rank</h3><div class="row-meta mono">Academic Year 2025–26</div></div></article>
     </div>
   </div>
 </section>
 
-<section id="extra">
-  <div class="container">
-    <div class="s-label reveal">
-      <span class="s-label-pill" style="background:rgba(212,160,160,0.12);color:var(--rose-m);border:1px solid rgba(212,160,160,0.2);">Involvement</span>
-      <h2>Beyond the Desk</h2><div class="s-label-line"></div>
+<section class="ch" id="patents">
+  <div class="wrap ch-grid">
+    <div class="ch-side rv">
+      <div class="ch-no">Chapter V</div>
+      <h2>Patents &amp; <em>publications</em></h2>
     </div>
-    <div class="ledger">
-      <div class="ledger-row reveal">
-        <div class="ledger-index">01</div>
-        <div class="ledger-body">
-          <div class="ledger-top">
-            <h3 class="ledger-title">Indian Society for Technology Education (ISTE) &mdash; VIT Student Chapter</h3>
-            <span class="ledger-date">Mar 2025 &ndash; Apr 2026</span>
-          </div>
-          <div class="ledger-role">Executive Secretary &amp; Machine Learning Lead</div>
-          <ul class="ledger-list">
+    <div class="rows rv">
+      <article class="row"><div class="row-date">March 2026</div><div><h3>System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</h3><div class="row-meta mono">Application No. 202641018176 · Published</div></div></article>
+      <article class="row"><div class="row-date">April 2026</div><div><h3>A System and Method for Machine Learning-Based FTIR Spectral Denoising</h3><div class="row-meta mono">Application No. 202641053864 · Published</div></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="extra">
+  <div class="wrap ch-grid">
+    <div class="ch-side rv">
+      <div class="ch-no">Chapter VI</div>
+      <h2>Beyond the <em>desk</em></h2>
+    </div>
+    <div class="rows rv">
+      <article class="row">
+        <div class="row-date">Mar 2025 – Apr 2026</div>
+        <div>
+          <h3>Indian Society for Technology Education (ISTE) — VIT Student Chapter</h3>
+          <div class="row-role">Executive Secretary &amp; Machine Learning Lead</div>
+          <ul>
             <li>Maintained chapter records, coordinated with Student Welfare, and supported initiatives organizing numerous workshops and hackathons.</li>
             <li>Conducted ML sessions for juniors, mentoring across full project cycles.</li>
           </ul>
         </div>
-      </div>
+      </article>
     </div>
   </div>
 </section>
 
-<section id="certs">
-  <div class="container">
-    <div class="s-label reveal">
-      <span class="s-label-pill" style="background:rgba(224,184,122,0.12);color:var(--peach-m);border:1px solid rgba(224,184,122,0.2);">Certified</span>
-      <h2>Certifications</h2><div class="s-label-line"></div>
+<section class="ch" id="certs">
+  <div class="wrap ch-grid">
+    <div class="ch-side rv">
+      <div class="ch-no">Chapter VII</div>
+      <h2><em>Certifications</em></h2>
     </div>
-    <div class="cert-field">
-      <div class="cert-chip reveal"><div class="cert-dot" style="background:var(--sky-m);box-shadow:0 0 5px var(--sky-m);"></div><div><div class="cert-name">Gen AI Using IBM Watsonx</div><div class="cert-issuer">IBM &middot; Jun 2025</div></div></div>
-      <div class="cert-chip reveal"><div class="cert-dot" style="background:var(--butter-m);box-shadow:0 0 5px var(--butter-m);"></div><div><div class="cert-name">Java</div><div class="cert-issuer">Udemy &middot; Jun 2024</div></div></div>
-      <div class="cert-chip reveal"><div class="cert-dot" style="background:var(--sage-m);box-shadow:0 0 5px var(--sage-m);"></div><div><div class="cert-name">C &amp; C++ (Beginner to Advanced)</div><div class="cert-issuer">Udemy &middot; May 2023</div></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="space-window">
-  <div class="contact-stars"></div>
-  <div class="contact-glow"></div>
-  <div class="contact-wrap reveal">
-    <div id="contact-star" style="font-family:serif;font-size:2.8rem;margin-bottom:0.5rem;color:var(--accent);position:relative;z-index:1;">&#10022;</div>
-    <div class="contact-title">Houston, I'm ready when you are.</div>
-    <div class="contact-sub">Internships, research collabs, open source, or just a hello &mdash; I'm always open to connecting.</div>
-    <div class="contact-links">
-      <a href="mailto:khanakshah2005@gmail.com" class="c-link" style="background:rgba(212,160,160,0.08);color:var(--rose-m);border-color:rgba(212,160,160,0.25);">khanakshah2005@gmail.com</a>
-      <a href="https://github.com/khanakshah27" target="_blank" class="c-link" style="background:rgba(181,168,232,0.08);color:var(--lav-m);border-color:rgba(181,168,232,0.25);">GitHub &#8599;</a>
-      <a href="https://linkedin.com/in/khanak-shah-206a94284" target="_blank" class="c-link" style="background:rgba(144,191,232,0.08);color:var(--sky-m);border-color:rgba(144,191,232,0.25);">LinkedIn &#8599;</a>
+    <div class="certs rv">
+      <div class="cert"><h3>Gen AI Using IBM Watsonx</h3><div class="mono">IBM · Jun 2025</div></div>
+      <div class="cert"><h3>Java</h3><div class="mono">Udemy · Jun 2024</div></div>
+      <div class="cert"><h3>C &amp; C++ (Beginner to Advanced)</h3><div class="mono">Udemy · May 2023</div></div>
     </div>
   </div>
 </section>
 
-<footer>&#10022; Crafted by Khanak Shah &middot; 2026 &#10022;</footer>
+<section id="contact">
+  <div class="wrap">
+    <div class="mono k rv">✦ Transmission open</div>
+    <h2 class="say rv">Houston, I’m <em>ready</em> when you are.</h2>
+    <a class="mail rv" href="mailto:khanakshah2005@gmail.com">khanakshah2005@gmail.com</a>
+    <p class="contact-sub rv">Internships, research collabs, open source, or just a hello — I’m always open to connecting.</p>
+    <div class="hero-links rv">
+      <a class="tlink main" href="mailto:khanakshah2005@gmail.com">Email</a>
+      <a class="tlink" href="https://github.com/khanakshah27" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="tlink" href="https://linkedin.com/in/khanak-shah-206a94284" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+    <footer class="mono"><span>✦ Crafted by Khanak Shah</span><span>2026</span></footer>
+  </div>
+</section>
 
 <script>
-// ── PRELOADER / LAUNCH SEQUENCE ──
+// tools marquee
 (function(){
-  const pre=document.getElementById("preloader");
-  if(!pre){return;}
-  const statusEl=document.getElementById("preloader-status");
-  const fillEl=document.getElementById("preloader-fill");
-  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  document.body.style.overflow="hidden";
-  const lines=["Charting coordinates…","Calibrating constellations &amp; neural nets…","Pressurizing the mission log…","T-minus liftoff."];
-  let i=0,finished=false;
-  function finish(){
-    if(finished)return;finished=true;
-    pre.classList.add("curtain-up");
-    setTimeout(()=>{pre.classList.add("done");document.body.style.overflow="";},1100);
-  }
-  function launch(){
-    if(statusEl)statusEl.textContent="T-minus liftoff.";
-    pre.classList.add("launching");
-    setTimeout(finish,reduced?150:900);
-  }
-  function nextLine(){
-    if(i>=lines.length){launch();return;}
-    if(statusEl)statusEl.innerHTML=lines[i];
-    if(fillEl)fillEl.style.width=(((i+1)/lines.length)*100)+"%";
-    i++;
-    setTimeout(nextLine,reduced?100:700);
-  }
-  setTimeout(nextLine,reduced?100:450);
-  setTimeout(finish,7000); // failsafe
+  const items=["Python","PyTorch","React.js","AWS","Docker","FastAPI","TensorFlow","GenAI","PostgreSQL","Figma"];
+  const html=items.map(t=>"<span>"+t+"</span>").join("");
+  document.getElementById("m-track").innerHTML=html+html;
 })();
 
-// ── SCROLL PROGRESS ──
-const prog=document.getElementById("scroll-progress");
-window.addEventListener("scroll",()=>{const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;prog.style.width=pct+"%";},{passive:true});
-
-// ── BACKGROUND CIRCLES — swell, drift and spin as you scroll ──
+// header + progress + active nav
 (function(){
-  const decos=document.querySelectorAll(".bg-deco span");
-  if(!decos.length)return;
-  const baseRotate={e1:-20,e2:14};
-  const items=Array.from(decos).map((el,i)=>{
-    const key=el.classList.contains("e1")?"e1":el.classList.contains("e2")?"e2":null;
-    return {el,phase:i*1.1,rot:key?baseRotate[key]:0,spin:(i%2===0?1:-1)*(8+i*3)};
-  });
-  let ticking=false;
-  function update(){
+  const head=document.getElementById("top"),bar=document.getElementById("progress");
+  const links=[...document.querySelectorAll("nav a")];
+  const secs=links.map(a=>document.querySelector(a.getAttribute("href")));
+  function onScroll(){
     const y=window.scrollY;
-    items.forEach(it=>{
-      const scale=1+0.55*Math.sin(y/170+it.phase);
-      const drift=34*Math.sin(y/230+it.phase*1.4);
-      const rot=it.rot+(y/1000)*it.spin;
-      it.el.style.transform="translateY("+drift.toFixed(1)+"px) rotate("+rot.toFixed(1)+"deg) scale("+Math.max(0.25,scale).toFixed(3)+")";
-    });
-    ticking=false;
+    head.classList.toggle("scrolled",y>40);
+    const max=document.documentElement.scrollHeight-innerHeight;
+    bar.style.width=(max>0?y/max*100:0)+"%";
+    let cur=-1;
+    secs.forEach((s,i)=>{if(s&&y>=s.offsetTop-220)cur=i;});
+    // chapters between nav targets map to the nearest earlier link
+    links.forEach((a,i)=>a.classList.toggle("on",i===cur));
   }
-  window.addEventListener("scroll",()=>{if(!ticking){requestAnimationFrame(update);ticking=true;}},{passive:true});
-  update();
+  addEventListener("scroll",onScroll,{passive:true});onScroll();
+  const btn=document.getElementById("menu-btn"),nav=document.getElementById("nav");
+  btn.addEventListener("click",()=>{const o=nav.classList.toggle("open");btn.setAttribute("aria-expanded",o);});
+  nav.addEventListener("click",e=>{if(e.target.tagName==="A"){nav.classList.remove("open");btn.setAttribute("aria-expanded","false");}});
 })();
 
-// ── WARP FLASH on section entry — tinted with that section's own accent ──
-const warp=document.getElementById("warp-flash");
-const warpColors={hero:"181,168,232",about:"181,168,232",skills:"181,168,232",experience:"157,196,179",projects:"212,160,160",awards:"224,200,122",patents:"144,191,232",extra:"212,160,160",certs:"224,184,122",contact:"181,168,232"};
-let lastSection="";
-const warpObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&e.target.id!==lastSection){lastSection=e.target.id;const c=warpColors[e.target.id]||"181,168,232";warp.style.background="radial-gradient(ellipse at 50% 50%,rgba("+c+",0.18) 0%,transparent 70%)";warp.style.transition="opacity 0.08s";warp.style.opacity="1";setTimeout(()=>{warp.style.transition="opacity 0.6s";warp.style.opacity="0";},80);}});},{threshold:0.4});
-document.querySelectorAll("section[id]").forEach(s=>warpObs.observe(s));
-
-// ── NAV + BACK-TO-TOP — arrive once you scroll past the hero ──
+// reveal
 (function(){
-  const navEl=document.querySelector("nav");
-  const backEl=document.getElementById("back-to-top");
-  const heroEl=document.getElementById("hero");
-  function update(){
-    const past=window.scrollY > (heroEl?heroEl.offsetHeight*0.6:400);
-    if(navEl)navEl.classList.toggle("visible",past);
-    if(backEl)backEl.classList.toggle("visible",past);
+  const els=document.querySelectorAll(".rv");
+  if(!("IntersectionObserver" in window)){els.forEach(e=>e.classList.add("in"));return;}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{threshold:0.1,rootMargin:"0px 0px -6% 0px"});
+  els.forEach(e=>io.observe(e));
+})();
+
+// constellation selector
+(function(){
+  const stars=document.querySelectorAll(".star"),projs=document.querySelectorAll(".proj");
+  stars.forEach(s=>s.addEventListener("click",()=>{
+    const i=s.dataset.i;
+    stars.forEach(x=>x.classList.toggle("on",x===s));
+    projs.forEach(p=>p.classList.toggle("on",p.dataset.i===i));
+  }));
+})();
+
+// starfield: fine static dots, a few slow twinkles, pointer parallax
+(function(){
+  const c=document.getElementById("stars"),ctx=c.getContext("2d");
+  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W,H,stars=[],mx=0,my=0;
+  function size(){
+    const r=c.parentElement.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);
+    W=r.width;H=r.height;c.width=W*d;c.height=H*d;ctx.setTransform(d,0,0,d,0,0);
+    const n=Math.round(W*H/5200);
+    stars=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()<0.08?1.3:Math.random()*0.7+0.3,p:Math.random()*6.28,s:Math.random()*0.8+0.2,z:Math.random()*0.8+0.2}));
   }
-  window.addEventListener("scroll",update,{passive:true});
-  update();
-})();
-
-// ── PROJECT CONSTELLATION — lines + stars draw in as the section arrives ──
-(function(){
-  const win=document.querySelector(".constellation-window");
-  if(!win)return;
-  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){win.classList.add("drawn");obs.unobserve(win);}});},{threshold:0.2});
-  obs.observe(win);
-})();
-
-// ── MOBILE NAV TOGGLE ──
-(function(){
-  const toggle=document.getElementById("nav-toggle");
-  const links=document.getElementById("nav-links");
-  if(!toggle||!links)return;
-  function setOpen(open){
-    toggle.classList.toggle("open",open);
-    links.classList.toggle("open",open);
-    toggle.setAttribute("aria-expanded",String(open));
-  }
-  toggle.addEventListener("click",()=>setOpen(!links.classList.contains("open")));
-  links.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>setOpen(false)));
-  document.addEventListener("click",e=>{if(links.classList.contains("open")&&!links.contains(e.target)&&!toggle.contains(e.target))setOpen(false);});
-})();
-
-// ── DOT NAV ──
-const dotItems=document.querySelectorAll(".dot-nav-item");
-dotItems.forEach(d=>{d.addEventListener("click",()=>{document.getElementById(d.dataset.sec)?.scrollIntoView({behavior:"smooth"});});});
-const dotSecObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){dotItems.forEach(d=>d.classList.toggle("active",d.dataset.sec===e.target.id));}});},{threshold:0.4});
-document.querySelectorAll("section[id]").forEach(s=>dotSecObs.observe(s));
-
-// ── PROJECT MISSION CONSTELLATION — click a star to load its dossier ──
-(function(){
-  const stars=document.querySelectorAll(".const-star");
-  const readout=document.getElementById("mission-readout");
-  const details=document.querySelectorAll(".mission-detail");
-  if(!readout||!stars.length)return;
-  stars.forEach(star=>{
-    star.addEventListener("click",()=>{
-      const id=star.dataset.proj,acc=star.dataset.acc;
-      stars.forEach(s=>s.classList.toggle("active",s===star));
-      details.forEach(d=>{d.hidden=d.dataset.proj!==id;});
-      readout.hidden=false;
-      readout.style.setProperty("--acc",acc);
-      readout.style.borderColor="rgba("+acc+",0.3)";
-      readout.classList.remove("entering");
-      void readout.offsetWidth; // restart the entrance animation
-      readout.classList.add("entering");
-    });
-  });
-})();
-
-// ── SOLAR SYSTEM SKILLS ──
-(function(){
-  const cvs = document.getElementById("solar-canvas");
-  if(!cvs) return;
-  const ctx = cvs.getContext("2d");
-
-  const PLANETS = [
-    { name:"Languages",      color:"181,168,232", r:22, orbitR:0, speed:0,      skills:["Python","Java","C","C++","JavaScript","HTML/CSS","SQL","Dart","Groovy"] },
-    { name:"Frameworks",     color:"212,160,160", r:17, orbitR:0, speed:0.0007, skills:["React.js","Bootstrap","FastAPI","Flask","Flutter","TensorFlow","PyTorch","Streamlit"] },
-    { name:"DevOps & Cloud", color:"144,191,232", r:19, orbitR:0, speed:0.0005, skills:["AWS","Git","GitHub","Bitbucket","Vercel","Figma","Canva","Docker","Kubernetes","Jenkins","Postman"] },
-    { name:"Observability",  color:"224,200,122", r:13, orbitR:0, speed:0.0009, skills:["Dynatrace","Splunk","Catchpoint"] },
-    { name:"ML & Data Sci",  color:"157,196,179", r:20, orbitR:0, speed:0.0006, skills:["Neural Nets","Deep Learning","NLP","GenAI","Scikit-learn","NumPy","Pandas","Matplotlib","Seaborn","OpenCV","R","MATLAB"] },
-  ];
-
-  // angles, moons state
-  PLANETS.forEach((p, i) => { p.angle = (i / PLANETS.length) * Math.PI * 2; p.moonAngles = p.skills.map((_,j)=>((j/p.skills.length)*Math.PI*2)); p.moonSpeeds = p.skills.map((_,j)=>(0.002+j*0.0003)*(Math.random()>0.5?1:-1)); });
-
-  let W, H, CX, CY, SUN_R, paused = false, hoveredPlanet = -1, selectedPlanet = -1, mouseX=0, mouseY=0;
-
-  function resize() {
-    const wrap = cvs.parentElement;
-    W = cvs.width  = wrap.clientWidth;
-    H = cvs.height = Math.min(W * 0.75, 580);
-    CX = W/2; CY = H/2;
-    SUN_R = Math.min(W, H) * 0.085;
-    const minGap = SUN_R + 28;
-    const maxR   = Math.min(CX, CY) - 32;
-    const band   = (maxR - minGap) / PLANETS.length;
-    PLANETS.forEach((p,i) => { p.orbitR = minGap + band * (i + 0.6); });
-  }
-  resize();
-  window.addEventListener("resize", resize);
-
-  // Build legend
-  const leg = document.getElementById("solar-legend");
-  if(leg){ PLANETS.forEach((p,i)=>{ const el=document.createElement("div"); el.className="solar-legend-item"; el.innerHTML=`<span class="solar-legend-dot" style="background:rgba(${p.color},0.9);box-shadow:0 0 5px rgba(${p.color},0.6);"></span>${p.name}`; el.addEventListener("click",()=>{selectedPlanet=(selectedPlanet===i)?-1:i;}); leg.appendChild(el); }); }
-
-  function getPos(p){ return { x: CX + Math.cos(p.angle)*p.orbitR, y: CY + Math.sin(p.angle)*p.orbitR }; }
-  function getMoonPos(p, mi){ const px=getPos(p); const mr=p.r+18+mi*3; return { x:px.x+Math.cos(p.moonAngles[mi])*mr, y:px.y+Math.sin(p.moonAngles[mi])*mr }; }
-
-  cvs.addEventListener("mousemove", e=>{ const rc=cvs.getBoundingClientRect(); mouseX=e.clientX-rc.left; mouseY=e.clientY-rc.top; hoveredPlanet=-1; PLANETS.forEach((p,i)=>{ const pp=getPos(p); if(Math.hypot(pp.x-mouseX,pp.y-mouseY)<p.r+6) hoveredPlanet=i; }); paused=hoveredPlanet>=0||selectedPlanet>=0; });
-  cvs.addEventListener("mouseleave",()=>{ hoveredPlanet=-1; paused=selectedPlanet>=0; });
-  cvs.addEventListener("click", e=>{ const rc=cvs.getBoundingClientRect(); const cx2=e.clientX-rc.left,cy2=e.clientY-rc.top; let hit=-1; PLANETS.forEach((p,i)=>{ const pp=getPos(p); if(Math.hypot(pp.x-cx2,pp.y-cy2)<p.r+10) hit=i; }); if(hit>=0) selectedPlanet=(selectedPlanet===hit)?-1:hit; else { /* click on moon? */ if(selectedPlanet>=0){ const p=PLANETS[selectedPlanet]; p.skills.forEach((_,mi)=>{ const mp=getMoonPos(p,mi); /* no-op, just keep selected */ }); } selectedPlanet=(hit>=0?hit:selectedPlanet<0?-1:selectedPlanet); if(hit<0) selectedPlanet=-1; } paused=selectedPlanet>=0; });
-
-  let t = 0;
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    t += 1;
-
-    // Update angles
-    if (!paused) {
-      PLANETS.forEach(p => {
-        p.angle += p.speed;
-        p.moonAngles.forEach((_, mi) => { p.moonAngles[mi] += p.moonSpeeds[mi]; });
-      });
-    } else if (selectedPlanet >= 0) {
-      // still spin moons of selected planet slowly
-      const p = PLANETS[selectedPlanet];
-      p.moonAngles.forEach((_, mi) => { p.moonAngles[mi] += p.moonSpeeds[mi] * 0.4; });
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    for(const s of stars){
+      const a=reduced?0.55:0.35+0.4*Math.sin(t/1400*s.s+s.p);
+      ctx.fillStyle="rgba(236,231,218,"+Math.max(0.08,a).toFixed(3)+")";
+      ctx.beginPath();ctx.arc(s.x+mx*s.z*10,s.y+my*s.z*10,s.r,0,6.283);ctx.fill();
     }
-
-    // Draw orbit rings
-    PLANETS.forEach((p, i) => {
-      const alpha = (selectedPlanet<0||selectedPlanet===i) ? (hoveredPlanet===i?0.22:0.08) : 0.03;
-      ctx.beginPath(); ctx.arc(CX, CY, p.orbitR, 0, Math.PI*2);
-      ctx.strokeStyle = `rgba(${p.color},${alpha})`;
-      ctx.lineWidth = hoveredPlanet===i ? 1 : 0.5;
-      ctx.setLineDash([4,8]); ctx.stroke(); ctx.setLineDash([]);
-    });
-
-    // Draw moons of selected planet
-    if (selectedPlanet >= 0) {
-      const p = PLANETS[selectedPlanet];
-      const pp = getPos(p);
-      const moonR = p.r + 18;
-      // Moon orbit ring
-      ctx.beginPath(); ctx.arc(pp.x, pp.y, moonR + p.skills.length*1.5, 0, Math.PI*2);
-      ctx.strokeStyle=`rgba(${p.color},0.12)`; ctx.lineWidth=0.5; ctx.setLineDash([3,6]); ctx.stroke(); ctx.setLineDash([]);
-
-      p.skills.forEach((skill, mi) => {
-        const mr = moonR + mi * 2.8;
-        const mx2 = pp.x + Math.cos(p.moonAngles[mi]) * mr;
-        const my2 = pp.y + Math.sin(p.moonAngles[mi]) * mr;
-        const moonSize = 5;
-
-        // Line from planet to moon
-        ctx.beginPath(); ctx.moveTo(pp.x, pp.y); ctx.lineTo(mx2, my2);
-        ctx.strokeStyle=`rgba(${p.color},0.18)`; ctx.lineWidth=0.5; ctx.stroke();
-
-        // Moon glow
-        const g2 = ctx.createRadialGradient(mx2,my2,0,mx2,my2,moonSize*3);
-        g2.addColorStop(0,`rgba(${p.color},0.4)`); g2.addColorStop(1,"transparent");
-        ctx.beginPath(); ctx.arc(mx2,my2,moonSize*3,0,Math.PI*2); ctx.fillStyle=g2; ctx.fill();
-
-        // Moon body
-        ctx.beginPath(); ctx.arc(mx2,my2,moonSize,0,Math.PI*2);
-        ctx.fillStyle=`rgba(${p.color},0.25)`; ctx.fill();
-        ctx.strokeStyle=`rgba(${p.color},0.8)`; ctx.lineWidth=1; ctx.stroke();
-
-        // Skill label
-        const angle = p.moonAngles[mi];
-        const lx = mx2 + Math.cos(angle)*18;
-        const ly = my2 + Math.sin(angle)*14;
-        ctx.font = "500 9.5px Outfit,sans-serif";
-        ctx.textAlign = "center"; ctx.textBaseline = "middle";
-        ctx.fillStyle = `rgba(${p.color},0.95)`;
-        ctx.fillText(skill, lx, ly);
-      });
-    }
-
-    // Draw planets
-    PLANETS.forEach((p, i) => {
-      const pp = getPos(p);
-      const isHov = hoveredPlanet === i;
-      const isSel = selectedPlanet === i;
-      const dim = selectedPlanet>=0 && selectedPlanet!==i;
-      const r = p.r + (isHov||isSel ? 3 : 0);
-
-      // Orbit trail glow behind planet
-      ctx.beginPath();
-      ctx.arc(CX, CY, p.orbitR, p.angle - 0.35, p.angle, false);
-      const tr = ctx.createLinearGradient(
-        CX+Math.cos(p.angle-0.35)*p.orbitR, CY+Math.sin(p.angle-0.35)*p.orbitR, pp.x, pp.y
-      );
-      tr.addColorStop(0,"transparent"); tr.addColorStop(1,`rgba(${p.color},${dim?0.05:0.35})`);
-      ctx.strokeStyle=tr; ctx.lineWidth=2.5; ctx.stroke();
-
-      // Planet outer glow
-      const G = ctx.createRadialGradient(pp.x,pp.y,0,pp.x,pp.y,r*3.5);
-      G.addColorStop(0,`rgba(${p.color},${dim?0.04:(isSel?0.45:isHov?0.35:0.15)})`);
-      G.addColorStop(1,"transparent");
-      ctx.beginPath(); ctx.arc(pp.x,pp.y,r*3.5,0,Math.PI*2); ctx.fillStyle=G; ctx.fill();
-
-      // Planet body
-      const Gb = ctx.createRadialGradient(pp.x-r*0.3,pp.y-r*0.3,0,pp.x,pp.y,r);
-      Gb.addColorStop(0,`rgba(${p.color},${dim?0.15:0.55})`);
-      Gb.addColorStop(1,`rgba(${p.color},${dim?0.05:0.18})`);
-      ctx.beginPath(); ctx.arc(pp.x,pp.y,r,0,Math.PI*2);
-      ctx.fillStyle=Gb; ctx.fill();
-      ctx.strokeStyle=`rgba(${p.color},${dim?0.15:(isSel?1:isHov?0.85:0.55)})`;
-      ctx.lineWidth=isSel?2:1.2; ctx.stroke();
-
-      // Planet ring (Saturn-style) for selected
-      if (isSel) {
-        ctx.save(); ctx.translate(pp.x, pp.y); ctx.scale(1, 0.32);
-        ctx.beginPath(); ctx.arc(0, 0, r*1.7, 0, Math.PI*2);
-        ctx.strokeStyle=`rgba(${p.color},0.4)`; ctx.lineWidth=3; ctx.stroke();
-        ctx.restore();
-      }
-
-      // Planet label
-      if (!dim || isHov) {
-        ctx.font = `${isSel?"600":"500"} ${r>17?"11px":"10px"} Outfit,sans-serif`;
-        ctx.textAlign="center"; ctx.textBaseline="middle";
-        ctx.fillStyle=`rgba(240,234,250,${dim?0.3:1})`;
-        ctx.fillText(p.name, pp.x, pp.y + r + 14);
-      }
-    });
-
-    // Draw SUN
-    const pulse = 1 + 0.025 * Math.sin(t * 0.04);
-    // Sun corona layers
-    [4.5, 3, 2].forEach((mult, li) => {
-      const sg = ctx.createRadialGradient(CX,CY,0,CX,CY,SUN_R*mult*pulse);
-      sg.addColorStop(0,`rgba(255,230,150,${[0.04,0.08,0.12][li]})`);
-      sg.addColorStop(0.5,`rgba(181,168,232,${[0.02,0.04,0.06][li]})`);
-      sg.addColorStop(1,"transparent");
-      ctx.beginPath(); ctx.arc(CX,CY,SUN_R*mult*pulse,0,Math.PI*2); ctx.fillStyle=sg; ctx.fill();
-    });
-    // Sun body
-    const sb = ctx.createRadialGradient(CX-SUN_R*0.3,CY-SUN_R*0.3,0,CX,CY,SUN_R*pulse);
-    sb.addColorStop(0,"rgba(255,240,200,0.95)");
-    sb.addColorStop(0.5,"rgba(255,200,100,0.7)");
-    sb.addColorStop(1,"rgba(200,140,60,0.4)");
-    ctx.beginPath(); ctx.arc(CX,CY,SUN_R*pulse,0,Math.PI*2); ctx.fillStyle=sb; ctx.fill();
-    ctx.strokeStyle="rgba(255,220,140,0.6)"; ctx.lineWidth=1.5; ctx.stroke();
-    // Sun label
-    ctx.font="600 12px Cormorant Garamond,serif"; ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.fillStyle="rgba(40,25,5,0.9)"; ctx.fillText("Khanak",CX,CY-5);
-    ctx.font="400 9px Outfit,sans-serif"; ctx.fillStyle="rgba(40,25,5,0.65)"; ctx.fillText("Shah",CX,CY+7);
-
-    requestAnimationFrame(draw);
+    if(!reduced)requestAnimationFrame(draw);
   }
-  draw();
-
-  // Keyboard: Escape deselects
-  document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ selectedPlanet=-1; paused=false; }});
+  addEventListener("mousemove",e=>{mx=e.clientX/innerWidth-0.5;my=e.clientY/innerHeight-0.5;if(reduced)draw(0);},{passive:true});
+  addEventListener("resize",()=>{size();if(reduced)draw(0);});
+  size();requestAnimationFrame(draw);
 })();
-const statNums=document.querySelectorAll(".hero-stat-num");
-const statObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("pop");setTimeout(()=>e.target.classList.remove("pop"),800);statObs.unobserve(e.target);}});},{threshold:1});
-statNums.forEach(n=>statObs.observe(n));
-
-// ── HERO MOUSE PARALLAX ──
-const pLine1=document.querySelector(".hero-name .line1");
-const pLine2=document.querySelector(".hero-name .line2");
-const pKicker=document.querySelector(".hero-kicker");
-document.getElementById("hero")?.addEventListener("mousemove",e=>{const r=document.getElementById("hero").getBoundingClientRect();const nx2=(e.clientX-r.left)/r.width-0.5;const ny2=(e.clientY-r.top)/r.height-0.5;if(pLine1)pLine1.style.transform="translate("+(nx2*18)+"px,"+(ny2*8)+"px)";if(pLine2)pLine2.style.transform="translate("+(nx2*28)+"px,"+(ny2*12)+"px)";if(pKicker)pKicker.style.transform="translate("+(nx2*10)+"px,"+(ny2*5)+"px)";});
-document.getElementById("hero")?.addEventListener("mouseleave",()=>{if(pLine1)pLine1.style.transform="";if(pLine2)pLine2.style.transform="";if(pKicker)pKicker.style.transform="";});
-
-// ── KONAMI CODE EASTER EGG ──
-const KC=[38,38,40,40,37,39,37,39,66,65];let kIdx=0;
-document.addEventListener("keydown",e=>{if(e.keyCode===KC[kIdx]){kIdx++;if(kIdx===KC.length){kIdx=0;const km=document.getElementById("konami-msg");km.style.opacity="1";setTimeout(()=>{km.style.transition="opacity 1s";km.style.opacity="0";},4000);}}else kIdx=0;});
-
-// CURSOR + COMET TRAIL
-const curDot=document.getElementById("cursor"),curRing=document.getElementById("cursor-ring");
-let mx=0,my=0,rx=0,ry=0;
-const TC=14,trails=[];
-for(let i=0;i<TC;i++){const d=document.createElement("div");d.className="trail-dot";const sz=Math.max(1.5,5*(1-i/TC));d.style.cssText="width:"+sz+"px;height:"+sz+"px;opacity:0;background:hsl("+(225+i*2)+",55%,62%)";document.body.appendChild(d);trails.push({el:d,x:0,y:0});}
-document.addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;curDot.style.left=mx+"px";curDot.style.top=my+"px";document.body.classList.toggle("cursor-big",!!e.target.closest("a,button"));});
-(function loop(){rx+=(mx-rx)*0.14;ry+=(my-ry)*0.14;curRing.style.left=rx+"px";curRing.style.top=ry+"px";for(let i=TC-1;i>0;i--){trails[i].x+=(trails[i-1].x-trails[i].x)*0.3;trails[i].y+=(trails[i-1].y-trails[i].y)*0.3;trails[i].el.style.left=trails[i].x+"px";trails[i].el.style.top=trails[i].y+"px";trails[i].el.style.opacity=(1-i/TC)*0.55;}trails[0].x+=(mx-trails[0].x)*0.4;trails[0].y+=(my-trails[0].y)*0.4;trails[0].el.style.left=trails[0].x+"px";trails[0].el.style.top=trails[0].y+"px";trails[0].el.style.opacity=0.7;requestAnimationFrame(loop);})();
-
-// ── astronomical canvases, confined to the hero space-window ──
-const heroCardEl=document.querySelector(".hero-card");
-function heroRect(){return heroCardEl?heroCardEl.getBoundingClientRect():{width:window.innerWidth,height:window.innerHeight};}
-
-// NEBULA CANVAS
-const nc=document.getElementById("nebula-canvas"),nx=nc.getContext("2d");
-let NW,NH;function resN(){const r=heroRect();NW=nc.width=r.width;NH=nc.height=r.height;}resN();window.addEventListener("resize",resN);
-const nebs=[{x:0.25,y:0.3,rx:0.45,ry:0.35,r:130,g:85,b:199,p:0},{x:0.75,y:0.6,rx:0.35,ry:0.45,r:61,g:122,b:98,p:2},{x:0.5,y:0.85,rx:0.4,ry:0.3,r:180,g:100,b:100,p:4},{x:0.1,y:0.75,rx:0.3,ry:0.25,r:42,g:111,b:168,p:1}];
-let nT=0;
-function drawNeb(){nx.clearRect(0,0,NW,NH);nT+=0.004;nebs.forEach(n=>{const dr=Math.sin(nT+n.p)*0.04,cx=(n.x+dr)*NW,cy=(n.y+Math.cos(nT*0.7+n.p)*0.03)*NH,R=Math.min(NW,NH)*0.4,g2=nx.createRadialGradient(cx,cy,0,cx,cy,R),a=0.06+0.04*Math.sin(nT*1.2+n.p);g2.addColorStop(0,"rgba("+n.r+","+n.g+","+n.b+","+a+")");g2.addColorStop(0.5,"rgba("+n.r+","+n.g+","+n.b+","+(a*0.4)+")");g2.addColorStop(1,"transparent");nx.beginPath();nx.ellipse(cx,cy,Math.min(NW,NH)*n.rx,Math.min(NW,NH)*n.ry,nT*0.05,0,Math.PI*2);nx.fillStyle=g2;nx.fill();});requestAnimationFrame(drawNeb);}drawNeb();
-
-// STAR FIELD + CONSTELLATIONS
-const sc=document.getElementById("star-canvas"),sx=sc.getContext("2d");
-let SW,SH;function resS(){const r=heroRect();SW=sc.width=r.width;SH=sc.height=r.height;}resS();window.addEventListener("resize",resS);
-const SC=["255,255,255","181,168,232","157,196,179","212,160,160","144,191,232","224,200,122"];
-const stars=[];
-for(let i=0;i<220;i++)stars.push({x:Math.random()*1400,y:Math.random()*900,r:Math.pow(Math.random(),3)*1.8+0.2,ts:0.4+Math.random()*2,to:Math.random()*Math.PI*2,c:SC[Math.floor(Math.random()*SC.length)],d:0.2+Math.random()*0.8});
-let sT=0;
-function drawStars(){sx.clearRect(0,0,SW,SH);sT+=0.008;
-stars.forEach(s=>{const tw=0.4+0.6*(0.5+0.5*Math.sin(sT*s.ts+s.to)),px=(s.x%SW+SW)%SW,py=(s.y%SH+SH)%SH;
-if(s.r>1.2){const g=sx.createRadialGradient(px,py,0,px,py,s.r*4);g.addColorStop(0,"rgba("+s.c+","+(tw*0.5)+")");g.addColorStop(1,"transparent");sx.beginPath();sx.arc(px,py,s.r*4,0,Math.PI*2);sx.fillStyle=g;sx.fill();}
-if(s.r>1.5){sx.save();sx.globalAlpha=tw*0.5;sx.strokeStyle="rgba("+s.c+",0.6)";sx.lineWidth=0.4;const sp=s.r*7;sx.beginPath();sx.moveTo(px-sp,py);sx.lineTo(px+sp,py);sx.stroke();sx.beginPath();sx.moveTo(px,py-sp);sx.lineTo(px,py+sp);sx.stroke();sx.restore();}
-sx.beginPath();sx.arc(px,py,s.r,0,Math.PI*2);sx.fillStyle="rgba("+s.c+","+tw+")";sx.fill();});
-// constellation lines
-sx.save();sx.lineWidth=0.5;
-for(let i=0;i<stars.length;i++){const a=stars[i];if(a.r<0.8)continue;const ax=(a.x%SW+SW)%SW,ay=(a.y%SH+SH)%SH;for(let j=i+1;j<stars.length;j++){const b=stars[j];if(b.r<0.8)continue;const bx=(b.x%SW+SW)%SW,by=(b.y%SH+SH)%SH,dist=Math.hypot(ax-bx,ay-by);if(dist<75){sx.globalAlpha=(1-dist/75)*0.08;sx.strokeStyle="rgba(181,168,232,1)";sx.beginPath();sx.moveTo(ax,ay);sx.lineTo(bx,by);sx.stroke();}}}sx.restore();
-requestAnimationFrame(drawStars);}drawStars();
-
-// SHOOTING STARS
-const shc=document.getElementById("shoot-canvas"),shx=shc.getContext("2d");
-let SHW,SHH;function resSh(){const r=heroRect();SHW=shc.width=r.width;SHH=shc.height=r.height;}resSh();window.addEventListener("resize",resSh);
-const shooters=[];
-function spawnShooter(){shooters.push({x:Math.random()*SHW*1.3,y:Math.random()*SHH*0.4,vx:-(4+Math.random()*7),vy:(1.5+Math.random()*3.5),len:90+Math.random()*160,alpha:1,w:0.8+Math.random()*1.4,c:SC[Math.floor(Math.random()*SC.length)]});}
-let lastShoot=0;
-function drawShooters(ts){shx.clearRect(0,0,SHW,SHH);if(ts-lastShoot>1800+Math.random()*2500){spawnShooter();lastShoot=ts;}for(let i=shooters.length-1;i>=0;i--){const s=shooters[i];s.x+=s.vx;s.y+=s.vy;s.alpha-=0.011;if(s.alpha<=0||s.x<-200){shooters.splice(i,1);continue;}const tx=s.x-s.vx*(s.len/Math.abs(s.vx)),ty=s.y-s.vy*(s.len/Math.abs(s.vx)),g=shx.createLinearGradient(tx,ty,s.x,s.y);g.addColorStop(0,"rgba("+s.c+",0)");g.addColorStop(1,"rgba("+s.c+","+s.alpha+")");shx.save();shx.beginPath();shx.moveTo(tx,ty);shx.lineTo(s.x,s.y);shx.strokeStyle=g;shx.lineWidth=s.w;shx.lineCap="round";shx.stroke();shx.beginPath();shx.arc(s.x,s.y,s.w*1.8,0,Math.PI*2);shx.fillStyle="rgba("+s.c+","+s.alpha+")";shx.fill();shx.restore();}requestAnimationFrame(drawShooters);}requestAnimationFrame(drawShooters);
-
-// TYPEWRITER
-const lines=["CS + Bioinformatics student at VIT Vellore.","Building AI systems that solve real problems.","Associate SDE Intern @ Gartner · DevOps Automation.","2× Patentee · Open source contributor.","Passionate about ML, GenAI, DevOps & Cloud."];
-let li=0,ci=0,del=false,tw=document.getElementById("tw-text");
-function type(){const line=lines[li];if(!del){tw.textContent=line.slice(0,ci+1);ci++;if(ci===line.length){del=true;setTimeout(type,1800);return;}}else{tw.textContent=line.slice(0,ci-1);ci--;if(ci===0){del=false;li=(li+1)%lines.length;setTimeout(type,400);return;}}setTimeout(type,del?36:60);}type();
-
-// SCROLL REVEAL
-const revO=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add("visible"),i*90);});},{threshold:0.08});
-document.querySelectorAll(".reveal").forEach(el=>revO.observe(el));
-
-// MAGNETIC BUTTONS
-document.querySelectorAll(".btn-mag").forEach(btn=>{btn.addEventListener("mousemove",e=>{const r=btn.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);btn.style.transform="translate("+(dx*0.18)+"px,"+(dy*0.22)+"px)";btn.style.setProperty("--bx",((e.clientX-r.left)/r.width*100)+"%");btn.style.setProperty("--by",((e.clientX-r.top)/r.height*100)+"%");});btn.addEventListener("mouseleave",()=>{btn.style.transform="";});});
-
-// NAV ACTIVE
-const allS=document.querySelectorAll("section[id]"),navAs=document.querySelectorAll(".nav-links a");
-window.addEventListener("scroll",()=>{let cur="";allS.forEach(s=>{if(window.scrollY>=s.offsetTop-140)cur=s.id;});navAs.forEach(a=>{a.style.color=a.getAttribute("href")==="#"+cur?"var(--text)":"";});},{passive:true});
-
-// CONTACT STAR PULSE
-const csStar=document.getElementById("contact-star");
-if(csStar){setInterval(()=>{csStar.style.textShadow="0 0 30px rgba(181,168,232,1),0 0 60px rgba(181,168,232,0.4)";setTimeout(()=>{csStar.style.textShadow="0 0 10px rgba(181,168,232,0.4)";},600);},2000);}
 </script>
 </body>
 </html>
