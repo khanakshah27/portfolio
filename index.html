@@ -335,6 +335,14 @@ body.intro-lock{overflow:hidden}
 .pile figcaption{position:absolute;left:14px;right:14px;bottom:11px;display:flex;justify-content:space-between;font-family:var(--poem);font-style:italic;font-size:1.05rem;color:#3a3350}
 .pile figcaption span:last-child{font-family:var(--mono);font-style:normal;font-size:0.62rem;letter-spacing:0.1em;padding-top:0.3rem;opacity:0.7}
 .pile-hint{margin-top:1.1rem;opacity:0.75}
+@media (min-width:901px){
+  #experience .ch-grid{grid-template-columns:minmax(0,2.5fr) minmax(0,9.5fr)}
+  #experience .row{grid-template-columns:minmax(0,1.7fr) minmax(0,8.3fr)}
+  .has-pile{display:grid;grid-template-columns:minmax(0,1fr) 300px;column-gap:2.6rem;align-items:start}
+  .has-pile>*{grid-column:1}
+  .has-pile>.pile-wrap{grid-column:2;grid-row:1 / span 4;margin-top:0.3rem}
+  .has-pile .pile{width:100%;margin-left:0}
+}
 
 /* ── scrubbed preface ── */
 .w{opacity:0.16;transition:opacity .35s ease}
@@ -788,7 +796,7 @@ body.intro-lock{overflow:hidden}
       });
       hint.textContent=order.length>1?"Tap the photo for the next one":"";
     }
-    layout();wrap.hidden=false;
+    layout();wrap.hidden=false;wrap.parentElement.classList.add("has-pile");
     if(order.length<2)return;
     function next(){
       if(busy)return;busy=true;
