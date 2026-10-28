@@ -422,6 +422,41 @@ body.intro-lock{overflow:hidden}
 /* ── LILAC BACKGROUND: living dot grid ── */
 .lbg{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
 
+
+/* ── GUIDE: astronaut in a spaceship ── */
+.guide{position:fixed;right:clamp(0.8rem,2vw,1.6rem);bottom:clamp(0.8rem,2vw,1.4rem);z-index:180;display:flex;flex-direction:column;align-items:flex-end;gap:0.6rem}
+.guide[hidden]{display:none}
+body.intro-lock .guide{display:none}
+.g-ship{width:clamp(78px,8.5vw,112px);aspect-ratio:120/112;background:none;border:none;padding:0;cursor:pointer;filter:drop-shadow(0 10px 14px rgba(0,0,0,0.5));transform:rotate(var(--tilt,0deg));transition:transform .5s var(--ease);animation:g-bob 4.2s ease-in-out infinite}
+.g-ship:hover{transform:rotate(var(--tilt,0deg)) scale(1.07)}
+.g-ship svg{display:block;width:100%;height:100%;overflow:visible}
+.g-ship.flying{animation:none;transform:translateY(-60px) rotate(-7deg) scale(1.08);transition:transform .55s cubic-bezier(.3,0,.2,1)}
+@keyframes g-bob{0%,100%{translate:0 0}50%{translate:0 -7px}}
+.g-flame path{transform-box:fill-box;transform-origin:50% 0;animation:g-fl .18s ease-in-out infinite alternate}
+.g-flame .b{animation-delay:.09s}
+.g-ship.flying .g-flame path{animation-duration:.08s;transform:scaleY(1.7)}
+@keyframes g-fl{from{transform:scaleY(0.8) scaleX(0.9)}to{transform:scaleY(1.25) scaleX(1.05)}}
+.g-led{animation:g-blink 1.8s ease-in-out infinite}
+.g-l1{animation:g-blink 1.6s ease-in-out infinite}.g-l2{animation:g-blink 1.6s ease-in-out .5s infinite}.g-l3{animation:g-blink 1.6s ease-in-out 1s infinite}
+@keyframes g-blink{50%{opacity:0.25}}
+.g-visor,.g-shine{transition:transform .2s ease-out}
+.g-bubble{width:max-content;max-width:min(16rem,calc(100vw - 2rem));padding:0.75rem 0.95rem;background:var(--star);color:#17122b;font-family:var(--poem);font-style:italic;font-size:1.02rem;line-height:1.35;border-radius:12px 12px 4px 12px;box-shadow:0 14px 26px -14px rgba(0,0,0,0.8);opacity:0;transform:translateY(8px) scale(0.96);transform-origin:100% 100%;pointer-events:none;transition:opacity .35s ease,transform .45s var(--ease);position:absolute;right:0;bottom:calc(100% + 0.2rem)}
+.g-bubble.on{opacity:1;transform:none}
+.g-panel{width:min(19rem,calc(100vw - 1.6rem));background:var(--ink-2);border:1px solid var(--line-strong);padding:1rem 1.05rem 0.9rem;box-shadow:0 24px 50px -16px rgba(0,0,0,0.85);position:absolute;right:0;bottom:calc(100% + 0.2rem);animation:swap .4s var(--ease)}
+.g-panel[hidden]{display:none}
+.g-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.7rem}
+.g-head .poem{font-size:1.25rem;color:var(--star)}
+.g-x{background:none;border:none;color:var(--star-60);font-size:1.5rem;line-height:1;cursor:pointer;padding:0 0.2rem}
+.g-x:hover{color:var(--amber)}
+.g-list{display:grid;border-top:1px solid var(--line)}
+.g-list button{display:flex;align-items:baseline;gap:0.8rem;text-align:left;background:none;border:none;border-bottom:1px solid var(--line);color:var(--star);font-family:var(--serif);font-size:1.18rem;padding:0.55rem 0.2rem;cursor:pointer;transition:color .2s,padding .25s}
+.g-list button i{font-family:var(--mono);font-style:normal;font-size:0.62rem;letter-spacing:0.1em;color:var(--amber);width:1.7rem;flex-shrink:0}
+.g-list button:hover{color:var(--lilac);padding-left:0.6rem}
+.g-foot{display:flex;flex-wrap:wrap;gap:0.4rem 1.1rem;margin-top:0.8rem}
+.g-foot button{background:none;border:none;border-bottom:1px solid var(--line-strong);color:var(--star-60);font-family:var(--mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:0 0 0.2rem;cursor:pointer;transition:color .2s,border-color .2s}
+.g-foot button:hover{color:var(--amber);border-color:var(--amber)}
+@media (prefers-reduced-motion:reduce){.g-ship,.g-flame path,.g-led,.g-l1,.g-l2,.g-l3{animation:none}}
+
 /* ── REVEAL ── */
 .rv.l{transform:translateX(-34px)}.rv.r{transform:translateX(34px)}
 .rv.l.in,.rv.r.in{transform:none}
@@ -437,6 +472,42 @@ body.intro-lock{overflow:hidden}
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="seal" viewBox="0 0 64 80"><path d="M20 44 L12 78 L26 70 L32 78 L34 46Z" fill="#b8741b"/><path d="M44 44 L52 78 L38 70 L32 78 L30 46Z" fill="#d68f2a"/><circle cx="32" cy="30" r="26" fill="#eaa23f"/><circle cx="32" cy="30" r="20" fill="none" stroke="#7a4a0c" stroke-width="1.2" stroke-dasharray="2 2.6"/><circle cx="32" cy="30" r="14" fill="none" stroke="#7a4a0c" stroke-width="1"/><path d="M32 19 l3.2 8 8.4 .7 -6.4 5.5 2 8.3 -7.2 -4.5 -7.2 4.5 2 -8.3 -6.4 -5.5 8.4 -.7z" fill="#7a4a0c"/></symbol></svg>
 <div id="progress"></div>
+<div class="guide" id="guide" hidden>
+  <div class="g-bubble" id="g-bubble" role="status" aria-live="polite"></div>
+  <div class="g-panel" id="g-panel" role="dialog" aria-label="Site guide" hidden>
+    <div class="g-head"><span class="poem">Where to, Commander?</span><button type="button" class="g-x" id="g-x" aria-label="Close guide">×</button></div>
+    <nav class="g-list" aria-label="Sections">
+      <button type="button" data-go="skills"><i>I</i>The Toolbox</button>
+      <button type="button" data-go="experience"><i>II</i>Where I’ve worked</button>
+      <button type="button" data-go="projects"><i>III</i>Selected work</button>
+      <button type="button" data-go="awards"><i>IV</i>Recognition</button>
+      <button type="button" data-go="patents"><i>V</i>Patents &amp; publications</button>
+      <button type="button" data-go="extra"><i>VI</i>Beyond the desk</button>
+      <button type="button" data-go="certs"><i>VII</i>Certifications</button>
+      <button type="button" data-go="contact"><i>✦</i>Say hello</button>
+    </nav>
+    <div class="g-foot">
+      <button type="button" id="g-top">↑ Top</button>
+      <button type="button" id="g-copy">Copy email</button>
+      <button type="button" id="g-tips" aria-pressed="true">Tips: on</button>
+    </div>
+  </div>
+  <button type="button" class="g-ship" id="g-ship" aria-label="Open the site guide" aria-expanded="false" aria-controls="g-panel">
+    <svg viewBox="0 0 120 112" aria-hidden="true">
+      <g class="g-flame"><path class="f1" d="M40 80Q46 108 52 80Z" fill="#eaa23f"/><path class="f1 b" d="M68 80Q74 108 80 80Z" fill="#eaa23f"/><path class="f2" d="M43 80Q46 96 49 80Z" fill="#fff3cf"/><path class="f2 b" d="M71 80Q74 96 77 80Z" fill="#fff3cf"/></g>
+      <path d="M34 80L25 94M86 80L95 94" stroke="#b9a7f0" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="60" y1="20" x2="60" y2="9" stroke="#d9cff7" stroke-width="2"/><circle class="g-led" cx="60" cy="8" r="3.4" fill="#eaa23f"/>
+      <ellipse cx="60" cy="66" rx="15" ry="9" fill="#ece8fb"/>
+      <circle cx="60" cy="47" r="14" fill="#ece8fb" stroke="#17122b" stroke-width="2"/>
+      <ellipse class="g-visor" cx="60" cy="48" rx="9" ry="7.4" fill="#241a4d"/>
+      <path class="g-shine" d="M54.5 45q3-3.6 7-3" stroke="#9fb8ff" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M31 66A29 33 0 0 1 89 66Z" fill="rgba(207,233,255,0.26)" stroke="#d9cff7" stroke-width="2"/>
+      <ellipse cx="60" cy="70" rx="53" ry="17" fill="#5a3ed1"/>
+      <ellipse cx="60" cy="64.5" rx="45" ry="9" fill="#7b5cf0"/>
+      <circle class="g-l1" cx="26" cy="72" r="3.2" fill="#eaa23f"/><circle class="g-l2" cx="43" cy="77" r="3.2" fill="#eaa23f"/><circle class="g-l3" cx="60" cy="79" r="3.2" fill="#eaa23f"/><circle class="g-l2" cx="77" cy="77" r="3.2" fill="#eaa23f"/><circle class="g-l1" cx="94" cy="72" r="3.2" fill="#eaa23f"/>
+    </svg>
+  </button>
+</div>
 <div id="intro" role="presentation" aria-hidden="true">
   <svg id="intro-svg">
     <defs><mask id="spmask" maskUnits="userSpaceOnUse"><rect id="sp-rect" fill="#fff"/><path id="sp-hole"/></mask></defs>
@@ -961,6 +1032,79 @@ body.intro-lock{overflow:hidden}
       new IntersectionObserver(es=>{const v=es[0].isIntersecting;if(v&&!vis){vis=true;last=performance.now();raf=requestAnimationFrame(loop);}else if(!v){vis=false;cancelAnimationFrame(raf);}}).observe(band);
     }
   });
+})();
+
+// guide: an astronaut in a spaceship who helps you get around (scripted, no AI)
+(function(){
+  const guide=document.getElementById("guide");if(!guide)return;
+  const ship=document.getElementById("g-ship"),panel=document.getElementById("g-panel"),bub=document.getElementById("g-bubble");
+  const tipsBtn=document.getElementById("g-tips");
+  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let tips=true;try{tips=localStorage.getItem("guide-tips")!=="off";}catch(e){}
+  function paintTips(){tipsBtn.textContent="Tips: "+(tips?"on":"off");tipsBtn.setAttribute("aria-pressed",tips);}
+  paintTips();
+  let bt;
+  function say(t,ms){clearTimeout(bt);bub.textContent=t;bub.classList.add("on");bt=setTimeout(()=>bub.classList.remove("on"),ms||5200);}
+  function hush(){clearTimeout(bt);bub.classList.remove("on");}
+  function setOpen(o){panel.hidden=!o;ship.setAttribute("aria-expanded",o);if(o)hush();}
+  ship.addEventListener("click",()=>setOpen(panel.hidden));
+  document.getElementById("g-x").addEventListener("click",()=>{setOpen(false);ship.focus();});
+  addEventListener("keydown",e=>{if(e.key==="Escape"&&!panel.hidden)setOpen(false);});
+  document.addEventListener("click",e=>{if(!panel.hidden&&!guide.contains(e.target))setOpen(false);});
+  // fly to a section
+  function fly(id){
+    const el=document.getElementById(id);if(!el)return;
+    setOpen(false);
+    if(!reduced){ship.classList.add("flying");setTimeout(()=>ship.classList.remove("flying"),1100);}
+    const y=el.getBoundingClientRect().top+scrollY-(id==="contact"?0:72);
+    scrollTo({top:Math.max(0,y),behavior:reduced?"auto":"smooth"});
+  }
+  panel.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>fly(b.dataset.go)));
+  document.getElementById("g-top").addEventListener("click",()=>{setOpen(false);scrollTo({top:0,behavior:reduced?"auto":"smooth"});});
+  document.getElementById("g-copy").addEventListener("click",()=>{
+    const a="khanakshah2005@gmail.com",ok=()=>say("Email copied. Safe travels!",3200);
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(a).then(ok,()=>{});else ok();
+    setOpen(false);
+  });
+  tipsBtn.addEventListener("click",()=>{tips=!tips;try{localStorage.setItem("guide-tips",tips?"on":"off");}catch(e){}paintTips();if(!tips)hush();});
+  // the visor follows the cursor
+  const visor=ship.querySelector(".g-visor"),shine=ship.querySelector(".g-shine");
+  if(!reduced)addEventListener("pointermove",e=>{
+    const r=ship.getBoundingClientRect(),dx=(e.clientX-(r.left+r.width/2))/innerWidth,dy=(e.clientY-(r.top+r.height/2))/innerHeight;
+    const x=Math.max(-1,Math.min(1,dx*3))*2.2,y=Math.max(-1,Math.min(1,dy*3))*1.6;
+    visor.style.transform="translate("+x+"px,"+y+"px)";shine.style.transform="translate("+x*1.3+"px,"+y*1.3+"px)";
+  },{passive:true});
+  // lean into the scroll
+  if(!reduced){let last=scrollY,t;addEventListener("scroll",()=>{const v=scrollY-last;last=scrollY;const tilt=Math.max(-10,Math.min(10,v*0.5));ship.style.setProperty("--tilt",tilt+"deg");clearTimeout(t);t=setTimeout(()=>ship.style.setProperty("--tilt","0deg"),140);},{passive:true});}
+  // one short tip per section, the first time you arrive
+  const QUIPS={
+    skills:"Pick a planet. Its skills fall into orbit.",
+    experience:"Mission log. Tap the Gartner photos, they shuffle.",
+    projects:"Five missions on the star chart. Pick a star.",
+    awards:"The honours roll, and three published patents below.",
+    extra:"Tap the objects on the desk. The lamp works too.",
+    contact:"Houston, this is the place to say hello."
+  };
+  const seen=new Set();let lastTip=0;
+  function startTips(){
+    if(!("IntersectionObserver" in window))return;
+    const io=new IntersectionObserver(es=>es.forEach(e=>{
+      const id=e.target.id;
+      if(!e.isIntersecting||seen.has(id)||!QUIPS[id])return;
+      seen.add(id);
+      if(!tips||!panel.hidden||Date.now()-lastTip<5000)return;
+      lastTip=Date.now();say(QUIPS[id]);
+    }),{threshold:0.35});
+    Object.keys(QUIPS).forEach(id=>{const el=document.getElementById(id);if(el)io.observe(el);});
+  }
+  // wake up once the opening quote has been dismissed
+  const wait=setInterval(()=>{
+    if(document.body.classList.contains("intro-lock"))return;
+    clearInterval(wait);
+    guide.hidden=false;
+    setTimeout(()=>{if(tips)say("Ahoy! Tap my ship if you want a lift to any section.",6000);},1300);
+    startTips();
+  },250);
 })();
 
 // copy email
