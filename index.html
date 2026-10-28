@@ -439,23 +439,38 @@ body.intro-lock .guide{display:none}
 .g-led{animation:g-blink 1.8s ease-in-out infinite}
 .g-l1{animation:g-blink 1.6s ease-in-out infinite}.g-l2{animation:g-blink 1.6s ease-in-out .5s infinite}.g-l3{animation:g-blink 1.6s ease-in-out 1s infinite}
 @keyframes g-blink{50%{opacity:0.25}}
-.g-visor,.g-shine{transition:transform .2s ease-out}
 .g-bubble{width:max-content;max-width:min(16rem,calc(100vw - 2rem));padding:0.75rem 0.95rem;background:var(--star);color:#17122b;font-family:var(--poem);font-style:italic;font-size:1.02rem;line-height:1.35;border-radius:12px 12px 4px 12px;box-shadow:0 14px 26px -14px rgba(0,0,0,0.8);opacity:0;transform:translateY(8px) scale(0.96);transform-origin:100% 100%;pointer-events:none;transition:opacity .35s ease,transform .45s var(--ease);position:absolute;right:0;bottom:calc(100% + 0.2rem)}
 .g-bubble.on{opacity:1;transform:none}
-.g-panel{width:min(19rem,calc(100vw - 1.6rem));background:var(--ink-2);border:1px solid var(--line-strong);padding:1rem 1.05rem 0.9rem;box-shadow:0 24px 50px -16px rgba(0,0,0,0.85);position:absolute;right:0;bottom:calc(100% + 0.2rem);animation:swap .4s var(--ease)}
+/* the round orbital menu */
+.g-panel{--R:124px;position:absolute;right:0;bottom:calc(100% + 0.4rem);width:340px;height:340px;max-width:none;border-radius:50%;background:radial-gradient(circle at 50% 45%,#171b2d 0%,#0f1322 62%,#0b0e17 100%);border:1px solid var(--line-strong);box-shadow:0 30px 60px -18px rgba(0,0,0,0.9),0 0 0 6px rgba(185,167,240,0.06);transform-origin:92% 100%;animation:g-pop .5s var(--ease)}
 .g-panel[hidden]{display:none}
-.g-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.7rem}
-.g-head .poem{font-size:1.25rem;color:var(--star)}
-.g-x{background:none;border:none;color:var(--star-60);font-size:1.5rem;line-height:1;cursor:pointer;padding:0 0.2rem}
-.g-x:hover{color:var(--amber)}
-.g-list{display:grid;border-top:1px solid var(--line)}
-.g-list button{display:flex;align-items:baseline;gap:0.8rem;text-align:left;background:none;border:none;border-bottom:1px solid var(--line);color:var(--star);font-family:var(--serif);font-size:1.18rem;padding:0.55rem 0.2rem;cursor:pointer;transition:color .2s,padding .25s}
-.g-list button i{font-family:var(--mono);font-style:normal;font-size:0.62rem;letter-spacing:0.1em;color:var(--amber);width:1.7rem;flex-shrink:0}
-.g-list button:hover{color:var(--lilac);padding-left:0.6rem}
-.g-foot{display:flex;flex-wrap:wrap;gap:0.4rem 1.1rem;margin-top:0.8rem}
-.g-foot button{background:none;border:none;border-bottom:1px solid var(--line-strong);color:var(--star-60);font-family:var(--mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:0 0 0.2rem;cursor:pointer;transition:color .2s,border-color .2s}
-.g-foot button:hover{color:var(--amber);border-color:var(--amber)}
-@media (prefers-reduced-motion:reduce){.g-ship,.g-flame path,.g-led,.g-l1,.g-l2,.g-l3{animation:none}}
+@keyframes g-pop{from{opacity:0;transform:scale(0.2) rotate(-40deg)}to{opacity:1;transform:none}}
+.g-rings{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;animation:g-turn 90s linear infinite}
+.g-rings circle{fill:none;stroke:var(--line-strong)}
+.g-rings .o{stroke-dasharray:2 7}
+.g-rings .i{stroke:var(--line)}
+@keyframes g-turn{to{transform:rotate(360deg)}}
+.g-center{position:absolute;left:50%;top:50%;width:150px;transform:translate(-50%,-50%);text-align:center;display:flex;flex-direction:column;align-items:center;gap:0.55rem}
+.g-hi{font-size:1.18rem;line-height:1.15;color:var(--star)}
+.g-sel{display:none;flex-direction:column;align-items:center;gap:0.25rem}
+.g-sel .mono{color:var(--amber);font-size:0.62rem}
+.g-st{font-family:var(--serif);font-size:1.25rem;line-height:1.1;color:var(--lilac)}
+.g-panel.sel .g-hi{display:none}
+.g-panel.sel .g-sel{display:flex}
+.g-acts{display:flex;gap:0.2rem 0.7rem;flex-wrap:wrap;justify-content:center;margin-top:0.1rem}
+.g-acts button{background:none;border:none;border-bottom:1px solid var(--line-strong);color:var(--star-60);font-family:var(--mono);font-size:0.54rem;letter-spacing:0.08em;text-transform:uppercase;padding:0 0 0.15rem;cursor:pointer;transition:color .2s,border-color .2s;white-space:nowrap}
+.g-acts button:hover{color:var(--amber);border-color:var(--amber)}
+.g-orbit{position:absolute;inset:0}
+.g-it{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) translate(calc(var(--c) * var(--R)),calc(var(--s) * var(--R)));background:#0f1322;border:none;color:var(--star);font-family:var(--serif);font-size:1.08rem;padding:0.15rem 0.5rem;cursor:pointer;white-space:nowrap;opacity:0;animation:g-in .5s var(--ease) calc(0.12s + var(--i) * 0.045s) forwards;transition:color .2s}
+.g-it::before{content:"";position:absolute;left:50%;top:-5px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--amber);opacity:0.8;transition:transform .25s}
+.g-it:hover,.g-it:focus-visible{color:var(--lilac)}
+.g-it:hover::before,.g-it:focus-visible::before{transform:scale(1.8);background:var(--lilac)}
+@keyframes g-in{from{opacity:0;transform:translate(-50%,-50%) translate(calc(var(--c) * var(--R) * 0.3),calc(var(--s) * var(--R) * 0.3))}to{opacity:1;transform:translate(-50%,-50%) translate(calc(var(--c) * var(--R)),calc(var(--s) * var(--R)))}}
+@media (max-width:420px){.g-panel{--R:110px;width:312px;height:312px}.g-it{font-size:1rem;padding:0.15rem 0.35rem}.g-center{width:132px}}
+@media (prefers-reduced-motion:reduce){.g-ship,.g-flame path,.g-led,.g-l1,.g-l2,.g-l3,.g-eye,.g-rings,.g-panel,.g-it{animation:none}.g-it{opacity:1}}
+.g-eye{transform-box:fill-box;transform-origin:50% 50%;animation:g-blinkeye 5s infinite}
+@keyframes g-blinkeye{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(0.08)}}
+.g-eyes{transition:transform .2s ease-out}
 
 /* ── REVEAL ── */
 .rv.l{transform:translateX(-34px)}.rv.r{transform:translateX(34px)}
@@ -475,36 +490,40 @@ body.intro-lock .guide{display:none}
 <div class="guide" id="guide" hidden>
   <div class="g-bubble" id="g-bubble" role="status" aria-live="polite"></div>
   <div class="g-panel" id="g-panel" role="dialog" aria-label="Site guide" hidden>
-    <div class="g-head"><span class="poem">Where to, Commander?</span><button type="button" class="g-x" id="g-x" aria-label="Close guide">×</button></div>
-    <nav class="g-list" aria-label="Sections">
-      <button type="button" data-go="skills"><i>I</i>The Toolbox</button>
-      <button type="button" data-go="experience"><i>II</i>Where I’ve worked</button>
-      <button type="button" data-go="projects"><i>III</i>Selected work</button>
-      <button type="button" data-go="awards"><i>IV</i>Recognition</button>
-      <button type="button" data-go="patents"><i>V</i>Patents &amp; publications</button>
-      <button type="button" data-go="extra"><i>VI</i>Beyond the desk</button>
-      <button type="button" data-go="certs"><i>VII</i>Certifications</button>
-      <button type="button" data-go="contact"><i>✦</i>Say hello</button>
-    </nav>
-    <div class="g-foot">
-      <button type="button" id="g-top">↑ Top</button>
-      <button type="button" id="g-copy">Copy email</button>
-      <button type="button" id="g-tips" aria-pressed="true">Tips: on</button>
+    <svg class="g-rings" viewBox="-170 -170 340 340" aria-hidden="true"><circle r="122" class="o"/><circle r="64" class="i"/></svg>
+    <div class="g-center">
+      <div class="g-hi poem">Where to, Commander?</div>
+      <div class="g-sel"><span class="mono" id="g-sn"></span><span class="g-st" id="g-st"></span></div>
+      <div class="g-acts"><button type="button" id="g-top">↑ Top</button><button type="button" id="g-copy">Copy mail</button><button type="button" id="g-tips" aria-pressed="true">Tips: on</button></div>
     </div>
+    <nav class="g-orbit" aria-label="Sections">
+      <button type="button" class="g-it" data-go="skills" data-full="The Toolbox" data-n="I" style="--c:0.0000;--s:-1.0000;--i:0"><span>Toolbox</span></button>
+      <button type="button" class="g-it" data-go="experience" data-full="Where I’ve worked" data-n="II" style="--c:0.7071;--s:-0.7071;--i:1"><span>Experience</span></button>
+      <button type="button" class="g-it" data-go="projects" data-full="Selected work" data-n="III" style="--c:1.0000;--s:0.0000;--i:2"><span>Work</span></button>
+      <button type="button" class="g-it" data-go="awards" data-full="Recognition" data-n="IV" style="--c:0.7071;--s:0.7071;--i:3"><span>Honours</span></button>
+      <button type="button" class="g-it" data-go="patents" data-full="Patents &amp; publications" data-n="V" style="--c:0.0000;--s:1.0000;--i:4"><span>Patents</span></button>
+      <button type="button" class="g-it" data-go="extra" data-full="Beyond the desk" data-n="VI" style="--c:-0.7071;--s:0.7071;--i:5"><span>The desk</span></button>
+      <button type="button" class="g-it" data-go="certs" data-full="Certifications" data-n="VII" style="--c:-1.0000;--s:0.0000;--i:6"><span>Certificates</span></button>
+      <button type="button" class="g-it" data-go="contact" data-full="Say hello" data-n="✦" style="--c:-0.7071;--s:-0.7071;--i:7"><span>Hello</span></button>
+    </nav>
   </div>
   <button type="button" class="g-ship" id="g-ship" aria-label="Open the site guide" aria-expanded="false" aria-controls="g-panel">
     <svg viewBox="0 0 120 112" aria-hidden="true">
-      <g class="g-flame"><path class="f1" d="M40 80Q46 108 52 80Z" fill="#eaa23f"/><path class="f1 b" d="M68 80Q74 108 80 80Z" fill="#eaa23f"/><path class="f2" d="M43 80Q46 96 49 80Z" fill="#fff3cf"/><path class="f2 b" d="M71 80Q74 96 77 80Z" fill="#fff3cf"/></g>
-      <path d="M34 80L25 94M86 80L95 94" stroke="#b9a7f0" stroke-width="3.5" stroke-linecap="round"/>
+      <g transform="translate(0 10)"><g class="g-flame"><path class="f1" d="M40 80Q46 108 52 80Z" fill="#eaa23f"/><path class="f1 b" d="M68 80Q74 108 80 80Z" fill="#eaa23f"/><path class="f2" d="M43 80Q46 96 49 80Z" fill="#fff3cf"/><path class="f2 b" d="M71 80Q74 96 77 80Z" fill="#fff3cf"/></g>
+      <path d="M34 80L25 94M86 80L95 94" stroke="#b9a7f0" stroke-width="3.5" stroke-linecap="round"/></g>
       <line x1="60" y1="20" x2="60" y2="9" stroke="#d9cff7" stroke-width="2"/><circle class="g-led" cx="60" cy="8" r="3.4" fill="#eaa23f"/>
       <ellipse cx="60" cy="66" rx="15" ry="9" fill="#ece8fb"/>
       <circle cx="60" cy="47" r="14" fill="#ece8fb" stroke="#17122b" stroke-width="2"/>
-      <ellipse class="g-visor" cx="60" cy="48" rx="9" ry="7.4" fill="#241a4d"/>
-      <path class="g-shine" d="M54.5 45q3-3.6 7-3" stroke="#9fb8ff" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="60" cy="48" r="10.6" fill="#241a4d"/>
+      <ellipse cx="60" cy="48.4" rx="9.2" ry="8.6" fill="#ffe2cc"/>
+      <ellipse cx="53.6" cy="51.4" rx="2.3" ry="1.5" fill="#ff9fb4" opacity="0.75"/><ellipse cx="66.4" cy="51.4" rx="2.3" ry="1.5" fill="#ff9fb4" opacity="0.75"/>
+      <g class="g-eyes"><g class="g-eye"><ellipse cx="56.2" cy="47" rx="1.9" ry="2.4" fill="#241a4d"/><circle cx="56.8" cy="46.1" r="0.75" fill="#fff"/></g><g class="g-eye"><ellipse cx="63.8" cy="47" rx="1.9" ry="2.4" fill="#241a4d"/><circle cx="64.4" cy="46.1" r="0.75" fill="#fff"/></g></g>
+      <path d="M57.4 51.6q2.6 2.6 5.2 0" stroke="#241a4d" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <path d="M52.6 43.4q2.6-3.2 6-2.8" stroke="#fff" stroke-opacity="0.8" stroke-width="1.8" fill="none" stroke-linecap="round"/>
       <path d="M31 66A29 33 0 0 1 89 66Z" fill="rgba(207,233,255,0.26)" stroke="#d9cff7" stroke-width="2"/>
-      <ellipse cx="60" cy="70" rx="53" ry="17" fill="#5a3ed1"/>
+      <g transform="translate(0 6)"><ellipse cx="60" cy="70" rx="53" ry="17" fill="#5a3ed1"/>
       <ellipse cx="60" cy="64.5" rx="45" ry="9" fill="#7b5cf0"/>
-      <circle class="g-l1" cx="26" cy="72" r="3.2" fill="#eaa23f"/><circle class="g-l2" cx="43" cy="77" r="3.2" fill="#eaa23f"/><circle class="g-l3" cx="60" cy="79" r="3.2" fill="#eaa23f"/><circle class="g-l2" cx="77" cy="77" r="3.2" fill="#eaa23f"/><circle class="g-l1" cx="94" cy="72" r="3.2" fill="#eaa23f"/>
+      <circle class="g-l1" cx="26" cy="72" r="3.2" fill="#eaa23f"/><circle class="g-l2" cx="43" cy="77" r="3.2" fill="#eaa23f"/><circle class="g-l3" cx="60" cy="79" r="3.2" fill="#eaa23f"/><circle class="g-l2" cx="77" cy="77" r="3.2" fill="#eaa23f"/><circle class="g-l1" cx="94" cy="72" r="3.2" fill="#eaa23f"/></g>
     </svg>
   </button>
 </div>
@@ -1048,7 +1067,6 @@ body.intro-lock .guide{display:none}
   function hush(){clearTimeout(bt);bub.classList.remove("on");}
   function setOpen(o){panel.hidden=!o;ship.setAttribute("aria-expanded",o);if(o)hush();}
   ship.addEventListener("click",()=>setOpen(panel.hidden));
-  document.getElementById("g-x").addEventListener("click",()=>{setOpen(false);ship.focus();});
   addEventListener("keydown",e=>{if(e.key==="Escape"&&!panel.hidden)setOpen(false);});
   document.addEventListener("click",e=>{if(!panel.hidden&&!guide.contains(e.target))setOpen(false);});
   // fly to a section
@@ -1059,7 +1077,12 @@ body.intro-lock .guide{display:none}
     const y=el.getBoundingClientRect().top+scrollY-(id==="contact"?0:72);
     scrollTo({top:Math.max(0,y),behavior:reduced?"auto":"smooth"});
   }
-  panel.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>fly(b.dataset.go)));
+  panel.querySelectorAll("[data-go]").forEach(b=>{
+    b.addEventListener("click",()=>fly(b.dataset.go));
+    const on=()=>{document.getElementById("g-sn").textContent=b.dataset.n==="✦"?"Contact":"Chapter "+b.dataset.n;document.getElementById("g-st").innerHTML=b.dataset.full;panel.classList.add("sel");};
+    const off=()=>panel.classList.remove("sel");
+    b.addEventListener("mouseenter",on);b.addEventListener("focus",on);b.addEventListener("mouseleave",off);b.addEventListener("blur",off);
+  });
   document.getElementById("g-top").addEventListener("click",()=>{setOpen(false);scrollTo({top:0,behavior:reduced?"auto":"smooth"});});
   document.getElementById("g-copy").addEventListener("click",()=>{
     const a="khanakshah2005@gmail.com",ok=()=>say("Email copied. Safe travels!",3200);
@@ -1068,11 +1091,11 @@ body.intro-lock .guide{display:none}
   });
   tipsBtn.addEventListener("click",()=>{tips=!tips;try{localStorage.setItem("guide-tips",tips?"on":"off");}catch(e){}paintTips();if(!tips)hush();});
   // the visor follows the cursor
-  const visor=ship.querySelector(".g-visor"),shine=ship.querySelector(".g-shine");
+  const eyes=ship.querySelector(".g-eyes");
   if(!reduced)addEventListener("pointermove",e=>{
     const r=ship.getBoundingClientRect(),dx=(e.clientX-(r.left+r.width/2))/innerWidth,dy=(e.clientY-(r.top+r.height/2))/innerHeight;
     const x=Math.max(-1,Math.min(1,dx*3))*2.2,y=Math.max(-1,Math.min(1,dy*3))*1.6;
-    visor.style.transform="translate("+x+"px,"+y+"px)";shine.style.transform="translate("+x*1.3+"px,"+y*1.3+"px)";
+    eyes.style.transform="translate("+x*0.55+"px,"+y*0.5+"px)";
   },{passive:true});
   // lean into the scroll
   if(!reduced){let last=scrollY,t;addEventListener("scroll",()=>{const v=scrollY-last;last=scrollY;const tilt=Math.max(-10,Math.min(10,v*0.5));ship.style.setProperty("--tilt",tilt+"deg");clearTimeout(t);t=setTimeout(()=>ship.style.setProperty("--tilt","0deg"),140);},{passive:true});}
@@ -1102,7 +1125,7 @@ body.intro-lock .guide{display:none}
     if(document.body.classList.contains("intro-lock"))return;
     clearInterval(wait);
     guide.hidden=false;
-    setTimeout(()=>{if(tips)say("Ahoy! Tap my ship if you want a lift to any section.",6000);},1300);
+    setTimeout(()=>{if(tips&&panel.hidden)say("Ahoy! Tap my ship if you want a lift to any section.",6000);},1300);
     startTips();
   },250);
 })();
