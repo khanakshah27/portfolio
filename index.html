@@ -372,38 +372,51 @@ body.intro-lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.stickers .stk.bob{animation:none}}
 
 
-/* ── RECOGNITION: embroidered mission patches ── */
-.patches{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2.2rem 1.4rem;margin-top:2.6rem}
-.patch{text-align:center}
-.patch svg{display:block;width:100%;max-width:190px;margin:0 auto 1rem;transform:rotate(var(--pr,0deg));filter:drop-shadow(0 12px 10px rgba(23,18,43,0.3));transition:transform .5s var(--ease)}
-.patch:hover svg{transform:rotate(calc(var(--pr,0deg) * -3)) scale(1.06)}
-.patch .spin{transform-origin:100px 100px;animation:spin 46s linear infinite}
-.patch:hover .spin{animation-play-state:paused}
-@keyframes spin{to{transform:rotate(360deg)}}
-.patch .pt{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:0.5px}
-.patch .pb{font-family:var(--serif);font-size:40px}
-.patch .ps{font-family:var(--mono);font-size:8.5px;letter-spacing:1.4px}
-.patch h3{font-family:var(--serif);font-weight:400;font-size:1.2rem;line-height:1.15;margin-bottom:0.4rem}
-@media (max-width:1000px){.patches{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:560px){.patches{grid-template-columns:repeat(2,minmax(0,1fr))}.patch h3{font-size:1.05rem}}
+/* ── RECOGNITION: an honours roll ── */
+.honours{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:2.6rem;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
+.hn{padding:2rem 1.5rem 2.2rem;border-left:1px solid var(--line);transition:background .35s}
+.hn:first-child{border-left:none;padding-left:0}
+.hn:hover{background:rgba(23,18,43,0.04)}
+.seal-s{display:block;width:92px;height:92px;margin-bottom:1.5rem;overflow:visible}
+.seal-s circle{fill:none;stroke:var(--star);stroke-width:1}
+.seal-s .in{stroke:var(--star-40)}
+.seal-s .n{font-family:var(--serif);font-style:italic;font-size:34px;fill:var(--star)}
+.seal-s.win circle:first-child{fill:var(--star);stroke:var(--star)}
+.seal-s.win .in{stroke:rgba(217,207,247,0.45)}
+.seal-s .st{fill:#d9cff7;stroke:none}
+.seal-s text.wn{font-family:var(--mono);font-size:9px;letter-spacing:2.2px;fill:#d9cff7;stroke:none}
+.hn-y{margin-bottom:0.55rem}
+.hn h3{font-family:var(--serif);font-weight:400;font-size:1.3rem;line-height:1.18;margin-bottom:0.65rem}
+.hn-m{opacity:0.9}
+@media (max-width:1000px){
+  .honours{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hn,.hn:first-child{border-left:none;padding-left:1.5rem;border-top:1px solid var(--line)}
+  .hn:nth-child(-n+2){border-top:none}
+  .hn:nth-child(even){border-left:1px solid var(--line)}
+  .hn:nth-child(odd){padding-left:0}
+}
+@media (max-width:560px){
+  .honours{grid-template-columns:minmax(0,1fr)}
+  .hn,.hn:nth-child(even),.hn:nth-child(odd){display:grid;grid-template-columns:72px minmax(0,1fr);gap:0 1.2rem;border-left:none;padding:1.4rem 0;border-top:1px solid var(--line)}
+  .hn:first-child{border-top:none}
+  .seal-s{width:72px;height:72px;margin:0}
+}
 
-/* ── PATENTS: filing documents with a PUBLISHED stamp ── */
+/* ── PATENTS: specification sheets ── */
 .pat-head{margin-top:clamp(4rem,8vw,6.5rem)}
 .pat-head h2{margin-bottom:0}
-.pdocs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.8rem;margin-top:2.4rem}
-.pdoc{position:relative;background:#fffdf6;color:#17122b;padding:1.3rem 1.4rem 3.6rem;border:1px solid rgba(23,18,43,0.22);transform:rotate(var(--rot,0deg));box-shadow:0 22px 30px -20px rgba(23,18,43,0.55),0 2px 0 rgba(23,18,43,0.05);transition:transform .45s var(--ease),box-shadow .45s;background-image:linear-gradient(rgba(90,62,209,0.07) 1px,transparent 1px);background-size:100% 26px;background-position:0 8px}
-.pdoc::before{content:"";position:absolute;top:0;right:0;width:30px;height:30px;background:linear-gradient(225deg,var(--lilac-bg) 50%,#e6dffb 50%);box-shadow:-2px 2px 4px rgba(23,18,43,0.12)}
-.pdoc:hover{transform:rotate(0deg) translateY(-6px);box-shadow:0 30px 36px -20px rgba(23,18,43,0.6)}
-.pd-top{display:flex;justify-content:space-between;padding-bottom:0.6rem;margin-bottom:0.9rem;border-bottom:3px double rgba(23,18,43,0.4);padding-right:34px}
-.pd-no{color:var(--star-60);margin-bottom:0.15rem}
-.pd-num{font-family:var(--mono);font-weight:500;font-size:clamp(1.15rem,1.7vw,1.5rem);letter-spacing:0.04em;color:var(--lilac)}
-.pd-bars{display:flex;align-items:stretch;height:34px;gap:2px;margin:0.8rem 0 1rem;opacity:0.85}
-.pd-bars i{display:block;background:#17122b}
-.pdoc h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.2rem,1.7vw,1.5rem);line-height:1.15;position:relative;z-index:1;background:rgba(255,253,246,0.82)}
-.pd-stamp{position:absolute;right:1rem;bottom:1.1rem;transform:rotate(-13deg);border:2px solid var(--lilac);color:var(--lilac);padding:0.25rem 0.6rem;letter-spacing:0.16em;opacity:0.88;background:rgba(255,253,246,0.55);border-radius:3px;box-shadow:inset 0 0 0 2px rgba(255,253,246,0.4)}
-.rv.in .pd-stamp{animation:stamp .55s cubic-bezier(.2,1.4,.4,1) .5s both}
-@keyframes stamp{from{opacity:0;transform:rotate(-13deg) scale(2.4)}to{opacity:0.88;transform:rotate(-13deg) scale(1)}}
-@media (max-width:1000px){.pdocs{grid-template-columns:minmax(0,1fr);max-width:560px}.pdoc{transform:none}}
+.pubs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(1.6rem,3vw,3rem);margin-top:2.4rem}
+.pub{border-top:2px solid var(--star);padding:1rem 0 0;display:flex;flex-direction:column}
+.pub-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.4rem}
+.pub-top .mono{opacity:0.85}
+.pub-i{font-family:var(--serif);font-style:italic;font-size:2.4rem;line-height:1;color:var(--lilac)}
+.pub h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.3rem,1.75vw,1.6rem);line-height:1.18;margin-bottom:1.6rem;flex:1}
+.pub dl{border-top:1px solid var(--line-strong);padding-top:0.9rem}
+.pub dt{margin-bottom:0.2rem;opacity:0.8}
+.pub dd{font-size:0.95rem;letter-spacing:0.06em;color:var(--star)}
+.pub-s{display:flex;align-items:center;gap:0.55rem;margin-top:1rem;padding-bottom:0.2rem;color:var(--lilac)}
+.pub-s i{width:7px;height:7px;border-radius:50%;background:var(--lilac);display:block}
+@media (max-width:1000px){.pubs{grid-template-columns:minmax(0,1fr);gap:2.4rem 0;max-width:620px}}
 #awards{padding-bottom:clamp(8rem,13vw,12rem)}
 
 /* ── REVEAL ── */
@@ -639,109 +652,22 @@ body.intro-lock{overflow:hidden}
     <div class="rv">
       <div class="ch-no">Chapter IV</div>
       <h2><em>Recognition</em></h2>
-      <p class="ch-note">Mission patches, earned the hard way.</p>
     </div>
-    <div class="patches rv">
-        <article class="patch" style="--pr:-2deg">
-          <svg viewBox="0 0 200 200" aria-hidden="true">
-            <circle cx="100" cy="100" r="97" fill="#eaa23f"/>
-            <circle cx="100" cy="100" r="91" fill="none" stroke="#2a1d05" stroke-width="1.6" stroke-dasharray="4.5 3.5" opacity="0.9"/>
-            <g class="spin"><defs><path id="pp0" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs>
-              <text class="pt" fill="#2a1d05"><textPath href="#pp0" textLength="448" lengthAdjust="spacing">BEST PCM PROJECT · ENGINEERINGS DAY ’26 · </textPath></text></g>
-            <circle cx="100" cy="100" r="54" fill="#f6c577"/>
-            <circle cx="100" cy="100" r="50" fill="none" stroke="#2a1d05" stroke-width="1.2" stroke-dasharray="2.5 3" opacity="0.8"/>
-            <path d="M100 52 l2.4 5.6 5.6 2.4 -5.6 2.4 -2.4 5.6 -2.4 -5.6 -5.6 -2.4 5.6 -2.4z" fill="#2a1d05"/>
-            <text x="100" y="112" text-anchor="middle" class="pb" fill="#2a1d05">Winner</text>
-            <text x="100" y="132" text-anchor="middle" class="ps" fill="#2a1d05">SEPT 2026</text>
-          </svg>
-          <h3>Winner — Best PCM Project, Engineerings Day ’26</h3><div class="mono">Vellore Institute of Technology · Sept 2026</div>
-        </article>
-        <article class="patch" style="--pr:1.5deg">
-          <svg viewBox="0 0 200 200" aria-hidden="true">
-            <circle cx="100" cy="100" r="97" fill="#2a1f66"/>
-            <circle cx="100" cy="100" r="91" fill="none" stroke="#b9a7f0" stroke-width="1.6" stroke-dasharray="4.5 3.5" opacity="0.9"/>
-            <g class="spin"><defs><path id="pp1" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs>
-              <text class="pt" fill="#f1ecff"><textPath href="#pp1" textLength="448" lengthAdjust="spacing">INNOVACT-2025 HACKATHON · VIT · </textPath></text></g>
-            <circle cx="100" cy="100" r="54" fill="#3a2d86"/>
-            <circle cx="100" cy="100" r="50" fill="none" stroke="#b9a7f0" stroke-width="1.2" stroke-dasharray="2.5 3" opacity="0.8"/>
-            <path d="M100 52 l2.4 5.6 5.6 2.4 -5.6 2.4 -2.4 5.6 -2.4 -5.6 -5.6 -2.4 5.6 -2.4z" fill="#b9a7f0"/>
-            <text x="100" y="112" text-anchor="middle" class="pb" fill="#f1ecff">1st</text>
-            <text x="100" y="132" text-anchor="middle" class="ps" fill="#f1ecff">PRIZE</text>
-          </svg>
-          <h3>1st Prize — InnovAct-2025 Hackathon</h3><div class="mono">Vellore Institute of Technology · 2025</div>
-        </article>
-        <article class="patch" style="--pr:-1deg">
-          <svg viewBox="0 0 200 200" aria-hidden="true">
-            <circle cx="100" cy="100" r="97" fill="#5a3ed1"/>
-            <circle cx="100" cy="100" r="91" fill="none" stroke="#d9cff7" stroke-width="1.6" stroke-dasharray="4.5 3.5" opacity="0.9"/>
-            <g class="spin"><defs><path id="pp2" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs>
-              <text class="pt" fill="#fff"><textPath href="#pp2" textLength="448" lengthAdjust="spacing">MERIT SCHOLARSHIP · RANK ONE · </textPath></text></g>
-            <circle cx="100" cy="100" r="54" fill="#6f55df"/>
-            <circle cx="100" cy="100" r="50" fill="none" stroke="#d9cff7" stroke-width="1.2" stroke-dasharray="2.5 3" opacity="0.8"/>
-            <path d="M100 52 l2.4 5.6 5.6 2.4 -5.6 2.4 -2.4 5.6 -2.4 -5.6 -5.6 -2.4 5.6 -2.4z" fill="#d9cff7"/>
-            <text x="100" y="112" text-anchor="middle" class="pb" fill="#fff">1st</text>
-            <text x="100" y="132" text-anchor="middle" class="ps" fill="#fff">2023–24</text>
-          </svg>
-          <h3>Merit Scholarship — 1st Rank</h3><div class="mono">Academic Year 2023–24 · 2024</div>
-        </article>
-        <article class="patch" style="--pr:2deg">
-          <svg viewBox="0 0 200 200" aria-hidden="true">
-            <circle cx="100" cy="100" r="97" fill="#d9739f"/>
-            <circle cx="100" cy="100" r="91" fill="none" stroke="#2e0f1d" stroke-width="1.6" stroke-dasharray="4.5 3.5" opacity="0.9"/>
-            <g class="spin"><defs><path id="pp3" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs>
-              <text class="pt" fill="#2e0f1d"><textPath href="#pp3" textLength="448" lengthAdjust="spacing">MERIT SCHOLARSHIP · RANK TWO · </textPath></text></g>
-            <circle cx="100" cy="100" r="54" fill="#e58bb4"/>
-            <circle cx="100" cy="100" r="50" fill="none" stroke="#2e0f1d" stroke-width="1.2" stroke-dasharray="2.5 3" opacity="0.8"/>
-            <path d="M100 52 l2.4 5.6 5.6 2.4 -5.6 2.4 -2.4 5.6 -2.4 -5.6 -5.6 -2.4 5.6 -2.4z" fill="#2e0f1d"/>
-            <text x="100" y="112" text-anchor="middle" class="pb" fill="#2e0f1d">2nd</text>
-            <text x="100" y="132" text-anchor="middle" class="ps" fill="#2e0f1d">2024–25</text>
-          </svg>
-          <h3>Merit Scholarship — 2nd Rank</h3><div class="mono">Academic Year 2024–25 · 2025</div>
-        </article>
-        <article class="patch" style="--pr:-1.5deg">
-          <svg viewBox="0 0 200 200" aria-hidden="true">
-            <circle cx="100" cy="100" r="97" fill="#1f7a6d"/>
-            <circle cx="100" cy="100" r="91" fill="none" stroke="#bfeee4" stroke-width="1.6" stroke-dasharray="4.5 3.5" opacity="0.9"/>
-            <g class="spin"><defs><path id="pp4" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs>
-              <text class="pt" fill="#f0fffb"><textPath href="#pp4" textLength="448" lengthAdjust="spacing">MERIT SCHOLARSHIP · RANK THREE · </textPath></text></g>
-            <circle cx="100" cy="100" r="54" fill="#2f9484"/>
-            <circle cx="100" cy="100" r="50" fill="none" stroke="#bfeee4" stroke-width="1.2" stroke-dasharray="2.5 3" opacity="0.8"/>
-            <path d="M100 52 l2.4 5.6 5.6 2.4 -5.6 2.4 -2.4 5.6 -2.4 -5.6 -5.6 -2.4 5.6 -2.4z" fill="#bfeee4"/>
-            <text x="100" y="112" text-anchor="middle" class="pb" fill="#f0fffb">3rd</text>
-            <text x="100" y="132" text-anchor="middle" class="ps" fill="#f0fffb">2025–26</text>
-          </svg>
-          <h3>Merit Scholarship — 3rd Rank</h3><div class="mono">Academic Year 2025–26 · 2026</div>
-        </article>
+    <div class="honours rv">
+        <article class="hn top"><svg class="seal-s win" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47"/><circle cx="50" cy="50" r="41" class="in"/><path class="st" d="M50 24l4.2 9.6 10.4 1-7.9 6.9 2.4 10.2L50 46l-9.1 5.7 2.4-10.2-7.9-6.9 10.4-1z" transform="translate(0 -2)"/><text x="50" y="70" text-anchor="middle" class="wn">WINNER</text></svg><div class="hn-t"><div class="mono hn-y">Sept 2026</div><h3>Winner — Best PCM Project, Engineerings Day ’26</h3><div class="mono hn-m">Vellore Institute of Technology</div></div></article>
+        <article class="hn"><svg class="seal-s" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47"/><circle cx="50" cy="50" r="41" class="in"/><text x="50" y="60" text-anchor="middle" class="n">1st</text></svg><div class="hn-t"><div class="mono hn-y">2025</div><h3>1st Prize — InnovAct-2025 Hackathon</h3><div class="mono hn-m">Vellore Institute of Technology</div></div></article>
+        <article class="hn"><svg class="seal-s" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47"/><circle cx="50" cy="50" r="41" class="in"/><text x="50" y="60" text-anchor="middle" class="n">1st</text></svg><div class="hn-t"><div class="mono hn-y">2024</div><h3>Merit Scholarship — 1st Rank</h3><div class="mono hn-m">Academic Year 2023–24</div></div></article>
+        <article class="hn"><svg class="seal-s" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47"/><circle cx="50" cy="50" r="41" class="in"/><text x="50" y="60" text-anchor="middle" class="n">2nd</text></svg><div class="hn-t"><div class="mono hn-y">2025</div><h3>Merit Scholarship — 2nd Rank</h3><div class="mono hn-m">Academic Year 2024–25</div></div></article>
+        <article class="hn"><svg class="seal-s" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47"/><circle cx="50" cy="50" r="41" class="in"/><text x="50" y="60" text-anchor="middle" class="n">3rd</text></svg><div class="hn-t"><div class="mono hn-y">2026</div><h3>Merit Scholarship — 3rd Rank</h3><div class="mono hn-m">Academic Year 2025–26</div></div></article>
     </div>
     <div class="rv pat-head" id="patents">
       <div class="ch-no">Chapter V</div>
       <h2>Patents &amp; <em>publications</em></h2>
     </div>
-    <div class="pdocs rv">
-        <article class="pdoc" style="--rot:-1.3deg">
-          <div class="pd-top mono"><span>Patent</span><span>March 2026</span></div>
-          <div class="pd-no mono">Application No.</div>
-          <div class="pd-num">202641018176</div>
-          <div class="pd-bars" data-n="202641018176" aria-hidden="true"></div>
-          <h3>System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</h3>
-          <div class="pd-stamp mono" aria-label="Published">Published</div>
-        </article>
-        <article class="pdoc" style="--rot:0.9deg">
-          <div class="pd-top mono"><span>Patent</span><span>April 2026</span></div>
-          <div class="pd-no mono">Application No.</div>
-          <div class="pd-num">202641053864</div>
-          <div class="pd-bars" data-n="202641053864" aria-hidden="true"></div>
-          <h3>A System and Method for Machine Learning-Based FTIR Spectral Denoising</h3>
-          <div class="pd-stamp mono" aria-label="Published">Published</div>
-        </article>
-        <article class="pdoc" style="--rot:-0.7deg">
-          <div class="pd-top mono"><span>Patent</span><span>2026</span></div>
-          <div class="pd-no mono">Application No.</div>
-          <div class="pd-num">202641123781</div>
-          <div class="pd-bars" data-n="202641123781" aria-hidden="true"></div>
-          <h3>Method for Resolution-Adaptive Spatial-Semantic Attention Conditioning in Diffusion Image Generation</h3>
-          <div class="pd-stamp mono" aria-label="Published">Published</div>
-        </article>
+    <div class="pubs rv">
+        <article class="pub"><div class="pub-top"><span class="pub-i">01</span><span class="mono">March 2026</span></div><h3>System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</h3><dl><dt class="mono">Application No.</dt><dd class="mono">202641018176</dd></dl><div class="pub-s mono"><i></i>Published</div></article>
+        <article class="pub"><div class="pub-top"><span class="pub-i">02</span><span class="mono">April 2026</span></div><h3>A System and Method for Machine Learning-Based FTIR Spectral Denoising</h3><dl><dt class="mono">Application No.</dt><dd class="mono">202641053864</dd></dl><div class="pub-s mono"><i></i>Published</div></article>
+        <article class="pub"><div class="pub-top"><span class="pub-i">03</span><span class="mono">2026</span></div><h3>Method for Resolution-Adaptive Spatial-Semantic Attention Conditioning in Diffusion Image Generation</h3><dl><dt class="mono">Application No.</dt><dd class="mono">202641123781</dd></dl><div class="pub-s mono"><i></i>Published</div></article>
     </div>
   </div>
 </section>
@@ -972,15 +898,6 @@ body.intro-lock{overflow:hidden}
     pile.addEventListener("click",e=>{if(e.target.closest("figure")===order[0])next();});
     pile.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&document.activeElement===order[0]){e.preventDefault();next();}});
   })();
-})();
-
-// barcodes drawn from each application number
-(function(){
-  document.querySelectorAll(".pd-bars").forEach(el=>{
-    const n=el.dataset.n.split("").map(Number);let h="";
-    n.forEach((d,i)=>{h+='<i style="width:'+(1+(d%3))+'px"></i><i style="width:'+(1+((d+i)%4))+'px;background:transparent"></i>';});
-    el.innerHTML=h+'<i style="width:3px"></i><i style="width:1px;background:transparent"></i><i style="width:2px"></i>';
-  });
 })();
 
 // copy email
