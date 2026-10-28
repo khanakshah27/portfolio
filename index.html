@@ -362,7 +362,13 @@ body.intro-lock{overflow:hidden}
 @keyframes bob{0%,100%{translate:0 0}50%{translate:0 -9px}}
 .m-track .stk{--w:34px;vertical-align:middle;margin:-8px 1.6rem -8px 1.2rem;filter:drop-shadow(0 3px 3px rgba(23,18,43,0.25))}
 .m-track span::after{content:none!important}
-@media (max-width:900px){.stickers .stk.hide-s{display:none}.stickers .stk{--w:calc(var(--w0,90px) * 0.7)}}
+@media (max-width:900px){
+  /* phones/tablets: stickers sit in their own row above the content, never over text */
+  .stickers{position:relative;inset:auto;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:0.4rem 1.6rem;padding:0 var(--pad) 2.2rem}
+  .stickers .stk,.stickers .stk.bob{position:static;--w:64px!important;animation:none}
+  .stickers .stk.hide-s{display:none}
+  .stickers .stk:hover{transform:rotate(var(--r,0deg))}
+}
 @media (prefers-reduced-motion:reduce){.stickers .stk.bob{animation:none}}
 
 /* ── REVEAL ── */
