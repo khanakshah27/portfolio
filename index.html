@@ -372,79 +372,43 @@ body.intro-lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.stickers .stk.bob{animation:none}}
 
 
-/* ── RECOGNITION: a sketched study ── */
-.scene-wrap{margin-top:2.4rem}
-.scene-scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;padding-bottom:0.4rem}
-.scene{display:block;width:100%;height:auto;overflow:visible}
-.sk *{stroke:var(--star);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.sk .fw{fill:#fffdf6}.sk .fw2{fill:rgba(255,255,255,0.55)}.sk .fw3{fill:rgba(255,255,255,0.5)}.sk .fa{fill:#f3c27a}.sk .fa2{fill:#fbe2b2}.sk .fp1{fill:#f2b8d0}.sk .fl{fill:#cdbff5}.sk .ft{fill:#9fdccf}
-.sk .fwd{fill:#e6c99c}.sk .fk{fill:#f6d6c0}.sk .fh{fill:#2a1f3d}.sk .fb{fill:#cfe5ff}.sk .fn{fill:#241a4d}.sk .fn2{fill:#2a1f3d}.sk .fp{fill:rgba(255,253,246,0.55)}.sk .pk{fill:#f4a6c0;stroke:none;opacity:0.8}
-.sk .dot{fill:var(--star);stroke:none}.sk .ink{fill:var(--star)}.sk .ink2{stroke:#5a3ed1;stroke-width:3}
-.sk .leg{stroke:var(--star);stroke-width:21}.sk .arm{stroke:var(--star);stroke-width:21}.sk .armw{stroke:#fffdf6;stroke-width:16.5}.sk .legw{stroke:#3a2d86;stroke-width:16.5}
-.sk .tick{stroke:#5a3ed1;stroke-width:2.4}.sk .cuff{stroke-width:2}
-.sk .armc{stroke:#d9cff7;stroke-width:5}
-.sk .curve{stroke:#5a3ed1;stroke-width:2.4}
-.sk text{stroke:none;fill:var(--star);font-family:var(--poem);font-style:italic}
-.sk text.num{font-family:var(--serif);font-style:normal;font-size:19px}.sk text.num.big{font-size:21px;font-style:italic}
-.scene .cone{fill:rgba(243,194,122,0.2);stroke:none}
-.scene .live .st{fill:#fff;stroke:none}
-.scene .live .chalk{font-family:var(--poem);font-style:italic;font-size:26px;fill:rgba(23,18,43,0.55);stroke:none}
-.scene .live .chalk.sm{font-size:21px}
-.scene .lights circle{fill:#eaa23f;stroke:#17122b;stroke-width:1.4;animation:twk 3s ease-in-out infinite}
-.scene .lights circle:nth-child(2n){animation-delay:-1s}.scene .lights circle:nth-child(3n){animation-delay:-2s}
-@keyframes twk{50%{opacity:0.35}}
-.scene .bub circle{fill:rgba(255,255,255,0.8);stroke:#17122b;stroke-width:1;animation:rise 2.6s ease-in infinite}
-.scene .bub circle:nth-child(2){animation-delay:-0.9s}.scene .bub circle:nth-child(3){animation-delay:-1.7s}
-@keyframes rise{from{transform:translateY(8px);opacity:0}30%{opacity:1}to{transform:translateY(-34px);opacity:0}}
-.scene .steam{fill:none;stroke:rgba(23,18,43,0.5);stroke-width:1.4;stroke-dasharray:3 4;animation:stm 2.4s linear infinite}
-.scene .steam.s2{animation-delay:-1.1s}
-@keyframes stm{to{stroke-dashoffset:-14}}
-.girl-eyes .eye{transform-box:fill-box;transform-origin:50% 50%;animation:g-blinkeye 5.2s infinite}
-.girl-eyes ellipse{fill:var(--star);stroke:none}
-.obj{cursor:pointer;outline:none}
-.obj .hit{fill:transparent;stroke:none}
-.obj .hl{fill:#eaa23f;stroke:none;opacity:0;transition:opacity .3s}
-.obj:hover .hl,.obj:focus-visible .hl{opacity:0.22}
-.obj.on .hl{opacity:0.5}
-.obj{transition:transform .35s var(--ease);transform-box:fill-box;transform-origin:50% 100%}
-.obj:hover,.obj.on{transform:translateY(-4px)}
-.scene-note{display:flex;justify-content:space-between;align-items:center;gap:1.4rem;flex-wrap:wrap;margin-top:1.1rem;padding:1.1rem 0 0.2rem;border-top:1px solid var(--line-strong)}
-.sn-main .mono{display:block}
-.sn-main h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.1;margin:0.35rem 0 0.45rem}
-.sn-ctl{display:flex;align-items:center;gap:0.9rem}
-.sn-ctl button{width:2.5rem;height:2.5rem;border:1px solid var(--line-strong);background:none;color:var(--star);font-size:1.1rem;cursor:pointer;border-radius:50%;transition:background .25s,color .25s}
-.sn-ctl button:hover{background:var(--star);color:var(--lilac-bg)}
-.scene-hint{margin-top:0.9rem;opacity:0.75}
+/* ── RECOGNITION: text list + a line sketch beside it ── */
+.recog{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,0.88fr);gap:2.4rem clamp(2rem,5vw,5rem);align-items:center;margin-top:2.4rem}
+.aw-list{list-style:none;border-top:1px solid var(--line-strong)}
+.aw-list li{display:grid;grid-template-columns:2.4rem minmax(0,1fr);gap:0 1.2rem;align-items:baseline;padding:1.4rem 0;border-bottom:1px solid var(--line)}
+.aw-n{opacity:0.7}
+.aw-list h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.35rem,2vw,1.75rem);line-height:1.15;margin-bottom:0.4rem;transition:color .25s}
+.aw-list li:hover h3{color:var(--lilac)}
+.aw-y{margin-bottom:0.45rem;color:var(--lilac)}
+.sketchpage{margin:0;justify-self:center;width:100%;max-width:460px;background:#fbf9ff;border:1.6px solid var(--star);border-radius:3px 6px 3px 5px/5px 3px 6px 3px;padding:0.3rem 0.5rem 0.6rem;transform:rotate(1.3deg);box-shadow:0 28px 36px -24px rgba(23,18,43,0.6)}
+.sketch{display:block;width:100%;height:auto;overflow:visible}
+.sk2 *{stroke:var(--star);stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.sk2 .pp{fill:#fbf9ff}.sk2 .dot{fill:var(--star);stroke:none}
+.sk2 .limb{stroke-width:21}.sk2 .limbi{stroke:#fbf9ff;stroke-width:16.5}
+.sk2 text{stroke:none;fill:var(--star)}
+.sk2 .nm{font-family:var(--serif);font-size:11px}
+.sk2 .chalk{font-family:var(--poem);font-style:italic;font-size:22px;fill:rgba(23,18,43,0.7)}
+.sk2 .eyes ellipse{fill:var(--star);stroke:none}
+.sk2 .eye{transform-box:fill-box;transform-origin:50% 50%;animation:g-blinkeye 5s infinite}
+@media (max-width:900px){.recog{grid-template-columns:minmax(0,1fr)}.sketchpage{max-width:400px}}
+@media (max-width:560px){.aw-list li{grid-template-columns:1.8rem minmax(0,1fr);gap:0 0.8rem}}
+@media (prefers-reduced-motion:reduce){.sk2 .eye{animation:none}}
 
-/* ── PATENTS: sheets pegged on a line ── */
+/* ── PATENTS: specification sheets ── */
 .pat-head{margin-top:clamp(4rem,8vw,6.5rem)}
 .pat-head h2{margin-bottom:0}
-.line-wrap{position:relative;margin-top:1.6rem}
-.cl{position:absolute;left:0;top:0;width:100%;height:130px;pointer-events:none;overflow:visible}
-.cl path{fill:none;stroke:var(--star);stroke-width:1.6;stroke-linecap:round}
-.pats{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(1.4rem,3vw,2.6rem);padding-top:57px}
-.pat{position:relative;background:#fffdf6;color:#17122b;padding:1.5rem 1.3rem 1.3rem;border:1.6px solid var(--star);border-radius:3px 5px 3px 6px/5px 3px 6px 3px;transform:rotate(var(--r,0deg));transform-origin:50% 0;box-shadow:0 20px 28px -20px rgba(23,18,43,0.6);transition:transform .5s var(--ease);display:flex;flex-direction:column}
-.pat:nth-child(2){margin-top:16px}
-.pat:hover{transform:rotate(calc(var(--r,0deg) * -0.5)) translateY(4px)}
-.peg{position:absolute;left:50%;top:-18px;width:14px;height:34px;margin-left:-7px;background:#e6c99c;border:1.6px solid var(--star);border-radius:3px;z-index:2}
-.peg::after{content:"";position:absolute;left:50%;top:50%;width:2px;height:12px;background:var(--star);transform:translate(-50%,-50%);opacity:0.7}
-.pat-art{display:block;width:100%;height:auto;margin:0 0 0.8rem;border-bottom:1.5px dashed rgba(23,18,43,0.35);padding-bottom:0.7rem}
-.pat-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.7rem}
-.pat-i{font-family:var(--serif);font-style:italic;font-size:2rem;line-height:1;color:var(--lilac)}
-.pat h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.2rem,1.6vw,1.45rem);line-height:1.18;margin-bottom:1.2rem;flex:1}
-.pat dl{border-top:1px solid var(--line-strong);padding-top:0.7rem}
-.pat dt{margin-bottom:0.15rem;opacity:0.8}
-.pat dd{font-size:0.92rem;letter-spacing:0.06em;color:var(--star)}
-.pub-s{display:flex;align-items:center;gap:0.55rem;margin-top:0.8rem;color:var(--lilac)}
+.pubs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(1.6rem,3vw,3rem);margin-top:2.4rem}
+.pub{border-top:2px solid var(--star);padding:1rem 0 0;display:flex;flex-direction:column}
+.pub-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.4rem}
+.pub-top .mono{opacity:0.85}
+.pub-i{font-family:var(--serif);font-style:italic;font-size:2.4rem;line-height:1;color:var(--lilac)}
+.pub h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.3rem,1.75vw,1.6rem);line-height:1.18;margin-bottom:1.6rem;flex:1}
+.pub dl{border-top:1px solid var(--line-strong);padding-top:0.9rem}
+.pub dt{margin-bottom:0.2rem;opacity:0.8}
+.pub dd{font-size:0.95rem;letter-spacing:0.06em;color:var(--star)}
+.pub-s{display:flex;align-items:center;gap:0.55rem;margin-top:1rem;padding-bottom:0.2rem;color:var(--lilac)}
 .pub-s i{width:7px;height:7px;border-radius:50%;background:var(--lilac);display:block}
-.bench{display:block;width:100%;height:auto;margin-top:2.4rem}
-@media (max-width:900px){
-  .cl{display:none}
-  .pats{grid-template-columns:minmax(0,1fr);gap:2.6rem 0;padding-top:20px;max-width:560px}
-  .pat:nth-child(2){margin-top:0}
-  .peg{top:-14px}
-  .bench{min-width:0}
-}
+@media (max-width:1000px){.pubs{grid-template-columns:minmax(0,1fr);gap:2.4rem 0;max-width:620px}}
 #awards{padding-bottom:clamp(8rem,13vw,12rem)}
 
 /* ── LILAC BACKGROUND: living dot grid ── */
@@ -775,108 +739,35 @@ body.intro-lock .guide{display:none}
       <div class="ch-no">Chapter IV</div>
       <h2><em>Recognition</em></h2>
     </div>
-    <div class="scene-wrap rv">
-      <div class="scene-scroll"><svg class="scene" viewBox="0 0 1200 520" role="group" aria-label="An illustrated study: a scientist beside a bookshelf of awards">
-  <path class="cone" d="M1094 254L1154 254L1196 468L1052 468Z"/>
-  <g class="sk" filter="url(#wob)">
-    <path d="M0 12Q300 42 600 12Q900 42 1200 12"/>
-    <rect class="fp" x="40" y="40" width="360" height="430"/><rect class="fwd" x="40" y="40" width="360" height="10"/><rect class="fwd" x="40" y="170" width="360" height="10"/><rect class="fwd" x="40" y="300" width="360" height="10"/><rect class="fwd" x="40" y="430" width="360" height="10"/><path d="M220 310V430"/><rect class="fwd" x="40" y="440" width="360" height="30"/><path d="M220 440V470"/><circle class="dot" cx="206" cy="456" r="3"/><circle class="dot" cx="234" cy="456" r="3"/><rect class="fl" x="58" y="78" width="22" height="92" rx="2"/><path d="M61 89H77M61 157H77"/><rect class="fa" x="80" y="66" width="18" height="104" rx="2"/><path d="M83 77H95M83 157H95"/><rect class="ft" x="98" y="86" width="26" height="84" rx="2"/><path d="M101 97H121M101 157H121"/><rect class="fp1" x="124" y="60" width="16" height="110" rx="2"/><path d="M127 71H137M127 157H137"/><rect class="fl" x="140" y="74" width="22" height="96" rx="2"/><path d="M143 85H159M143 157H159"/><rect class="fa" x="162" y="70" width="20" height="100" rx="2"/><path d="M165 81H179M165 157H179"/><rect class="ft" x="182" y="92" width="16" height="78" rx="2"/><path d="M185 103H195M185 157H195"/><rect class="fp1" x="206" y="78" width="20" height="92" rx="2" transform="rotate(-13 226 170)"/><path d="M209 92H223M209 156H223" transform="rotate(-13 226 170)"/><rect class="fa" x="238" y="346" width="20" height="84" rx="2"/><path d="M241 357H255M241 417H255"/><rect class="fl" x="258" y="360" width="24" height="70" rx="2"/><path d="M261 371H279M261 417H279"/><rect class="ft" x="282" y="340" width="18" height="90" rx="2"/><path d="M285 351H297M285 417H297"/><rect class="fp1" x="158" y="284" width="60" height="16" rx="2"/><path d="M162 292H214"/><rect class="ft" x="164" y="268" width="50" height="16" rx="2"/><path d="M168 276H210"/><rect class="fa" x="160" y="252" width="56" height="16" rx="2"/><path d="M164 260H212"/><circle class="fb" cx="110" cy="372" r="34"/><ellipse cx="110" cy="372" rx="14" ry="34"/><path d="M76 372H144M82 354Q110 362 138 354M82 390Q110 382 138 390"/><path d="M146 346Q160 396 114 410"/><path d="M114 408V424M92 426H136"/><path class="ft" d="M340 404Q320 380 326 352Q342 366 340 404ZM340 404Q348 372 372 362Q374 388 340 404ZM340 404Q338 372 340 346Q352 372 340 404Z"/><path class="fp1" d="M322 404H358L352 430H328Z"/>
-    <circle class="fwd" cx="900" cy="146" r="82"/><circle class="fn" cx="900" cy="146" r="68"/><circle class="dot" cx="900" cy="68" r="3"/><circle class="dot" cx="900" cy="224" r="3"/><circle class="dot" cx="822" cy="146" r="3"/><circle class="dot" cx="978" cy="146" r="3"/><ellipse cx="1088" cy="118" rx="38" ry="13"/><ellipse cx="1088" cy="118" rx="38" ry="13" transform="rotate(60 1088 118)"/><ellipse cx="1088" cy="118" rx="38" ry="13" transform="rotate(120 1088 118)"/><circle class="fa" cx="1088" cy="118" r="6"/><path d="M1124 470V252"/><ellipse class="fwd" cx="1124" cy="468" rx="28" ry="6"/><path class="fa" d="M1090 252L1158 252L1142 200L1106 200Z"/><rect class="fwd" x="760" y="372" width="262" height="12" rx="2"/><path d="M776 384V468M1006 384V468"/><rect class="fp" x="906" y="384" width="100" height="84"/><path d="M906 426H1006"/><circle class="dot" cx="956" cy="405" r="3"/><circle class="dot" cx="956" cy="447" r="3"/><path class="fl" d="M792 372L852 372L846 358L798 358Z"/><path d="M842 358Q874 336 864 296Q858 280 842 282" style="stroke-width:10"/><path class="armc" d="M842 358Q874 336 864 296Q858 280 842 282"/><rect class="fw" x="806" y="246" width="22" height="66" rx="4" transform="rotate(18 817 280)"/><rect class="fn2" x="802" y="238" width="22" height="10" rx="3" transform="rotate(18 813 243)"/><rect class="fa" x="800" y="334" width="44" height="7" rx="2"/><circle class="fw" cx="822" cy="352" r="5"/><rect class="fp1" x="868" y="346" width="28" height="26" rx="5"/><path d="M896 352Q910 352 910 362Q910 372 896 370"/><path class="fw3" d="M944 300V330L920 370Q917 372 921 372H981Q985 372 982 370L958 330V300"/><path class="fa" d="M928 354H974L982 370Q985 372 981 372H921Q917 372 920 370Z"/><path d="M940 300H962"/>
-    <path d="M722 96Q746 78 770 94" style="display:none"/>
-    <path d="M20 470H1180"/><path d="M30 474l-9 9"/><path d="M64 474l-9 9"/><path d="M98 474l-9 9"/><path d="M132 474l-9 9"/><path d="M166 474l-9 9"/><path d="M200 474l-9 9"/><path d="M234 474l-9 9"/><path d="M268 474l-9 9"/><path d="M302 474l-9 9"/><path d="M336 474l-9 9"/><path d="M370 474l-9 9"/><path d="M404 474l-9 9"/><path d="M438 474l-9 9"/><path d="M472 474l-9 9"/><path d="M506 474l-9 9"/><path d="M540 474l-9 9"/><path d="M574 474l-9 9"/><path d="M608 474l-9 9"/><path d="M642 474l-9 9"/><path d="M676 474l-9 9"/><path d="M710 474l-9 9"/><path d="M744 474l-9 9"/><path d="M778 474l-9 9"/><path d="M812 474l-9 9"/><path d="M846 474l-9 9"/><path d="M880 474l-9 9"/><path d="M914 474l-9 9"/><path d="M948 474l-9 9"/><path d="M982 474l-9 9"/><path d="M1016 474l-9 9"/><path d="M1050 474l-9 9"/><path d="M1084 474l-9 9"/><path d="M1118 474l-9 9"/><path d="M1152 474l-9 9"/>
-    
-<g class="girl">
-  <path class="leg" d="M572 404Q568 436 566 458"/><path class="legw" d="M572 404Q568 436 566 458"/><path class="leg" d="M608 404Q614 436 618 458"/><path class="legw" d="M608 404Q614 436 618 458"/>
-  <ellipse class="fn2" cx="562" cy="465" rx="21" ry="8"/><ellipse class="fn2" cx="624" cy="465" rx="21" ry="8"/>
-  <path class="fw" d="M526 196Q528 170 560 166L620 166Q652 170 654 196L672 412L508 412Z"/>
-  <path class="fl" d="M572 168L590 226L608 168Z"/>
-  <path d="M572 168L584 280M608 168L596 280M590 226V412"/>
-  <circle class="dot" cx="590" cy="262" r="2.6"/><circle class="dot" cx="590" cy="304" r="2.6"/><circle class="dot" cx="590" cy="346" r="2.6"/>
-  <rect class="fw" x="618" y="332" width="30" height="34" rx="3"/><path d="M628 332V318M636 332V322"/><path class="ink2" d="M628 318V330M636 322V330"/>
-  <path d="M580 160Q590 172 600 160"/><path class="fk" d="M580 148L580 166Q590 176 600 166L600 148Z"/>
-  <path class="arm" d="M540 200Q500 228 462 180"/><path class="armw" d="M540 200Q500 228 462 180"/>
-  <path class="cuff" d="M470 188l-10 -8"/>
-  <circle class="fk" cx="456" cy="172" r="10"/><path d="M449 168L426 150" style="stroke-width:10"/><path d="M449 168L426 150" style="stroke:#f6d6c0;stroke-width:6"/>
-  <g transform="rotate(-9 650 300)">
-    <rect class="fwd" x="612" y="248" width="76" height="102" rx="5"/><rect class="fw" x="620" y="260" width="60" height="82" rx="2"/>
-    <rect class="fn2" x="638" y="243" width="24" height="12" rx="3"/>
-    <path d="M628 276h26M628 292h26M628 308h26M628 324h26"/>
-    <path class="tick" d="M660 272l4 5 8-10M660 288l4 5 8-10M660 304l4 5 8-10"/>
+    <div class="recog rv">
+      <ol class="aw-list"><li><span class="aw-n mono">01</span><div><div class="aw-y mono">Sept 2026</div><h3>Winner — Best PCM Project, Engineerings Day ’26</h3><div class="mono">Vellore Institute of Technology</div></div></li><li><span class="aw-n mono">02</span><div><div class="aw-y mono">2025</div><h3>1st Prize — InnovAct-2025 Hackathon</h3><div class="mono">Vellore Institute of Technology</div></div></li><li><span class="aw-n mono">03</span><div><div class="aw-y mono">2024</div><h3>Merit Scholarship — 1st Rank</h3><div class="mono">Academic Year 2023–24</div></div></li><li><span class="aw-n mono">04</span><div><div class="aw-y mono">2025</div><h3>Merit Scholarship — 2nd Rank</h3><div class="mono">Academic Year 2024–25</div></div></li><li><span class="aw-n mono">05</span><div><div class="aw-y mono">2026</div><h3>Merit Scholarship — 3rd Rank</h3><div class="mono">Academic Year 2025–26</div></div></li></ol>
+      <figure class="sketchpage"><svg class="sketch" viewBox="0 0 480 548" role="img" aria-label="A line sketch of a girl scientist beside her bookshelf of trophies, waving a hand and writing on a clipboard">
+  <g class="sk2">
+    <g filter="url(#wob)">
+      <path d="M24 6V22"/><circle class="pp" cx="24" cy="8" r="4.4"/><path d="M48 6V22"/><circle class="pp" cx="48" cy="8" r="4.4"/><path d="M72 6V22"/><circle class="pp" cx="72" cy="8" r="4.4"/><path d="M96 6V22"/><circle class="pp" cx="96" cy="8" r="4.4"/><path d="M120 6V22"/><circle class="pp" cx="120" cy="8" r="4.4"/><path d="M144 6V22"/><circle class="pp" cx="144" cy="8" r="4.4"/><path d="M168 6V22"/><circle class="pp" cx="168" cy="8" r="4.4"/><path d="M192 6V22"/><circle class="pp" cx="192" cy="8" r="4.4"/><path d="M216 6V22"/><circle class="pp" cx="216" cy="8" r="4.4"/><path d="M240 6V22"/><circle class="pp" cx="240" cy="8" r="4.4"/><path d="M264 6V22"/><circle class="pp" cx="264" cy="8" r="4.4"/><path d="M288 6V22"/><circle class="pp" cx="288" cy="8" r="4.4"/><path d="M312 6V22"/><circle class="pp" cx="312" cy="8" r="4.4"/><path d="M336 6V22"/><circle class="pp" cx="336" cy="8" r="4.4"/><path d="M360 6V22"/><circle class="pp" cx="360" cy="8" r="4.4"/><path d="M384 6V22"/><circle class="pp" cx="384" cy="8" r="4.4"/><path d="M408 6V22"/><circle class="pp" cx="408" cy="8" r="4.4"/><path d="M432 6V22"/><circle class="pp" cx="432" cy="8" r="4.4"/><path d="M456 6V22"/><circle class="pp" cx="456" cy="8" r="4.4"/>
+      <path d="M270 36q8 -8 18 0" style="display:none"/>
+      <path d="M10 62Q125 96 240 62Q355 96 470 62"/><circle class="pp" cx="70" cy="75" r="4.2"/><circle class="pp" cx="125" cy="79" r="4.2"/><circle class="pp" cx="180" cy="75" r="4.2"/><circle class="pp" cx="300" cy="75" r="4.2"/><circle class="pp" cx="355" cy="79" r="4.2"/><circle class="pp" cx="410" cy="75" r="4.2"/>
+      <rect class="pp" x="24" y="120" width="190" height="338"/><rect class="pp" x="24" y="120" width="190" height="8"/><rect class="pp" x="24" y="230" width="190" height="8"/><rect class="pp" x="24" y="340" width="190" height="8"/><rect class="pp" x="24" y="450" width="190" height="8"/><path d="M119 348V450"/><rect class="pp" x="24" y="458" width="190" height="62"/><path d="M119 458V520"/><circle class="dot" cx="108" cy="490" r="2.4"/><circle class="dot" cx="130" cy="490" r="2.4"/><rect class="pp" x="36" y="160" width="16" height="70" rx="1.5"/><path d="M38.5 169H49.5M38.5 219H49.5"/><rect class="pp" x="52" y="146" width="14" height="84" rx="1.5"/><path d="M54.5 155H63.5M54.5 219H63.5"/><rect class="pp" x="66" y="170" width="18" height="60" rx="1.5"/><path d="M68.5 179H81.5M68.5 219H81.5"/><rect class="pp" x="84" y="138" width="13" height="92" rx="1.5"/><path d="M86.5 147H94.5M86.5 219H94.5"/><rect class="pp" x="97" y="158" width="17" height="72" rx="1.5"/><path d="M99.5 167H111.5M99.5 219H111.5"/><rect class="pp" x="114" y="150" width="15" height="80" rx="1.5"/><path d="M116.5 159H126.5M116.5 219H126.5"/><rect class="pp" x="129" y="166" width="14" height="64" rx="1.5"/><path d="M131.5 175H140.5M131.5 219H140.5"/><rect class="pp" x="146" y="154" width="15" height="76" rx="1.5" transform="rotate(-14 161 230)"/><rect class="pp" x="112" y="439" width="58" height="11" rx="1.5"/><path d="M115 444.5H167"/><rect class="pp" x="116" y="428" width="50" height="11" rx="1.5"/><path d="M119 433.5H163"/><rect class="pp" x="112" y="417" width="56" height="11" rx="1.5"/><path d="M115 422.5H165"/><rect class="pp" x="44" y="328" width="48" height="12"/><path d="M68 328V312"/><path class="pp" d="M55 320H81L84 328H52Z"/><path class="pp" d="M42 262H94Q92 304 68 310Q44 304 42 262Z"/><ellipse class="pp" cx="68" cy="262" rx="26" ry="4.6"/><path d="M42 270Q24 268 27 284Q30 294 46 290M94 270Q112 268 109 284Q106 294 90 290"/><polygon class="pp" points="68.0,276.0 70.0,281.3 75.6,281.5 71.2,285.0 72.7,290.5 68.0,287.4 63.3,290.5 64.8,285.0 60.4,281.5 66.0,281.3"/><path d="M130 238V272"/><path class="pp" d="M125 288L119 316L125 311L128 318L131 290Z"/><path class="pp" d="M135 288L141 314L135 309L132 316L129 290Z"/><circle class="pp" cx="139.0" cy="282.0" r="4.6"/><circle class="pp" cx="136.4" cy="288.4" r="4.6"/><circle class="pp" cx="130.0" cy="291.0" r="4.6"/><circle class="pp" cx="123.6" cy="288.4" r="4.6"/><circle class="pp" cx="121.0" cy="282.0" r="4.6"/><circle class="pp" cx="123.6" cy="275.6" r="4.6"/><circle class="pp" cx="130.0" cy="273.0" r="4.6"/><circle class="pp" cx="136.4" cy="275.6" r="4.6"/><circle class="pp" cx="130" cy="282" r="9"/><text class="nm" x="130" y="286" text-anchor="middle">1</text><path d="M162 238V272"/><path class="pp" d="M157 288L151 316L157 311L160 318L163 290Z"/><path class="pp" d="M167 288L173 314L167 309L164 316L161 290Z"/><circle class="pp" cx="171.0" cy="282.0" r="4.6"/><circle class="pp" cx="168.4" cy="288.4" r="4.6"/><circle class="pp" cx="162.0" cy="291.0" r="4.6"/><circle class="pp" cx="155.6" cy="288.4" r="4.6"/><circle class="pp" cx="153.0" cy="282.0" r="4.6"/><circle class="pp" cx="155.6" cy="275.6" r="4.6"/><circle class="pp" cx="162.0" cy="273.0" r="4.6"/><circle class="pp" cx="168.4" cy="275.6" r="4.6"/><circle class="pp" cx="162" cy="282" r="9"/><text class="nm" x="162" y="286" text-anchor="middle">2</text><path d="M194 238V272"/><path class="pp" d="M189 288L183 316L189 311L192 318L195 290Z"/><path class="pp" d="M199 288L205 314L199 309L196 316L193 290Z"/><circle class="pp" cx="203.0" cy="282.0" r="4.6"/><circle class="pp" cx="200.4" cy="288.4" r="4.6"/><circle class="pp" cx="194.0" cy="291.0" r="4.6"/><circle class="pp" cx="187.6" cy="288.4" r="4.6"/><circle class="pp" cx="185.0" cy="282.0" r="4.6"/><circle class="pp" cx="187.6" cy="275.6" r="4.6"/><circle class="pp" cx="194.0" cy="273.0" r="4.6"/><circle class="pp" cx="200.4" cy="275.6" r="4.6"/><circle class="pp" cx="194" cy="282" r="9"/><text class="nm" x="194" y="286" text-anchor="middle">3</text><circle class="pp" cx="66" cy="404" r="27"/><ellipse cx="66" cy="404" rx="11" ry="27"/><path d="M39 404H93M43 390Q66 396 89 390M43 418Q66 412 89 418"/><path d="M94 382Q104 424 70 436"/><path d="M70 432V444M52 446H88"/><path d="M192 436Q176 418 182 396Q194 408 192 436ZM192 436Q198 410 214 404Q216 426 192 436ZM192 436Q190 410 192 392Q202 412 192 436Z" /><path class="pp" d="M178 436H206L202 450H182Z"/>
+      <circle class="pp" cx="418" cy="130" r="44"/><circle cx="418" cy="130" r="35"/><circle class="dot" cx="418" cy="90" r="2.2"/><circle class="dot" cx="418" cy="170" r="2.2"/><circle class="dot" cx="378" cy="130" r="2.2"/><circle class="dot" cx="458" cy="130" r="2.2"/><circle cx="424" cy="130" r="12"/><ellipse cx="424" cy="130" rx="24" ry="6" transform="rotate(-22 424 130)"/><circle class="dot" cx="398" cy="116" r="1.3"/><circle class="dot" cx="440" cy="152" r="1.3"/><circle class="dot" cx="404" cy="150" r="1.3"/><path d="M446 520V286"/><ellipse class="pp" cx="446" cy="518" rx="22" ry="5"/><path class="pp" d="M420 286L472 286L462 246L430 246Z"/>
+      <path d="M10 520H470"/><path d="M22 524l-7 8"/><path d="M52 524l-7 8"/><path d="M82 524l-7 8"/><path d="M112 524l-7 8"/><path d="M142 524l-7 8"/><path d="M172 524l-7 8"/><path d="M202 524l-7 8"/><path d="M232 524l-7 8"/><path d="M262 524l-7 8"/><path d="M292 524l-7 8"/><path d="M322 524l-7 8"/><path d="M352 524l-7 8"/><path d="M382 524l-7 8"/><path d="M412 524l-7 8"/><path d="M442 524l-7 8"/>
+    </g>
+    <text class="chalk" x="252" y="44" transform="rotate(-4 252 44)">E = mc²</text>
+    <g transform="translate(-138.8 131.3) scale(.82)">
+      <g filter="url(#wob)"><path class="limb" d="M572 404Q568 436 566 458"/><path class="limbi" d="M572 404Q568 436 566 458"/><path class="limb" d="M608 404Q614 436 618 458"/><path class="limbi" d="M608 404Q614 436 618 458"/><ellipse class="pp" cx="562" cy="465" rx="21" ry="8"/><ellipse class="pp" cx="624" cy="465" rx="21" ry="8"/><path class="pp" d="M526 196Q528 170 560 166L620 166Q652 170 654 196L672 412L508 412Z"/><path class="pp" d="M572 168L590 226L608 168Z"/><path d="M572 168L584 280M608 168L596 280M590 226V412"/><circle class="dot" cx="590" cy="262" r="2.6"/><circle class="dot" cx="590" cy="304" r="2.6"/><circle class="dot" cx="590" cy="346" r="2.6"/><rect class="pp" x="618" y="338" width="30" height="34" rx="3"/><path d="M628 338V324M636 338V328"/><path class="pp" d="M580 148L580 166Q590 176 600 166L600 148Z"/><g transform="rotate(-9 650 300)"><rect class="pp" x="612" y="248" width="76" height="102" rx="5"/><rect class="pp" x="620" y="260" width="60" height="82" rx="2"/><rect class="pp" x="638" y="243" width="24" height="12" rx="3"/><path d="M628 276h26M628 292h30M628 308h22M628 324h28"/><path d="M660 270l4 5 8-10M660 286l4 5 8-10"/></g></g>
+      <path class="limb" d="M540 200L506 224"/><path class="limbi" d="M540 200L506 224"/><g class="wave"><path class="limb" d="M506 224L466 182"/><path class="limbi" d="M506 224L466 182"/><circle class="pp" cx="458" cy="174" r="10"/><path d="M452 168L430 148" style="stroke-width:9"/><path d="M452 168L430 148" style="stroke:#fbf9ff;stroke-width:5"/><animateTransform attributeName="transform" type="rotate" values="-18 506 224;8 506 224;-18 506 224" dur="1.7s" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1" keyTimes="0;0.5;1" repeatCount="indefinite"/></g><path class="limb" d="M646 204L684 252"/><path class="limbi" d="M646 204L684 252"/><g class="write"><path class="limb" d="M684 252L652 302"/><path class="limbi" d="M684 252L652 302"/><circle class="pp" cx="648" cy="306" r="10"/><path d="M652 308L640 338" style="stroke-width:3.2"/><path d="M640 338l-2.4 6" /><animateTransform attributeName="transform" type="rotate" values="-4 684 252;5 684 252;-4 684 252" dur="0.5s" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1" keyTimes="0;0.5;1" repeatCount="indefinite"/></g>
+      <g filter="url(#wob)"><circle class="pp" cx="590" cy="118" r="39"/><path class="pp" d="M550 116Q546 66 592 64Q640 64 632 118Q618 92 592 92Q566 92 550 116Z"/><path d="M566 84Q580 72 600 74M584 74Q574 86 570 98" /><circle class="pp" cx="602" cy="58" r="17"/><path d="M596 50Q602 44 608 50M604 66Q612 60 616 54"/><path class="pp" d="M552 112Q540 130 548 156Q556 140 556 120Z"/><circle class="pp" cx="575" cy="122" r="12"/><circle class="pp" cx="607" cy="122" r="12"/><path d="M587 121H595M563 120L555 117M619 120L627 117"/><path d="M568 106Q575 101 582 105M600 105Q607 101 614 106"/><path d="M583 141Q591 150 599 141"/><path d="M561 136l4 -2M564 139l4 -2M621 136l-4 -2M618 139l-4 -2" style="stroke-width:1.4"/><g class="eyes"><g class="eye"><ellipse cx="575" cy="123" rx="3" ry="4"/></g><g class="eye"><ellipse cx="607" cy="123" rx="3" ry="4"/></g></g></g>
+    </g>
   </g>
-  <path class="arm" d="M646 204Q694 246 650 304"/><path class="armw" d="M646 204Q694 246 650 304"/>
-  <circle class="fk" cx="646" cy="306" r="10"/>
-  <circle class="fk" cx="590" cy="118" r="39"/>
-  <path class="fh" d="M550 116Q546 66 592 64Q640 64 632 118Q618 92 592 92Q566 92 550 116Z"/>
-  <circle class="fh" cx="602" cy="58" r="17"/><path d="M596 48Q602 44 608 48"/>
-  <path class="fh" d="M552 112Q540 130 548 156Q556 140 556 120Z"/>
-  <circle class="fw2" cx="575" cy="122" r="12"/><circle class="fw2" cx="607" cy="122" r="12"/><path d="M587 121H595M563 120L555 117M619 120L627 117"/>
-  <ellipse class="pk" cx="563" cy="137" rx="6" ry="3.4"/><ellipse class="pk" cx="619" cy="137" rx="6" ry="3.4"/>
-  <path d="M568 106Q575 101 582 105M600 105Q607 101 614 106"/>
-  <path d="M583 141Q591 150 599 141" />
-</g>
-<g class="girl-eyes"><g class="eye"><ellipse cx="575" cy="123" rx="3.2" ry="4"/></g><g class="eye"><ellipse cx="607" cy="123" rx="3.2" ry="4"/></g></g>
-
-    <g class="obj" data-k="win" tabindex="0" role="button" aria-label="Trophy: Best PCM Project winner"><ellipse class="hl" cx="320" cy="116" rx="80" ry="68"/><rect class="fwd" x="290" y="158" width="60" height="12" rx="2"/><path d="M320 158V138"/><path class="fwd" d="M306 148H334L338 158H302Z"/><path class="fa" d="M284 86L356 86Q354 134 320 140Q286 134 284 86Z"/><ellipse class="fa2" cx="320" cy="86" rx="36" ry="6"/><path d="M284 96Q258 94 262 116Q266 130 288 124M356 96Q382 94 378 116Q374 130 352 124"/><polygon class="fw" points="320.0,103.0 322.7,110.3 330.5,110.6 324.4,115.4 326.5,122.9 320.0,118.6 313.5,122.9 315.6,115.4 309.5,110.6 317.3,110.3"/><rect class="hit" x="252" y="74" width="136" height="98"/></g><g class="obj" data-k="first" tabindex="0" role="button" aria-label="Medal: InnovAct 2025 hackathon first prize"><ellipse class="hl" cx="110" cy="236" rx="52" ry="62"/><path class="fp1" d="M88 184L104 184L118 214L102 216Z"/><path class="fl" d="M132 184L116 184L102 214L118 216Z"/><ellipse class="fwd" cx="110" cy="296" rx="28" ry="6"/><path d="M110 270V292"/><circle class="fa" cx="110" cy="240" r="30"/><circle cx="110" cy="240" r="22"/><text class="num big" x="110" y="248" text-anchor="middle">1st</text><rect class="hit" x="56" y="180" width="108" height="122"/></g>
-    <g class="obj" data-k="r1" tabindex="0" role="button" aria-label="Rosette: 1 rank scholarship"><ellipse class="hl" cx="255" cy="254" rx="34" ry="52"/><path d="M255 180V226"/><path class="fl" d="M248 250L239 288L247 282L252 292L257 252Z"/><path class="fl" d="M262 250L271 286L263 280L258 290L253 252Z"/><circle class="fl" cx="268.0" cy="240.0" r="7"/><circle class="fl" cx="264.2" cy="249.2" r="7"/><circle class="fl" cx="255.0" cy="253.0" r="7"/><circle class="fl" cx="245.8" cy="249.2" r="7"/><circle class="fl" cx="242.0" cy="240.0" r="7"/><circle class="fl" cx="245.8" cy="230.8" r="7"/><circle class="fl" cx="255.0" cy="227.0" r="7"/><circle class="fl" cx="264.2" cy="230.8" r="7"/><circle class="fw" cx="255" cy="240" r="13"/><text class="num" x="255" y="246" text-anchor="middle">1</text><rect class="hit" x="223" y="210" width="64" height="94"/></g>
-    <g class="obj" data-k="r2" tabindex="0" role="button" aria-label="Rosette: 2 rank scholarship"><ellipse class="hl" cx="310" cy="254" rx="34" ry="52"/><path d="M310 180V226"/><path class="fp1" d="M303 250L294 288L302 282L307 292L312 252Z"/><path class="fp1" d="M317 250L326 286L318 280L313 290L308 252Z"/><circle class="fp1" cx="323.0" cy="240.0" r="7"/><circle class="fp1" cx="319.2" cy="249.2" r="7"/><circle class="fp1" cx="310.0" cy="253.0" r="7"/><circle class="fp1" cx="300.8" cy="249.2" r="7"/><circle class="fp1" cx="297.0" cy="240.0" r="7"/><circle class="fp1" cx="300.8" cy="230.8" r="7"/><circle class="fp1" cx="310.0" cy="227.0" r="7"/><circle class="fp1" cx="319.2" cy="230.8" r="7"/><circle class="fw" cx="310" cy="240" r="13"/><text class="num" x="310" y="246" text-anchor="middle">2</text><rect class="hit" x="278" y="210" width="64" height="94"/></g>
-    <g class="obj" data-k="r3" tabindex="0" role="button" aria-label="Rosette: 3 rank scholarship"><ellipse class="hl" cx="365" cy="254" rx="34" ry="52"/><path d="M365 180V226"/><path class="ft" d="M358 250L349 288L357 282L362 292L367 252Z"/><path class="ft" d="M372 250L381 286L373 280L368 290L363 252Z"/><circle class="ft" cx="378.0" cy="240.0" r="7"/><circle class="ft" cx="374.2" cy="249.2" r="7"/><circle class="ft" cx="365.0" cy="253.0" r="7"/><circle class="ft" cx="355.8" cy="249.2" r="7"/><circle class="ft" cx="352.0" cy="240.0" r="7"/><circle class="ft" cx="355.8" cy="230.8" r="7"/><circle class="ft" cx="365.0" cy="227.0" r="7"/><circle class="ft" cx="374.2" cy="230.8" r="7"/><circle class="fw" cx="365" cy="240" r="13"/><text class="num" x="365" y="246" text-anchor="middle">3</text><rect class="hit" x="333" y="210" width="64" height="94"/></g>
-  </g>
-  <g class="live">
-    <circle class="st" cx="868" cy="108" r="1.8"/><circle class="st" cx="930" cy="96" r="1.4"/><circle class="st" cx="948" cy="150" r="1.8"/><circle class="st" cx="862" cy="176" r="1.4"/><circle class="st" cx="905" cy="196" r="1.6"/><circle class="st" cx="884" cy="140" r="1.2"/>
-    <circle class="fa" cx="918" cy="146" r="20" style="stroke:#17122b;stroke-width:1.6"/><ellipse cx="918" cy="146" rx="36" ry="9" transform="rotate(-22 918 146)" style="fill:none;stroke:#b9a7f0;stroke-width:3"/>
-    <g class="bub"><circle cx="950" cy="352" r="3"/><circle cx="962" cy="344" r="2.4"/><circle cx="944" cy="340" r="2"/></g>
-    <path class="steam" d="M876 338q-5 -8 0 -14q5 -6 0 -12"/><path class="steam s2" d="M888 338q-5 -8 0 -14q5 -6 0 -12"/>
-    <text class="chalk" x="716" y="96" transform="rotate(-6 716 96)">E = mc²</text>
-    <text class="chalk sm" x="1010" y="248" transform="rotate(5 1010 248)">∫ ψ dx</text>
-    <g class="lights"><circle cx="150" cy="24" r="4.5"/><circle cx="300" cy="27" r="4.5"/><circle cx="450" cy="24" r="4.5"/><circle cx="750" cy="24" r="4.5"/><circle cx="900" cy="27" r="4.5"/><circle cx="1050" cy="24" r="4.5"/></g>
-  </g>
-</svg></div>
-      <div class="scene-note" aria-live="polite">
-        <div class="sn-main"><span class="mono" id="sn-k"></span><h3 id="sn-t"></h3><div class="mono" id="sn-m"></div></div>
-        <div class="sn-ctl"><button type="button" id="sn-prev" aria-label="Previous award">←</button><span class="mono" id="sn-c"></span><button type="button" id="sn-next" aria-label="Next award">→</button></div>
-      </div>
-      <ul class="sn-data" hidden><li data-k="win"><b>Winner — Best PCM Project, Engineerings Day ’26</b><span>Vellore Institute of Technology · Sept 2026</span></li><li data-k="first"><b>1st Prize — InnovAct-2025 Hackathon</b><span>Vellore Institute of Technology · 2025</span></li><li data-k="r1"><b>Merit Scholarship — 1st Rank</b><span>Academic Year 2023–24 · 2024</span></li><li data-k="r2"><b>Merit Scholarship — 2nd Rank</b><span>Academic Year 2024–25 · 2025</span></li><li data-k="r3"><b>Merit Scholarship — 3rd Rank</b><span>Academic Year 2025–26 · 2026</span></li></ul>
-      <div class="mono scene-hint">Tap a trophy, medal or rosette on the shelf</div>
+</svg></figure>
     </div>
     <div class="rv pat-head" id="patents">
       <div class="ch-no">Chapter V</div>
       <h2>Patents &amp; <em>publications</em></h2>
     </div>
-    <div class="line-wrap rv">
-      <svg class="cl" viewBox="0 0 1200 130" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 36Q600 112 1210 36" vector-effect="non-scaling-stroke"/></svg>
-      <div class="pats">
-      <article class="pat" style="--r:-1.6deg"><span class="peg" aria-hidden="true"></span>
-        <svg class="pat-art" viewBox="0 0 240 110" aria-hidden="true"><g class="sk" filter="url(#wob)"><path d="M14 56Q40 26 66 56Q40 86 14 56Z"/><circle cx="40" cy="56" r="11"/><circle class="ink" cx="40" cy="56" r="4.5"/><path d="M76 56H106M99 49L106 56L99 63"/><rect class="fl" x="116" y="42" width="30" height="30" rx="3"/><rect class="fa" x="150" y="42" width="30" height="30" rx="3"/><rect class="ft" x="184" y="42" width="30" height="30" rx="3"/><path d="M146 57H150M180 57H184"/><path d="M123 52H139M123 60H133M157 52H173M157 60H167M191 52H207M191 60H201"/><rect class="fw" x="158" y="14" width="22" height="16" rx="3"/><path d="M162 14V9Q169 1 176 9V14"/></g></svg>
-        <div class="pat-top"><span class="pat-i">01</span><span class="mono">March 2026</span></div>
-        <h3>System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</h3>
-        <dl><dt class="mono">Application No.</dt><dd class="mono">202641018176</dd></dl>
-        <div class="pub-s mono"><i></i>Published</div>
-      </article><article class="pat" style="--r:1.1deg"><span class="peg" aria-hidden="true"></span>
-        <svg class="pat-art" viewBox="0 0 240 110" aria-hidden="true"><g class="sk" filter="url(#wob)"><path d="M16 94H226M16 94V12"/><path d="M22,81 L25,78 L28,87 L31,76 L34,84 L37,79 L40,70 L43,73 L46,59 L49,61 L52,52 L55,55 L58,66 L61,79 L64,71 L67,76 L70,84 L73,87 L76,73 L79,59 L82,61 L85,42 L88,64 L91,64 L94,70 L97,75 L100,80 L103,90 L106,78"/><path d="M112 56H136M129 49L136 56L129 63"/><path class="curve" d="M150 90Q160 90 166 74Q174 28 182 72Q188 88 196 86Q206 80 210 66Q214 56 222 88"/></g></svg>
-        <div class="pat-top"><span class="pat-i">02</span><span class="mono">April 2026</span></div>
-        <h3>A System and Method for Machine Learning-Based FTIR Spectral Denoising</h3>
-        <dl><dt class="mono">Application No.</dt><dd class="mono">202641053864</dd></dl>
-        <div class="pub-s mono"><i></i>Published</div>
-      </article><article class="pat" style="--r:-0.8deg"><span class="peg" aria-hidden="true"></span>
-        <svg class="pat-art" viewBox="0 0 240 110" aria-hidden="true"><g class="sk" filter="url(#wob)"><rect class="fa" x="16" y="26" width="14" height="14"/><rect class="fw" x="16" y="43" width="14" height="14"/><rect class="fw" x="16" y="60" width="14" height="14"/><rect class="fw" x="33" y="26" width="14" height="14"/><rect class="fw" x="33" y="43" width="14" height="14"/><rect class="fa" x="33" y="60" width="14" height="14"/><rect class="fw" x="50" y="26" width="14" height="14"/><rect class="fa" x="50" y="43" width="14" height="14"/><rect class="fw" x="50" y="60" width="14" height="14"/><path d="M72 54H112M105 47L112 54L105 61"/><path d="M62 38Q100 8 150 30" style="stroke-dasharray:3 5"/><rect class="fa" x="148" y="16" width="12" height="12"/><rect class="fw" x="148" y="31" width="12" height="12"/><rect class="fw" x="148" y="46" width="12" height="12"/><rect class="fw" x="148" y="61" width="12" height="12"/><rect class="fw" x="148" y="76" width="12" height="12"/><rect class="fw" x="163" y="16" width="12" height="12"/><rect class="fa" x="163" y="31" width="12" height="12"/><rect class="fw" x="163" y="46" width="12" height="12"/><rect class="fw" x="163" y="61" width="12" height="12"/><rect class="fw" x="163" y="76" width="12" height="12"/><rect class="fw" x="178" y="16" width="12" height="12"/><rect class="fw" x="178" y="31" width="12" height="12"/><rect class="fa" x="178" y="46" width="12" height="12"/><rect class="fw" x="178" y="61" width="12" height="12"/><rect class="fw" x="178" y="76" width="12" height="12"/><rect class="fw" x="193" y="16" width="12" height="12"/><rect class="fw" x="193" y="31" width="12" height="12"/><rect class="fw" x="193" y="46" width="12" height="12"/><rect class="fa" x="193" y="61" width="12" height="12"/><rect class="fw" x="193" y="76" width="12" height="12"/><rect class="fw" x="208" y="16" width="12" height="12"/><rect class="fw" x="208" y="31" width="12" height="12"/><rect class="fw" x="208" y="46" width="12" height="12"/><rect class="fw" x="208" y="61" width="12" height="12"/><rect class="fa" x="208" y="76" width="12" height="12"/></g></svg>
-        <div class="pat-top"><span class="pat-i">03</span><span class="mono">September 2026</span></div>
-        <h3>Method for Resolution-Adaptive Spatial-Semantic Attention Conditioning in Diffusion Image Generation</h3>
-        <dl><dt class="mono">Application No.</dt><dd class="mono">202641123781</dd></dl>
-        <div class="pub-s mono"><i></i>Published</div>
-      </article>
-      </div>
-      <svg class="bench" viewBox="0 0 1200 170" aria-hidden="true"><g class="sk" filter="url(#wob)">
-  <path d="M10 150H1190"/><path d="M30 154l-8 8"/><path d="M68 154l-8 8"/><path d="M106 154l-8 8"/><path d="M144 154l-8 8"/><path d="M182 154l-8 8"/><path d="M220 154l-8 8"/><path d="M258 154l-8 8"/><path d="M296 154l-8 8"/><path d="M334 154l-8 8"/><path d="M372 154l-8 8"/><path d="M410 154l-8 8"/><path d="M448 154l-8 8"/><path d="M486 154l-8 8"/><path d="M524 154l-8 8"/><path d="M562 154l-8 8"/><path d="M600 154l-8 8"/><path d="M638 154l-8 8"/><path d="M676 154l-8 8"/><path d="M714 154l-8 8"/><path d="M752 154l-8 8"/><path d="M790 154l-8 8"/><path d="M828 154l-8 8"/><path d="M866 154l-8 8"/><path d="M904 154l-8 8"/><path d="M942 154l-8 8"/><path d="M980 154l-8 8"/><path d="M1018 154l-8 8"/><path d="M1056 154l-8 8"/><path d="M1094 154l-8 8"/><path d="M1132 154l-8 8"/><path d="M1170 154l-8 8"/>
-  <path class="fl" d="M120 150L170 150L164 138L126 138Z"/><path d="M160 138Q190 118 182 84Q176 66 158 68" style="stroke-width:9"/><path class="armc" d="M160 138Q190 118 182 84Q176 66 158 68"/>
-  <rect class="fw" x="124" y="36" width="22" height="64" rx="4" transform="rotate(18 135 70)"/><rect class="fa" x="118" y="114" width="46" height="7" rx="2"/>
-  <path class="fw3" d="M300 150V74H336V150Z"/><path class="ft" d="M300 120H336V150H300Z"/><path d="M296 74H340"/><path d="M300 100h8M300 112h8"/>
-  <path class="fw3" d="M360 150V92H390V150Z"/><path class="fp1" d="M360 126H390V150H360Z"/><path d="M356 92H394"/>
-  <path class="fw3" d="M434 150H470L458 112V94H446V112Z"/><path class="fa" d="M440 136H464L470 150H434Z"/>
-  <circle class="fa" cx="640" cy="104" r="10"/><circle class="fl" cx="600" cy="130" r="8"/><circle class="fp1" cx="682" cy="128" r="8"/><circle class="ft" cx="640" cy="60" r="8"/><path d="M634 96L606 124M646 96L676 122M640 94V68"/>
-  <rect class="fn2" x="850" y="116" width="150" height="10" rx="2"/><path class="fw" d="M862 116L872 54H978L988 116Z"/><rect class="fn" x="880" y="62" width="90" height="46" rx="2" style="fill:#241a4d"/><path d="M902 98L924 78L940 90L960 70" style="stroke:#eaa23f"/>
-  <path class="ft" d="M1090 150L1082 126H1124L1116 150Z"/><path class="ft" d="M1103 126Q1086 100 1092 78Q1108 96 1103 126ZM1103 126Q1112 96 1136 88Q1138 112 1103 126Z"/>
-</g></svg>
-    </div>
+    <div class="pubs rv">
+        <article class="pub"><div class="pub-top"><span class="pub-i">01</span><span class="mono">March 2026</span></div><h3>System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</h3><dl><dt class="mono">Application No.</dt><dd class="mono">202641018176</dd></dl><div class="pub-s mono"><i></i>Published</div></article>
+        <article class="pub"><div class="pub-top"><span class="pub-i">02</span><span class="mono">April 2026</span></div><h3>A System and Method for Machine Learning-Based FTIR Spectral Denoising</h3><dl><dt class="mono">Application No.</dt><dd class="mono">202641053864</dd></dl><div class="pub-s mono"><i></i>Published</div></article>
+        <article class="pub"><div class="pub-top"><span class="pub-i">03</span><span class="mono">September 2026</span></div><h3>Method for Resolution-Adaptive Spatial-Semantic Attention Conditioning in Diffusion Image Generation</h3><dl><dt class="mono">Application No.</dt><dd class="mono">202641123781</dd></dl><div class="pub-s mono"><i></i>Published</div></article>
     </div>
   </div>
 </section>
@@ -1220,7 +1111,7 @@ body.intro-lock .guide{display:none}
     skills:"Pick a planet. Its skills fall into orbit.",
     experience:"Mission log. Tap the Gartner photos, they shuffle.",
     projects:"Five missions on the star chart. Pick a star.",
-    awards:"Tap the shelf. Each trophy has a story. Patents hang below.",
+    awards:"Meet the scientist who looks after the trophy shelf.",
     extra:"Tap the objects on the desk. The lamp works too.",
     contact:"Houston, this is the place to say hello."
   };
@@ -1246,33 +1137,10 @@ body.intro-lock .guide{display:none}
   },250);
 })();
 
-// recognition scene: the shelf tells the story
+// sketch: hands wave and write (SMIL); still when reduced motion is on
 (function(){
-  const wrap=document.querySelector(".scene-wrap");if(!wrap)return;
-  const svgEl=wrap.querySelector(".scene");
-  function fitScene(){svgEl.setAttribute("viewBox",innerWidth<720?"0 0 740 520":"0 0 1200 520");}
-  fitScene();addEventListener("resize",fitScene);
-  const objs=[...wrap.querySelectorAll(".obj")];
-  const data=[...wrap.querySelectorAll(".sn-data li")].map(li=>({k:li.dataset.k,t:li.querySelector("b").textContent,m:li.querySelector("span").textContent}));
-  const kk=document.getElementById("sn-k"),tt=document.getElementById("sn-t"),mm=document.getElementById("sn-m"),cc=document.getElementById("sn-c");
-  let idx=0,timer,touched=false;
-  function show(i){
-    idx=(i+data.length)%data.length;const d=data[idx];
-    objs.forEach(o=>o.classList.toggle("on",o.dataset.k===d.k));
-    kk.textContent="Award "+String(idx+1).padStart(2,"0");tt.textContent=d.t;mm.textContent=d.m;cc.textContent=String(idx+1).padStart(2,"0")+" / "+String(data.length).padStart(2,"0");
-  }
-  function stop(){touched=true;clearInterval(timer);}
-  objs.forEach(o=>{
-    const go=()=>{stop();show(data.findIndex(d=>d.k===o.dataset.k));};
-    o.addEventListener("click",go);o.addEventListener("mouseenter",go);
-    o.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go();}});
-  });
-  document.getElementById("sn-prev").addEventListener("click",()=>{stop();show(idx-1);});
-  document.getElementById("sn-next").addEventListener("click",()=>{stop();show(idx+1);});
-  show(0);
-  if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&"IntersectionObserver" in window){
-    new IntersectionObserver(es=>{if(es[0].isIntersecting&&!touched){clearInterval(timer);timer=setInterval(()=>show(idx+1),4200);}else clearInterval(timer);},{threshold:0.4}).observe(wrap);
-  }
+  const sk=document.querySelector(".sketch");if(!sk)return;
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches&&sk.pauseAnimations)sk.pauseAnimations();
 })();
 
 // copy email
