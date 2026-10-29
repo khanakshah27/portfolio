@@ -372,55 +372,64 @@ body.intro-lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.stickers .stk.bob{animation:none}}
 
 
-/* ── RECOGNITION: text list + a line sketch beside it ── */
-.recog{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2.4rem clamp(2rem,5vw,5rem);align-items:center;margin-top:2.4rem}
-.aw-list{list-style:none;border-top:1px solid var(--line-strong)}
-.aw-list li{display:grid;grid-template-columns:2.4rem minmax(0,1fr);gap:0 1.2rem;align-items:baseline;padding:1.4rem 0;border-bottom:1px solid var(--line)}
-.aw-n{opacity:0.7}
-.aw-list h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.35rem,2vw,1.75rem);line-height:1.15;margin-bottom:0.4rem;transition:color .25s}
-.aw-list li:hover h3{color:var(--lilac)}
-.aw-y{margin-bottom:0.45rem;color:var(--lilac)}
-.aor-fig{margin:0;justify-self:center;width:100%;max-width:560px}
-.aor{display:block;width:100%;height:auto;overflow:visible}
-.aor *{stroke-linecap:round}
-.aor .bezel{transform-origin:260px 260px;animation:orbit 260s linear infinite}
-.aor .bezel circle{fill:none;stroke:var(--star);stroke-width:1;opacity:0.55}
-.aor .bezel path{stroke:var(--star);stroke-width:1;opacity:0.55}
-.aor .axis{stroke:var(--star);stroke-width:0.6;opacity:0.22;fill:none}
-.aor .ar-ring{fill:none;stroke:var(--star);stroke-width:1;opacity:0.3;transition:opacity .3s,stroke-width .3s}
-.aor .ar-ring.on{opacity:0.95;stroke-width:1.6}
-.aor .core{fill:rgba(255,255,255,0.45);stroke:var(--star);stroke-width:1;opacity:0.8}
-.aorb{transform-origin:260px 260px;animation:orbit linear infinite}
-.aorb.rev{animation-direction:reverse}
-@keyframes orbit{to{transform:rotate(360deg)}}
-.aor-fig:hover .aorb,.aor-fig:hover .bezel{animation-play-state:paused}
-.aor .sweep{stroke:var(--lilac);stroke-width:1;opacity:0;transition:opacity .3s;stroke-dasharray:2 5}
-.aorb.on .sweep{opacity:0.8}
-.aor .apl{cursor:pointer;outline:none}
-.aor .apl .hit{fill:transparent;stroke:none}
-.aor .apl .halo{fill:none;stroke:var(--lilac);stroke-width:1;stroke-dasharray:2 4;opacity:0;transition:opacity .3s}
-.aor .apl .body{fill:#d9cff7;stroke:var(--star);stroke-width:1.5;transition:fill .3s}
-.aor .apl.win .body{fill:#eaa23f}
-.aor .apl .sat{fill:none;stroke:var(--star);stroke-width:1.3}
-.aor .apl .mk{fill:var(--star);stroke:none}
-.aor .apl:hover .body,.aor .apl:focus-visible .body,.aor .apl.on .body{fill:var(--lilac)}
-.aor .apl.win:hover .body,.aor .apl.win.on .body{fill:#eaa23f}
-.aor .apl.on .halo{opacity:1}
-.aor .apl.on .mk{fill:#fff}
-.aor .readout text{text-anchor:middle;fill:var(--star);stroke:none}
-.aor .ro-s{font-family:var(--mono);font-size:9.5px;letter-spacing:2.2px;fill:var(--lilac)}
-.aor .ro-y{font-family:var(--serif);font-style:italic;font-size:50px}
-.aor .ro-l{font-family:var(--mono);font-size:8.6px;letter-spacing:0.8px}
-.aor .cards text{font-family:var(--mono);font-size:9px;letter-spacing:1px;fill:var(--star);opacity:0.55;stroke:none}
-.aw-list li{cursor:default;transition:background .3s}
-.aw-list li.on{background:linear-gradient(90deg,rgba(90,62,209,0.1),transparent 70%)}
-.aw-list li.on h3{color:var(--lilac)}
-.aw-list li:focus-visible{outline:1px solid var(--lilac);outline-offset:-1px}
-@media (prefers-reduced-motion:reduce){.aorb,.aor .bezel{animation:none}}
-@media (max-width:900px){.recog{grid-template-columns:minmax(0,1fr)}.aor-fig{max-width:420px}}
-@media (max-width:560px){.aw-list li{grid-template-columns:1.8rem minmax(0,1fr);gap:0 0.8rem}}
+/* ── RECOGNITION: an honours index ── */
+.ln{display:block;overflow:hidden;padding-bottom:0.1em;margin-bottom:-0.1em}
+.ln>span{display:block;transform:translateY(112%);transition:transform 1s var(--ease) calc(var(--i,0) * 0.09s + 0.12s)}
+.rv.in .ln>span{transform:none}
+.aw-wrap{margin-top:2.6rem}
+.aw-list{list-style:none;position:relative}
+.aw-list::before{content:"";position:absolute;left:0;top:0;width:100%;height:1px;background:var(--star);opacity:0.55;transform:scaleX(0);transform-origin:0 50%;transition:transform 1.3s var(--ease)}
+.rv.in .aw-list::before{transform:none}
+.aw{position:relative;overflow:hidden;transition:opacity .5s ease}
+.aw::before{content:"";position:absolute;inset:0;background:var(--star);transform:translateY(101%);transition:transform .65s cubic-bezier(.77,0,.18,1)}
+.aw::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--line-strong);transform:scaleX(0);transform-origin:0 50%;transition:transform 1.2s var(--ease) calc(var(--i,0) * 0.1s + 0.1s)}
+.rv.in .aw::after{transform:none}
+.aw.on::before{transform:none}
+.aw-list.hov .aw:not(.on){opacity:0.36}
+.aw-row{position:relative;z-index:1;display:grid;grid-template-columns:3.2rem minmax(0,1fr) auto auto 2rem;gap:0 clamp(1rem,2.4vw,2.2rem);align-items:baseline;width:100%;padding:1.8rem 0.2rem;background:none;border:none;color:var(--star);text-align:left;cursor:pointer;font:inherit;transition:color .5s ease,padding .6s var(--ease)}
+.aw.on .aw-row{color:var(--lilac-bg);padding-left:1.5rem;padding-right:1.5rem}
+.aw-row:focus-visible{outline:1px solid var(--lilac);outline-offset:-3px}
+.aw-n{transition:color .4s}
+.aw.on .aw-n{color:var(--amber)}
+.aw-t{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.7rem);line-height:1.1;letter-spacing:-0.005em}
+.aw-tag,.aw-y{white-space:nowrap}
+.aw-tag{opacity:0.7;transition:opacity .4s}
+.aw.on .aw-tag,.aw.on .aw-y{opacity:1;color:var(--lilac-bg)}
+.aw-y{min-width:5.2rem;text-align:right}
+.aw-ar{font-size:1.2rem;opacity:0.35;transform:translate(-6px,6px);transition:transform .55s var(--ease),opacity .4s,color .4s}
+.aw.on .aw-ar{opacity:1;transform:none;color:var(--amber)}
+.aw-more{position:relative;z-index:1;display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}
+.aw.on .aw-more{grid-template-rows:1fr}
+.aw-more>div{overflow:hidden;min-height:0}
+.aw-more-in{display:flex;flex-wrap:wrap;gap:0.4rem 2.6rem;padding:0 1.5rem 0 calc(3.2rem + clamp(1rem,2.4vw,2.2rem) + 1.5rem);opacity:0;transform:translateY(-6px);transition:opacity .45s ease,transform .6s var(--ease),padding-bottom .5s var(--ease)}
+.aw-more-in .mono{color:var(--lilac-bg)}
+.aw.on .aw-more-in{opacity:1;transform:none;padding-bottom:1.7rem;transition-delay:.12s,.12s,0s}
+@media (max-width:760px){
+  .aw-row{grid-template-columns:2rem minmax(0,1fr) 1.4rem;gap:0 0.8rem;padding:1.4rem 0.2rem}
+  .aw-tag,.aw-y{grid-column:2;grid-row:2;margin-top:0.55rem}
+  .aw-tag{justify-self:start}.aw-y{justify-self:end;margin-top:-1.05rem;text-align:right}
+  .aw-ar{grid-column:3;grid-row:1}
+  .aw-more-in{padding-left:calc(2rem + 0.8rem + 1.5rem)}
+}
+/* cursor-following preview */
+.aw-peek{position:fixed;left:0;top:0;width:176px;height:176px;margin:-88px 0 0 -88px;border-radius:50%;pointer-events:none;z-index:60;opacity:0;background:#fffdf6;border:1px solid var(--star);box-shadow:0 26px 40px -22px rgba(23,18,43,0.55);display:grid;place-items:center;text-align:center;will-change:transform;transition:opacity .4s ease,background .5s ease}
+.aw-peek.show{opacity:1}
+.aw-peek.win{background:#f3c27a}
+.aw-peek::before{content:"";position:absolute;inset:8px;border-radius:50%;border:1px dashed rgba(23,18,43,0.45);animation:spin 40s linear infinite}
+.pk-in{position:relative;transition:opacity .25s ease,transform .45s var(--ease)}
+.pk-in.sw{opacity:0;transform:translateY(6px)}
+.pk-n{font-family:var(--serif);font-style:italic;font-size:3.5rem;line-height:1;color:#17122b}
+.pk-t{margin-top:0.35rem;max-width:8.5rem;color:#17122b;opacity:0.85;line-height:1.4}
+.pk-y{margin-top:0.25rem;color:#5a3ed1}
+.aw-peek.win .pk-y{color:#17122b}
+@media (hover:none),(pointer:coarse){.aw-peek{display:none}}
+@media (prefers-reduced-motion:reduce){.ln>span,.aw::before,.aw-more,.aw-more-in,.aw-peek::before{transition:none;animation:none}.ln>span{transform:none}}
 
 /* ── PATENTS: specification sheets ── */
+.pubs .pub{opacity:0;transform:translateY(26px);transition:opacity .9s ease calc(var(--k,0) * 0.14s + 0.2s),transform 1.1s var(--ease) calc(var(--k,0) * 0.14s + 0.2s)}
+.pubs.rv.in .pub{opacity:1;transform:none}
+.pubs .pub:nth-child(2){--k:1}.pubs .pub:nth-child(3){--k:2}
+@media (prefers-reduced-motion:reduce){.pubs .pub{opacity:1;transform:none;transition:none}}
 .pat-head{margin-top:clamp(4rem,8vw,6.5rem)}
 .pat-head h2{margin-bottom:0}
 .pubs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(1.6rem,3vw,3rem);margin-top:2.4rem}
@@ -505,6 +514,7 @@ body.intro-lock .guide{display:none}
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="seal" viewBox="0 0 64 80"><path d="M20 44 L12 78 L26 70 L32 78 L34 46Z" fill="#b8741b"/><path d="M44 44 L52 78 L38 70 L32 78 L30 46Z" fill="#d68f2a"/><circle cx="32" cy="30" r="26" fill="#eaa23f"/><circle cx="32" cy="30" r="20" fill="none" stroke="#7a4a0c" stroke-width="1.2" stroke-dasharray="2 2.6"/><circle cx="32" cy="30" r="14" fill="none" stroke="#7a4a0c" stroke-width="1"/><path d="M32 19 l3.2 8 8.4 .7 -6.4 5.5 2 8.3 -7.2 -4.5 -7.2 4.5 2 -8.3 -6.4 -5.5 8.4 -.7z" fill="#7a4a0c"/></symbol></svg>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"></svg>
+<div class="aw-peek" id="aw-peek" aria-hidden="true"><div class="pk-in" id="pk-in"><div class="pk-n" id="pk-n"></div><div class="pk-t mono" id="pk-t"></div><div class="pk-y mono" id="pk-y"></div></div></div>
 <div id="progress"></div>
 <div class="guide" id="guide" hidden>
   <div class="g-bubble" id="g-bubble" role="status" aria-live="polite"></div>
@@ -763,32 +773,14 @@ body.intro-lock .guide{display:none}
   <div class="wrap">
     <div class="rv">
       <div class="ch-no">Chapter IV</div>
-      <h2><em>Recognition</em></h2>
+      <h2><span class="ln"><span style="--i:0"><em>Recognition</em></span></span></h2>
     </div>
-    <div class="recog rv">
-      <ol class="aw-list"><li data-i="0" tabindex="0"><span class="aw-n mono">01</span><div><div class="aw-y mono">Sept 2026</div><h3>Winner — Best PCM Project, Engineerings Day ’26</h3><div class="mono">Vellore Institute of Technology</div></div></li><li data-i="1" tabindex="0"><span class="aw-n mono">02</span><div><div class="aw-y mono">2025</div><h3>1st Prize — InnovAct-2025 Hackathon</h3><div class="mono">Vellore Institute of Technology</div></div></li><li data-i="2" tabindex="0"><span class="aw-n mono">03</span><div><div class="aw-y mono">2024</div><h3>Merit Scholarship — 1st Rank</h3><div class="mono">Academic Year 2023–24</div></div></li><li data-i="3" tabindex="0"><span class="aw-n mono">04</span><div><div class="aw-y mono">2025</div><h3>Merit Scholarship — 2nd Rank</h3><div class="mono">Academic Year 2024–25</div></div></li><li data-i="4" tabindex="0"><span class="aw-n mono">05</span><div><div class="aw-y mono">2026</div><h3>Merit Scholarship — 3rd Rank</h3><div class="mono">Academic Year 2025–26</div></div></li></ol>
-      <figure class="aor-fig">
-      <svg class="aor" id="aor" viewBox="-18 -18 556 556" role="group" aria-label="An orrery: each award is a planet on its own orbit around the centre">
-        <defs><radialGradient id="og"><stop offset="0" stop-color="#fff" stop-opacity="0.55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
-        <circle cx="260" cy="260" r="252" fill="url(#og)"/>
-        <g class="bezel"><circle cx="260" cy="260" r="242"/><path d="M502.0 260.0L511.0 260.0"/><path d="M501.1 281.1L506.1 281.5"/><path d="M498.3 302.0L503.2 302.9"/><path d="M493.8 322.6L502.4 325.0"/><path d="M487.4 342.8L492.1 344.5"/><path d="M479.3 362.3L483.9 364.4"/><path d="M469.6 381.0L477.4 385.5"/><path d="M458.2 398.8L462.3 401.7"/><path d="M445.4 415.6L449.2 418.8"/><path d="M431.1 431.1L437.5 437.5"/><path d="M415.6 445.4L418.8 449.2"/><path d="M398.8 458.2L401.7 462.3"/><path d="M381.0 469.6L385.5 477.4"/><path d="M362.3 479.3L364.4 483.9"/><path d="M342.8 487.4L344.5 492.1"/><path d="M322.6 493.8L325.0 502.4"/><path d="M302.0 498.3L302.9 503.2"/><path d="M281.1 501.1L281.5 506.1"/><path d="M260.0 502.0L260.0 511.0"/><path d="M238.9 501.1L238.5 506.1"/><path d="M218.0 498.3L217.1 503.2"/><path d="M197.4 493.8L195.0 502.4"/><path d="M177.2 487.4L175.5 492.1"/><path d="M157.7 479.3L155.6 483.9"/><path d="M139.0 469.6L134.5 477.4"/><path d="M121.2 458.2L118.3 462.3"/><path d="M104.4 445.4L101.2 449.2"/><path d="M88.9 431.1L82.5 437.5"/><path d="M74.6 415.6L70.8 418.8"/><path d="M61.8 398.8L57.7 401.7"/><path d="M50.4 381.0L42.6 385.5"/><path d="M40.7 362.3L36.1 364.4"/><path d="M32.6 342.8L27.9 344.5"/><path d="M26.2 322.6L17.6 325.0"/><path d="M21.7 302.0L16.8 302.9"/><path d="M18.9 281.1L13.9 281.5"/><path d="M18.0 260.0L9.0 260.0"/><path d="M18.9 238.9L13.9 238.5"/><path d="M21.7 218.0L16.8 217.1"/><path d="M26.2 197.4L17.6 195.0"/><path d="M32.6 177.2L27.9 175.5"/><path d="M40.7 157.7L36.1 155.6"/><path d="M50.4 139.0L42.6 134.5"/><path d="M61.8 121.2L57.7 118.3"/><path d="M74.6 104.4L70.8 101.2"/><path d="M88.9 88.9L82.5 82.5"/><path d="M104.4 74.6L101.2 70.8"/><path d="M121.2 61.8L118.3 57.7"/><path d="M139.0 50.4L134.5 42.6"/><path d="M157.7 40.7L155.6 36.1"/><path d="M177.2 32.6L175.5 27.9"/><path d="M197.4 26.2L195.0 17.6"/><path d="M218.0 21.7L217.1 16.8"/><path d="M238.9 18.9L238.5 13.9"/><path d="M260.0 18.0L260.0 9.0"/><path d="M281.1 18.9L281.5 13.9"/><path d="M302.0 21.7L302.9 16.8"/><path d="M322.6 26.2L325.0 17.6"/><path d="M342.8 32.6L344.5 27.9"/><path d="M362.3 40.7L364.4 36.1"/><path d="M381.0 50.4L385.5 42.6"/><path d="M398.8 61.8L401.7 57.7"/><path d="M415.6 74.6L418.8 70.8"/><path d="M431.1 88.9L437.5 82.5"/><path d="M445.4 104.4L449.2 101.2"/><path d="M458.2 121.2L462.3 118.3"/><path d="M469.6 139.0L477.4 134.5"/><path d="M479.3 157.7L483.9 155.6"/><path d="M487.4 177.2L492.1 175.5"/><path d="M493.8 197.4L502.4 195.0"/><path d="M498.3 218.0L503.2 217.1"/><path d="M501.1 238.9L506.1 238.5"/></g>
-        <path class="axis" d="M28 260H492M260 28V492"/>
-        <circle class="ar-ring" data-i="0" cx="260" cy="260" r="82"/><circle class="ar-ring" data-i="1" cx="260" cy="260" r="114"/><circle class="ar-ring" data-i="2" cx="260" cy="260" r="146"/><circle class="ar-ring" data-i="3" cx="260" cy="260" r="178"/><circle class="ar-ring" data-i="4" cx="260" cy="260" r="210"/>
-        <circle class="core" cx="260" cy="260" r="58"/>
-        <g class="aorb" style="animation-duration:64s"><line class="sweep" x1="260" y1="260" x2="298.5" y2="187.6"/><g class="apl win" data-i="0" tabindex="0" role="button" aria-label="Winner — Best PCM Project"><circle class="hit" cx="298.5" cy="187.6" r="20"/><circle class="halo" cx="298.5" cy="187.6" r="19"/><circle class="body" cx="298.5" cy="187.6" r="10"/><ellipse class="sat" cx="298.5" cy="187.6" rx="21.0" ry="7.0" transform="rotate(-24 298.5 187.6)"/><polygon class="mk" points="298.5,182.6 299.7,185.9 303.3,186.1 300.5,188.2 301.4,191.6 298.5,189.7 295.6,191.6 296.5,188.2 293.7,186.1 297.3,185.9"/></g></g><g class="aorb rev" style="animation-duration:84s"><line class="sweep" x1="260" y1="260" x2="349.8" y2="330.2"/><g class="apl" data-i="1" tabindex="0" role="button" aria-label="1st Prize — InnovAct-2025 Hackathon"><circle class="hit" cx="349.8" cy="330.2" r="20"/><circle class="halo" cx="349.8" cy="330.2" r="17.5"/><circle class="body" cx="349.8" cy="330.2" r="8.5"/><polygon class="mk" points="349.8,325.9 350.9,328.7 353.9,328.9 351.5,330.7 352.3,333.6 349.8,332.0 347.3,333.6 348.1,330.7 345.8,328.9 348.8,328.7"/></g></g><g class="aorb" style="animation-duration:108s"><line class="sweep" x1="260" y1="260" x2="136.2" y2="337.4"/><g class="apl" data-i="2" tabindex="0" role="button" aria-label="Merit Scholarship — 1st Rank"><circle class="hit" cx="136.2" cy="337.4" r="20"/><circle class="halo" cx="136.2" cy="337.4" r="16"/><circle class="body" cx="136.2" cy="337.4" r="7"/></g></g><g class="aorb rev" style="animation-duration:132s"><line class="sweep" x1="260" y1="260" x2="193.3" y2="95.0"/><g class="apl" data-i="3" tabindex="0" role="button" aria-label="Merit Scholarship — 2nd Rank"><circle class="hit" cx="193.3" cy="95.0" r="20"/><circle class="halo" cx="193.3" cy="95.0" r="16"/><circle class="body" cx="193.3" cy="95.0" r="7"/></g></g><g class="aorb" style="animation-duration:160s"><line class="sweep" x1="260" y1="260" x2="425.5" y2="130.7"/><g class="apl" data-i="4" tabindex="0" role="button" aria-label="Merit Scholarship — 3rd Rank"><circle class="hit" cx="425.5" cy="130.7" r="20"/><circle class="halo" cx="425.5" cy="130.7" r="16"/><circle class="body" cx="425.5" cy="130.7" r="7"/></g></g>
-        <g class="readout" aria-hidden="true">
-          <text class="ro-s" x="260" y="236" text-anchor="middle" id="or-s">HONOURS</text>
-          <text class="ro-y" x="260" y="276" text-anchor="middle" id="or-y">05</text>
-          <text class="ro-l" x="260" y="293" text-anchor="middle" id="or-a"></text>
-          <text class="ro-l" x="260" y="301" text-anchor="middle" id="or-b"></text>
-        </g>
-        <g class="cards" aria-hidden="true"><text x="260" y="-4" text-anchor="middle">0°</text><text x="522" y="263" text-anchor="middle">90°</text><text x="260" y="534" text-anchor="middle">180°</text><text x="-2" y="263" text-anchor="middle">270°</text></g>
-      </svg>
-    </figure>
+    <div class="aw-wrap rv">
+      <ol class="aw-list" id="aw-list"><li class="aw" data-i="0" style="--i:0"><button type="button" class="aw-row" id="aw-b0" aria-expanded="false" aria-controls="aw-d0"><span class="aw-n mono">01</span><span class="aw-t"><span class="ln"><span>Winner — Best PCM Project, Engineerings Day ’26</span></span></span><span class="aw-tag mono">Project award</span><span class="aw-y mono">Sept 2026</span><span class="aw-ar" aria-hidden="true">↗</span></button><div class="aw-more" id="aw-d0" role="region" aria-labelledby="aw-b0"><div><div class="aw-more-in"><span class="mono">Vellore Institute of Technology</span><span class="mono">Awarded September 2026</span></div></div></div></li><li class="aw" data-i="1" style="--i:1"><button type="button" class="aw-row" id="aw-b1" aria-expanded="false" aria-controls="aw-d1"><span class="aw-n mono">02</span><span class="aw-t"><span class="ln"><span>1st Prize — InnovAct-2025 Hackathon</span></span></span><span class="aw-tag mono">Hackathon</span><span class="aw-y mono">2025</span><span class="aw-ar" aria-hidden="true">↗</span></button><div class="aw-more" id="aw-d1" role="region" aria-labelledby="aw-b1"><div><div class="aw-more-in"><span class="mono">Vellore Institute of Technology</span><span class="mono">Awarded 2025</span></div></div></div></li><li class="aw" data-i="2" style="--i:2"><button type="button" class="aw-row" id="aw-b2" aria-expanded="false" aria-controls="aw-d2"><span class="aw-n mono">03</span><span class="aw-t"><span class="ln"><span>Merit Scholarship — 1st Rank</span></span></span><span class="aw-tag mono">Scholarship</span><span class="aw-y mono">2024</span><span class="aw-ar" aria-hidden="true">↗</span></button><div class="aw-more" id="aw-d2" role="region" aria-labelledby="aw-b2"><div><div class="aw-more-in"><span class="mono">Academic Year 2023–24</span><span class="mono">Awarded 2024</span></div></div></div></li><li class="aw" data-i="3" style="--i:3"><button type="button" class="aw-row" id="aw-b3" aria-expanded="false" aria-controls="aw-d3"><span class="aw-n mono">04</span><span class="aw-t"><span class="ln"><span>Merit Scholarship — 2nd Rank</span></span></span><span class="aw-tag mono">Scholarship</span><span class="aw-y mono">2025</span><span class="aw-ar" aria-hidden="true">↗</span></button><div class="aw-more" id="aw-d3" role="region" aria-labelledby="aw-b3"><div><div class="aw-more-in"><span class="mono">Academic Year 2024–25</span><span class="mono">Awarded 2025</span></div></div></div></li><li class="aw" data-i="4" style="--i:4"><button type="button" class="aw-row" id="aw-b4" aria-expanded="false" aria-controls="aw-d4"><span class="aw-n mono">05</span><span class="aw-t"><span class="ln"><span>Merit Scholarship — 3rd Rank</span></span></span><span class="aw-tag mono">Scholarship</span><span class="aw-y mono">2026</span><span class="aw-ar" aria-hidden="true">↗</span></button><div class="aw-more" id="aw-d4" role="region" aria-labelledby="aw-b4"><div><div class="aw-more-in"><span class="mono">Academic Year 2025–26</span><span class="mono">Awarded 2026</span></div></div></div></li></ol>
     </div>
     <div class="rv pat-head" id="patents">
       <div class="ch-no">Chapter V</div>
-      <h2>Patents &amp; <em>publications</em></h2>
+      <h2><span class="ln"><span style="--i:0">Patents &amp; <em>publications</em></span></span></h2>
     </div>
     <div class="pubs rv">
         <article class="pub"><div class="pub-top"><span class="pub-i">01</span><span class="mono">March 2026</span></div><h3>System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</h3><dl><dt class="mono">Application No.</dt><dd class="mono">202641018176</dd></dl><div class="pub-s mono"><i></i>Published</div></article>
@@ -1137,7 +1129,7 @@ body.intro-lock .guide{display:none}
     skills:"Pick a planet. Its skills fall into orbit.",
     experience:"Mission log. Tap the Gartner photos, they shuffle.",
     projects:"Five missions on the star chart. Pick a star.",
-    awards:"Hover a planet. Each orbit is one of the awards.",
+    awards:"Hover a row. Each honour opens up.",
     extra:"Tap the objects on the desk. The lamp works too.",
     contact:"Houston, this is the place to say hello."
   };
@@ -1163,28 +1155,40 @@ body.intro-lock .guide{display:none}
   },250);
 })();
 
-// orrery: planets and list rows highlight each other; the centre reads out the award
+// honours index: rows slide open, the rest dim, a small seal follows the cursor
 (function(){
-  const fig=document.querySelector(".aor-fig");if(!fig)return;
-  const rings=[...fig.querySelectorAll(".ar-ring")],orbs=[...fig.querySelectorAll(".aorb")],pls=[...fig.querySelectorAll(".apl")];
-  const rows=[...document.querySelectorAll(".aw-list li")];
-  const D=[["2026","WINNER","BEST PCM PROJECT"],["2025","1ST PRIZE","INNOVACT-2025"],["2024","1ST RANK","MERIT SCHOLARSHIP"],["2025","2ND RANK","MERIT SCHOLARSHIP"],["2026","3RD RANK","MERIT SCHOLARSHIP"]];
-  const s=document.getElementById("or-s"),y=document.getElementById("or-y"),a=document.getElementById("or-a"),b=document.getElementById("or-b");
-  let cur=-1,timer,touched=false;
-  function sel(i){
-    cur=i;
-    rings.forEach((r,j)=>r.classList.toggle("on",j===i));orbs.forEach((o,j)=>o.classList.toggle("on",j===i));
-    pls.forEach((p,j)=>p.classList.toggle("on",j===i));rows.forEach((r,j)=>r.classList.toggle("on",j===i));
-    const d=D[i];s.textContent=d[1];y.textContent=d[0];a.textContent=d[2];b.textContent="";
+  const list=document.getElementById("aw-list");if(!list)return;
+  const items=[...list.querySelectorAll(".aw")],peek=document.getElementById("aw-peek"),pin=document.getElementById("pk-in");
+  const pn=document.getElementById("pk-n"),pt=document.getElementById("pk-t"),py=document.getElementById("pk-y");
+  const P=[["Win","Best PCM Project","2026"],["1st","InnovAct 2025","2025"],["1st","Merit Scholarship","2024"],["2nd","Merit Scholarship","2025"],["3rd","Merit Scholarship","2026"]];
+  const fine=matchMedia("(hover:hover) and (pointer:fine)").matches;
+  let cur=-1,x=0,y=0,tx=0,ty=0,sc=0.6,tsc=0.6,raf=0,inside=false;
+  function set(i){
+    if(i===cur)return;cur=i;
+    items.forEach((it,j)=>{const on=j===i;it.classList.toggle("on",on);it.querySelector(".aw-row").setAttribute("aria-expanded",on);});
+    list.classList.toggle("hov",i>=0);
+    if(i>=0&&fine){
+      pin.classList.add("sw");
+      setTimeout(()=>{pn.textContent=P[i][0];pt.textContent=P[i][1];py.textContent=P[i][2];peek.classList.toggle("win",i===0);pin.classList.remove("sw");},120);
+    }
+    peek.classList.toggle("show",fine&&i>=0&&inside);tsc=(i>=0)?1:0.6;
   }
-  function stop(){touched=true;clearInterval(timer);}
-  pls.forEach(p=>{const i=+p.dataset.i;p.addEventListener("mouseenter",()=>{stop();sel(i);});p.addEventListener("click",()=>{stop();sel(i);});p.addEventListener("focus",()=>{stop();sel(i);});
-    p.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();stop();sel(i);}});});
-  rows.forEach(r=>{const i=+r.dataset.i;r.addEventListener("mouseenter",()=>{stop();sel(i);});r.addEventListener("focus",()=>{stop();sel(i);});});
-  sel(0);
-  if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&"IntersectionObserver" in window){
-    new IntersectionObserver(es=>{if(es[0].isIntersecting&&!touched){clearInterval(timer);timer=setInterval(()=>sel((cur+1)%5),3400);}else clearInterval(timer);},{threshold:0.35}).observe(fig);
+  function loop(){
+    x+=(tx-x)*0.16;y+=(ty-y)*0.16;sc+=(tsc-sc)*0.14;
+    peek.style.transform="translate3d("+x.toFixed(1)+"px,"+y.toFixed(1)+"px,0) scale("+sc.toFixed(3)+")";
+    raf=requestAnimationFrame(loop);
   }
+  if(fine){
+    list.addEventListener("pointermove",e=>{inside=true;tx=e.clientX+96;ty=e.clientY-70;if(!raf){x=tx;y=ty;loop();}if(cur>=0)peek.classList.add("show");});
+    list.addEventListener("pointerleave",()=>{inside=false;peek.classList.remove("show");set(-1);});
+  }
+  items.forEach((it,i)=>{
+    it.addEventListener("pointerenter",e=>{if(e.pointerType==="mouse")set(i);});
+    const row=it.querySelector(".aw-row");
+    row.addEventListener("focus",()=>set(i));
+    row.addEventListener("click",()=>{if(!fine)set(cur===i?-1:i);});
+  });
+  list.addEventListener("focusout",e=>{if(!list.contains(e.relatedTarget))set(-1);});
 })();
 
 // copy email
