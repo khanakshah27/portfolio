@@ -178,6 +178,9 @@ h2 em{color:var(--lilac)}
 @keyframes swap{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .proj h3{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.6vw,3rem);line-height:1.05}
 .proj p{margin-top:1rem;color:var(--star-60);font-weight:300;max-width:42rem;line-height:1.75}
+.proj ul.pb{list-style:none;margin-top:1rem;display:grid;gap:0.7rem;max-width:42rem}
+.proj ul.pb li{position:relative;padding-left:1.3rem;color:var(--star-60);font-weight:300;line-height:1.7}
+.proj ul.pb li::before{content:"";position:absolute;left:0;top:0.82em;width:0.55rem;height:1px;background:var(--amber)}
 .proj .tags{margin-top:1.2rem;display:flex;flex-wrap:wrap;gap:0.3rem 1.1rem}
 .proj .tags span{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.06em;color:var(--star-40)}
 .proj .hero-links{margin-top:1.5rem}
@@ -706,12 +709,16 @@ body.intro-lock .guide{display:none}
         </div>
       </div>
       <div class="proj" data-i="1">
-        <div class="proj-l"><div class="row-date">P.02 · NLP · ML · Social Impact</div><div class="monitor"><div class="m-bezel"><div class="m-screen"><div class="m-card" style="--bg:#a8486a"><small>Project 02 · Case study</small><b>Workplace Microaggression Detector</b><em>Flags language that sidelines women at work, with 91% accuracy.</em></div></div></div><div class="m-neck"></div><div class="m-base"></div></div></div>
+        <div class="proj-l"><div class="row-date">P.02 · NLP · ML · Social Impact</div><div class="monitor"><div class="m-bezel"><div class="m-screen"><div class="m-bar"><i></i><i></i><i></i><span>microaggressions-in-workplace-front.vercel.app</span></div><div class="m-live"><iframe data-src="https://microaggressions-in-workplace-front.vercel.app/" title="Workplace Microaggression Detector live preview" tabindex="-1" loading="lazy" scrolling="no"></iframe><a href="https://microaggressions-in-workplace-front.vercel.app/" target="_blank" rel="noopener" aria-label="Open Workplace Microaggression Detector live"><span>Open live ↗</span></a></div></div></div><div class="m-neck"></div><div class="m-base"></div></div></div>
         <div>
           <h3>Workplace Microaggression Detector</h3>
-          <p>End-to-end ML web app detecting language that marginalizes women in workplace communication. Preprocessed with SpaCy NLP, deployed on Flask, with 91% accuracy using TF-IDF logistic regression.</p>
-          <div class="tags"><span>Python</span><span>Scikit-learn</span><span>SpaCy</span><span>Pandas</span><span>Flask</span></div>
-          <div class="hero-links"><a class="tlink" href="https://github.com/khanakshah27" target="_blank" rel="noopener">GitHub ↗</a></div>
+          <ul class="pb">
+            <li>Built and deployed an ML web app that detects microaggressions in workplace language, focusing on remarks that marginalize women, with real-time classification and confidence scores.</li>
+            <li>Raised accuracy from 86% to 92% (5-fold CV) by benchmarking 15 model/feature combinations and combining word and character TF-IDF n-grams with logistic regression.</li>
+            <li>Served a Flask REST API on Render and a custom responsive frontend on Vercel.</li>
+          </ul>
+          <div class="tags"><span>Python</span><span>Scikit-learn</span><span>NLP</span><span>Flask</span><span>JavaScript</span><span>Render</span><span>Vercel</span></div>
+          <div class="hero-links"><a class="tlink" href="https://github.com/khanakshah27" target="_blank" rel="noopener">GitHub ↗</a><a class="tlink main" href="https://microaggressions-in-workplace-front.vercel.app/" target="_blank" rel="noopener">Live ↗</a></div>
         </div>
       </div>
       <div class="proj" data-i="2">
