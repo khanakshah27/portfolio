@@ -594,10 +594,10 @@ body.intro-lock .guide{display:none}
 .grp-cap{position:absolute;left:0;top:calc(100% + 34px);white-space:nowrap;color:var(--star-60)}
 .bk{position:relative;flex:0 0 auto;width:calc(var(--w) * var(--k) * 1px);height:calc(var(--h) * var(--k) * 1px);border:none;padding:14px 0 12px;cursor:pointer;color:var(--c2);background:linear-gradient(90deg,rgba(0,0,0,0.3),transparent 20%,transparent 76%,rgba(0,0,0,0.38)),var(--c1);border-radius:3px 3px 1px 1px;box-shadow:inset 2px 0 0 rgba(255,255,255,0.13),0 2px 0 rgba(0,0,0,0.45);display:flex;flex-direction:column;align-items:center;justify-content:space-between;transform-origin:50% 100%;transition:transform .6s var(--ease),filter .4s,box-shadow .4s;transform:rotate(var(--lean,0deg))}
 .bk::before,.bk::after{content:"";position:absolute;left:5px;right:5px;height:6px;border-top:1px solid currentColor;border-bottom:1px solid currentColor;opacity:0.55}
-.bk::before{top:30px}.bk::after{bottom:60px}
+.bk::before{top:30px}.bk::after{bottom:34px}
 .bk .st{font-size:0.7rem;line-height:1;opacity:0.9}
-.bk .t{writing-mode:vertical-rl;text-align:center;font-family:var(--serif);font-size:clamp(0.82rem,1.25vw,1rem);line-height:1.08;max-height:calc((var(--h) - 112) * var(--k) * 1px);overflow:hidden;margin:auto 0}
-.bk .ap{display:inline-block;writing-mode:horizontal-tb;line-height:0.6}
+.bk .t{writing-mode:vertical-rl;text-align:center;font-family:var(--serif);font-size:clamp(0.82rem,1.25vw,1rem);line-height:1.08;max-height:calc((var(--h) - 118) * var(--k) * 1px);overflow:hidden;margin:auto 0}
+.bk .ap{display:inline-block;writing-mode:horizontal-tb;width:0.34em;height:1em;line-height:1;text-align:center;overflow:visible;vertical-align:baseline}
 .bk .a{writing-mode:vertical-rl;font-family:var(--mono);font-size:0.52rem;letter-spacing:0.16em;text-transform:uppercase;opacity:0.85;white-space:nowrap}
 .bk:hover,.bk.on,.bk:focus-visible{transform:translateY(-18px) rotate(calc(var(--lean,0deg) - 2deg));filter:brightness(1.12);box-shadow:inset 2px 0 0 rgba(255,255,255,0.18),0 18px 20px -10px rgba(0,0,0,0.7);outline:none;z-index:2}
 .bk.on{box-shadow:inset 2px 0 0 rgba(255,255,255,0.18),0 0 0 1px rgba(246,215,122,0.55),0 18px 24px -10px rgba(0,0,0,0.75)}
@@ -1216,14 +1216,19 @@ body.intro-lock .guide{display:none}
   el.classList.add("ready");
   document.body.classList.add("intro-lock");
   addEventListener("resize",build);
+  function onKey(e){
+    if(opened)return;
+    if(e.key==="Enter"||e.key===" "||e.key==="Escape"){e.preventDefault();open();}
+  }
   function open(){
     if(opened)return;opened=true;
+    removeEventListener("keydown",onKey);
     el.classList.add("open");hole.style.strokeDashoffset=0;
     setTimeout(()=>{el.classList.add("gone");document.body.classList.remove("intro-lock");removeEventListener("resize",build);},1400);
   }
   requestAnimationFrame(()=>requestAnimationFrame(()=>{el.classList.add("show");drawn=true;line.style.strokeDashoffset=0;}));
   el.addEventListener("click",open);
-  addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "||e.key==="Escape"){e.preventDefault();open();}});
+  addEventListener("keydown",onKey);
 })();
 
 // desk interactions
@@ -1655,6 +1660,8 @@ body.intro-lock .guide{display:none}
 (function(){
   const shelf=document.getElementById("shelf");if(!shelf)return;
   const BK=[{"t": "To Kill a Mockingbird", "a": "Harper Lee", "y": "1960", "k": "Novel · Pulitzer Prize, 1961", "n": "A story of childhood and racial injustice in the American South, set in Alabama in the 1930s.", "st": "read", "c1": "#2f5d62", "c2": "#e6c77a", "w": 64, "h": 262}, {"t": "The Bell Jar", "a": "Sylvia Plath", "y": "1963", "k": "Novel · Plath’s only novel", "n": "A semi-autobiographical portrait of a young woman’s breakdown in 1950s New York.", "st": "read", "c1": "#a8243d", "c2": "#f4ece0", "w": 60, "h": 236}, {"t": "The Housemaid’s Secret", "a": "Freida McFadden", "y": "2023", "k": "Psychological thriller · Housemaid #2", "n": "The second book in the Housemaid series.", "st": "read", "c1": "#1c1c27", "c2": "#e58bb4", "w": 66, "h": 276}, {"t": "Hollywood, Ending", "a": "John Green", "y": "2026", "k": "Novel · his first for adults", "n": "Two young actors rise to fame after being cast in an Andy Warhol biopic. By the author of Looking for Alaska.", "st": "reading", "c1": "#c8872b", "c2": "#17122b", "w": 72, "h": 292}, {"t": "The Old Man and the Sea", "a": "Ernest Hemingway", "y": "1952", "k": "Novella · Pulitzer Prize, 1953", "n": "An aging Cuban fisherman’s long struggle with a giant marlin far out in the Gulf Stream.", "st": "reading", "c1": "#1f3a5f", "c2": "#f0e6cf", "w": 62, "h": 252}];
+  const PLUM=[["#2b2250","#cfc4f5"],["#241b44","#cfc4f5"],["#312757","#cfc4f5"]],CREAM=[["#ece4d1","#2b2250"],["#e1d8c2","#2b2250"]];
+  let pi=0,ci=0;BK.forEach(b=>{const c=b.st==="reading"?CREAM[ci++%2]:PLUM[pi++%3];b.c1=c[0];b.c2=c[1];});
   const done=BK.filter(b=>b.st==="read"),now=BK.filter(b=>b.st==="reading");
   const mk=(list,cap)=>{
     const g=document.createElement("div");g.className="grp";
@@ -1662,8 +1669,8 @@ body.intro-lock .guide{display:none}
       const i=BK.indexOf(b),el=document.createElement("button");el.type="button";el.className="bk "+b.st;el.dataset.i=i;
       el.style.cssText="--w:"+b.w+";--h:"+b.h+";--c1:"+b.c1+";--c2:"+b.c2+(b.st==="reading"?";--lean:"+(i===3?"-4":"6")+"deg":"");
       el.setAttribute("role","option");el.setAttribute("aria-label",b.t+" by "+b.a+(b.st==="reading"?", currently reading":""));
-      el.innerHTML='<span class="st">✦</span><span class="t"></span><span class="a"></span>'+(b.st==="reading"?'<span class="rib"></span>':"");
-      el.querySelector(".t").innerHTML=b.t.replace(/’/g,'<span class="ap">’</span>');el.querySelector(".a").textContent=b.a;g.appendChild(el);
+      el.innerHTML='<span class="st">✦</span><span class="t"></span><span class="st" style="opacity:0">✦</span>'+(b.st==="reading"?'<span class="rib"></span>':"");
+      el.querySelector(".t").innerHTML=b.t.replace(/’/g,'<span class="ap">’</span>');g.appendChild(el);
     });
     const c=document.createElement("span");c.className="grp-cap mono";c.textContent=cap;g.appendChild(c);shelf.appendChild(g);
   };
