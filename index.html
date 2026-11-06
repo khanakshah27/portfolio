@@ -743,7 +743,7 @@ body.intro-lock .guide{display:none}
     <div class="ch-grid">
       <div class="ch-side rv">
         <div class="ch-no">About me</div>
-        <h2><span class="ln"><span style="--i:0">Where I come <em>from</em>, where I’m <em>going</em></span></span></h2>
+        <h2><span class="ln"><span style="--i:0">Where I come <em>from</em>, and the <em>places I’ve been</em></span></span></h2>
         <div class="fact">
           <span class="fact-n" id="fact-n">5</span>
           <p><b class="mono">Fun fact</b>I have lived in 5 cities so far, across 2 countries.</p>
@@ -1383,7 +1383,7 @@ body.intro-lock .guide{display:none}
 (function(){
   const root=document.getElementById("gh");if(!root)return;
   const grid=document.getElementById("gh-grid"),months=document.getElementById("gh-months"),tip=document.getElementById("gh-tip");
-  const SNAP={"from":"2025-11-02","counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,2,0,0,0,0,4,11,0,0,0,0,0,0,0,0,0,0,0,0,0,18,13,0,7,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,10,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,16,0,0,2,0,4,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,3,0,0,0,0,0,0,0,7,3,0,0,2,16,0,0,2,0,0,0,0,1,1,0,0,0,11,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,8,1,0,0,0,0]};
+  const SNAP={"from":"2025-11-02","counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,2,0,0,0,0,4,11,0,0,0,0,0,0,0,0,0,0,0,0,0,18,13,0,7,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,10,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,16,0,0,2,0,4,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,19,0,3,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,30,0,0,0,0,12,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,3,0,0,0,0,3,4,2,7,3,3,0,4,17,0,0,2,0,0,0,0,1,1,0,0,4,16,2,0,0,2,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,1,0,0,0,8,1,0,0,0,3]};
   const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
   const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const fmtD=d=>d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric"});
@@ -1445,12 +1445,15 @@ body.intro-lock .guide{display:none}
   grid.addEventListener("pointerleave",()=>tip.classList.remove("on"));
   // show the snapshot straight away, then upgrade to live data
   render(fromSnap(),false);
-  const ctl=("AbortController" in window)?new AbortController():null;
-  const kill=ctl&&setTimeout(()=>ctl.abort(),7000);
-  fetch("https://github-contributions-api.jogruber.de/v4/khanakshah27?y=last",ctl?{signal:ctl.signal}:{})
-    .then(r=>{if(!r.ok)throw 0;return r.json();})
-    .then(j=>{if(j&&j.contributions&&j.contributions.length>300){render(j.contributions.map(x=>({date:x.date,count:x.count})),true);}})
-    .catch(()=>{}).finally(()=>clearTimeout(kill));
+  function load(url){
+    const ctl=("AbortController" in window)?new AbortController():null,kill=ctl&&setTimeout(()=>ctl.abort(),7000);
+    return fetch(url,ctl?{signal:ctl.signal}:{}).then(r=>{if(!r.ok)throw 0;return r.json();})
+      .then(j=>{if(!j||!j.contributions||j.contributions.length<300)throw 0;return j.contributions.map(x=>({date:x.date,count:x.count}));})
+      .finally(()=>clearTimeout(kill));
+  }
+  load("/api/contributions")
+    .catch(()=>load("https://github-contributions-api.jogruber.de/v4/khanakshah27?y=last"))
+    .then(days=>render(days,true)).catch(()=>{});
 })();
 
 // about me: a night-lights map of the cities I have lived in
