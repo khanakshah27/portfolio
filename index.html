@@ -352,28 +352,8 @@ body.intro-lock{overflow:hidden}
 .w.lit{opacity:1}
 
 
-/* ── ASTRONOMICAL STICKERS (lilac sections) ── */
 .band-lilac{position:relative;overflow:hidden}
 .band-lilac>.wrap{position:relative;z-index:1}
-.stickers{position:absolute;inset:0;z-index:0;pointer-events:none}
-.stk{display:inline-block;width:var(--w,90px);height:var(--w,90px);transform:rotate(var(--r,0deg));filter:drop-shadow(0 7px 7px rgba(23,18,43,0.28));transition:transform .45s var(--ease)}
-.stk svg{display:block;width:100%;height:100%;overflow:visible}
-.stickers .stk{position:absolute;pointer-events:auto;cursor:grab}
-.stickers .stk:hover{transform:rotate(calc(var(--r,0deg) + 9deg)) scale(1.12)}
-.stickers .stk.bob{animation:bob 6s ease-in-out infinite}
-.stickers .stk.bob:hover{animation-play-state:paused}
-@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -9px}}
-.m-track .stk{--w:34px;vertical-align:middle;margin:-8px 1.6rem -8px 1.2rem;filter:drop-shadow(0 3px 3px rgba(23,18,43,0.25))}
-.m-track span::after{content:none!important}
-@media (max-width:900px){
-  /* phones/tablets: stickers sit in their own row above the content, never over text */
-  .stickers{position:relative;inset:auto;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:0.4rem 1.6rem;padding:0 var(--pad) 2.2rem}
-  .stickers .stk,.stickers .stk.bob{position:static;--w:64px!important;animation:none}
-  .stickers .stk.hide-s{display:none}
-  .stickers .stk:hover{transform:rotate(var(--r,0deg))}
-}
-@media (prefers-reduced-motion:reduce){.stickers .stk.bob{animation:none}}
-
 
 /* ── RECOGNITION: an honours index ── */
 .ln{display:block;overflow:hidden;padding-bottom:0.1em;margin-bottom:-0.1em}
@@ -413,25 +393,29 @@ body.intro-lock{overflow:hidden}
 }
 @media (prefers-reduced-motion:reduce){.ln>span,.aw::before,.aw-more,.aw-more-in{transition:none;animation:none}.ln>span{transform:none}}
 
-/* ── PATENTS: specification sheets ── */
-.pubs .pub{opacity:0;transform:translateY(26px);transition:opacity .9s ease calc(var(--k,0) * 0.14s + 0.2s),transform 1.1s var(--ease) calc(var(--k,0) * 0.14s + 0.2s)}
-.pubs.rv.in .pub{opacity:1;transform:none}
-.pubs .pub:nth-child(2){--k:1}.pubs .pub:nth-child(3){--k:2}
-@media (prefers-reduced-motion:reduce){.pubs .pub{opacity:1;transform:none;transition:none}}
+/* ── PATENTS: a revolving carousel ── */
 .pat-head{margin-top:clamp(4rem,8vw,6.5rem)}
 .pat-head h2{margin-bottom:0}
-.pubs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(1.6rem,3vw,3rem);margin-top:2.4rem}
-.pub{border-top:2px solid var(--star);padding:1rem 0 0;display:flex;flex-direction:column}
-.pub-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.4rem}
-.pub-top .mono{opacity:0.85}
-.pub-i{font-family:var(--serif);font-style:italic;font-size:2.4rem;line-height:1;color:var(--lilac)}
-.pub h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.3rem,1.75vw,1.6rem);line-height:1.18;margin-bottom:1.6rem;flex:1}
-.pub dl{border-top:1px solid var(--line-strong);padding-top:0.9rem}
-.pub dt{margin-bottom:0.2rem;opacity:0.8}
-.pub dd{font-size:0.95rem;letter-spacing:0.06em;color:var(--star)}
-.pub-s{display:flex;align-items:center;gap:0.55rem;margin-top:1rem;padding-bottom:0.2rem;color:var(--lilac)}
-.pub-s i{width:7px;height:7px;border-radius:50%;background:var(--lilac);display:block}
-@media (max-width:1000px){.pubs{grid-template-columns:minmax(0,1fr);gap:2.4rem 0;max-width:620px}}
+.car{margin-top:2.2rem}
+.car-stage{position:relative;outline:none;--cw:min(80vw,420px)}
+.car:not(.on) .car-ring{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem}
+.car.on .car-stage{height:var(--ch,420px);perspective:1700px;perspective-origin:50% 38%;touch-action:pan-y;cursor:grab;user-select:none}
+.car.on .car-stage:active{cursor:grabbing}
+.car.on .car-ring{position:absolute;inset:0;transform-style:preserve-3d}
+.pcard{background:#fffdf6;color:#17122b;border:1px solid rgba(23,18,43,0.25);border-top:2px solid #17122b;padding:1.6rem 1.6rem 1.5rem;display:flex;flex-direction:column;box-shadow:0 30px 44px -28px rgba(23,18,43,0.6)}
+.car.on .pcard{position:absolute;left:50%;top:0;width:var(--cw);margin-left:calc(var(--cw) / -2);will-change:transform,filter}
+.pc-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.4rem}
+.pc-i{font-family:var(--serif);font-style:italic;font-size:2.6rem;line-height:1;color:var(--lilac)}
+.pcard h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.35rem,2vw,1.7rem);line-height:1.18;margin-bottom:1.6rem;flex:1}
+.pcard dl{border-top:1px solid var(--line-strong);padding-top:0.9rem}
+.pcard dt{margin-bottom:0.2rem;opacity:0.8}
+.pcard dd{font-size:0.98rem;letter-spacing:0.06em;color:var(--star)}
+.pc-s{display:flex;align-items:center;gap:0.55rem;margin-top:1rem;color:var(--lilac)}
+.pc-s i{width:7px;height:7px;border-radius:50%;background:var(--lilac);display:block}
+.car-ctl{display:none;justify-content:center;align-items:center;gap:1.2rem;margin-top:1.6rem}
+.car.on .car-ctl{display:flex}
+.car-ctl button{width:2.7rem;height:2.7rem;border:1px solid var(--line-strong);background:none;color:var(--star);font-size:1.1rem;cursor:pointer;border-radius:50%;transition:background .3s,color .3s,transform .3s}
+.car-ctl button:hover{background:var(--star);color:var(--lilac-bg);transform:scale(1.06)}
 #awards{padding-bottom:clamp(8rem,13vw,12rem)}
 
 /* ── LILAC BACKGROUND: living dot grid ── */
@@ -486,6 +470,49 @@ body.intro-lock .guide{display:none}
 .g-eye{transform-box:fill-box;transform-origin:50% 50%;animation:g-blinkeye 5s infinite}
 @keyframes g-blinkeye{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(0.08)}}
 .g-eyes{transition:transform .2s ease-out}
+
+/* ── MISSION PROFILE ── */
+.mp-facts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:clamp(2.6rem,5vw,4rem);border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line)}
+.mp-f{padding:1.5rem 1.3rem 1.7rem;border-left:1px solid var(--line);transition:background .4s,opacity .8s ease calc(var(--k,0) * 0.09s + 0.15s),transform 1s var(--ease) calc(var(--k,0) * 0.09s + 0.15s);opacity:0;transform:translateY(18px)}
+.mp-f:nth-child(2){--k:1}.mp-f:nth-child(3){--k:2}.mp-f:nth-child(4){--k:3}.mp-f:nth-child(5){--k:4}
+.rv.in .mp-f{opacity:1;transform:none}
+.mp-f:first-child{border-left:none;padding-left:0}
+.mp-f:hover{background:rgba(185,167,240,0.07)}
+.mp-f dt{color:var(--amber);margin-bottom:0.9rem}
+.mp-f dd{font-family:var(--serif);font-size:clamp(1.25rem,1.75vw,1.65rem);line-height:1.15;margin-bottom:0.55rem}
+.mp-f .mono{opacity:0.75;line-height:1.5;display:block}
+.traj{margin-top:clamp(3.2rem,6vw,5.5rem)}
+.traj-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.6rem}
+.traj-head .ch-no{margin-bottom:0}
+.traj-body{position:relative}
+.traj-line{position:absolute;left:0;right:0;top:0;height:1px;background:var(--line-strong)}
+.traj-line i{position:absolute;left:0;top:-1px;height:3px;width:100%;background:var(--amber);transform:scaleX(0);transform-origin:0 50%;transition:transform 2.6s var(--ease) .3s}
+.traj-line b{position:absolute;top:-5px;left:0;width:11px;height:11px;margin-left:-5px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 5px rgba(234,162,63,0.18);opacity:0;transition:left 2.6s var(--ease) .3s,opacity .6s ease .3s}
+.rv.in .traj-line i{transform:none}
+.rv.in .traj-line b{left:100%;opacity:1}
+.traj-cols{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 clamp(1.2rem,2.4vw,2.4rem)}
+.tc{position:relative;padding-top:1.6rem}
+.tc::before{content:"";position:absolute;left:0;top:-5px;width:11px;height:11px;border-radius:50%;background:var(--ink);border:1px solid var(--amber);transform:scale(0);transition:transform .7s var(--ease) calc(var(--c) * 0.55s + 0.4s)}
+.rv.in .tc::before{transform:none}
+.ty{font-family:var(--serif);font-style:italic;font-size:clamp(2.2rem,3.6vw,3.4rem);line-height:1;color:var(--lilac)}
+.tc ul{list-style:none;margin-top:1.3rem;display:grid;gap:1.05rem}
+.tc li{border-left:1px solid var(--line-strong);padding-left:0.95rem;opacity:0;transform:translateY(14px);transition:opacity .7s ease calc(var(--c) * 0.55s + var(--e) * 0.1s + 0.55s),transform .9s var(--ease) calc(var(--c) * 0.55s + var(--e) * 0.1s + 0.55s)}
+.rv.in .tc li{opacity:1;transform:none}
+.tc li .mono{display:block;margin-bottom:0.2rem;opacity:0.7}
+.tc li b{font-family:var(--serif);font-weight:400;font-size:1.18rem;line-height:1.2;color:var(--star)}
+.tc ul:hover li{opacity:0.45}.tc ul li:hover{opacity:1}
+@media (max-width:1000px){.mp-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.mp-f,.mp-f:first-child{border-left:none;padding-left:0;border-top:1px solid var(--line)}.mp-f:nth-child(-n+2){border-top:none}.mp-f:nth-child(even){border-left:1px solid var(--line);padding-left:1.3rem}}
+@media (max-width:760px){
+  .mp-facts{grid-template-columns:minmax(0,1fr)}.mp-f,.mp-f:nth-child(even){border-left:none;padding-left:0}.mp-f:nth-child(2){border-top:1px solid var(--line)}
+  .traj-body{padding-left:1.7rem}
+  .traj-line{left:0;right:auto;top:0;bottom:0;width:1px;height:auto}
+  .traj-line i{left:-1px;top:0;width:3px;height:100%;transform:scaleY(0);transform-origin:50% 0}
+  .traj-line b{display:none}
+  .traj-cols{grid-template-columns:minmax(0,1fr);gap:2.4rem 0}
+  .tc{padding-top:0}
+  .tc::before{left:calc(-1.7rem - 5px);top:0.6rem}
+}
+@media (prefers-reduced-motion:reduce){.mp-f,.tc li{opacity:1;transform:none;transition:none}.tc::before{transform:none;transition:none}.traj-line i{transform:none;transition:none}.traj-line b{display:none}}
 
 /* ── REVEAL ── */
 .rv.l{transform:translateX(-34px)}.rv.r{transform:translateX(34px)}
@@ -619,12 +646,22 @@ body.intro-lock .guide{display:none}
 </div>
 
 <section class="ch" id="about">
-  <div class="wrap ch-grid">
-    <div class="ch-side rv">
-      <div class="ch-no">Preface</div>
-      <h2 class="poem">A note</h2>
+  <div class="wrap">
+    <div class="ch-grid">
+      <div class="ch-side rv">
+        <div class="ch-no">Preface</div>
+        <h2><span class="ln"><span style="--i:0">Mission <em>profile</em></span></span></h2>
+      </div>
+      <p class="big rv">I enjoy <em>simplifying</em> the way things work &mdash; automating workflows and building impactful systems that make a meaningful difference.</p>
     </div>
-    <p class="big rv">I enjoy <em>simplifying</em> the way things work &mdash; automating workflows and building impactful systems that make a meaningful difference.</p>
+    <dl class="mp-facts rv"><div class="mp-f"><dt class="mono">Base</dt><dd>Bangalore, India</dd><span class="mono">12.97° N · 77.59° E</span></div><div class="mp-f"><dt class="mono">Studying</dt><dd>CS + Bioinformatics</dd><span class="mono">VIT Vellore · CGPA 9.46</span></div><div class="mp-f"><dt class="mono">Latest role</dt><dd>Associate SDE Intern</dd><span class="mono">Gartner · DevOps team</span></div><div class="mp-f"><dt class="mono">Focus</dt><dd>ML, GenAI, DevOps &amp; Cloud</dd><span class="mono">Systems that solve real problems</span></div><div class="mp-f"><dt class="mono">Open to</dt><dd>Internships and freelance</dd><span class="mono">Research collabs · open source</span></div></dl>
+    <div class="traj rv">
+      <div class="traj-head"><div class="ch-no">Trajectory</div><span class="mono">2023 → 2026</span></div>
+      <div class="traj-body">
+        <div class="traj-line" aria-hidden="true"><i></i><b></b></div>
+        <ol class="traj-cols"><li class="tc" style="--c:0"><div class="ty">2023</div><ul><li style="--e:0"><span class="mono">May 2023</span><b>C &amp; C++ certification</b></li></ul></li><li class="tc" style="--c:1"><div class="ty">2024</div><ul><li style="--e:0"><span class="mono">Jun 2024</span><b>Java certification</b></li><li style="--e:1"><span class="mono">2024</span><b>Merit Scholarship, 1st Rank</b></li></ul></li><li class="tc" style="--c:2"><div class="ty">2025</div><ul><li style="--e:0"><span class="mono">From Mar 2025</span><b>ISTE: Executive Secretary &amp; ML Lead</b></li><li style="--e:1"><span class="mono">Jun 2025</span><b>Gen AI with IBM Watsonx</b></li><li style="--e:2"><span class="mono">Jul – Sep 2025</span><b>GSSoC ’25 contributor</b></li><li style="--e:3"><span class="mono">2025</span><b>1st Prize, InnovAct Hackathon</b></li></ul></li><li class="tc" style="--c:3"><div class="ty">2026</div><ul><li style="--e:0"><span class="mono">Mar – Sep 2026</span><b>Three patents published</b></li><li style="--e:1"><span class="mono">May – Jul 2026</span><b>Associate SDE Intern, Gartner</b></li><li style="--e:2"><span class="mono">Sept 2026</span><b>Winner, Best PCM Project</b></li></ul></li></ol>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -753,14 +790,6 @@ body.intro-lock .guide{display:none}
 </section>
 
 <section class="ch band-lilac" id="awards">
-  <div class="stickers" aria-hidden="true">
-    <span class="stk bob" data-s="saturn" style="--w:120px;--w0:120px;--r:14deg;right:2.5%;top:2.2rem"></span>
-    <span class="stk" data-s="moon" style="--w:84px;--w0:84px;--r:-16deg;left:1.5%;top:1.4rem"></span>
-    <span class="stk hide-s" data-s="sparkle" style="--w:58px;--w0:58px;--r:10deg;left:47%;top:5.2rem"></span>
-    <span class="stk bob" data-s="rocket" style="--w:138px;--w0:138px;--r:24deg;right:9%;bottom:3.2rem"></span>
-    <span class="stk hide-s" data-s="comet" style="--w:110px;--w0:110px;--r:-8deg;right:34%;bottom:2.4rem"></span>
-    <span class="stk hide-s" data-s="planet" style="--w:76px;--w0:76px;--r:-12deg;left:2%;bottom:2.6rem"></span>
-  </div>
   <div class="wrap">
     <div class="rv">
       <div class="ch-no">Chapter IV</div>
@@ -773,10 +802,12 @@ body.intro-lock .guide{display:none}
       <div class="ch-no">Chapter V</div>
       <h2><span class="ln"><span style="--i:0">Patents &amp; <em>publications</em></span></span></h2>
     </div>
-    <div class="pubs rv">
-        <article class="pub"><div class="pub-top"><span class="pub-i">01</span><span class="mono">March 2026</span></div><h3>System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</h3><dl><dt class="mono">Application No.</dt><dd class="mono">202641018176</dd></dl><div class="pub-s mono"><i></i>Published</div></article>
-        <article class="pub"><div class="pub-top"><span class="pub-i">02</span><span class="mono">April 2026</span></div><h3>A System and Method for Machine Learning-Based FTIR Spectral Denoising</h3><dl><dt class="mono">Application No.</dt><dd class="mono">202641053864</dd></dl><div class="pub-s mono"><i></i>Published</div></article>
-        <article class="pub"><div class="pub-top"><span class="pub-i">03</span><span class="mono">September 2026</span></div><h3>Method for Resolution-Adaptive Spatial-Semantic Attention Conditioning in Diffusion Image Generation</h3><dl><dt class="mono">Application No.</dt><dd class="mono">202641123781</dd></dl><div class="pub-s mono"><i></i>Published</div></article>
+    <div class="car rv" id="car">
+      <div class="car-stage" id="car-stage" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Patents. Use the arrow keys or buttons to turn the cards.">
+        <div class="car-ring" id="car-ring"><article class="pcard" aria-label="Patent 01"><div class="pc-top"><span class="pc-i">01</span><span class="mono">March 2026</span></div><h3>System for AI-Driven Threat Detection &amp; Blockchain-Based Evidence Preservation</h3><dl><dt class="mono">Application No.</dt><dd class="mono">202641018176</dd></dl><div class="pc-s mono"><i></i>Published</div></article><article class="pcard" aria-label="Patent 02"><div class="pc-top"><span class="pc-i">02</span><span class="mono">April 2026</span></div><h3>A System and Method for Machine Learning-Based FTIR Spectral Denoising</h3><dl><dt class="mono">Application No.</dt><dd class="mono">202641053864</dd></dl><div class="pc-s mono"><i></i>Published</div></article><article class="pcard" aria-label="Patent 03"><div class="pc-top"><span class="pc-i">03</span><span class="mono">September 2026</span></div><h3>Method for Resolution-Adaptive Spatial-Semantic Attention Conditioning in Diffusion Image Generation</h3><dl><dt class="mono">Application No.</dt><dd class="mono">202641123781</dd></dl><div class="pc-s mono"><i></i>Published</div></article></div>
+      </div>
+      <div class="car-ctl"><button type="button" id="car-prev" aria-label="Previous patent">←</button><span class="mono" id="car-c">01 / 03</span><button type="button" id="car-next" aria-label="Next patent">→</button></div>
+    </div>
     </div>
   </div>
 </section>
@@ -851,14 +882,6 @@ body.intro-lock .guide{display:none}
 </section>
 
 <section id="contact" class="band-lilac">
-  <div class="stickers" aria-hidden="true">
-    <span class="stk bob" data-s="helmet" style="--w:170px;--w0:170px;--r:-9deg;right:9%;top:24%"></span>
-    <span class="stk" data-s="moon" style="--w:100px;--w0:100px;--r:18deg;right:30%;top:8%"></span>
-    <span class="stk hide-s" data-s="sparkle" style="--w:64px;--w0:64px;--r:-6deg;right:3%;top:58%"></span>
-    <span class="stk bob" data-s="planet" style="--w:96px;--w0:96px;--r:12deg;right:27%;bottom:20%"></span>
-    <span class="stk hide-s" data-s="comet" style="--w:128px;--w0:128px;--r:-14deg;right:6%;bottom:11%"></span>
-    <span class="stk" data-s="saturn" style="--w:110px;--w0:110px;--r:-18deg;left:3%;top:4%"></span>
-  </div>
   <div class="wrap">
     <div class="mono k rv">✦ Transmission open</div>
     <h2 class="say poem rv">Houston, I’m <em>ready</em> when you are.</h2>
@@ -1117,6 +1140,7 @@ body.intro-lock .guide{display:none}
   if(!reduced){let last=scrollY,t;addEventListener("scroll",()=>{const v=scrollY-last;last=scrollY;const tilt=Math.max(-10,Math.min(10,v*0.5));ship.style.setProperty("--tilt",tilt+"deg");clearTimeout(t);t=setTimeout(()=>ship.style.setProperty("--tilt","0deg"),140);},{passive:true});}
   // one short tip per section, the first time you arrive
   const QUIPS={
+    about:"A quick mission briefing before the details.",
     skills:"Pick a planet. Its skills fall into orbit.",
     experience:"Mission log. Tap the Gartner photos, they shuffle.",
     projects:"Five missions on the star chart. Pick a star.",
@@ -1167,6 +1191,71 @@ body.intro-lock .guide{display:none}
   list.addEventListener("focusout",e=>{if(!list.contains(e.relatedTarget))set(-1);});
 })();
 
+// patents: a revolving 3D carousel
+(function(){
+  const car=document.getElementById("car");if(!car)return;
+  const stage=document.getElementById("car-stage"),ring=document.getElementById("car-ring");
+  const cards=[...ring.children],N=cards.length,step=360/N;
+  const counter=document.getElementById("car-c");
+  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let R=400,rot=0,target=0,hover=false,drag=null,vis=false,raf=0,timer=0,focus=false;
+  function measure(){
+    cards.forEach(c=>c.style.minHeight="");
+    const h=Math.max(...cards.map(c=>c.offsetHeight));
+    cards.forEach(c=>c.style.minHeight=h+"px");
+    stage.style.setProperty("--ch",(h+10)+"px");
+    R=cards[0].offsetWidth*0.95;
+  }
+  function idx(){return ((Math.round(-target/step)%N)+N)%N;}
+  function render(){
+    cards.forEach((c,i)=>{
+      const a=i*step+rot,n=((a%360)+540)%360-180,f=Math.max(0,1-Math.abs(n)/step);
+      const th=n*Math.PI/180,x=R*Math.sin(th),z=R*(Math.cos(th)-1),tilt=Math.max(-40,Math.min(40,-n*0.28));
+      c.style.transform="translate3d("+x.toFixed(1)+"px,0,"+z.toFixed(1)+"px) rotateY("+tilt.toFixed(2)+"deg)";
+      c.style.filter="brightness("+(0.82+0.18*f*f).toFixed(3)+")";
+      c.style.zIndex=Math.round(100*Math.cos(n*Math.PI/180))+100;
+      c.style.pointerEvents="auto";
+    });
+    counter.textContent=String(idx()+1).padStart(2,"0")+" / "+String(N).padStart(2,"0");
+  }
+  function tick(){
+    if(Math.abs(target-rot)>0.05){rot+=(target-rot)*(reduced?1:0.085);}else rot=target;
+    render();
+    raf=requestAnimationFrame(tick);
+  }
+  function go(d){target+= -d*step;restart();}
+  function restart(){clearInterval(timer);if(reduced)return;timer=setInterval(()=>{if(vis&&!hover&&!drag&&!focus)target-=step;},4800);}
+  car.classList.add("on");
+  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>{measure();render();});
+  addEventListener("resize",()=>{measure();render();});
+  document.getElementById("car-prev").addEventListener("click",()=>go(-1));
+  document.getElementById("car-next").addEventListener("click",()=>go(1));
+  stage.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"){e.preventDefault();go(-1);}else if(e.key==="ArrowRight"){e.preventDefault();go(1);}});
+  stage.addEventListener("focus",()=>{focus=true;});stage.addEventListener("blur",()=>{focus=false;});
+  stage.addEventListener("pointerenter",e=>{if(e.pointerType==="mouse")hover=true;});
+  stage.addEventListener("pointerleave",()=>{hover=false;});
+  cards.forEach((c,i)=>c.addEventListener("click",()=>{
+    if(drag&&drag.moved)return;
+    const a=i*step+target,n=((a%360)+540)%360-180;
+    if(Math.abs(n)>step/2){target-=n;restart();}
+  }));
+  stage.addEventListener("pointerdown",e=>{drag={x:e.clientX,r:target,moved:false};});
+  addEventListener("pointermove",e=>{
+    if(!drag)return;const dx=e.clientX-drag.x;
+    if(Math.abs(dx)>6)drag.moved=true;
+    if(drag.moved){target=drag.r+dx*0.32;}
+  });
+  addEventListener("pointerup",()=>{
+    if(!drag)return;
+    if(drag.moved){target=Math.round(target/step)*step;restart();}
+    setTimeout(()=>{drag=null;},0);
+  });
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(es=>{vis=es[0].isIntersecting;},{threshold:0.3}).observe(stage);
+  }else vis=true;
+  restart();raf=requestAnimationFrame(tick);
+})();
+
 // copy email
 (function(){
   const b=document.getElementById("copy-mail");if(!b)return;
@@ -1178,36 +1267,12 @@ body.intro-lock .guide{display:none}
   });
 })();
 
-// stickers: flat art with a white die-cut border, built from one shape list
-(function(){
-  const E=(tag,a,fill,stroke,sw)=>({tag,a,fill,stroke,sw});
-  const ART={
-    saturn:[E("circle",{cx:50,cy:50,r:22},"#eaa23f"),E("circle",{cx:43,cy:43,r:5},"#f7cd85"),E("ellipse",{cx:50,cy:52,rx:42,ry:12,transform:"rotate(-22 50 52)"},"none","#5a3ed1",6)],
-    moon:[E("path",{d:"M64 10a42 42 0 1 0 24 58a33 33 0 0 1-24-58z"},"#f3d77e"),E("circle",{cx:38,cy:56,r:5},"#e2c25f"),E("circle",{cx:52,cy:74,r:3.5},"#e2c25f"),E("path",{d:"M78 22l2.4 6 6 2.4-6 2.4-2.4 6-2.4-6-6-2.4 6-2.4z"},"#5a3ed1")],
-    rocket:[E("path",{d:"M34 54L16 80l18-6z"},"#eaa23f"),E("path",{d:"M66 54l18 26-18-6z"},"#eaa23f"),E("path",{d:"M42 70L50 94 58 70z"},"#e85d4a"),E("path",{d:"M50 6C68 22 72 46 67 72H33C28 46 32 22 50 6z"},"#7b5cf0"),E("circle",{cx:50,cy:42,r:9},"#cfe9ff","#17122b",3.5)],
-    comet:[E("path",{d:"M66 40Q34 58 6 92Q42 80 80 50z"},"#7b5cf0"),E("path",{d:"M60 50Q38 64 22 84Q46 76 70 54z"},"#a995f6"),E("circle",{cx:72,cy:36,r:17},"#eaa23f"),E("circle",{cx:67,cy:31,r:5},"#f7cd85")],
-    sparkle:[E("path",{d:"M50 4L60 40 96 50 60 60 50 96 40 60 4 50 40 40z"},"#eaa23f"),E("path",{d:"M50 28L54 46 72 50 54 54 50 72 46 54 28 50 46 46z"},"#fbe3b0")],
-    planet:[E("circle",{cx:50,cy:50,r:32},"#e58bb4"),E("circle",{cx:38,cy:40,r:7},"#cf6f9b"),E("circle",{cx:62,cy:60,r:9},"#cf6f9b"),E("circle",{cx:60,cy:34,r:4},"#cf6f9b"),E("path",{d:"M24 36a32 32 0 0 1 22-16",},"none","#f6c2da",4)],
-    helmet:[E("rect",{x:12,y:62,width:76,height:26,rx:10},"#d7d0f2","#17122b",3.5),E("circle",{cx:50,cy:46,r:34},"#ece8fb","#17122b",3.5),E("rect",{x:24,y:30,width:52,height:34,rx:16},"#241a4d"),E("path",{d:"M32 42q6-8 16-8",},"none","#9fb8ff",3.5),E("circle",{cx:50,cy:76,r:4},"#eaa23f")]
-  };
-  function attrs(a){return Object.keys(a).map(k=>k+'="'+a[k]+'"').join(" ");}
-  window.stickerSVG=function(n){
-    const sh=ART[n];if(!sh)return"";
-    const out=sh.map(x=>"<"+x.tag+" "+attrs(x.a)+' fill="'+(x.fill==="none"?"none":"#fff")+'" stroke="#fff" stroke-width="'+((x.sw||0)+10)+'" stroke-linejoin="round" stroke-linecap="round"/>').join("");
-    const top=sh.map(x=>"<"+x.tag+" "+attrs(x.a)+' fill="'+x.fill+'"'+(x.stroke?' stroke="'+x.stroke+'" stroke-width="'+(x.sw||2)+'" stroke-linejoin="round" stroke-linecap="round"':"")+"/>").join("");
-    return '<svg viewBox="-6 -6 112 112" aria-hidden="true">'+out+top+"</svg>";
-  };
-  window.fillStickers=function(root){(root||document).querySelectorAll("[data-s]").forEach(el=>{if(!el.firstChild)el.innerHTML=stickerSVG(el.dataset.s);});};
-})();
-
 // tools marquee
 (function(){
   const items=["Python","PyTorch","React.js","AWS","Docker","FastAPI","TensorFlow","GenAI","PostgreSQL","Figma"];
-  const names=["saturn","sparkle","moon","rocket","planet","comet","helmet"];
-  const html=items.map((t,i)=>"<span>"+t+'</span><i class="stk" data-s="'+names[i%names.length]+'"></i>').join("");
+  const html=items.map(t=>"<span>"+t+"</span>").join("");
   const track=document.getElementById("m-track");
   track.innerHTML=html+html;
-  fillStickers(document);
 })();
 
 // header + progress + active nav
