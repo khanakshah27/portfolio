@@ -1687,11 +1687,11 @@ body.intro-lock .guide{display:none}
     let ok=false;
     try{
       const ctl=("AbortController" in window)?new AbortController():null,kill=ctl&&setTimeout(()=>ctl.abort(),12000);
-      const r=await fetch("https://formsubmit.co/ajax/"+MAIL,{method:"POST",signal:ctl?ctl.signal:undefined,headers:{"Content-Type":"application/json","Accept":"application/json"},
-        body:JSON.stringify({_subject:"New book recommendation",_template:"table",_captcha:"false",_honey:hp,"book recommendation":rec,"from":name||"anonymous"})});
+      const r=await fetch("https://formspree.io/f/meaadygz",{method:"POST",signal:ctl?ctl.signal:undefined,headers:{"Content-Type":"application/json","Accept":"application/json"},
+        body:JSON.stringify({_subject:"New book recommendation",_gotcha:hp,"book recommendation":rec,"from":name||"anonymous"})});
       clearTimeout(kill);
       let j={};try{j=await r.json();}catch(e){}
-      ok=r.ok&&String(j.success)!=="false";
+      ok=r.ok&&!j.errors;
     }catch(err){ok=false;}
     if(!ok){btn.disabled=false;fallback(rec,name);return;}
     msg.textContent="";
