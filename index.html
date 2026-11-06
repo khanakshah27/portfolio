@@ -1655,7 +1655,7 @@ body.intro-lock .guide{display:none}
   }else row.classList.add("ready");
 })();
 
-// recommendations: write on the paper, drop it in the box (saved to the owner)
+// recommendations: write on the paper, drop it in the box (it is emailed to the owner)
 (function(){
   const form=document.getElementById("recs-form");if(!form)return;
   const paper=document.getElementById("paper"),box=document.getElementById("rbox"),slot=document.getElementById("rslot");
@@ -1686,8 +1686,12 @@ body.intro-lock .guide{display:none}
     const hp=form.querySelector(".hp").value;
     let ok=false;
     try{
-      const r=await fetch("/api/recommend",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({rec,name,website:hp})});
-      ok=r.ok;
+      const ctl=("AbortController" in window)?new AbortController():null,kill=ctl&&setTimeout(()=>ctl.abort(),12000);
+      const r=await fetch("https://formsubmit.co/ajax/"+MAIL,{method:"POST",signal:ctl?ctl.signal:undefined,headers:{"Content-Type":"application/json","Accept":"application/json"},
+        body:JSON.stringify({_subject:"New book recommendation",_template:"table",_captcha:"false",_honey:hp,"book recommendation":rec,"from":name||"anonymous"})});
+      clearTimeout(kill);
+      let j={};try{j=await r.json();}catch(e){}
+      ok=r.ok&&String(j.success)!=="false";
     }catch(err){ok=false;}
     if(!ok){btn.disabled=false;fallback(rec,name);return;}
     msg.textContent="";
