@@ -411,31 +411,31 @@ body.intro-lock{overflow:hidden}
 .car.on .car-stage{height:var(--ch,420px);perspective:1700px;perspective-origin:50% 38%;touch-action:pan-y;cursor:grab;user-select:none}
 .car.on .car-stage:active{cursor:grabbing}
 .car.on .car-ring{position:absolute;inset:0;transform-style:preserve-3d}
-@property --ga{syntax:"<angle>";inherits:false;initial-value:0deg}
-.pcard{position:relative;color:#f1ecff;padding:2rem 1.9rem 1.8rem;display:flex;flex-direction:column;border:1.5px solid transparent;border-radius:6px;background:linear-gradient(160deg,#17103a 0%,#0d0922 100%) padding-box,conic-gradient(from var(--ga),#fff1b8,#eaa23f,#a9680f,#f6d77a,#eaa23f,#fff1b8,#c98a1e,#fff1b8) border-box;box-shadow:0 0 14px rgba(234,162,63,0.55),0 0 38px rgba(234,162,63,0.28),0 0 52px rgba(123,92,240,0.4),0 0 96px rgba(185,167,240,0.3),0 30px 44px -28px rgba(23,18,43,0.7);animation:gspin 7s linear infinite}
-.pcard::before{content:"";position:absolute;inset:7px;border:1px solid rgba(234,162,63,0.6);border-radius:3px;background:radial-gradient(circle at 0 0,#f6d77a 0 2.6px,transparent 3.2px),radial-gradient(circle at 100% 0,#f6d77a 0 2.6px,transparent 3.2px),radial-gradient(circle at 0 100%,#f6d77a 0 2.6px,transparent 3.2px),radial-gradient(circle at 100% 100%,#f6d77a 0 2.6px,transparent 3.2px),radial-gradient(120% 60% at 50% -10%,rgba(246,215,122,0.12),transparent 60%);pointer-events:none}
-.pcard::after{content:"";position:absolute;left:12%;right:12%;bottom:-14px;height:20px;background:radial-gradient(ellipse at 50% 0,rgba(234,162,63,0.5),transparent 70%);filter:blur(8px);pointer-events:none}
-@keyframes gspin{to{--ga:360deg}}
+
+.pcard{position:relative;color:#3a2a1b;padding:2rem 1.9rem 1.8rem;display:flex;flex-direction:column;border:1px solid rgba(120,90,50,0.45);border-radius:4px;background:linear-gradient(165deg,#fbf7ee 0%,#f1e8d5 55%,#e8dcc2 100%);box-shadow:0 26px 40px -24px rgba(70,45,15,0.55),inset 0 1px 0 rgba(255,255,255,0.7)}
+.pcard::before{content:"";position:absolute;inset:7px;border:1px solid rgba(120,90,50,0.35);border-radius:2px;pointer-events:none}
+
+
 .car.on .pcard{position:absolute;left:50%;top:0;width:var(--cw);margin-left:calc(var(--cw) / -2);will-change:transform,filter}
 .pc-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.4rem;padding:0 0.2rem}
-.pc-i{font-family:var(--serif);font-style:italic;font-size:2.6rem;line-height:1;color:#f6d77a;text-shadow:0 0 16px rgba(234,162,63,0.85)}
-.pcard .mono{color:rgba(246,226,170,0.78)}
-.orn{position:absolute;color:#f0c15a;pointer-events:none;z-index:2;filter:drop-shadow(0 0 4px rgba(234,162,63,0.7))}
+.pc-i{font-family:var(--serif);font-style:italic;font-size:2.6rem;line-height:1;color:#8a6a3d}
+.pcard .mono{color:rgba(70,48,25,0.72)}
+.orn{position:absolute;color:#9a7a4b;pointer-events:none;z-index:2}
 .orn.oc{width:68px;height:68px}
 .orn.oc.tl{left:-7px;top:-7px}
 .orn.oc.tr{right:-7px;top:-7px;transform:scaleX(-1)}
 .orn.oc.bl{left:-7px;bottom:-7px;transform:scaleY(-1)}
 .orn.oc.br{right:-7px;bottom:-7px;transform:scale(-1,-1)}
-.orn.os{width:30px;height:30px;left:50%;margin-left:-15px;background:#0d0922;border-radius:50%}
+.orn.os{width:30px;height:30px;left:50%;margin-left:-15px;background:#f1e8d5;border-radius:50%}
 .orn.os.t{top:-15px}.orn.os.b{bottom:-15px}
 .orn.od{width:16px;height:16px;top:50%;margin-top:-8px}
 .orn.od.l{left:-8px}.orn.od.r{right:-8px}
-.pcard h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.35rem,2vw,1.7rem);line-height:1.18;margin-bottom:1.6rem;flex:1;color:#fff}
-.pcard dl{border-top:1px solid;border-image:linear-gradient(90deg,rgba(246,215,122,0.9),rgba(234,162,63,0.15)) 1;padding-top:0.9rem}
+.pcard h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.35rem,2vw,1.7rem);line-height:1.18;margin-bottom:1.6rem;flex:1;color:#2a1d12}
+.pcard dl{border-top:1px solid rgba(120,90,50,0.4);padding-top:0.9rem}
 .pcard dt{margin-bottom:0.2rem;opacity:0.8}
-.pcard dd{font-size:0.98rem;letter-spacing:0.06em;color:#fff}
-.pc-s{display:flex;align-items:center;gap:0.55rem;margin-top:1rem;color:#f3c27a}
-.pc-s i{width:7px;height:7px;border-radius:50%;background:#eaa23f;box-shadow:0 0 10px 2px rgba(234,162,63,0.8);display:block}
+.pcard dd{font-size:0.98rem;letter-spacing:0.06em;color:#2a1d12}
+.pc-s{display:flex;align-items:center;gap:0.55rem;margin-top:1rem;color:#8a5a1c}
+.pc-s i{width:7px;height:7px;border-radius:50%;background:#b07a2a;display:block}
 .car-ctl{display:none;justify-content:center;align-items:center;gap:1.2rem;margin-top:1.6rem}
 .car.on .car-ctl{display:flex}
 .car-ctl button{width:2.7rem;height:2.7rem;border:1px solid var(--line-strong);background:none;color:var(--star);font-size:1.1rem;cursor:pointer;border-radius:50%;transition:background .3s,color .3s,transform .3s}
@@ -584,7 +584,7 @@ body.intro-lock .guide{display:none}
 
 /* ── LIFE'S LIBRARY ── */
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.lib{display:grid;gap:1.6rem;min-width:0}
+.lib{display:grid;gap:0;min-width:0}
 .covers{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding:1.6rem 0 4.6rem;perspective:1400px}
 .bkc{--cw:132px;position:relative;width:var(--cw);height:calc(var(--cw) * 1.42);flex:0 0 auto;color:var(--c2)}
 .bkc:nth-child(even){margin-top:58px}
@@ -607,7 +607,6 @@ body.intro-lock .guide{display:none}
 .bk3 .bkb{inset:0;transform:translateZ(-8px);background:var(--c1);filter:brightness(0.6);border-radius:2px 5px 5px 2px}
 .flo .rib{position:absolute;left:62%;top:calc(100% - 4px);width:9px;height:40px;background:linear-gradient(180deg,#eaa23f,#c2761a);clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%);transform-origin:50% 0;animation:rib 3.6s ease-in-out infinite;pointer-events:none}
 @keyframes rib{50%{transform:rotate(7deg)}}
-.lib-key{text-align:center;font-size:1.1rem;color:var(--star-60)}
 @media (max-width:900px){.bkc{--cw:112px}}
 @media (max-width:640px){.covers{justify-content:center;gap:1.8rem 1.4rem;flex-wrap:wrap;padding-bottom:3.6rem}.bkc{--cw:98px}.bkc:nth-child(even){margin-top:34px}}
 @media (prefers-reduced-motion:reduce){.flo,.flo .rib{animation:none}.bk3{transition:none}}
@@ -670,8 +669,8 @@ body.intro-lock .guide{display:none}
 <symbol id="lv-branch" viewBox="0 0 54 124"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 122C22 88 28 52 36 8"/><path transform="translate(23 104) rotate(-40) scale(-1 1)" d="M0 0C6-4 12-12 12-24C4-18 0-10 0 0Z"/><path transform="translate(24 90) rotate(40)" d="M0 0C6-4 12-12 12-24C4-18 0-10 0 0Z"/><path transform="translate(26 74) rotate(-38) scale(-1 1)" d="M0 0C6-4 12-12 12-24C4-18 0-10 0 0Z"/><path transform="translate(28 58) rotate(38)" d="M0 0C6-4 12-12 12-24C4-18 0-10 0 0Z"/><path transform="translate(31 42) rotate(-36) scale(-1 1)" d="M0 0C6-4 12-12 12-24C4-18 0-10 0 0Z"/><path transform="translate(33 27) rotate(34)" d="M0 0C6-4 12-12 12-24C4-18 0-10 0 0Z"/></g></symbol>
 <symbol id="lv-sprig" viewBox="0 0 70 100"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 96C18 70 30 44 58 10"/><path transform="translate(16 82) rotate(-70)" d="M0 0C6-4 12-12 12-24C4-18 0-10 0 0Z"/><path transform="translate(21 68) rotate(10)" d="M0 0C6-4 12-12 12-24C4-18 0-10 0 0Z"/><path transform="translate(28 54) rotate(-60)" d="M0 0C6-4 12-12 12-24C4-18 0-10 0 0Z"/><path transform="translate(35 42) rotate(20)" d="M0 0C6-4 12-12 12-24C4-18 0-10 0 0Z"/><path transform="translate(44 29) rotate(-52)" d="M0 0C6-4 12-12 12-24C4-18 0-10 0 0Z"/><path transform="translate(52 19) rotate(30)" d="M0 0C6-4 12-12 12-24C4-18 0-10 0 0Z"/></g></symbol>
 <symbol id="tr-corner" viewBox="0 0 56 56"><g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M2 54V22C2 10 10 2 22 2H54"/><path d="M8 54V24C8 15 15 8 24 8H54" opacity="0.7"/><path d="M17 31C17 22 22 17 31 17" opacity="0.9"/><path d="M14 40C14 26 26 14 40 14" opacity="0.35"/></g><circle cx="13" cy="13" r="2.5" fill="currentColor"/><path d="M2 32l3.2 3.2L2 38.4-1.2 35.2z" fill="currentColor"/><path d="M32 2l3.2 3.2L32 8.4 28.8 5.2z" fill="currentColor"/><circle cx="26" cy="26" r="1.1" fill="currentColor"/></symbol>
-<symbol id="tr-star" viewBox="0 0 44 44"><g fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="22" cy="22" r="15"/><circle cx="22" cy="22" r="19" opacity="0.45" stroke-dasharray="1.5 3"/></g><path d="M22 3l4 15 15 4-15 4-4 15-4-15-15-4 15-4z" fill="currentColor"/><circle cx="22" cy="22" r="2.4" fill="#0d0922"/></symbol>
-<symbol id="tr-dia" viewBox="0 0 20 20"><path d="M10 1l8 9-8 9-8-9z" fill="#0d0922" stroke="currentColor" stroke-width="1.2"/><path d="M10 6l4 4-4 4-4-4z" fill="currentColor"/></symbol>
+<symbol id="tr-star" viewBox="0 0 44 44"><g fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="22" cy="22" r="15"/><circle cx="22" cy="22" r="19" opacity="0.45" stroke-dasharray="1.5 3"/></g><path d="M22 3l4 15 15 4-15 4-4 15-4-15-15-4 15-4z" fill="currentColor"/><circle cx="22" cy="22" r="2.4" fill="#f1e8d5"/></symbol>
+<symbol id="tr-dia" viewBox="0 0 20 20"><path d="M10 1l8 9-8 9-8-9z" fill="#f1e8d5" stroke="currentColor" stroke-width="1.2"/><path d="M10 6l4 4-4 4-4-4z" fill="currentColor"/></symbol>
 </defs></svg>
 <div id="progress"></div>
 <div class="guide" id="guide" hidden>
@@ -1112,7 +1111,6 @@ body.intro-lock .guide{display:none}
       </div>
       <div class="lib rv" id="lib">
         <div class="covers" id="covers" role="list" aria-label="Books I have read recently"></div>
-        <p class="lib-key poem">The ones with a bookmark are the books I’m reading right now.</p>
         <ul class="sr-only"><li>To Kill a Mockingbird by Harper Lee (1960) — read</li><li>The Bell Jar by Sylvia Plath (1963) — read</li><li>The Housemaid’s Secret by Freida McFadden (2023) — read</li><li>Hollywood, Ending by John Green (2026) — currently reading</li><li>The Old Man and the Sea by Ernest Hemingway (1952) — currently reading</li></ul>
       </div>
     </div>
