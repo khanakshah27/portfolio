@@ -250,7 +250,7 @@ footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid v
 /* ── SOLAR SYSTEM (toolbox) ── */
 #skills{background:var(--plum);padding-bottom:clamp(3rem,6vw,5rem)}
 .solar-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.2rem 3rem;margin-bottom:2.2rem}
-.solar-head .ch-note{max-width:26rem;margin-top:0}
+.solar-head .ch-note{max-width:none;margin-top:1rem}
 #solar{display:block;width:100%;cursor:crosshair;touch-action:manipulation;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .solar-legend{display:flex;flex-wrap:wrap;gap:0.4rem 2rem;margin-top:1.4rem}
 .solar-legend button{background:none;border:none;border-bottom:1px solid transparent;color:var(--star-60);font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0;cursor:pointer;display:flex;align-items:center;gap:0.55rem;transition:color .2s,border-color .2s}
@@ -332,6 +332,7 @@ body.intro-lock{overflow:hidden}
 .cut-stack .sp-w+.sp-w{margin-top:2rem}
 .cut-stack .sp-w:nth-child(even){width:90%;margin-left:auto}
 .gal-side{margin-top:2.2rem;display:grid;gap:2rem;max-width:230px}
+@media (min-width:901px){.gal-side{max-width:none;width:calc(100% + 120px);margin-right:-120px}}
 .sp-w{position:relative;filter:drop-shadow(0 10px 12px rgba(0,0,0,0.55));transform:rotate(var(--r,0deg));transition:transform .5s var(--ease),opacity .9s ease calc(var(--n,0) * .2s + .1s),translate 1s var(--ease) calc(var(--n,0) * .2s + .1s);opacity:0;translate:0 22px}
 .in .sp-w,.sp-w.in{opacity:1;translate:0 0}
 
@@ -410,20 +411,26 @@ body.intro-lock{overflow:hidden}
 .car.on .car-stage{height:var(--ch,420px);perspective:1700px;perspective-origin:50% 38%;touch-action:pan-y;cursor:grab;user-select:none}
 .car.on .car-stage:active{cursor:grabbing}
 .car.on .car-ring{position:absolute;inset:0;transform-style:preserve-3d}
-.pcard{background:#fffdf6;color:#17122b;border:1px solid rgba(23,18,43,0.25);border-top:2px solid #17122b;padding:1.6rem 1.6rem 1.5rem;display:flex;flex-direction:column;box-shadow:0 30px 44px -28px rgba(23,18,43,0.6)}
+@property --ga{syntax:"<angle>";inherits:false;initial-value:0deg}
+.pcard{position:relative;color:#f1ecff;padding:1.7rem 1.7rem 1.55rem;display:flex;flex-direction:column;border:1.5px solid transparent;border-radius:6px;background:linear-gradient(160deg,#17103a 0%,#0d0922 100%) padding-box,conic-gradient(from var(--ga),#b9a7f0,#7b5cf0,#eaa23f,#e58bb4,#b9a7f0) border-box;box-shadow:0 0 18px rgba(123,92,240,0.55),0 0 46px rgba(123,92,240,0.35),0 0 90px rgba(185,167,240,0.28),0 30px 44px -28px rgba(23,18,43,0.7);animation:gspin 7s linear infinite}
+.pcard::before{content:"";position:absolute;inset:-1.5px;border-radius:7px;background:radial-gradient(120% 70% at 50% -10%,rgba(185,167,240,0.22),transparent 60%);pointer-events:none}
+.pcard::after{content:"";position:absolute;left:12%;right:12%;bottom:-14px;height:20px;background:radial-gradient(ellipse at 50% 0,rgba(185,167,240,0.55),transparent 70%);filter:blur(8px);pointer-events:none}
+@keyframes gspin{to{--ga:360deg}}
 .car.on .pcard{position:absolute;left:50%;top:0;width:var(--cw);margin-left:calc(var(--cw) / -2);will-change:transform,filter}
 .pc-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.4rem}
-.pc-i{font-family:var(--serif);font-style:italic;font-size:2.6rem;line-height:1;color:var(--lilac)}
-.pcard h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.35rem,2vw,1.7rem);line-height:1.18;margin-bottom:1.6rem;flex:1}
-.pcard dl{border-top:1px solid var(--line-strong);padding-top:0.9rem}
+.pc-i{font-family:var(--serif);font-style:italic;font-size:2.6rem;line-height:1;color:#c9b8ff;text-shadow:0 0 18px rgba(185,167,240,0.8)}
+.pcard .mono{color:rgba(241,236,255,0.72)}
+.pcard h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.35rem,2vw,1.7rem);line-height:1.18;margin-bottom:1.6rem;flex:1;color:#fff}
+.pcard dl{border-top:1px solid rgba(185,167,240,0.35);padding-top:0.9rem}
 .pcard dt{margin-bottom:0.2rem;opacity:0.8}
-.pcard dd{font-size:0.98rem;letter-spacing:0.06em;color:var(--star)}
-.pc-s{display:flex;align-items:center;gap:0.55rem;margin-top:1rem;color:var(--lilac)}
-.pc-s i{width:7px;height:7px;border-radius:50%;background:var(--lilac);display:block}
+.pcard dd{font-size:0.98rem;letter-spacing:0.06em;color:#fff}
+.pc-s{display:flex;align-items:center;gap:0.55rem;margin-top:1rem;color:#f3c27a}
+.pc-s i{width:7px;height:7px;border-radius:50%;background:#eaa23f;box-shadow:0 0 10px 2px rgba(234,162,63,0.8);display:block}
 .car-ctl{display:none;justify-content:center;align-items:center;gap:1.2rem;margin-top:1.6rem}
 .car.on .car-ctl{display:flex}
 .car-ctl button{width:2.7rem;height:2.7rem;border:1px solid var(--line-strong);background:none;color:var(--star);font-size:1.1rem;cursor:pointer;border-radius:50%;transition:background .3s,color .3s,transform .3s}
 .car-ctl button:hover{background:var(--star);color:var(--lilac-bg);transform:scale(1.06)}
+@media (prefers-reduced-motion:reduce){.pcard{animation:none}}
 #awards{padding-bottom:clamp(8rem,13vw,12rem)}
 
 /* ── LILAC BACKGROUND: living dot grid ── */
@@ -706,7 +713,7 @@ body.intro-lock .guide{display:none}
     <div class="ch-grid">
       <div class="ch-side rv">
         <div class="ch-no">Preface</div>
-        <h2><span class="ln"><span style="--i:0">Building <em>in public</em></span></span></h2>
+        <h2><span class="ln"><span style="--i:0">One commit <em>at a time</em></span></span></h2>
       </div>
       <p class="big rv">I enjoy <em>simplifying</em> the way things work &mdash; automating workflows and building impactful systems that make a meaningful difference.</p>
     </div>
@@ -803,8 +810,8 @@ body.intro-lock .guide{display:none}
       <div>
         <div class="ch-no">Chapter I</div>
         <h2>The <em>Toolbox</em></h2>
+        <p class="ch-note">All the skills I’ve gained over the years.</p>
       </div>
-      <p class="ch-note">Five planets of capability. Choose one, and its skills fall into orbit.</p>
     </div>
   </div>
   <div class="wrap rv">
