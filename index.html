@@ -471,57 +471,43 @@ body.intro-lock .guide{display:none}
 @keyframes g-blinkeye{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(0.08)}}
 .g-eyes{transition:transform .2s ease-out}
 
-/* ── IMPACT, MEASURED (bento) ── */
-.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:1.1rem;margin-top:clamp(2.6rem,5vw,4rem)}
-.bc{position:relative;border:1px solid var(--line-strong);padding:1.6rem 1.7rem 1.7rem;display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(22px);transition:opacity .9s ease calc(var(--k,0) * 0.11s + 0.1s),transform 1.1s var(--ease) calc(var(--k,0) * 0.11s + 0.1s),border-color .4s,background .4s}
-.rv.in .bc{opacity:1;transform:none}
-.bc:hover{border-color:var(--lilac);background:rgba(185,167,240,0.05)}
-.bc-a{grid-column:span 7}.bc-b{grid-column:span 5}.bc-c{grid-column:span 5}.bc-d{grid-column:span 4}.bc-e{grid-column:span 3}.bc-f{grid-column:span 12;flex-direction:row;align-items:center;gap:2rem 3.5rem}
-.bc-ctx{color:var(--amber);margin-bottom:1rem}
-.bc-n{font-family:var(--serif);font-style:italic;font-size:clamp(3rem,5.4vw,5rem);line-height:0.95;letter-spacing:-0.02em;color:var(--star);margin-bottom:0.9rem}
-.bc p{color:var(--star-60);font-weight:300;line-height:1.65;font-size:0.98rem;max-width:32rem}
-.bars{margin-top:auto;padding-top:1.6rem;display:grid;gap:0.75rem}
-.bar-row{display:grid;grid-template-columns:3.4rem minmax(0,1fr) 5.2rem;gap:0.8rem;align-items:center}
-.bar-row .mono:last-child{text-align:right;color:var(--star)}
-.bar{height:10px;border:1px solid var(--line-strong);position:relative}
-.bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--star-60);transition:width 1.6s var(--ease) .6s}
-.bar i.b2{background:var(--amber);transition-delay:1.5s,0s}
-.rv.in .bar i.b1{width:100%}.rv.in .bar i.b2{width:9%}
-.ring-wrap{position:relative;width:min(100%,190px);margin-bottom:1.1rem}
-.ring{display:block;width:100%;height:auto}
-.ring circle{fill:none;stroke-width:5}
-.ring .rt{stroke:var(--line-strong)}
-.ring .rf{stroke:var(--lilac);stroke-linecap:round;stroke-dasharray:301.6;stroke-dashoffset:301.6;transition:stroke-dashoffset 2s var(--ease) .5s}
-.rv.in .ring .rf{stroke-dashoffset:75.4}
-.ring-n{position:absolute;inset:0;display:grid;place-items:center;margin:0;font-size:clamp(1.9rem,2.8vw,2.5rem)}
-.dots{display:grid;grid-template-columns:repeat(19,minmax(0,1fr));gap:5px;margin-top:auto;padding-top:1.5rem}
-.dots i{aspect-ratio:1;border-radius:50%;border:1px solid var(--line-strong);transition:background .4s ease calc(var(--k) * 9ms + 0.7s),border-color .4s ease calc(var(--k) * 9ms + 0.7s),transform .5s var(--ease) calc(var(--k) * 9ms + 0.7s)}
-.rv.in .dots i.d{background:var(--amber);border-color:var(--amber);transform:scale(1.1)}
-.vbars{display:flex;gap:1.1rem;align-items:flex-end;height:120px;margin-top:auto;padding-top:1.3rem}
-.vbars div{flex:0 1 84px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:0.4rem}
-.vbars i{display:block;width:100%;height:0;background:var(--star-60);transition:height 1.5s var(--ease) .7s}
-.vbars i.hi{background:var(--lilac);transition-delay:1s}
-.rv.in .vbars i{height:calc(var(--h) * 1%)}
-.langs{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:auto;padding-top:1.4rem;max-width:200px}
-.langs i{aspect-ratio:1;border-radius:50%;border:1px solid var(--line-strong);transition:background .4s ease calc(var(--k) * 40ms + 0.8s),border-color .4s ease calc(var(--k) * 40ms + 0.8s),transform .5s var(--ease) calc(var(--k) * 40ms + 0.8s);display:grid;place-items:center;font-style:normal;font-family:var(--mono);font-size:0.75rem;color:var(--lilac)}
-.rv.in .langs i{background:var(--lilac);border-color:var(--lilac);transform:scale(1.05)}
-.rv.in .langs i.plus{background:none;border-color:var(--lilac)}
-.chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.1rem}
-.chips span{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;border:1px solid var(--line-strong);padding:0.35rem 0.7rem;color:var(--star-60);opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .7s var(--ease),border-color .3s,color .3s}
-.rv.in .chips span{opacity:1;transform:none}
-.chips span:nth-child(1){transition-delay:.9s}.chips span:nth-child(2){transition-delay:1s}.chips span:nth-child(3){transition-delay:1.1s}.chips span:nth-child(4){transition-delay:1.2s}.chips span:nth-child(5){transition-delay:1.3s}.chips span:nth-child(6){transition-delay:1.4s}.chips span:nth-child(7){transition-delay:1.5s}
-.chips span:hover{border-color:var(--lilac);color:var(--lilac)}
-.bf-l{flex:0 0 auto}.bf-l .bc-n{margin-bottom:0;font-size:clamp(4rem,7vw,6.5rem)}
-.bf-r{flex:1;min-width:0}
-@media (max-width:1000px){
-  .bc-a,.bc-b,.bc-c,.bc-d,.bc-e{grid-column:span 6}.bc-a{grid-column:span 12}.bc-e{grid-column:span 12}
-}
-@media (max-width:640px){
-  .bento{gap:0.9rem}.bc-a,.bc-b,.bc-c,.bc-d,.bc-e,.bc-f{grid-column:span 12}
-  .bc-f{flex-direction:column;align-items:flex-start;gap:0.4rem}
-  .ring-wrap{width:160px}
-}
-@media (prefers-reduced-motion:reduce){.bc{opacity:1;transform:none;transition:none}.bar i,.vbars i,.ring .rf,.dots i,.langs i,.chips span{transition:none}.chips span{opacity:1;transform:none}}
+/* ── GITHUB CONTRIBUTIONS ── */
+.gh{position:relative;margin-top:clamp(2.6rem,5vw,4rem)}
+.gh-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.4rem 3rem;margin-bottom:1.8rem}
+.gh-total{display:flex;flex-direction:column;gap:0.5rem}
+.gh-n{font-family:var(--serif);font-style:italic;font-size:clamp(3.4rem,7vw,6rem);line-height:0.9;letter-spacing:-0.02em;color:var(--star)}
+.gh-stats{display:flex;gap:clamp(1.4rem,3.5vw,3.4rem)}
+.gh-stats div{display:flex;flex-direction:column;gap:0.35rem;padding-left:1rem;border-left:1px solid var(--line-strong)}
+.gh-stats b{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,2.4vw,2.1rem);line-height:1}
+.gh-scroll{overflow-x:auto;padding-bottom:0.6rem;scrollbar-width:thin}
+.gh-graph{min-width:760px}
+.gh-months{position:relative;height:1.1rem;margin-left:2.4rem;margin-bottom:0.45rem}
+.gh-months span{position:absolute;top:0;font-family:var(--mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--star-60)}
+.gh-grid-wrap{display:flex;gap:0.5rem}
+.gh-days{display:grid;grid-template-rows:repeat(7,1fr);width:1.9rem;font-family:var(--mono);font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--star-40)}
+.gh-days span{grid-row:var(--r);display:flex;align-items:center}
+.gh-days span:nth-child(1){--r:2}.gh-days span:nth-child(2){--r:4}.gh-days span:nth-child(3){--r:6}
+.gh-grid{flex:1;display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;grid-auto-columns:1fr;gap:4px}
+.gh-grid i{aspect-ratio:1;border-radius:50%;background:rgba(185,167,240,0.1);border:1px solid rgba(185,167,240,0.16);opacity:0;transform:scale(0.2);transition:opacity .5s ease calc(var(--w) * 16ms + 0.15s),transform .7s var(--ease) calc(var(--w) * 16ms + 0.15s),background .25s,box-shadow .25s}
+.rv.in .gh-grid i{opacity:1;transform:none}
+.gh-grid i.b{opacity:0!important;pointer-events:none}
+.gh-grid i.l1{background:rgba(185,167,240,0.3);border-color:rgba(185,167,240,0.3)}
+.gh-grid i.l2{background:rgba(185,167,240,0.58);border-color:rgba(185,167,240,0.58)}
+.gh-grid i.l3{background:#b9a7f0;border-color:#b9a7f0}
+.gh-grid i.l4{background:#eaa23f;border-color:#eaa23f;box-shadow:0 0 12px rgba(234,162,63,0.35)}
+.gh-grid i:not(.b):hover{transform:scale(1.5)!important;z-index:2;position:relative;box-shadow:0 0 0 2px var(--ink),0 0 0 3px var(--lilac)}
+.gh-foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.9rem 2rem;margin-top:1.3rem}
+.gh-live{display:flex;align-items:center;gap:0.6rem}
+.gh-live i{width:7px;height:7px;border-radius:50%;background:var(--amber);display:block}
+.gh-live.ok i{animation:ghp 2s ease-in-out infinite}
+@keyframes ghp{0%,100%{box-shadow:0 0 0 0 rgba(234,162,63,0.55)}50%{box-shadow:0 0 0 6px rgba(234,162,63,0)}}
+.gh-legend{display:flex;align-items:center;gap:0.45rem}
+.gh-legend b{width:12px;height:12px;border-radius:50%;display:block;background:rgba(185,167,240,0.1);border:1px solid rgba(185,167,240,0.16)}
+.gh-legend .l1{background:rgba(185,167,240,0.3);border-color:rgba(185,167,240,0.3)}.gh-legend .l2{background:rgba(185,167,240,0.58);border-color:rgba(185,167,240,0.58)}.gh-legend .l3{background:#b9a7f0;border-color:#b9a7f0}.gh-legend .l4{background:#eaa23f;border-color:#eaa23f}
+.gh-tip{position:fixed;left:0;top:0;z-index:70;pointer-events:none;background:var(--star);color:#17122b;padding:0.45rem 0.7rem;white-space:nowrap;opacity:0;transform:translateY(4px);transition:opacity .2s ease,transform .25s var(--ease)}
+.gh-tip.on{opacity:1;transform:none}
+@media (max-width:760px){.gh-stats{width:100%;justify-content:space-between;gap:1rem}}
+@media (prefers-reduced-motion:reduce){.gh-grid i{opacity:1;transform:none;transition:none}.gh-live.ok i{animation:none}}
 
 /* ── REVEAL ── */
 .rv.l{transform:translateX(-34px)}.rv.r{transform:translateX(34px)}
@@ -659,50 +645,34 @@ body.intro-lock .guide{display:none}
     <div class="ch-grid">
       <div class="ch-side rv">
         <div class="ch-no">Preface</div>
-        <h2><span class="ln"><span style="--i:0">Impact, <em>measured</em></span></span></h2>
+        <h2><span class="ln"><span style="--i:0">Building <em>in public</em></span></span></h2>
       </div>
       <p class="big rv">I enjoy <em>simplifying</em> the way things work &mdash; automating workflows and building impactful systems that make a meaningful difference.</p>
     </div>
-    <div class="bento rv" id="bento">
-      <article class="bc bc-a" style="--k:0">
-        <div class="bc-ctx mono">Gartner · DevOps</div>
-        <div class="bc-n"><span data-fmt="range" data-a="75" data-b="85" data-s="%">75–85%</span></div>
-        <p>faster troubleshooting. The App Configuration Validator catches invalid endpoints at the pull-request stage.</p>
-        <div class="bars" aria-hidden="true">
-          <div class="bar-row"><span class="mono">Before</span><div class="bar"><i class="b1"></i></div><span class="mono">2+ hours</span></div>
-          <div class="bar-row"><span class="mono">After</span><div class="bar"><i class="b2"></i></div><span class="mono">10–15 min</span></div>
+    <div class="gh rv" id="gh">
+      <div class="gh-head">
+        <div class="gh-total"><span class="gh-n" id="gh-n">0</span><span class="mono">contributions in the last year</span></div>
+        <div class="gh-stats">
+          <div><b id="gh-days">–</b><span class="mono">Active days</span></div>
+          <div><b id="gh-streak">–</b><span class="mono">Longest streak</span></div>
+          <div><b id="gh-best">–</b><span class="mono">Busiest day</span></div>
         </div>
-      </article>
-      <article class="bc bc-b" style="--k:1">
-        <div class="bc-ctx mono">Gartner · DevOps</div>
-        <div class="ring-wrap">
-          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="48"/><circle class="rf" cx="60" cy="60" r="48" transform="rotate(-90 60 60)"/></svg>
-          <div class="bc-n ring-n"><span data-fmt="range" data-a="70" data-b="80" data-s="%">70–80%</span></div>
+      </div>
+      <div class="gh-scroll" id="gh-scroll">
+        <div class="gh-graph" id="gh-graph" role="img" aria-label="GitHub contribution graph for the last year">
+          <div class="gh-months" id="gh-months" aria-hidden="true"></div>
+          <div class="gh-grid-wrap">
+            <div class="gh-days" aria-hidden="true"><span>Mon</span><span>Wed</span><span>Fri</span></div>
+            <div class="gh-grid" id="gh-grid" aria-hidden="true"></div>
+          </div>
         </div>
-        <p>less manual effort, migration time and operating cost in the AWS Lambda runtime upgrade pipeline.</p>
-      </article>
-      <article class="bc bc-c" style="--k:2">
-        <div class="bc-ctx mono">Gartner · Cloud cleanup</div>
-        <div class="bc-n"><span data-fmt="frac" data-a="123" data-b="171">123 / 171</span></div>
-        <p>inactive AWS Lambda functions found, and cleaned up to cut cost and improve scalability.</p>
-        <div class="dots" aria-hidden="true"><i class="d" style="--k:0"></i><i class="d" style="--k:1"></i><i class="d" style="--k:2"></i><i class="d" style="--k:3"></i><i class="d" style="--k:4"></i><i class="d" style="--k:5"></i><i class="d" style="--k:6"></i><i class="d" style="--k:7"></i><i class="d" style="--k:8"></i><i class="d" style="--k:9"></i><i class="d" style="--k:10"></i><i class="d" style="--k:11"></i><i class="d" style="--k:12"></i><i class="d" style="--k:13"></i><i class="d" style="--k:14"></i><i class="d" style="--k:15"></i><i class="d" style="--k:16"></i><i class="d" style="--k:17"></i><i class="d" style="--k:18"></i><i class="d" style="--k:19"></i><i class="d" style="--k:20"></i><i class="d" style="--k:21"></i><i class="d" style="--k:22"></i><i class="d" style="--k:23"></i><i class="d" style="--k:24"></i><i class="d" style="--k:25"></i><i class="d" style="--k:26"></i><i class="d" style="--k:27"></i><i class="d" style="--k:28"></i><i class="d" style="--k:29"></i><i class="d" style="--k:30"></i><i class="d" style="--k:31"></i><i class="d" style="--k:32"></i><i class="d" style="--k:33"></i><i class="d" style="--k:34"></i><i class="d" style="--k:35"></i><i class="d" style="--k:36"></i><i class="d" style="--k:37"></i><i class="d" style="--k:38"></i><i class="d" style="--k:39"></i><i class="d" style="--k:40"></i><i class="d" style="--k:41"></i><i class="d" style="--k:42"></i><i class="d" style="--k:43"></i><i class="d" style="--k:44"></i><i class="d" style="--k:45"></i><i class="d" style="--k:46"></i><i class="d" style="--k:47"></i><i class="d" style="--k:48"></i><i class="d" style="--k:49"></i><i class="d" style="--k:50"></i><i class="d" style="--k:51"></i><i class="d" style="--k:52"></i><i class="d" style="--k:53"></i><i class="d" style="--k:54"></i><i class="d" style="--k:55"></i><i class="d" style="--k:56"></i><i class="d" style="--k:57"></i><i class="d" style="--k:58"></i><i class="d" style="--k:59"></i><i class="d" style="--k:60"></i><i class="d" style="--k:61"></i><i class="d" style="--k:62"></i><i class="d" style="--k:63"></i><i class="d" style="--k:64"></i><i class="d" style="--k:65"></i><i class="d" style="--k:66"></i><i class="d" style="--k:67"></i><i class="d" style="--k:68"></i><i class="d" style="--k:69"></i><i class="d" style="--k:70"></i><i class="d" style="--k:71"></i><i class="d" style="--k:72"></i><i class="d" style="--k:73"></i><i class="d" style="--k:74"></i><i class="d" style="--k:75"></i><i class="d" style="--k:76"></i><i class="d" style="--k:77"></i><i class="d" style="--k:78"></i><i class="d" style="--k:79"></i><i class="d" style="--k:80"></i><i class="d" style="--k:81"></i><i class="d" style="--k:82"></i><i class="d" style="--k:83"></i><i class="d" style="--k:84"></i><i class="d" style="--k:85"></i><i class="d" style="--k:86"></i><i class="d" style="--k:87"></i><i class="d" style="--k:88"></i><i class="d" style="--k:89"></i><i class="d" style="--k:90"></i><i class="d" style="--k:91"></i><i class="d" style="--k:92"></i><i class="d" style="--k:93"></i><i class="d" style="--k:94"></i><i class="d" style="--k:95"></i><i class="d" style="--k:96"></i><i class="d" style="--k:97"></i><i class="d" style="--k:98"></i><i class="d" style="--k:99"></i><i class="d" style="--k:100"></i><i class="d" style="--k:101"></i><i class="d" style="--k:102"></i><i class="d" style="--k:103"></i><i class="d" style="--k:104"></i><i class="d" style="--k:105"></i><i class="d" style="--k:106"></i><i class="d" style="--k:107"></i><i class="d" style="--k:108"></i><i class="d" style="--k:109"></i><i class="d" style="--k:110"></i><i class="d" style="--k:111"></i><i class="d" style="--k:112"></i><i class="d" style="--k:113"></i><i class="d" style="--k:114"></i><i class="d" style="--k:115"></i><i class="d" style="--k:116"></i><i class="d" style="--k:117"></i><i class="d" style="--k:118"></i><i class="d" style="--k:119"></i><i class="d" style="--k:120"></i><i class="d" style="--k:121"></i><i class="d" style="--k:122"></i><i class="" style="--k:123"></i><i class="" style="--k:124"></i><i class="" style="--k:125"></i><i class="" style="--k:126"></i><i class="" style="--k:127"></i><i class="" style="--k:128"></i><i class="" style="--k:129"></i><i class="" style="--k:130"></i><i class="" style="--k:131"></i><i class="" style="--k:132"></i><i class="" style="--k:133"></i><i class="" style="--k:134"></i><i class="" style="--k:135"></i><i class="" style="--k:136"></i><i class="" style="--k:137"></i><i class="" style="--k:138"></i><i class="" style="--k:139"></i><i class="" style="--k:140"></i><i class="" style="--k:141"></i><i class="" style="--k:142"></i><i class="" style="--k:143"></i><i class="" style="--k:144"></i><i class="" style="--k:145"></i><i class="" style="--k:146"></i><i class="" style="--k:147"></i><i class="" style="--k:148"></i><i class="" style="--k:149"></i><i class="" style="--k:150"></i><i class="" style="--k:151"></i><i class="" style="--k:152"></i><i class="" style="--k:153"></i><i class="" style="--k:154"></i><i class="" style="--k:155"></i><i class="" style="--k:156"></i><i class="" style="--k:157"></i><i class="" style="--k:158"></i><i class="" style="--k:159"></i><i class="" style="--k:160"></i><i class="" style="--k:161"></i><i class="" style="--k:162"></i><i class="" style="--k:163"></i><i class="" style="--k:164"></i><i class="" style="--k:165"></i><i class="" style="--k:166"></i><i class="" style="--k:167"></i><i class="" style="--k:168"></i><i class="" style="--k:169"></i><i class="" style="--k:170"></i></div>
-      </article>
-      <article class="bc bc-d" style="--k:3">
-        <div class="bc-ctx mono">Microaggression Detector</div>
-        <div class="bc-n"><span data-fmt="pair" data-a="86" data-b="92" data-s="%">86 → 92%</span></div>
-        <p>accuracy (5-fold CV) after benchmarking 15 model and feature combinations.</p>
-        <div class="vbars" aria-hidden="true"><div><i style="--h:86"></i><span class="mono">86</span></div><div><i class="hi" style="--h:92"></i><span class="mono">92</span></div></div>
-      </article>
-      <article class="bc bc-e" style="--k:4">
-        <div class="bc-ctx mono">Medimate AI</div>
-        <div class="bc-n"><span data-fmt="plus" data-a="20">20+</span></div>
-        <p>Indian languages for prescription explanations.</p>
-        <div class="langs" aria-hidden="true"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i><i style="--k:6"></i><i style="--k:7"></i><i style="--k:8"></i><i style="--k:9"></i><i style="--k:10"></i><i style="--k:11"></i><i style="--k:12"></i><i style="--k:13"></i><i style="--k:14"></i><i style="--k:15"></i><i style="--k:16"></i><i style="--k:17"></i><i style="--k:18"></i><i style="--k:19"></i><i class="plus" style="--k:20">+</i></div>
-      </article>
-      <article class="bc bc-f" style="--k:5">
-        <div class="bf-l"><div class="bc-ctx mono">BioLink</div><div class="bc-n"><span data-fmt="int" data-a="7">7</span></div></div>
-        <div class="bf-r"><p>authoritative biomedical databases cross-referenced to turn research papers into knowledge graphs.</p><div class="chips" aria-hidden="true"><span>NCBI</span><span>UniProt</span><span>PDB</span><span>KEGG</span><span>GO</span><span>ClinVar</span><span>STRING</span></div></div>
-      </article>
+      </div>
+      <div class="gh-foot">
+        <div class="gh-live mono"><i></i><span id="gh-src">Loading from GitHub…</span></div>
+        <div class="gh-legend mono">Less <b class="l0"></b><b class="l1"></b><b class="l2"></b><b class="l3"></b><b class="l4"></b> More</div>
+        <a class="tlink" href="https://github.com/khanakshah27" target="_blank" rel="noopener">github.com/khanakshah27 ↗</a>
+      </div>
+      <div class="gh-tip mono" id="gh-tip" role="tooltip"></div>
     </div>
   </div>
 </section>
@@ -1182,7 +1152,7 @@ body.intro-lock .guide{display:none}
   if(!reduced){let last=scrollY,t;addEventListener("scroll",()=>{const v=scrollY-last;last=scrollY;const tilt=Math.max(-10,Math.min(10,v*0.5));ship.style.setProperty("--tilt",tilt+"deg");clearTimeout(t);t=setTimeout(()=>ship.style.setProperty("--tilt","0deg"),140);},{passive:true});}
   // one short tip per section, the first time you arrive
   const QUIPS={
-    about:"The headline numbers, before the details.",
+    about:"My real GitHub activity, pulled in live.",
     skills:"Pick a planet. Its skills fall into orbit.",
     experience:"Mission log. Tap the Gartner photos, they shuffle.",
     projects:"Five missions on the star chart. Pick a star.",
@@ -1298,32 +1268,77 @@ body.intro-lock .guide{display:none}
   restart();raf=requestAnimationFrame(tick);
 })();
 
-// impact numbers count up when the cards come into view
+// GitHub contributions: live from GitHub, with a saved snapshot as a backup
 (function(){
-  const box=document.getElementById("bento");if(!box)return;
-  const els=[...box.querySelectorAll("[data-fmt]")];
+  const root=document.getElementById("gh");if(!root)return;
+  const grid=document.getElementById("gh-grid"),months=document.getElementById("gh-months"),tip=document.getElementById("gh-tip");
+  const SNAP={"from":"2025-11-02","counts":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,2,0,0,0,0,4,11,0,0,0,0,0,0,0,0,0,0,0,0,0,18,13,0,7,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,10,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,16,0,0,2,0,4,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,3,0,0,0,0,0,0,0,7,3,0,0,2,16,0,0,2,0,0,0,0,1,1,0,0,0,11,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,8,1,0,0,0,0]};
   const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const fmt={
-    range:(e,t)=>Math.round(+e.dataset.a*t)+"–"+Math.round(+e.dataset.b*t)+e.dataset.s,
-    pair:(e,t)=>Math.round(+e.dataset.a*t)+" → "+Math.round(+e.dataset.b*t)+e.dataset.s,
-    frac:(e,t)=>Math.round(+e.dataset.a*t)+" / "+Math.round(+e.dataset.b*t),
-    plus:(e,t)=>Math.round(+e.dataset.a*t)+"+",
-    int:(e,t)=>String(Math.round(+e.dataset.a*t))
-  };
-  function run(){
-    if(reduced)return;
-    const t0=performance.now()+350,dur=1700;
-    function f(now){
-      const k=Math.min(1,Math.max(0,(now-t0)/dur)),e=1-Math.pow(1-k,3);
-      els.forEach(el=>{el.textContent=fmt[el.dataset.fmt](el,e);});
-      if(k<1)requestAnimationFrame(f);
-    }
-    els.forEach(el=>{el.textContent=fmt[el.dataset.fmt](el,0);});
-    requestAnimationFrame(f);
+  const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const fmtD=d=>d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric"});
+  const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  function fromSnap(){
+    const out=[];const d=new Date(SNAP.from+"T00:00:00");
+    SNAP.counts.forEach(n=>{out.push({date:iso(d),count:n});d.setDate(d.getDate()+1);});
+    return out;
   }
-  if("IntersectionObserver" in window){
-    const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){run();io.disconnect();}},{threshold:0.25});io.observe(box);
+  function render(days,live){
+    // levels from the spread of this year's active days
+    const nz=days.map(x=>x.count).filter(n=>n>0).sort((a,b)=>a-b);
+    const q=p=>nz.length?nz[Math.min(nz.length-1,Math.floor(p*nz.length))]:1;
+    const t1=q(0.34),t2=q(0.67),t3=q(0.9);
+    const lvl=n=>n<=0?0:n<=t1?1:n<=t2?2:n<=t3?3:4;
+    grid.innerHTML="";months.innerHTML="";
+    const first=new Date(days[0].date+"T00:00:00");
+    const pad=first.getDay();let w=0,i=0,lastM=-1;
+    const total=days.reduce((a,x)=>a+x.count,0);
+    const cells=[];
+    for(let k=0;k<pad;k++){const c=document.createElement("i");c.className="b";c.style.setProperty("--w",0);grid.appendChild(c);}
+    days.forEach((x,idx)=>{
+      const d=new Date(x.date+"T00:00:00"),pos=pad+idx,week=Math.floor(pos/7);
+      const c=document.createElement("i");c.className="l"+lvl(x.count);c.style.setProperty("--w",week);
+      c.dataset.t=(x.count?x.count+" contribution"+(x.count>1?"s":""):"No contributions")+" · "+fmtD(d);
+      grid.appendChild(c);
+      if(d.getDate()<=7&&d.getMonth()!==lastM&&d.getDay()===0||(idx===0)){
+        if(d.getMonth()!==lastM){lastM=d.getMonth();const m=document.createElement("span");m.textContent=MON[d.getMonth()];m.style.left=(week/53*100)+"%";months.appendChild(m);}
+      }
+    });
+    // stats
+    let act=0,best={n:0,d:null},run=0,longest=0;
+    days.forEach(x=>{if(x.count>0){act++;run++;longest=Math.max(longest,run);if(x.count>best.n)best={n:x.count,d:x.date};}else run=0;});
+    document.getElementById("gh-days").textContent=act;
+    document.getElementById("gh-streak").textContent=longest+(longest===1?" day":" days");
+    document.getElementById("gh-best").textContent=best.n?best.n+" · "+MON[+best.d.slice(5,7)-1]+" "+(+best.d.slice(8)):"–";
+    document.getElementById("gh-graph").setAttribute("aria-label","GitHub contribution graph: "+total+" contributions in the last year, on "+act+" days.");
+    countTo(total);
+    const src=document.getElementById("gh-src"),box=src.parentElement;
+    if(live){box.classList.add("ok");src.textContent="Live from GitHub · synced just now";}
+    else{box.classList.remove("ok");src.textContent="Saved snapshot · "+fmtD(new Date(days[days.length-1].date+"T00:00:00"));}
+    // keep the newest weeks in view on small screens
+    const sc=document.getElementById("gh-scroll");sc.scrollLeft=sc.scrollWidth;
   }
+  let shown=0;
+  function countTo(n){
+    const el=document.getElementById("gh-n");
+    if(reduced){el.textContent=n;return;}
+    const t0=performance.now(),from=shown;shown=n;
+    (function f(now){const k=Math.min(1,(now-t0)/1500),e=1-Math.pow(1-k,3);el.textContent=Math.round(from+(n-from)*e);if(k<1)requestAnimationFrame(f);})(t0);
+  }
+  // tooltip
+  grid.addEventListener("pointermove",e=>{
+    const c=e.target.closest("i");if(!c||c.classList.contains("b")){tip.classList.remove("on");return;}
+    tip.textContent=c.dataset.t;tip.classList.add("on");
+    const w=tip.offsetWidth;tip.style.left=Math.min(innerWidth-w-8,Math.max(8,e.clientX-w/2))+"px";tip.style.top=(e.clientY-44)+"px";
+  });
+  grid.addEventListener("pointerleave",()=>tip.classList.remove("on"));
+  // show the snapshot straight away, then upgrade to live data
+  render(fromSnap(),false);
+  const ctl=("AbortController" in window)?new AbortController():null;
+  const kill=ctl&&setTimeout(()=>ctl.abort(),7000);
+  fetch("https://github-contributions-api.jogruber.de/v4/khanakshah27?y=last",ctl?{signal:ctl.signal}:{})
+    .then(r=>{if(!r.ok)throw 0;return r.json();})
+    .then(j=>{if(j&&j.contributions&&j.contributions.length>300){render(j.contributions.map(x=>({date:x.date,count:x.count})),true);}})
+    .catch(()=>{}).finally(()=>clearTimeout(kill));
 })();
 
 // copy email
