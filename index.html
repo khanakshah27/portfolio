@@ -584,49 +584,33 @@ body.intro-lock .guide{display:none}
 
 /* ── LIFE'S LIBRARY ── */
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.lib{display:grid;gap:3rem;min-width:0}
-.covers{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:1.4rem 2.6rem;perspective:1400px}
-.cgrp{position:relative;padding-top:2.4rem;display:flex;gap:14px}
-.cgrp-cap{position:absolute;left:0;top:0;color:var(--star-60)}
-.bkc{--cw:118px;position:relative;width:var(--cw);height:calc(var(--cw) * 1.42);background:none;border:none;padding:0;cursor:pointer;color:var(--c2);perspective:900px;outline:none}
-.bk3{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateY(-26deg);transform-origin:50% 50%;transition:transform .8s var(--ease),filter .5s}
-.bkc:hover .bk3,.bkc:focus-visible .bk3{transform:translateY(-8px) rotateY(-12deg)}
-.bkc.on .bk3{transform:translateY(-14px) rotateY(-6deg)}
+.lib{display:grid;gap:1.6rem;min-width:0}
+.covers{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding:1.6rem 0 4.6rem;perspective:1400px}
+.bkc{--cw:132px;position:relative;width:var(--cw);height:calc(var(--cw) * 1.42);flex:0 0 auto;color:var(--c2)}
+.bkc:nth-child(even){margin-top:58px}
+.covers:not(.ready) .bkc{opacity:0}
+.flo{position:absolute;inset:0;animation:flo 6.4s ease-in-out infinite;will-change:transform}
+.bkc:nth-child(even) .flo{animation-direction:reverse}
+.bkc:nth-child(2) .flo{animation-delay:-1.3s}.bkc:nth-child(3) .flo{animation-delay:-2.6s}.bkc:nth-child(4) .flo{animation-delay:-3.9s}.bkc:nth-child(5) .flo{animation-delay:-5.1s}
+@keyframes flo{0%,100%{transform:translateY(-12px)}50%{transform:translateY(12px)}}
+.bk3{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateY(-26deg);transition:transform .8s var(--ease);cursor:default}
+.bkc:hover .bk3{transform:rotateY(-4deg) scale(1.06)}
 .bk3>*{position:absolute;backface-visibility:hidden}
-.bk3 .fr{inset:0;transform:translateZ(8px);background:linear-gradient(105deg,rgba(0,0,0,0.3) 0,rgba(0,0,0,0.12) 7%,transparent 16%),var(--c1);border-radius:2px 5px 5px 2px;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.06),0 22px 26px -14px rgba(0,0,0,0.8);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.55rem;text-align:center;padding:0.7rem 0.6rem 0.7rem 0.9rem}
+.bk3 .fr{inset:0;transform:translateZ(8px);background:linear-gradient(105deg,rgba(0,0,0,0.3) 0,rgba(0,0,0,0.12) 7%,transparent 16%),var(--c1);border-radius:2px 5px 5px 2px;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.06),0 26px 30px -14px rgba(0,0,0,0.8);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.55rem;text-align:center;padding:0.7rem 0.6rem 0.7rem 0.9rem}
 .bk3 .fr::before{content:"";position:absolute;inset:7px 7px 7px 11px;border:1px solid currentColor;opacity:0.5;border-radius:1px}
 .bk3 .fr::after{content:"";position:absolute;inset:11px 11px 11px 15px;border:1px solid currentColor;opacity:0.22}
 .bk3 .ti{position:relative;font-family:var(--serif);font-style:italic;font-size:clamp(0.95rem,1.35vw,1.15rem);line-height:1.1}
 .bk3 .au{position:relative;font-size:0.46rem;letter-spacing:0.16em;text-transform:uppercase;opacity:0.85}
 .bk3 .orn2{position:relative;font-size:0.7rem;opacity:0.9}
-.bk3 .pgs{top:3px;bottom:3px;right:-1px;width:16px;margin-right:-7px;transform:rotateY(90deg) translateZ(0);background:repeating-linear-gradient(0deg,#ede6d3 0 1px,#cfc6b0 1px 2px);transform-origin:center}
-.bk3 .bk{display:none}
+.bk3 .pgs{top:3px;bottom:3px;right:-1px;width:16px;margin-right:-7px;transform:rotateY(90deg);background:repeating-linear-gradient(0deg,#ede6d3 0 1px,#cfc6b0 1px 2px)}
 .bk3 .sd{top:0;bottom:0;left:-8px;width:16px;transform:rotateY(-90deg);background:var(--c1);filter:brightness(0.7)}
 .bk3 .bkb{inset:0;transform:translateZ(-8px);background:var(--c1);filter:brightness(0.6);border-radius:2px 5px 5px 2px}
-.bkc .rib{position:absolute;left:62%;top:calc(100% - 4px);width:9px;height:38px;background:linear-gradient(180deg,#eaa23f,#c2761a);clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%);transform:translateZ(9px);transform-origin:50% 0;animation:rib 3.6s ease-in-out infinite;pointer-events:none}
-@keyframes rib{50%{transform:translateZ(9px) rotate(6deg)}}
-.bkc.on .fr{box-shadow:inset 0 0 0 1px rgba(246,215,122,0.55),0 0 0 1px rgba(246,215,122,0.35),0 26px 30px -14px rgba(0,0,0,0.85)}
-.spread{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:260px;background:#f2ebda;color:#241c40;border-radius:3px;box-shadow:0 34px 44px -26px rgba(0,0,0,0.9),0 1px 0 rgba(255,255,255,0.5) inset;transform-style:preserve-3d;perspective:1800px}
-.spread::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:70px;margin-left:-35px;background:linear-gradient(90deg,transparent,rgba(60,40,10,0.18) 46%,rgba(60,40,10,0.28) 50%,rgba(60,40,10,0.18) 54%,transparent);pointer-events:none;z-index:2}
-.spread::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0 31px,rgba(90,62,209,0.07) 31px 32px);pointer-events:none;border-radius:3px}
-.pg{position:relative;padding:2.1rem 2rem 1.8rem;display:flex;flex-direction:column;z-index:1}
-.pg-l{padding-right:2.6rem}.pg-r{padding-left:2.6rem;transform-origin:0 50%}
-.bst{display:inline-flex;align-items:center;gap:0.55rem;color:rgba(36,28,64,0.65)}
-.bst i{width:8px;height:8px;border-radius:50%;background:#7b5cf0;display:block}
-.bst.reading{color:#b0690c}
-.bst.reading i{background:#eaa23f;box-shadow:0 0 0 0 rgba(234,162,63,0.6);animation:ghp 2s ease-in-out infinite}
-.pg h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3.2vw,2.7rem);line-height:1.05;margin:1.1rem 0 0.7rem;color:#241c40}
-.bm-a{font-size:1.3rem;color:rgba(36,28,64,0.7)}
-.pg-orn{margin-top:auto;font-size:1rem;color:#c2761a;padding-top:1rem}
-.bm-k{color:#5a3ed1;line-height:1.7}
-.bm-n{margin-top:1rem;color:rgba(36,28,64,0.82);line-height:1.8;font-size:1rem;max-width:30rem}
-.pg-no{margin-top:auto;padding-top:1rem;text-align:right;color:rgba(36,28,64,0.45)}
-.spread.swap .pg-r{animation:turn .85s var(--ease)}
-.spread.swap .pg-l>*{animation:ncin .6s var(--ease)}
-@keyframes turn{from{transform:rotateY(-80deg);opacity:0.2}to{transform:none;opacity:1}}
-@media (max-width:900px){.covers{gap:1.2rem 1.6rem}.bkc{--cw:104px}}
-@media (max-width:640px){.spread{grid-template-columns:minmax(0,1fr)}.spread::before{display:none}.pg-l{padding-right:1.6rem;padding-bottom:0.4rem}.pg-r{padding-left:1.6rem;padding-top:0.6rem}.bkc{--cw:92px}.cgrp{gap:10px}}
-@media (prefers-reduced-motion:reduce){.bkc .rib,.bst.reading i{animation:none}.spread.swap .pg-r,.spread.swap .pg-l>*{animation:none}.bk3{transition:none}}
+.flo .rib{position:absolute;left:62%;top:calc(100% - 4px);width:9px;height:40px;background:linear-gradient(180deg,#eaa23f,#c2761a);clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%);transform-origin:50% 0;animation:rib 3.6s ease-in-out infinite;pointer-events:none}
+@keyframes rib{50%{transform:rotate(7deg)}}
+.lib-key{text-align:center;font-size:1.1rem;color:var(--star-60)}
+@media (max-width:900px){.bkc{--cw:112px}}
+@media (max-width:640px){.covers{justify-content:center;gap:1.8rem 1.4rem;flex-wrap:wrap;padding-bottom:3.6rem}.bkc{--cw:98px}.bkc:nth-child(even){margin-top:34px}}
+@media (prefers-reduced-motion:reduce){.flo,.flo .rib{animation:none}.bk3{transition:none}}
 
 /* ── RECOMMENDATIONS BOX ── */
 .recs{display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.1fr) minmax(0,0.7fr);gap:2rem clamp(1.4rem,3.5vw,3rem);align-items:center;margin-top:clamp(4rem,8vw,6.5rem);padding-top:clamp(2.4rem,5vw,3.6rem);border-top:1px solid var(--line-strong)}
@@ -1127,20 +1111,8 @@ body.intro-lock .guide{display:none}
         <p class="ch-note">Like Alaska Young from John Green’s <i>Looking for Alaska</i>, I also am an avid reader.</p>
       </div>
       <div class="lib rv" id="lib">
-        <div class="covers" id="covers" role="listbox" aria-label="Books I have read recently"></div>
-        <article class="spread" id="spread" aria-live="polite">
-          <div class="pg pg-l">
-            <span class="bst mono" id="bst"><i></i><b id="bst-t"></b></span>
-            <h3 id="bm-t"></h3>
-            <div class="bm-a poem" id="bm-a"></div>
-            <span class="pg-orn" aria-hidden="true">✦</span>
-          </div>
-          <div class="pg pg-r">
-            <div class="bm-k mono" id="bm-k"></div>
-            <p class="bm-n" id="bm-n"></p>
-            <span class="pg-no mono" id="pg-no"></span>
-          </div>
-        </article>
+        <div class="covers" id="covers" role="list" aria-label="Books I have read recently"></div>
+        <p class="lib-key poem">The ones with a bookmark are the books I’m reading right now.</p>
         <ul class="sr-only"><li>To Kill a Mockingbird by Harper Lee (1960) — read</li><li>The Bell Jar by Sylvia Plath (1963) — read</li><li>The Housemaid’s Secret by Freida McFadden (2023) — read</li><li>Hollywood, Ending by John Green (2026) — currently reading</li><li>The Old Man and the Sea by Ernest Hemingway (1952) — currently reading</li></ul>
       </div>
     </div>
@@ -1425,7 +1397,7 @@ body.intro-lock .guide{display:none}
   const QUIPS={
     about:"My real GitHub activity, pulled in live.",
     places:"Touch a glowing pin. Each one is a city I have lived in.",
-    library:"Pick a book to open it. Then drop me a recommendation.",
+    library:"A few books from my shelf. Drop me a recommendation below.",
     skills:"Pick a planet. Its skills fall into orbit.",
     experience:"Mission log. Tap the Gartner photos, they shuffle.",
     projects:"Five missions on the star chart. Pick a star.",
@@ -1659,44 +1631,44 @@ body.intro-lock .guide{display:none}
   }
 })();
 
-// life's library: hardcovers standing in a row; pick one to open it
+// life's library: floating hardcovers that swirl in when you arrive
 (function(){
   const row=document.getElementById("covers");if(!row)return;
   const BK=[{"t": "To Kill a Mockingbird", "a": "Harper Lee", "y": "1960", "k": "Novel · Pulitzer Prize, 1961", "n": "A story of childhood and racial injustice in the American South, set in Alabama in the 1930s.", "st": "read", "c1": "#2f5d62", "c2": "#e6c77a", "w": 64, "h": 262}, {"t": "The Bell Jar", "a": "Sylvia Plath", "y": "1963", "k": "Novel · Plath’s only novel", "n": "A semi-autobiographical portrait of a young woman’s breakdown in 1950s New York.", "st": "read", "c1": "#a8243d", "c2": "#f4ece0", "w": 60, "h": 236}, {"t": "The Housemaid’s Secret", "a": "Freida McFadden", "y": "2023", "k": "Psychological thriller · Housemaid #2", "n": "The second book in the Housemaid series.", "st": "read", "c1": "#1c1c27", "c2": "#e58bb4", "w": 66, "h": 276}, {"t": "Hollywood, Ending", "a": "John Green", "y": "2026", "k": "Novel · his first for adults", "n": "Two young actors rise to fame after being cast in an Andy Warhol biopic. By the author of Looking for Alaska.", "st": "reading", "c1": "#c8872b", "c2": "#17122b", "w": 72, "h": 292}, {"t": "The Old Man and the Sea", "a": "Ernest Hemingway", "y": "1952", "k": "Novella · Pulitzer Prize, 1953", "n": "An aging Cuban fisherman’s long struggle with a giant marlin far out in the Gulf Stream.", "st": "reading", "c1": "#1f3a5f", "c2": "#f0e6cf", "w": 62, "h": 252}];
   const PLUM=[["#2b2250","#cfc4f5"],["#241b44","#cfc4f5"],["#312757","#cfc4f5"]],CREAM=[["#ece4d1","#2b2250"],["#e1d8c2","#2b2250"]];
   let pi=0,ci=0;BK.forEach(b=>{const c=b.st==="reading"?CREAM[ci++%2]:PLUM[pi++%3];b.c1=c[0];b.c2=c[1];});
-  const mk=(list,cap)=>{
-    const g=document.createElement("div");g.className="cgrp";
-    const c=document.createElement("span");c.className="cgrp-cap mono";c.textContent=cap;g.appendChild(c);
-    list.forEach(b=>{
-      const i=BK.indexOf(b),el=document.createElement("button");el.type="button";el.className="bkc "+b.st;el.dataset.i=i;
-      el.style.cssText="--c1:"+b.c1+";--c2:"+b.c2;
-      el.setAttribute("role","option");el.setAttribute("aria-label",b.t+" by "+b.a+(b.st==="reading"?", currently reading":""));
-      el.innerHTML='<span class="bk3"><span class="bkb"></span><span class="sd"></span><span class="pgs"></span><span class="fr"><span class="orn2">✦</span><span class="ti"></span><span class="au"></span></span></span>'+(b.st==="reading"?'<span class="rib"></span>':"");
-      el.querySelector(".ti").textContent=b.t;el.querySelector(".au").textContent=b.a;g.appendChild(el);
-    });
-    row.appendChild(g);
-  };
-  mk(BK.filter(b=>b.st==="read"),"Finished");mk(BK.filter(b=>b.st==="reading"),"Reading now");
-  const sp=document.getElementById("spread");
-  const el={mt:document.getElementById("bm-t"),ma:document.getElementById("bm-a"),k:document.getElementById("bm-k"),n:document.getElementById("bm-n"),st:document.getElementById("bst"),stt:document.getElementById("bst-t"),no:document.getElementById("pg-no")};
+  BK.forEach(b=>{
+    const el=document.createElement("div");el.className="bkc";el.setAttribute("role","listitem");
+    el.style.cssText="--c1:"+b.c1+";--c2:"+b.c2;
+    el.setAttribute("aria-label",b.t+" by "+b.a+(b.st==="reading"?", currently reading":""));
+    el.innerHTML='<span class="flo"><span class="bk3"><span class="bkb"></span><span class="sd"></span><span class="pgs"></span><span class="fr"><span class="orn2">✦</span><span class="ti"></span><span class="au"></span></span></span>'+(b.st==="reading"?'<span class="rib"></span>':"")+'</span>';
+    el.querySelector(".ti").textContent=b.t;el.querySelector(".au").textContent=b.a;row.appendChild(el);
+  });
   const books=[...row.querySelectorAll(".bkc")];
-  let cur=-1,touched=false,timer=0,idx=0;
-  function sel(i){
-    if(i===cur)return;cur=i;const b=BK[i];
-    books.forEach(x=>x.classList.toggle("on",+x.dataset.i===i));
-    el.mt.textContent=b.t;el.ma.textContent="by "+b.a;el.k.innerHTML="";
-    el.k.appendChild(document.createTextNode(b.y+"  ·  "+b.k));el.n.textContent=b.n;
-    el.st.className="bst mono "+(b.st==="reading"?"reading":"");el.stt.textContent=b.st==="reading"?"Reading now":"Finished";
-    el.no.textContent=String(i+1).padStart(2,"0")+" / "+String(BK.length).padStart(2,"0");
-    sp.classList.remove("swap");void sp.offsetWidth;sp.classList.add("swap");
+  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function swirl(){
+    if(reduced||!books[0].animate){row.classList.add("ready");return;}
+    row.classList.add("ready");
+    books.forEach((b,i)=>{
+      const R=Math.min(240,innerWidth*0.4),a0=i*1.26+0.5,N=16,frames=[];
+      for(let k=0;k<=N;k++){
+        const t=k/N,e=1-Math.pow(1-t,3),r=R*(1-e),th=a0+(1-e)*7.2;
+        frames.push({
+          transform:"translate("+(Math.cos(th)*r).toFixed(1)+"px,"+(Math.sin(th)*r*0.7).toFixed(1)+"px) rotate("+((1-e)*-600).toFixed(1)+"deg) scale("+(0.12+0.88*e).toFixed(3)+")",
+          opacity:Math.min(1,t*4).toFixed(2),offset:t
+        });
+      }
+      b.animate(frames,{duration:1900,delay:i*170,easing:"linear",fill:"backwards"});
+    });
   }
-  const stop=()=>{touched=true;clearInterval(timer);};
-  books.forEach(b=>{const i=+b.dataset.i;b.addEventListener("mouseenter",()=>{stop();sel(i);});b.addEventListener("click",()=>{stop();sel(i);});b.addEventListener("focus",()=>{stop();sel(i);});});
-  sel(3);
-  if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&"IntersectionObserver" in window){
-    new IntersectionObserver(es=>{clearInterval(timer);if(es[0].isIntersecting&&!touched){idx=0;sel(0);timer=setInterval(()=>{idx=(idx+1)%BK.length;sel(idx);},3800);}},{threshold:0.35}).observe(row);
-  }
+  if("IntersectionObserver" in window){
+    let played=false;
+    new IntersectionObserver(es=>{
+      const e=es[0];
+      if(e.intersectionRatio>=0.3&&!played){played=true;swirl();}
+      else if(e.intersectionRatio===0&&played){played=false;}
+    },{threshold:[0,0.3]}).observe(row);
+  }else row.classList.add("ready");
 })();
 
 // recommendations: write on the paper, drop it in the box (saved to the owner)
