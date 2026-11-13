@@ -165,6 +165,8 @@ html[data-theme="light"] .night,html[data-theme="light"] .nextpg.dk{--ink:#0b0e1
 .nextpg i{grid-row:1/3;grid-column:2;font-style:normal;font-size:2rem;color:var(--amber);transition:transform .5s var(--ease)}
 .nextpg:hover{background:var(--ink-2)}.nextpg:hover i{transform:translateX(10px)}
 #pt{position:fixed;inset:0;z-index:500;display:grid;place-items:center;background:var(--plum);color:#ece7da;pointer-events:none;clip-path:circle(0% at 50% 50%);transition:clip-path .55s cubic-bezier(.65,0,.35,1)}
+html[data-theme="light"] #pt{background:#e7def6;color:#1d1830}
+html[data-theme="light"] #pt .pt-no{color:#6a48e0}
 #pt.on{clip-path:circle(150% at 50% 50%);pointer-events:auto}
 #pt.out{transition:opacity .45s ease;opacity:0}
 #pt .pt-in{text-align:center;opacity:0;transform:translateY(10px);transition:opacity .35s .2s,transform .5s .2s var(--ease)}
@@ -872,7 +874,7 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
     </div>
     <h1><span>Khanak</span><span><em>Shah</em></span></h1>
     <div class="hero-lower">
-      <p class="hero-lede">CS + Bioinformatics student at <b>VIT Vellore</b>. Associate SDE Intern at <b>Gartner</b>, building AI systems that solve real problems, and automating the cloud plumbing underneath. Three patents, open source contributor.</p>
+      <p class="hero-lede">CS + Bioinformatics student at <b>VIT Vellore</b>. Former Associate SDE Intern at <b>Gartner</b>. Building AI systems that solve real problems, and automating the cloud plumbing underneath. Three patents, open source contributor.</p>
       <div>
         <div class="stats">
           <div class="stat"><div class="stat-n">9.46</div><div class="stat-l mono">CGPA · VIT Vellore</div></div>
@@ -2152,20 +2154,21 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
     if(cvs.clientWidth&&Math.abs(cvs.clientWidth-W)>1)resize();
     t++;ctx.clearRect(0,0,W,H);
     const light=document.documentElement.dataset.theme==="light",TXT=light?"29,24,48":"236,231,218",NODE=light?"246,241,233":"11,14,23";
+    const K=light?2.6:1;
     const C=p=>light?p.c.split(",").map(n=>Math.round(n*0.6)).join(","):p.c;
     stars.forEach(s=>{ctx.fillStyle="rgba("+TXT+","+(0.2+0.3*Math.sin(t*0.02+s.p)).toFixed(2)+")";ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,6.283);ctx.fill();});
     const paused=hov>=0||sel>=0;
     if(!reduced){PL.forEach((p,i)=>{if(!paused)p.a+=p.sp;if(!paused||i===sel)p.m=p.m.map((a,j)=>a+p.ms[j]*(paused?0.4:1));});}
     PL.forEach((p,i)=>{
       ctx.beginPath();ctx.arc(CX,CY,p.o,0,6.283);
-      ctx.strokeStyle="rgba("+C(p)+","+((sel<0||sel===i)?(hov===i?0.4:0.17):0.06)+")";ctx.lineWidth=1;ctx.setLineDash([3,7]);ctx.stroke();ctx.setLineDash([]);
+      ctx.strokeStyle="rgba("+C(p)+","+Math.min(0.9,((sel<0||sel===i)?(hov===i?0.4:0.17):0.06)*K)+")";ctx.lineWidth=light?1.4:1;ctx.setLineDash([3,7]);ctx.stroke();ctx.setLineDash([]);
     });
     if(sel>=0){
       const p=PL[sel],q=pos(p),base=p.r+20;
-      ctx.beginPath();ctx.arc(q.x,q.y,base,0,6.283);ctx.strokeStyle="rgba("+C(p)+",0.18)";ctx.setLineDash([2,5]);ctx.stroke();ctx.setLineDash([]);
+      ctx.beginPath();ctx.arc(q.x,q.y,base,0,6.283);ctx.strokeStyle="rgba("+C(p)+","+Math.min(0.9,0.18*K)+")";ctx.setLineDash([2,5]);ctx.stroke();ctx.setLineDash([]);
       p.skills.forEach((k,j)=>{
         const rr=base+j*2.6,x=q.x+Math.cos(p.m[j])*rr,y=q.y+Math.sin(p.m[j])*rr;
-        ctx.beginPath();ctx.moveTo(q.x,q.y);ctx.lineTo(x,y);ctx.strokeStyle="rgba("+C(p)+",0.16)";ctx.stroke();
+        ctx.beginPath();ctx.moveTo(q.x,q.y);ctx.lineTo(x,y);ctx.strokeStyle="rgba("+C(p)+","+Math.min(0.9,0.16*K)+")";ctx.stroke();
         ctx.beginPath();ctx.arc(x,y,4,0,6.283);ctx.fillStyle="rgba("+NODE+",1)";ctx.fill();ctx.strokeStyle="rgba("+C(p)+",0.95)";ctx.stroke();
         if(W>600){ctx.font="italic 13px 'IM Fell English',Georgia,serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="rgba("+C(p)+",1)";ctx.fillText(k,x+Math.cos(p.m[j])*(14+k.length*2.4),y+Math.sin(p.m[j])*13);}
       });
