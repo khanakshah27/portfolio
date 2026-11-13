@@ -470,8 +470,9 @@ body.intro-lock{overflow:hidden}
 }
 
 /* ── scrubbed preface ── */
-.w{opacity:0.16;transition:opacity .35s ease}
+.w{opacity:0.16;transition:opacity .5s ease,color .35s ease,text-shadow .35s ease;color:color-mix(in srgb,var(--lilac) calc(var(--g,0) * 100%),currentColor);text-shadow:0 0 calc(var(--g,0) * 26px) color-mix(in srgb,var(--lilac) calc(var(--g,0) * 70%),transparent)}
 .w.lit{opacity:1}
+#about .big{cursor:default}
 
 
 .band-lilac{position:relative;overflow:hidden}
@@ -887,7 +888,7 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
 </div>
 
 
-<div class="page" data-page="about" data-no="02" data-name="About">
+<div class="page" data-page="about" data-no="02" data-name="About me">
 <section class="ch" id="about">
   <div class="wrap">
     <div class="ch-grid">
@@ -1142,7 +1143,7 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
 </div>
 
 
-<div class="page" data-page="beyond" data-no="05" data-name="Beyond">
+<div class="page" data-page="beyond" data-no="05" data-name="Beyond the desk">
 <section class="ch" id="extra">
   <div class="wrap duo">
     <div class="rv l">
@@ -1256,7 +1257,7 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
 </div>
 
 
-<div class="page" data-page="contact" data-no="06" data-name="Hello">
+<div class="page" data-page="contact" data-no="06" data-name="Say hello">
 <section id="contact" class="band-lilac">
   <div class="wrap">
     <div class="mono k rv">✦ Transmission open</div>
@@ -1965,6 +1966,7 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
     scrollTo({top:0,behavior:"instant"});
     requestAnimationFrame(()=>{
       dispatchEvent(new Event("resize"));
+      dispatchEvent(new CustomEvent("pagechange",{detail:key}));
       requestAnimationFrame(()=>{toSection(sec);onScroll();});
     });
   }
@@ -1976,7 +1978,7 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
     busy=true;
     const pg=byKey[r.page];
     ptNo.textContent="Page "+pg.dataset.no+" / 06";
-    ptN.textContent=pg.dataset.page==="home"?"Khanak Shah":pg.dataset.name==="Hello"?"Say hello":pg.dataset.name;
+    ptN.textContent=pg.dataset.page==="home"?"Khanak Shah":pg.dataset.name;
     pt.classList.remove("out");pt.classList.add("on");
     setTimeout(()=>{
       swap(r.page,r.sec);
@@ -2053,9 +2055,10 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
   setTimeout(all,300);
 })();
 
-// preface: words light up as you scroll
+// preface: the words light up in a wave when you arrive, and glow with colour as the cursor passes over them
 (function(){
   const el=document.querySelector("#about .big");if(!el)return;
+  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
   const words=[];
   (function walk(n){
     [...n.childNodes].forEach(c=>{
@@ -2066,13 +2069,29 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
       }else if(c.nodeType===1)walk(c);
     });
   })(el);
-  function upd(){
-    const r=el.getBoundingClientRect();
-    const p=Math.min(1,Math.max(0,(innerHeight*0.82-r.top)/(innerHeight*0.45)));
-    const n=Math.ceil(p*words.length);
-    words.forEach((w,i)=>w.classList.toggle("lit",i<n));
+  let timers=[];
+  function wave(){
+    timers.forEach(clearTimeout);timers=[];
+    words.forEach(w=>w.classList.remove("lit"));
+    words.forEach((w,i)=>{
+      if(reduced){w.classList.add("lit");return;}
+      timers.push(setTimeout(()=>w.classList.add("lit"),380+i*70));
+    });
   }
-  addEventListener("scroll",upd,{passive:true});upd();
+  addEventListener("pagechange",e=>{if(e.detail==="about")wave();});
+  if(document.querySelector('.page.active[data-page="about"]'))wave();
+  // the glow follows the cursor: words close to it take on colour and a soft light
+  let mx=-999,my=-999,raf=0;
+  function paint(){
+    raf=0;
+    words.forEach(w=>{
+      const r=w.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+      const d=Math.hypot(cx-mx,(cy-my)*1.15),g=Math.max(0,1-d/170);
+      w.style.setProperty("--g",(g*g).toFixed(3));
+    });
+  }
+  el.addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;if(!raf)raf=requestAnimationFrame(paint);},{passive:true});
+  el.addEventListener("mouseleave",()=>{mx=-999;my=-999;if(!raf)raf=requestAnimationFrame(paint);});
 })();
 
 // hero orrery drifts and turns as you scroll away
