@@ -351,8 +351,8 @@ footer{margin-top:clamp(4rem,8vw,7rem);padding-top:1.3rem;border-top:1px solid v
 /* ── COLOUR BANDS (break the dark scroll with lilac + plum) ── */
 .band-lilac{background:var(--lilac-bg);--star:#17122b;--star-60:rgba(23,18,43,0.7);--star-40:rgba(23,18,43,0.5);--line:rgba(23,18,43,0.16);--line-strong:rgba(23,18,43,0.36);--amber:#5a3ed1;--lilac:#5a3ed1;border-color:transparent!important;color:var(--star)}
 .band-lilac ::selection{background:#17122b;color:var(--lilac-bg)}
-html:not([data-theme="light"]) .band-lilac{background:radial-gradient(ellipse at 18% 0%,#33256b 0,transparent 58%),radial-gradient(ellipse at 90% 100%,#2a1d5c 0,transparent 55%),#1a1236;--star:#ece7da;--star-60:rgba(236,231,218,0.72);--star-40:rgba(236,231,218,0.5);--line:rgba(236,231,218,0.16);--line-strong:rgba(236,231,218,0.34);--amber:#eaa23f;--lilac:#b9a7f0}
-html:not([data-theme="light"]) .band-lilac ::selection{background:#eaa23f;color:#1a1236}
+html:not([data-theme="light"]) .band-lilac{background:var(--ink);--star:#ece7da;--star-60:rgba(236,231,218,0.62);--star-40:rgba(236,231,218,0.42);--line:rgba(236,231,218,0.13);--line-strong:rgba(236,231,218,0.28);--amber:#eaa23f;--lilac:#b9a7f0}
+html:not([data-theme="light"]) .band-lilac ::selection{background:#eaa23f;color:#0b0e17}
 .band-plum{background:var(--plum)}
 .duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3rem clamp(2.5rem,6vw,6rem)}
 .duo h2{margin-bottom:2rem}
@@ -379,6 +379,9 @@ html:not([data-theme="light"]) .band-lilac ::selection{background:#eaa23f;color:
 /* ── INTRO: the quote unwinds along its own spiral ── */
 #intro{position:fixed;inset:0;z-index:1000;background:#150f2b;cursor:pointer}
 #intro.ready{background:transparent}
+html[data-theme="light"] #intro{background:#f6f1e9}
+html[data-theme="light"] #sp-bg{fill:#f6f1e9}
+html[data-theme="light"] #sp-line{opacity:0.55}
 #intro .g{transition:opacity .45s ease .75s}
 #intro.open .g{opacity:0}
 #intro.gone{display:none}
@@ -499,6 +502,9 @@ body.intro-lock{overflow:hidden}
 .aw-row:focus-visible{outline:1px solid var(--lilac);outline-offset:-3px}
 .aw-n{transition:color .4s}
 .aw.on .aw-n{color:var(--amber)}
+html:not([data-theme="light"]) .aw::before{background:#cfc4f5}
+html:not([data-theme="light"]) .aw.on{--star:#17122b;--star-60:rgba(23,18,43,0.72);--star-40:rgba(23,18,43,0.55);--line:rgba(23,18,43,0.18);--line-strong:rgba(23,18,43,0.36);--amber:#5a3ed1;--lilac:#5a3ed1}
+html:not([data-theme="light"]) .aw.on .aw-row,html:not([data-theme="light"]) .aw.on .aw-tag,html:not([data-theme="light"]) .aw.on .aw-y{color:#17122b}
 .aw-t{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.7rem);line-height:1.1;letter-spacing:-0.005em}
 .aw-tag,.aw-y{white-space:nowrap}
 .aw-tag{opacity:0.7;transition:opacity .4s}
@@ -509,6 +515,7 @@ body.intro-lock{overflow:hidden}
 .aw-more>div{overflow:hidden;min-height:0}
 .aw-more-in{display:flex;flex-wrap:wrap;gap:0.4rem 2.6rem;padding:0 1.5rem 0 calc(3.2rem + clamp(1rem,2.4vw,2.2rem) + 1.5rem);opacity:0;transform:translateY(-6px);transition:opacity .45s ease,transform .6s var(--ease),padding-bottom .5s var(--ease)}
 .aw-more-in .mono{color:var(--lilac-bg)}
+html:not([data-theme="light"]) .aw-more-in .mono{color:#2b2250}
 .aw.on .aw-more-in{opacity:1;transform:none;padding-bottom:1.7rem;transition-delay:.12s,.12s,0s}
 @media (max-width:760px){
   .aw-row{grid-template-columns:2rem minmax(0,1fr);gap:0 0.8rem;padding:1.4rem 0.2rem}
@@ -1141,7 +1148,7 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
     </div>
   </div>
 </section>
-<a class="nextpg" href="#/beyond"><span class="mono">Next page · 05 / 06</span><b class="poem">Beyond the desk, and my reading life</b><i aria-hidden="true">→</i></a>
+<a class="nextpg" href="#/beyond"><span class="mono">Next page · 05 / 06</span><b class="poem">Beyond the desk</b><i aria-hidden="true">→</i></a>
 </div>
 
 
@@ -1433,7 +1440,7 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
       ctx.clearRect(0,0,W,H);
       const dk=document.documentElement.dataset.theme!=="light",BC=dk?"185,167,240":"90,62,209";
       // soft drifting light (pale in light mode, violet glow in dark mode)
-      const blobs=dk?[[0.2,0.25,0.55,"120,90,235",0.26,0.00011,0.00009],[0.8,0.7,0.6,"95,70,215",0.22,0.00008,0.00012],[0.55,0.5,0.5,"185,167,240",0.07,0.00009,0.00007]]:[[0.2,0.25,0.55,"255,255,255",0.38,0.00011,0.00009],[0.8,0.7,0.6,"255,255,255",0.3,0.00008,0.00012],[0.55,0.5,0.5,"140,110,235",0.16,0.00009,0.00007]];
+      const blobs=dk?[[0.2,0.25,0.55,"120,90,235",0.13,0.00011,0.00009],[0.8,0.7,0.6,"95,70,215",0.11,0.00008,0.00012],[0.55,0.5,0.5,"185,167,240",0.04,0.00009,0.00007]]:[[0.2,0.25,0.55,"255,255,255",0.38,0.00011,0.00009],[0.8,0.7,0.6,"255,255,255",0.3,0.00008,0.00012],[0.55,0.5,0.5,"140,110,235",0.16,0.00009,0.00007]];
       blobs.forEach(([bx,by,br,col,al,sx,sy],i)=>{
         const x=W*(bx+0.12*Math.sin(t*sx+i*2)),y=H*(by+0.12*Math.cos(t*sy+i*3)),r=Math.max(W,H*0.8)*br;
         const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,"rgba("+col+","+al+")");g.addColorStop(1,"rgba("+col+",0)");
