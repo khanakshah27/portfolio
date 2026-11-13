@@ -8,9 +8,10 @@
 <meta name="description" content="Khanak Shah — CS + Bioinformatics student at VIT Vellore. AI systems, DevOps automation, patents and open source."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Petit+Formal+Script&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IM+Fell+English:ital@1&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IM+Fell+English:ital@1&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet"/>
 <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t;}catch(e){}</script>
 <style>
+@font-face{font-family:"Champignon";src:url("fonts/Champignon.otf") format("opentype");font-weight:400;font-style:normal;font-display:swap}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 :root{
@@ -47,7 +48,7 @@ a{color:inherit;text-decoration:none}
 header{position:fixed;top:0;left:0;right:0;z-index:200;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
 header.scrolled{background:rgba(11,14,23,0.86);backdrop-filter:blur(10px);border-bottom-color:var(--line)}
 .head-in{max-width:1240px;margin:0 auto;padding:1.1rem var(--pad);display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
-.brand{font-family:"Petit Formal Script","Cormorant Garamond",Georgia,serif;font-weight:400;font-size:1.7rem;line-height:1;letter-spacing:0;white-space:nowrap}
+.brand{font-family:"Champignon","Petit Formal Script",Georgia,serif;font-weight:400;font-size:3.1rem;line-height:0.7;letter-spacing:0;white-space:nowrap}
 .brand i{color:var(--amber)}
 nav{display:flex;gap:1.9rem}
 nav a{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--star-60);transition:color .2s;position:relative;padding:0.2rem 0}
@@ -100,7 +101,7 @@ html[data-theme="light"] .orb::before{background:radial-gradient(circle,rgba(255
 .orb:hover .orb-hint,.orb:focus-visible .orb-hint,.orb.hint .orb-hint{opacity:1;transform:translate(-50%,0)}
 .orb:hover .moon{transform:scale(1.04)}.orb:hover .sun{transform:scale(1.04)}
 .head-r{display:flex;align-items:center;gap:1.4rem}
-@media (max-width:760px){.orb{width:148px;height:148px;top:-62px;right:-60px}.orb::before{width:420px;height:420px;margin:-210px 0 0 -210px}.orb .moon,.orb .sun{inset:16px}.orb-rays{inset:-24px}.head-in{padding-right:calc(var(--pad) + 62px)}.brand{font-size:1.4rem}.orb-hint{display:none}.head-r{gap:.7rem}}
+@media (max-width:760px){.orb{width:148px;height:148px;top:-62px;right:-60px}.orb::before{width:420px;height:420px;margin:-210px 0 0 -210px}.orb .moon,.orb .sun{inset:16px}.orb-rays{inset:-24px}.head-in{padding-right:calc(var(--pad) + 62px)}.brand{font-size:2.7rem}.orb-hint{display:none}.head-r{gap:.7rem}}
 @media (prefers-reduced-motion:reduce){.orb-body,.orb .moon,.orb .sun{transition:none}.orb-rays{animation:none}}
 
 html[data-theme="light"] #skills,html[data-theme="light"] .night,html[data-theme="light"] .nextpg.dk{--ink:#0b0e17;--ink-2:#10141f;--plum:#150f2b;--line:rgba(236,231,218,0.13);--line-strong:rgba(236,231,218,0.28);--star:#ece7da;--star-60:rgba(236,231,218,0.62);--star-40:rgba(236,231,218,0.42);--amber:#eaa23f;--lilac:#b9a7f0;color:#ece7da}
@@ -124,7 +125,7 @@ html[data-theme="light"] #skills,html[data-theme="light"] .night,html[data-theme
 /* ── HERO ── */
 #hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:7rem 0 2.2rem;overflow:hidden;border-bottom:1px solid var(--line)}
 #stars{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.orrery{position:absolute;right:calc(var(--pad) * -1.5);top:50%;width:min(78vh,56vw);aspect-ratio:1;transform:translateY(-50%);pointer-events:none;opacity:0.95}
+.orrery{position:absolute;right:calc(var(--pad) * -1.5);top:57%;width:min(78vh,56vw);aspect-ratio:1;transform:translateY(-50%);pointer-events:none;opacity:0.95}
 .orrery svg{width:100%;height:100%;overflow:visible}
 .orrery .orb{fill:none;stroke:var(--line-strong);stroke-width:0.8}
 .orrery .orb.dash{stroke-dasharray:2 7}
@@ -138,7 +139,7 @@ html[data-theme="light"] #skills,html[data-theme="light"] .night,html[data-theme
 .hero-body{position:relative;z-index:2}
 .hero-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem 2rem;margin-bottom:2.2rem}
 .hero-meta .amb{color:var(--amber)}
-h1{font-family:"Petit Formal Script","Cormorant Garamond",Georgia,serif;font-weight:400;font-size:clamp(4rem,13.2vw,12.4rem);line-height:1.02;letter-spacing:0;margin-left:-0.02em}
+h1{font-family:"Champignon","Petit Formal Script",Georgia,serif;font-weight:400;font-size:clamp(5rem,18vw,17rem);line-height:1.02;letter-spacing:0;margin-left:-0.02em}
 h1 span{display:block}
 h1 em{color:var(--lilac);padding-left:0.6em;font-style:normal;font-weight:400}
 .hero-lower{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:2rem 4rem;margin-top:3rem;align-items:end}
