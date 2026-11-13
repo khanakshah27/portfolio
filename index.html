@@ -8,7 +8,7 @@
 <meta name="description" content="Khanak Shah — CS + Bioinformatics student at VIT Vellore. AI systems, DevOps automation, patents and open source."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300,100,1;1,9..144,300,100,1&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IM+Fell+English:ital@1&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Petit+Formal+Script&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IM+Fell+English:ital@1&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet"/>
 <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t;}catch(e){}</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -47,7 +47,7 @@ a{color:inherit;text-decoration:none}
 header{position:fixed;top:0;left:0;right:0;z-index:200;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
 header.scrolled{background:rgba(11,14,23,0.86);backdrop-filter:blur(10px);border-bottom-color:var(--line)}
 .head-in{max-width:1240px;margin:0 auto;padding:1.1rem var(--pad);display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
-.brand{font-family:"Fraunces","Instrument Serif",Georgia,serif;font-variation-settings:"SOFT" 100,"WONK" 1;font-weight:300;font-size:1.45rem;line-height:1;letter-spacing:-0.01em}
+.brand{font-family:"Petit Formal Script","Cormorant Garamond",Georgia,serif;font-weight:400;font-size:1.7rem;line-height:1;letter-spacing:0;white-space:nowrap}
 .brand i{color:var(--amber)}
 nav{display:flex;gap:1.9rem}
 nav a{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--star-60);transition:color .2s;position:relative;padding:0.2rem 0}
@@ -68,22 +68,40 @@ html[data-theme="light"]{color-scheme:light;--ink:#f6f1e9;--ink-2:#ece5d8;--line
 html[data-theme="light"] header.scrolled{background:rgba(246,241,233,0.88)}
 html[data-theme="light"] ::selection{background:#6a48e0;color:#fff}
 html.theme-anim *,html.theme-anim *::before,html.theme-anim *::after{transition:background-color .6s ease,color .6s ease,border-color .6s ease,fill .6s ease,stroke .6s ease!important}
-.theme-btn{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line-strong);background:transparent;color:var(--star);cursor:pointer;padding:0;transition:border-color .3s,background .3s}
-.theme-btn:hover{border-color:var(--amber)}
-.theme-btn svg{width:22px;height:22px;overflow:visible;transform:rotate(0deg);transition:transform .9s cubic-bezier(.5,0,.2,1)}
-.theme-btn .core{fill:currentColor;cx:12px;cy:12px;r:4.6px;transition:r .9s cubic-bezier(.5,0,.2,1)}
-.theme-btn .cut{fill:#000;cx:32px;cy:-8px;r:7px;transition:cx .9s cubic-bezier(.5,0,.2,1),cy .9s cubic-bezier(.5,0,.2,1),r .9s}
-.theme-btn .rays{transform-box:view-box;transform-origin:12px 12px;transition:transform .9s cubic-bezier(.5,0,.2,1),opacity .5s}
-.theme-btn .rays line{stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
-/* dark = moon: the sun turns half a circle, its rays tuck in and a shadow bites out a crescent */
-html:not([data-theme="light"]) .theme-btn svg{transform:rotate(180deg)}
-html:not([data-theme="light"]) .theme-btn .core{r:8.4px}
-html:not([data-theme="light"]) .theme-btn .cut{cx:17px;cy:7.5px;r:7px}
-html:not([data-theme="light"]) .theme-btn .rays{transform:scale(0.2) rotate(-90deg);opacity:0}
-html[data-theme="light"] .theme-btn .core{fill:var(--amber)}html[data-theme="light"] .theme-btn .rays line{stroke:var(--amber)}
+/* ── SUN / MOON (the theme switch lives in the sky at the top) ── */
+.head-in{padding-right:calc(var(--pad) + 96px)}
+.orb{position:absolute;top:-92px;right:-90px;width:214px;height:214px;border:0;border-radius:50%;background:none;padding:0;cursor:pointer;z-index:3;-webkit-tap-highlight-color:transparent}
+.orb:focus-visible{outline:2px solid var(--amber);outline-offset:4px}
+.orb-body{position:absolute;inset:0;border-radius:50%;transition:transform 1.3s cubic-bezier(.5,0,.15,1)}
+.orb .moon,.orb .sun{position:absolute;inset:24px;border-radius:50%;transition:opacity .9s ease,transform 1.3s cubic-bezier(.5,0,.15,1),box-shadow 1s}
+.orb .moon{background:
+ radial-gradient(circle at 63% 33%,rgba(112,104,88,.5) 0 8%,transparent 9.5%),
+ radial-gradient(circle at 36% 60%,rgba(112,104,88,.42) 0 12%,transparent 13.5%),
+ radial-gradient(circle at 70% 68%,rgba(112,104,88,.45) 0 6%,transparent 7.5%),
+ radial-gradient(circle at 24% 38%,rgba(112,104,88,.38) 0 4.5%,transparent 6%),
+ radial-gradient(circle at 54% 82%,rgba(112,104,88,.4) 0 5%,transparent 6.5%),
+ radial-gradient(circle at 46% 46%,rgba(150,142,124,.28) 0 14%,transparent 16%),
+ radial-gradient(circle at 34% 30%,#fffaf0 0,#ece5d1 46%,#b7b09d 100%);
+ box-shadow:inset -16px -12px 28px rgba(20,16,40,.42),0 0 46px 8px rgba(185,167,240,.38),0 0 120px 36px rgba(185,167,240,.16)}
+.orb .sun{background:radial-gradient(circle at 38% 36%,#fffbe4 0,#ffe680 26%,#ffbd2e 60%,#ff8a1f 100%);
+ box-shadow:0 0 38px 12px rgba(255,170,40,.62),0 0 120px 44px rgba(255,150,30,.28);opacity:0;transform:scale(.55)}
+.orb-rays{position:absolute;inset:-40px;border-radius:50%;opacity:0;transition:opacity 1s;pointer-events:none;
+ background:repeating-conic-gradient(from 0deg,rgba(255,190,60,.7) 0 3deg,transparent 3deg 14deg);
+ -webkit-mask:radial-gradient(circle,transparent 40%,#000 43%,rgba(0,0,0,.0) 70%);mask:radial-gradient(circle,transparent 40%,#000 43%,rgba(0,0,0,0) 70%);
+ animation:rays 70s linear infinite}
+@keyframes rays{to{transform:rotate(360deg)}}
+html[data-theme="light"] .orb-body{transform:rotate(360deg)}
+html[data-theme="light"] .orb .moon{opacity:0;transform:scale(.55)}
+html[data-theme="light"] .orb .sun{opacity:1;transform:none}
+html[data-theme="light"] .orb-rays{opacity:1}
+.orb::before{content:"";position:absolute;left:50%;top:50%;width:760px;height:760px;margin:-380px 0 0 -380px;border-radius:50%;background:radial-gradient(circle,rgba(185,167,240,.2) 0,rgba(185,167,240,.07) 32%,transparent 62%);pointer-events:none;transition:background 1s}
+html[data-theme="light"] .orb::before{background:radial-gradient(circle,rgba(255,176,60,.34) 0,rgba(255,176,60,.11) 32%,transparent 62%)}
+.orb-hint{position:absolute;left:50%;bottom:6px;transform:translate(-50%,6px);font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;color:var(--star-60);opacity:0;transition:opacity .3s,transform .3s;pointer-events:none}
+.orb:hover .orb-hint,.orb:focus-visible .orb-hint,.orb.hint .orb-hint{opacity:1;transform:translate(-50%,0)}
+.orb:hover .moon{transform:scale(1.04)}.orb:hover .sun{transform:scale(1.04)}
 .head-r{display:flex;align-items:center;gap:1.4rem}
-@media (max-width:760px){.head-r{gap:0.7rem}}
-@media (prefers-reduced-motion:reduce){.theme-btn svg,.theme-btn .core,.theme-btn .cut,.theme-btn .rays{transition:none}}
+@media (max-width:760px){.orb{width:148px;height:148px;top:-62px;right:-60px}.orb::before{width:420px;height:420px;margin:-210px 0 0 -210px}.orb .moon,.orb .sun{inset:16px}.orb-rays{inset:-24px}.head-in{padding-right:calc(var(--pad) + 62px)}.brand{font-size:1.4rem}.orb-hint{display:none}.head-r{gap:.7rem}}
+@media (prefers-reduced-motion:reduce){.orb-body,.orb .moon,.orb .sun{transition:none}.orb-rays{animation:none}}
 
 html[data-theme="light"] #skills,html[data-theme="light"] .night,html[data-theme="light"] .nextpg.dk{--ink:#0b0e17;--ink-2:#10141f;--plum:#150f2b;--line:rgba(236,231,218,0.13);--line-strong:rgba(236,231,218,0.28);--star:#ece7da;--star-60:rgba(236,231,218,0.62);--star-40:rgba(236,231,218,0.42);--amber:#eaa23f;--lilac:#b9a7f0;color:#ece7da}
 /* ── PAGES ── */
@@ -120,9 +138,9 @@ html[data-theme="light"] #skills,html[data-theme="light"] .night,html[data-theme
 .hero-body{position:relative;z-index:2}
 .hero-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem 2rem;margin-bottom:2.2rem}
 .hero-meta .amb{color:var(--amber)}
-h1{font-family:"Fraunces","Instrument Serif",Georgia,serif;font-variation-settings:"SOFT" 100,"WONK" 1;font-weight:300;font-size:clamp(4.2rem,14.5vw,13.5rem);line-height:0.88;letter-spacing:-0.035em;margin-left:-0.04em}
+h1{font-family:"Petit Formal Script","Cormorant Garamond",Georgia,serif;font-weight:400;font-size:clamp(4rem,13.2vw,12.4rem);line-height:1.02;letter-spacing:0;margin-left:-0.02em}
 h1 span{display:block}
-h1 em{color:var(--lilac);padding-left:0.45em;font-style:italic;font-weight:300}
+h1 em{color:var(--lilac);padding-left:0.6em;font-style:normal;font-weight:400}
 .hero-lower{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:2rem 4rem;margin-top:3rem;align-items:end}
 .hero-lede{font-size:clamp(1.02rem,1.5vw,1.2rem);color:var(--star-60);max-width:30rem;line-height:1.65;font-weight:300}
 .hero-lede b{color:var(--star);font-weight:400}
@@ -756,6 +774,11 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
 
 <div id="pt" aria-hidden="true"><div class="pt-in"><div class="pt-no" id="pt-no"></div><div class="pt-n" id="pt-n"></div></div></div>
 <header id="top">
+    <button class="orb" id="theme-btn" type="button" aria-label="Switch to light mode" aria-pressed="false">
+      <span class="orb-rays" aria-hidden="true"></span>
+      <span class="orb-body" aria-hidden="true"><span class="moon"></span><span class="sun"></span></span>
+      <span class="orb-hint" aria-hidden="true" id="orb-hint">Bring the sun</span>
+    </button>
   <div class="head-in">
     <a href="#/home" class="brand">Khanak <i>Shah</i></a>
     <div class="head-r">
@@ -768,12 +791,6 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
       <a href="#/beyond" data-p="beyond">Beyond</a>
       <a href="#/contact" data-p="contact">Contact</a>
     </nav>
-    <button class="theme-btn" id="theme-btn" type="button" aria-label="Switch to light mode" aria-pressed="false" title="Light / dark">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><defs><mask id="moonmask" maskUnits="userSpaceOnUse" x="-12" y="-12" width="48" height="48"><rect x="-12" y="-12" width="48" height="48" fill="#fff"/><circle class="cut" cx="12" cy="12" r="6.4" fill="#000"/></mask></defs>
-        <circle class="core" cx="12" cy="12" r="4.6" mask="url(#moonmask)"/>
-        <g class="rays"><line x1="12" y1="1.6" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.4"/><line x1="1.6" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.4" y2="12"/><line x1="4.6" y1="4.6" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.4" y2="19.4"/><line x1="4.6" y1="19.4" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.4" y2="4.6"/></g>
-      </svg>
-    </button>
     </div>
   </div>
 </header>
@@ -1833,11 +1850,12 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
   const root=document.documentElement,btn=document.getElementById("theme-btn");
   if(!btn)return;
   const isLight=()=>root.dataset.theme==="light";
-  function paint(){const l=isLight();btn.setAttribute("aria-pressed",l?"true":"false");btn.setAttribute("aria-label",l?"Switch to dark mode":"Switch to light mode");
+  function paint(){const l=isLight();btn.setAttribute("aria-pressed",l?"true":"false");btn.setAttribute("aria-label",l?"Switch to dark mode":"Switch to light mode");const h=document.getElementById("orb-hint");if(h)h.textContent=l?"Bring the moon":"Bring the sun";
     const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=l?"#f6f1e9":"#0b0e17";
     window.dispatchEvent(new CustomEvent("themechange",{detail:{light:l}}));}
   paint();
-  btn.addEventListener("click",()=>{
+  try{if(!localStorage.getItem("orbhint")){setTimeout(()=>{btn.classList.add("hint");setTimeout(()=>{btn.classList.remove("hint");localStorage.setItem("orbhint","1");},5200);},3200);}}catch(e){}
+  btn.addEventListener("click",()=>{btn.classList.remove("hint");
     root.classList.add("theme-anim");
     root.dataset.theme=isLight()?"dark":"light";
     try{localStorage.setItem("theme",root.dataset.theme);}catch(e){}
