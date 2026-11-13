@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IM+Fell+English:ital@1&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Noto+Serif+Gujarati&text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%E0%AA%A8%E0%AA%AE%E0%AA%B8%E0%AB%8D%E0%AA%A4%E0%AB%87&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Noto+Serif+Gujarati&text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%E0%AA%A8%E0%AA%AE%E0%AA%B8%E0%AB%8D%E0%AA%A4%E0%AB%87%21&display=swap" rel="stylesheet"/>
 <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t;}catch(e){}</script>
 <style>
 @font-face{font-family:"Champignon";src:url("fonts/Champignon.otf") format("opentype");font-weight:400;font-style:normal;font-display:swap}
@@ -79,45 +79,41 @@ html[data-theme="light"] .orbits svg{opacity:0.55}
 .orbits .arm{transform-box:view-box;transform-origin:950px 950px;animation:spin linear infinite}
 .orbits .p{fill:var(--star)}.orbits .p.a{fill:var(--amber)}.orbits .p.h{fill:var(--ink);stroke:var(--star);stroke-width:1.2}
 .greet{display:flex;align-items:center;gap:1.1rem;min-width:0}
-.greet-word{background:none;border:0;padding:0;cursor:pointer;color:var(--star);text-align:left;white-space:nowrap;min-width:7.2rem;
-  font-family:"Champignon",Georgia,serif;font-size:3.1rem;line-height:0.8;transition:opacity .32s ease,transform .5s var(--ease),filter .32s}
-.greet-word[data-l="hi"]{font-family:"Tiro Devanagari Hindi","Noto Serif Devanagari",serif;font-size:1.9rem;line-height:1}
-.greet-word[data-l="gu"]{font-family:"Noto Serif Gujarati",serif;font-size:1.8rem;line-height:1}
+.greet-word{background:none;border:0;padding:0;cursor:pointer;color:var(--star);text-align:left;white-space:nowrap;min-width:7.5rem;
+  font-family:"Cormorant Garamond","IM Fell English",Georgia,serif;font-style:italic;font-weight:500;font-size:2.15rem;line-height:1;letter-spacing:0.005em;transition:opacity .32s ease,transform .5s var(--ease),filter .32s,color .3s}
+.greet-word[data-l="hi"]{font-family:"Tiro Devanagari Hindi","Noto Serif Devanagari",serif;font-style:normal;font-weight:400;font-size:1.75rem}
+.greet-word[data-l="gu"]{font-family:"Noto Serif Gujarati",serif;font-style:normal;font-weight:400;font-size:1.65rem}
 .greet-word.swap{opacity:0;transform:translateY(-10px);filter:blur(3px)}
 .greet-word:hover{color:var(--lilac)}
-.greet-langs{display:flex;gap:0.3rem}
-.greet-langs button{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.08em;padding:0.3rem 0.55rem;border-radius:99px;border:1px solid var(--line-strong);background:none;color:var(--star-60);cursor:pointer;transition:color .25s,border-color .25s,background .25s}
-.greet-langs button:hover{color:var(--star);border-color:var(--star-60)}
-.greet-langs button[aria-pressed="true"]{color:var(--star);border-color:var(--amber);background:color-mix(in srgb,var(--amber) 16%,transparent)}
-#nav{position:relative;display:flex;gap:0;padding:4px;border:1px solid var(--line-strong);border-radius:99px;background:color-mix(in srgb,var(--ink) 55%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-#nav a{position:relative;z-index:1;padding:0.5rem 1rem;border-radius:99px;color:var(--star-60);transition:color .3s}
+#nav{display:flex;align-items:center;gap:1.9rem}
+#nav a{position:relative;display:flex;align-items:center;gap:0.6rem;padding:0.35rem 0;color:var(--star-60);transition:color .3s}
 #nav a::before{display:none!important}
 #nav a:hover,#nav a.on{color:var(--star)}
 #nav .r{display:block;overflow:hidden;height:1.25em;line-height:1.25}
 #nav .r b,#nav .r i{display:block;transition:transform .5s var(--ease);white-space:nowrap}
 #nav .r b{font-weight:400}
-#nav .r b em{font-style:normal;color:var(--amber);opacity:0.8;margin-right:0.45em;font-size:0.9em}
 #nav .r i{font-family:var(--poem);font-style:italic;text-transform:none;letter-spacing:0.01em;font-size:1.06rem;line-height:1.05;color:var(--amber)}
 #nav a:hover .r b,#nav a:hover .r i{transform:translateY(-100%)}
-.nav-glow{position:absolute;z-index:0;top:4px;bottom:4px;left:0;width:0;border-radius:99px;opacity:0;pointer-events:none;
-  background:linear-gradient(135deg,color-mix(in srgb,var(--lilac) 30%,transparent),color-mix(in srgb,var(--lilac) 10%,transparent));
-  border:1px solid color-mix(in srgb,var(--lilac) 55%,transparent);box-shadow:0 0 22px color-mix(in srgb,var(--lilac) 28%,transparent);
-  transition:left .6s cubic-bezier(.5,1.35,.4,1),width .6s cubic-bezier(.5,1.35,.4,1),opacity .3s}
-.nav-glow::after{content:"";position:absolute;left:9px;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber)}
+/* the pages walk through the phases of the moon, and end on the sun */
+.ph{position:relative;flex:0 0 auto;width:13px;height:13px;border-radius:50%;overflow:hidden;border:1px solid var(--star-40);background:var(--star-60);transition:transform .7s cubic-bezier(.5,0,.2,1),background .3s,border-color .3s,box-shadow .3s}
+.ph::after{content:"";position:absolute;inset:-1px;border-radius:50%;background:var(--ink);transform:translateX(var(--o,0%));transition:background .6s}
+.ph.sun{overflow:visible;background:var(--amber);border-color:var(--amber);box-shadow:0 0 0 3px color-mix(in srgb,var(--amber) 28%,transparent)}
+.ph.sun::after{display:none}
+#nav a:hover .ph{transform:rotate(180deg) scale(1.15)}
+#nav a.on .ph{background:var(--amber);border-color:var(--amber);box-shadow:0 0 10px 1px color-mix(in srgb,var(--amber) 65%,transparent)}
+#nav a.on .ph.sun{box-shadow:0 0 0 3px color-mix(in srgb,var(--amber) 28%,transparent),0 0 14px 3px color-mix(in srgb,var(--amber) 70%,transparent)}
 @media (max-width:1060px){
   .menu-btn{display:block}
   #nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;border-radius:0 0 18px 18px;border-width:0 0 1px;padding:0.4rem var(--pad) 1rem;background:var(--ink);-webkit-backdrop-filter:none;backdrop-filter:none}
   #nav.open{display:flex}
   #nav a{padding:0.85rem 0.4rem;border-radius:0;border-bottom:1px solid var(--line)}
-  #nav .r{height:auto}#nav .r i{display:none}#nav a:hover .r b{transform:none}
-  .nav-glow{display:none}
+  #nav .r{height:auto}#nav .r i{display:none}#nav a:hover .r b{transform:none}#nav a:hover .ph{transform:none}
 }
 @media (max-width:640px){
-  .greet-langs{display:none}
-  .greet-word{font-size:2.7rem;min-width:0}.greet-word[data-l="hi"]{font-size:1.7rem}.greet-word[data-l="gu"]{font-size:1.6rem}
+    .greet-word{font-size:1.8rem;min-width:0}.greet-word[data-l="hi"]{font-size:1.5rem}.greet-word[data-l="gu"]{font-size:1.4rem}
   .orbits{top:12px;right:14px}.orbits svg{left:-600px;top:-600px;width:1200px;height:1200px}
 }
-@media (prefers-reduced-motion:reduce){.orbits .arm{animation:none}.greet-word,.nav-glow,#nav .r b,#nav .r i{transition:none}}
+@media (prefers-reduced-motion:reduce){.orbits .arm{animation:none}.greet-word,.ph,#nav .r b,#nav .r i{transition:none}}
 
 /* ── SUN / MOON (the theme switch lives in the sky at the top) ── */
 .head-in{padding-right:calc(var(--pad) + 100px)}
@@ -147,12 +143,17 @@ html[data-theme="light"] .orb .sun{opacity:1;transform:none}
 html[data-theme="light"] .orb-rays{opacity:1}
 .orb::before{content:"";position:absolute;left:50%;top:50%;width:760px;height:760px;margin:-380px 0 0 -380px;border-radius:50%;background:radial-gradient(circle,rgba(185,167,240,.2) 0,rgba(185,167,240,.07) 32%,transparent 62%);pointer-events:none;transition:background 1s}
 html[data-theme="light"] .orb::before{background:radial-gradient(circle,rgba(255,176,60,.34) 0,rgba(255,176,60,.11) 32%,transparent 62%)}
-.orb-hint{position:absolute;left:50%;bottom:6px;transform:translate(-50%,6px);font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;color:var(--star-60);opacity:0;transition:opacity .3s,transform .3s;pointer-events:none}
-.orb:hover .orb-hint,.orb:focus-visible .orb-hint,.orb.hint .orb-hint{opacity:1;transform:translate(-50%,0)}
+.orb-hint{position:absolute;right:104px;bottom:14px;white-space:nowrap;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--star-60);pointer-events:none;transition:color .3s}
+.orb-hint b{display:inline-block;font-weight:400;margin-right:.45em;color:var(--amber);animation:nudge 1.8s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateY(-3px)}}
+.orb:hover .orb-hint{color:var(--star)}
+.orb-ring{position:absolute;inset:24px;border-radius:50%;pointer-events:none;border:1.5px solid rgba(185,167,240,.55);animation:orbring 4.2s ease-out infinite}
+html[data-theme="light"] .orb-ring{border-color:rgba(255,170,40,.65)}
+@keyframes orbring{0%{transform:scale(1);opacity:.8}70%,100%{transform:scale(1.55);opacity:0}}
 .orb:hover .moon{transform:scale(1.04)}.orb:hover .sun{transform:scale(1.04)}
 .head-r{display:flex;align-items:center;gap:1.4rem}
-@media (max-width:760px){.orb{width:148px;height:148px;top:-62px;right:-60px}.orb::before{width:420px;height:420px;margin:-210px 0 0 -210px}.orb .moon,.orb .sun{inset:16px}.orb-rays{inset:-24px}.head-in{padding-right:calc(var(--pad) + 62px)}.brand{font-size:2.7rem}.orb-hint{display:none}.head-r{gap:.7rem}}
-@media (prefers-reduced-motion:reduce){.orb-body,.orb .moon,.orb .sun{transition:none}.orb-rays{animation:none}}
+@media (max-width:760px){.orb{width:148px;height:148px;top:-62px;right:-60px}.orb::before{width:420px;height:420px;margin:-210px 0 0 -210px}.orb .moon,.orb .sun{inset:16px}.orb-rays{inset:-24px}.head-in{padding-right:calc(var(--pad) + 62px)}.brand{font-size:2.7rem}.orb-hint{right:70px;bottom:8px;font-size:.56rem}.head-r{gap:.7rem}}
+@media (prefers-reduced-motion:reduce){.orb-body,.orb .moon,.orb .sun{transition:none}.orb-rays,.orb-ring,.orb-hint b{animation:none}}
 
 html[data-theme="light"] #skills,html[data-theme="light"] .night,html[data-theme="light"] .nextpg.dk{--ink:#0b0e17;--ink-2:#10141f;--plum:#150f2b;--line:rgba(236,231,218,0.13);--line-strong:rgba(236,231,218,0.28);--star:#ece7da;--star-60:rgba(236,231,218,0.62);--star-40:rgba(236,231,218,0.42);--amber:#eaa23f;--lilac:#b9a7f0;color:#ece7da}
 /* ── PAGES ── */
@@ -565,6 +566,7 @@ body.intro-lock .guide{display:none}
 .g-l1{animation:g-blink 1.6s ease-in-out infinite}.g-l2{animation:g-blink 1.6s ease-in-out .5s infinite}.g-l3{animation:g-blink 1.6s ease-in-out 1s infinite}
 @keyframes g-blink{50%{opacity:0.25}}
 .g-bubble{width:max-content;max-width:min(16rem,calc(100vw - 2rem));padding:0.75rem 0.95rem;background:var(--star);color:#17122b;font-family:var(--poem);font-style:italic;font-size:1.02rem;line-height:1.35;border-radius:12px 12px 4px 12px;box-shadow:0 14px 26px -14px rgba(0,0,0,0.8);opacity:0;transform:translateY(8px) scale(0.96);transform-origin:100% 100%;pointer-events:none;transition:opacity .35s ease,transform .45s var(--ease);position:absolute;right:0;bottom:calc(100% + 0.2rem)}
+html[data-theme="light"] .g-bubble{background:#1d1830;color:#f6f1e9}
 .g-bubble.on{opacity:1;transform:none}
 /* the round orbital menu */
 .g-panel{--R:124px;position:absolute;right:0;bottom:calc(100% + 0.4rem);width:340px;height:340px;max-width:none;border-radius:50%;background:radial-gradient(circle at 50% 45%,#171b2d 0%,#0f1322 62%,#0b0e17 100%);border:1px solid var(--line-strong);box-shadow:0 30px 60px -18px rgba(0,0,0,0.9),0 0 0 6px rgba(185,167,240,0.06);transform-origin:92% 100%;animation:g-pop .5s var(--ease)}
@@ -829,28 +831,22 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
   <button class="orb" id="theme-btn" type="button" aria-label="Switch to light mode" aria-pressed="false">
       <span class="orb-rays" aria-hidden="true"></span>
       <span class="orb-body" aria-hidden="true"><span class="moon"></span><span class="sun"></span></span>
-      <span class="orb-hint" aria-hidden="true" id="orb-hint">Bring the sun</span>
+      <span class="orb-ring" aria-hidden="true"></span>
+      <span class="orb-hint" aria-hidden="true"><b>↑</b><span id="orb-hint-t">Switch to day</span></span>
     </button>
   <div class="head-in">
     <div class="greet" id="greet">
-      <button type="button" class="greet-word" id="greet-word" lang="en" data-l="en" aria-label="Hello. Tap to change the language.">Hello</button>
-      <div class="greet-langs" role="group" aria-label="Greeting language">
-        <button type="button" data-l="en" aria-pressed="true" title="English">EN</button>
-        <button type="button" data-l="hi" aria-pressed="false" title="हिन्दी">हिं</button>
-        <button type="button" data-l="gu" aria-pressed="false" title="ગુજરાતી">ગુ</button>
-        <button type="button" data-l="de" aria-pressed="false" title="Deutsch">DE</button>
-      </div>
+      <button type="button" class="greet-word" id="greet-word" lang="en" data-l="en" title="Say hello in another language" aria-label="Hello. Tap to change the language.">Hello!</button>
     </div>
     <div class="head-r">
     <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav id="nav" aria-label="Pages">
-      <span class="nav-glow" aria-hidden="true"></span>
-      <a href="#/home" data-p="home"><span class="r"><b><em>01</em>Home</b><i>Home</i></span></a>
-      <a href="#/about" data-p="about"><span class="r"><b><em>02</em>About me</b><i>About me</i></span></a>
-      <a href="#/work" data-p="work"><span class="r"><b><em>03</em>Work</b><i>Work</i></span></a>
-      <a href="#/honours" data-p="honours"><span class="r"><b><em>04</em>Recognition</b><i>Recognition</i></span></a>
-      <a href="#/beyond" data-p="beyond"><span class="r"><b><em>05</em>Beyond the desk</b><i>Beyond the desk</i></span></a>
-      <a href="#/contact" data-p="contact"><span class="r"><b><em>06</em>Say hello</b><i>Say hello</i></span></a>
+      <a href="#/home" data-p="home"><span class="ph" style="--o:0%" aria-hidden="true"></span><span class="r"><b>Home</b><i>Home</i></span></a>
+      <a href="#/about" data-p="about"><span class="ph" style="--o:28%" aria-hidden="true"></span><span class="r"><b>About me</b><i>About me</i></span></a>
+      <a href="#/work" data-p="work"><span class="ph" style="--o:52%" aria-hidden="true"></span><span class="r"><b>Work</b><i>Work</i></span></a>
+      <a href="#/honours" data-p="honours"><span class="ph" style="--o:76%" aria-hidden="true"></span><span class="r"><b>Recognition</b><i>Recognition</i></span></a>
+      <a href="#/beyond" data-p="beyond"><span class="ph" style="--o:100%" aria-hidden="true"></span><span class="r"><b>Beyond the desk</b><i>Beyond the desk</i></span></a>
+      <a href="#/contact" data-p="contact"><span class="ph sun" aria-hidden="true"></span><span class="r"><b>Say hello</b><i>Say hello</i></span></a>
     </nav>
     </div>
   </div>
@@ -863,7 +859,6 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
     <div class="wrap hero-body">
     <div class="hero-meta mono">
       <span>12.97° N &nbsp;77.59° E &nbsp;·&nbsp; Bangalore, India</span>
-      <span class="amb">● Open to opportunities</span>
     </div>
     <h1><span>Khanak</span><span><em>Shah</em></span></h1>
     <div class="hero-lower">
@@ -1893,8 +1888,8 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
 // greeting in four languages
 (function(){
   const word=document.getElementById("greet-word");if(!word)return;
-  const G={en:["Hello","en","Hello"],hi:["नमस्ते","hi","Namaste"],gu:["નમસ્તે","gu","Namaste"],de:["Hallo","de","Hallo"]};
-  const order=["en","hi","gu","de"],chips=[...document.querySelectorAll(".greet-langs button")];
+  const G={en:["Hello!","en","Hello"],hi:["नमस्ते!","hi","Namaste"],gu:["નમસ્તે!","gu","Namaste"],de:["Hallo!","de","Hallo"]};
+  const order=["en","hi","gu","de"],chips=[];
   const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
   let cur="en",timer=0,busy=false,touched=false;
   try{const sv=localStorage.getItem("greet");if(G[sv]){cur=sv;touched=true;}}catch(e){}
@@ -1924,7 +1919,7 @@ html[data-theme="light"] .lsky{background:radial-gradient(ellipse at 72% 24%,rgb
   const root=document.documentElement,btn=document.getElementById("theme-btn");
   if(!btn)return;
   const isLight=()=>root.dataset.theme==="light";
-  function paint(){const l=isLight();btn.setAttribute("aria-pressed",l?"true":"false");btn.setAttribute("aria-label",l?"Switch to dark mode":"Switch to light mode");const h=document.getElementById("orb-hint");if(h)h.textContent=l?"Bring the moon":"Bring the sun";
+  function paint(){const l=isLight();btn.setAttribute("aria-pressed",l?"true":"false");btn.setAttribute("aria-label",l?"Switch to dark mode":"Switch to light mode");const h=document.getElementById("orb-hint-t");if(h)h.textContent=l?"Switch to night":"Switch to day";
     const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=l?"#f6f1e9":"#0b0e17";
     window.dispatchEvent(new CustomEvent("themechange",{detail:{light:l}}));}
   paint();
